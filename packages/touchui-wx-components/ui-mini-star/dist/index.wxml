@@ -1,0 +1,3 @@
+<view class="ui-mini-star">
+  <image class="star-img" src="{{imgSrc}}" style="width:{{width}}px;height:{{height}}px" alt="" />
+</view>

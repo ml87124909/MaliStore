@@ -1,0 +1,62 @@
+<page>
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>严选专栏</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="swiper-container">
+    <swiper circular autoplay previous-margin="20px" next-margin="30px" interval="6000" duration="500" class="swiper">
+      <block wx:for="{{cms}}" wx:key="unique">
+        <swiper-item>
+          <image src="{{item.picUrl}}" class="img" bindtap="tapBanner" data-id="{{item.businessId}}" />
+          <view class="swiper-info">
+            <view class="swiper-info-der">
+              <ui-divider padding="8" _pid="{{_pid}}">{{item.linkUrl}}</ui-divider>
+            </view>
+            <view class="swiper-info-name">{{item.title}}</view>
+            <view class="swiper-info-text">{{item.remark}}</view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="special-menu">
+    <scroll-view class="special-scroll" scroll-x style="width: 100%">
+      <view class="special-info-box">
+        <image src="../../../images/add-addr.png" />
+        <view class="special-info-bg"></view>
+        <view class="special-info-name">傻大傻啊</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="special-topic-box">
+    <view class="special-topic-title">
+      <ui-divider padding="15" _pid="{{_pid}}">
+        <view style="color:#27323f">傻大傻啊</view>
+      </ui-divider>
+    </view>
+    <view class="special-topic-list-box">
+      <view class="special-topic-list" bindtap="getTopicTap" data-id="12">
+        <image src="../../../images/pay_coupon.png" />
+        <text>199元起</text>
+        <view class="special-topic-list-title">选择一种风格，选择一种人生</view>
+        <view class="special-topic-list-text">ins风、北欧风、复古风等数十款好物限时特价</view>
+      </view>
+    </view>
+  </view>
+</page>

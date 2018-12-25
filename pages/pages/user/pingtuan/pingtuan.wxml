@@ -1,0 +1,60 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的拼团</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="order-header-box">
+    <ui-tabs class="ui-tabs" index="{{ current }}" bindchange="handleChange" _pid="{{_pid}}">
+      <ui-tab _pid="{{_pid}}">全部</ui-tab>
+      <ui-tab _pid="{{_pid}}">拼团中</ui-tab>
+      <ui-tab _pid="{{_pid}}">拼团成功</ui-tab>
+      <ui-tab _pid="{{_pid}}">拼团失败</ui-tab>
+    </ui-tabs>
+  </view>
+  <view class="order-content-box">
+    <swiper style="height:{{WIN_HEIGHT}}px" class="content" current="{{ current }}" bindchange="handleContentChange">
+      <swiper-item>
+        <view class="no-more-goods">
+          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
+          <view class="text">没有拼团订单</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="no-more-goods">
+          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
+          <view class="text">没有拼团订单</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="no-more-goods">
+          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
+          <view class="text">没有拼团订单</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="no-more-goods">
+          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
+          <view class="text">没有拼团订单</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+</page>

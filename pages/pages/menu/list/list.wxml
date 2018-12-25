@@ -1,0 +1,97 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>{{name}}</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}px"></view>
+  <view wx:if="{{categorieslist}}" style="background-color:#ffffff;border-bottom:1px solid #f5f5f5;position:fixed;z-index:99;">
+    <ui-tabs index="{{ current }}" probe="1" bindchange="handleChange" _pid="{{_pid}}">
+      <ui-tab wx:for="{{categorieslist}}" wx:key="id" _pid="{{_pid}}">{{item.name}}</ui-tab>
+    </ui-tabs>
+  </view>
+  <view wx:if="{{goods}}" class="goods-container">
+    <!--
+             /* 商品筛选条件，下期版本将会上线 */
+            <view class="sticky-in-relative-container" id="suggestion-title">
+                <ui-sticky scroll-top="{{ scrollTop }}" top="{{NAV_HEIGHT}}" custom-style="{{ customStyle }}" class="header header1" stick-on-tap="stick-on-tap">
+                    <view>
+                    <ui-row height="46" class="nav_top">
+                        <ui-col vertical-align="middle" align="center" data-idx="{{index}}" bindtap="openPopup" wx:for="{{ navList }}" wx:key="id" class="{{ item.active }}">
+                        <ui-row height="46">
+                            <ui-col vertical-align="middle" align="right" space-right="5">
+                                <view>{{ item.name}}</view>
+                            </ui-col>
+                            <ui-col vertical-align="middle" align="left" span="4" space-left="5">
+                            <ui-icon type="{{item.arrow}}" size="8" color="#878787;" class="{{ item.active }}"></ui-icon>
+                            </ui-col>
+                        </ui-row>
+                        </ui-col>
+                    </ui-row>
+                    </view>
+                    <view slot="sticky">
+                    <ui-row height="46" class="nav_top">
+                        <ui-col vertical-align="middle" align="center" data-idx="{{index}}" bindtap="openPopup" wx:for="{{ navList }}" wx:key="id" class="{{ item.active }}">
+                        <ui-row height="46">
+                            <ui-col vertical-align="middle" align="right" space-right="5">
+                                <view>{{ item.name}}</view>
+                            </ui-col>
+                            <ui-col vertical-align="middle" align="left" span="4" space-left="5">
+                            <ui-icon type="{{item.arrow}}" size="8" color="#878787;" class="{{ item.active }}"></ui-icon>
+                            </ui-col>
+                        </ui-row>
+                        </ui-col>
+                    </ui-row>
+                    </view>
+                </ui-sticky>
+            </view>
+            -->
+    <view class="goods-remark">{{remark}}</view>
+    <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+      <view class="img-box">
+        <image src="{{item.pic}}" class="image" mode="widthFix" lazy-load="true" />
+        <view wx:if="{{item.introduce}}" class="goods-characteristic">
+          <text>{{item.introduce}}</text>
+        </view>
+      </view>
+      <view class="goods-title">{{item.name}}</view>
+      <view style="display:flex;">
+        <view class="goods-price">Ұ{{item.mini_price}}</view>
+        <view class="goods-original">¥{{item.original_price}}</view>
+        <view class="goods-price-naver">已售{{item.orders}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!goods}}" class="no-more-goods">
+    <image src="../../../../images/none/empty_goods.png" class="no-order-img" />
+    <view class="text">小二正在上新中</view>
+  </view>
+
+
+  <ui-popup cropout show="{{ show1 }}" position="top" top="{{ popup_NAV_HEIGHT +46 }}" height="{{popupHeight}}" mask-style="{{ { top: popup_NAV_HEIGHT +46+'px' } }}" bindhide="popHide1" bindshow="popShow1" _pid="{{_pid}}">
+    <view class="top_pop">
+      <ui-check-list max="1" label-position="left" options="{{ sortList1 }}" type="plain" value="{{ checklist1 }}" bindchange="change1" color="#ffd305" _pid="{{_pid}}"></ui-check-list>
+    </view>
+  </ui-popup>
+  <ui-popup cropout show="{{ show2 }}" position="top" top="{{ popup_NAV_HEIGHT +46 }}" height="{{popupHeight}}" mask-style="{{ { top: popup_NAV_HEIGHT +46+'px' } }}" bindhide="popHide2" bindshow="popShow2" _pid="{{_pid}}">
+    <view class="top_pop">
+      <ui-check-list max="1" label-position="left" options="{{ sortList2 }}" type="plain" value="{{ checklist2 }}" bindchange="change2" color="#ffd305" _pid="{{_pid}}"></ui-check-list>
+    </view>
+  </ui-popup>
+
+</page>

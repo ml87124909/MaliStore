@@ -1,0 +1,11 @@
+<view class="ui-divider">
+  <view class="holder">
+    <view class="line" style="{{ lineStyle }}"></view>
+  </view>
+  <view class="ui-divider-content" style="{{ contentStyle }}">
+    <slot></slot>
+  </view>
+  <view class="holder">
+    <view class="line" style="{{ lineStyle }}"></view>
+  </view>
+</view>

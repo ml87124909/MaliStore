@@ -1,0 +1,59 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>今日上新</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="history_content_box" wx:if="{{historyList}}" wx:for="{{historyList}}" wx:key="id">
+    <ui-sticky scroll-top="{{ scrollTop }}" top="{{STI_HEIGHT}}" _pid="{{_pid}}">
+      <view class="history_content_header_box">
+        <view class="history_content_header">{{item.date}}</view>
+        <view class="history_del_box">
+          <text>{{item.goods.length}}件商品</text>
+        </view>
+      </view>
+      <view slot="sticky">
+        <view class="history_content_header_box">
+          <view class="history_content_header">{{item.date}}</view>
+          <view class="history_del_box">
+            <text>{{item.goods.length}}件商品</text>
+          </view>
+        </view>
+      </view>
+    </ui-sticky>
+    <view class="histor_goods_box" wx:for="{{item.goods}}" wx:key="id">
+      <image src="{{item.pic}}" bindtap="toDetailsTap" data-id="{{item.id}}" />
+      <view class="histor_goods_info">
+        <view class="goods_name" bindtap="toDetailsTap" data-id="{{item.id}}">{{item.name}}</view>
+        <view class="goods_introduce" bindtap="toDetailsTap" data-id="{{item.id}}">{{item.introduce}}</view>
+        <view class="goods_price" bindtap="toDetailsTap" data-id="{{item.id}}">
+          ¥{{item.mini_price}}
+          <text wx:if="{{item.original_price}}">¥{{item.original_price}}</text>
+        </view>
+        <view class="goods_del">
+          <text>库存：{{item.stores}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="no-more-goods" wx:if="{{!historyList}}">
+    <image src="../../../../images/none/newday_empty.png" class="no-order-img" />
+    <view class="text">商品正在上新中</view>
+  </view>
+</page>

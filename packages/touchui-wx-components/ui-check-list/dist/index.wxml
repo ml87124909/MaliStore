@@ -1,0 +1,18 @@
+<view class="ui-check-list {{ disabled ? 'ui-check-list-disabled' : '' }}">
+  <view class="cells">
+    <view wx:for="{{ options }}" wx:key="index" class="cell {{ labelPosition === 'left' ? 'cell__label-left' : ''}}" bindtap="handleChange" data-item="{{ item }}">
+      <view class="cell_hd">
+        <span class="ui-checkbox-inner {{ type ? 'ui-checkbox-inner__' + type :  '' }} {{ disabled ? 'is-disabled' : '' }} {{ util.getCheckedClass(value, item) }}" style="{{ util.isChecked(value, item) ? innerCheckStyle : '' }}">
+          <span class="ui-checkbox__check" style="{{ checkBoxStyle }}"></span>
+        </span>
+      </view>
+      <view class="cell_bd">
+        <span>{{ util.getItem(options, item) }}</span>
+        <view class="inline-desc" wx:if="{{ item.subTitle }}">{{ item.subTitle }}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<wxs module="util">
+  module.exports = { isChecked: function (value, item) { if (typeof item === 'object') { return value.indexOf(item.key) > -1 } return value.indexOf(item) > -1 }, getItem: function (options, item) { return typeof item === 'object' ? item.value : item }, getCheckedClass: function (value, item) { if (typeof item === 'object') { return value.indexOf(item.key) > -1 ? 'is-checked' : '' } return value.indexOf(item) > -1 ? 'is-checked' : '' } }
+</wxs>

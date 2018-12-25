@@ -1,0 +1,70 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>物流动态</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="wuliu-content-box">
+    <view class="wuliu-header">
+      <view class="ui-row" style="height:80px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image src="../../../../../images/wuliu.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="name">物流公司：
+              <text>{{name}}</text>
+            </view>
+            <view class="name">物流单号：
+              <text>{{id}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="button" bindtap="getCopyNmuber" data-id="{{id}}">复制</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="wuliu-list" wx:if="{{wuliuInfo}}">
+      <view wx:for="{{wuliuInfo}}" wx:key="{{index}}" class="ui-row" style="height:80px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="line">
+              <view class="after"></view>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="time">{{item.AcceptTime}}</view>
+            <view class="text">{{item.AcceptStation}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="no-more-goods" wx:if="{{!wuliuInfo}}">
+      <image src="../../../../../images/none/wuliu_empty.png" class="no-order-img" />
+      <view class="text">暂无轨迹信息，您可以复制运单号到【{{name}}】官网查询</view>
+    </view>
+  </view>
+</page>

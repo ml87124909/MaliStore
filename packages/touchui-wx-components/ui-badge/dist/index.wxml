@@ -1,0 +1,5 @@
+<span style="{{ selfCustomStyle }}" class="ui-badge {{ text === '' ? 'ui-badge-dot' : '' }} {{ isSingleNumber ? 'ui-badge-single' : '' }}">
+  {{ selfText }}
+  <span wx:if="{{ isNumberOverLength }}" class="plus">+</span>
+  <block wx:if="{{ isStringOverLength }}">...</block>
+</span>

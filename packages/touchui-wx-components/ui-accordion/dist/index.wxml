@@ -1,0 +1,13 @@
+<view class="ui-accordion">
+  <view class="header" bindtap="touchStartHandler">
+    <view wx:if="{{showArrow}}" class="arrow" style="{{buttonImageStyle}}">
+      <image class="arrow-image" style="transform: {{buttonImageObj.transform}}" src="{{triangleImg}}" />
+    </view>
+    <view class="accordion-header">
+      <slot name="header"></slot>
+    </view>
+  </view>
+  <view class="content" style="height: {{contentObj.height}}px;transition: {{contentObj.transition}}" src="{{triangleImg}}">
+    <slot name="content"></slot>
+  </view>
+</view>

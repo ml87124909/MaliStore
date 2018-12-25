@@ -1,0 +1,18 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <view class="userinfo">
+    <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
+    <view class="iser-info-box">
+      <open-data class="userinfo-nickname" type="userNickName"></open-data>
+      <text class="userinfo-score" bindtap="score">积分：{{amount.score}}</text>
+      <text wx:if="{{userInfo && score_sign_continuous == 0}}" class="userinfo-score-day" bindtap="score">今日未签到</text>
+      <text wx:if="{{userInfo && score_sign_continuous > 0}}" class="userinfo-score-day">已连续签到{{score_sign_continuous}}天</text>
+    </view>
+    <image bindtap="shareProditTap" src="../../../images/Profit.png" class="Profit" />
+  </view>
+  <template is="userNavMenu" data="{{noplay:noplay,notransfer:notransfer,noconfirm:noconfirm,noreputation:noreputation}}" />
+  <template is="userListMenu" data="{{userInfo:userInfo}}" />
+  <!--  重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务  -->
+</page>

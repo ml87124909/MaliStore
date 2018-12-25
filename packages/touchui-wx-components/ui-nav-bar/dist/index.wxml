@@ -1,0 +1,5 @@
+<view class="ui-nav-bar" style="{{ selfCustomStyle }}">
+  <view class="ui-nav-bar-content">
+    <slot></slot>
+  </view>
+</view>

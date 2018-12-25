@@ -1,0 +1,226 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的余额记录</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="paypal-info-box">
+    <view class="info-header-box">
+      <ui-tabs class="ui-tabs" probe="1" active-tab-style="{{activeTabStyle}}" tab-style="{{tabStyle}}" auto-width="{{true}}" index="{{ current }}" bindchange="handleChange" _pid="{{_pid}}">
+        <ui-tab _pid="{{_pid}}">
+          <view class="item item-right">提现记录</view>
+        </ui-tab>
+        <ui-tab _pid="{{_pid}}">
+          <view class="item item-left">充值记录</view>
+        </ui-tab>
+        <ui-tab _pid="{{_pid}}">
+          <view class="item item-left">返现记录</view>
+        </ui-tab>
+        <ui-tab _pid="{{_pid}}">
+          <view class="item item-left">消费记录</view>
+        </ui-tab>
+      </ui-tabs>
+    </view>
+    <swiper class="content" current="{{ current }}" bindchange="handleContentChange">
+      <swiper-item>
+        <view class="info-content-header-box">
+          <view class="ui-row" style="height:40px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>提现时间</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>提现金额</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>提现状态</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="info-content-box" wx:for="{{paypalinfo}}" wx:key="id">
+          <view class="ui-row ui-row" style="height:45px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.date}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>¥{{item.money}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.state}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="info-text" wx:if="{{item.remark}}">财务备注：
+            <text>{{item.remark}}
+              <text></text>
+            </text>
+          </view>
+        </view>
+        <view class="no-more-goods" wx:if="{{!paypalinfo}}">
+          <image src="../../../../../images/none/order_empty.png" class="no-order-img" />
+          <view class="text">无此类型记录</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="info-content-header-box">
+          <view class="ui-row" style="height:40px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>充值时间</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>充值金额</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>到账金额</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="info-content-box" wx:for="{{paypalinfo}}" wx:key="id">
+          <view class="ui-row ui-row" style="height:45px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.date}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>¥{{item.money}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.real_money}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="no-more-goods" wx:if="{{!paypalinfo}}">
+          <image src="../../../../../images/none/order_empty.png" class="no-order-img" />
+          <view class="text">无此类型记录</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="info-content-header-box">
+          <view class="ui-row" style="height:40px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>返现时间</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>返现金额</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>返现类型</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="info-content-box" wx:for="{{paypalinfo}}" wx:key="id">
+          <view class="ui-row ui-row" style="height:45px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.date}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>¥{{item.money}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.type}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="no-more-goods" wx:if="{{!paypalinfo}}">
+          <image src="../../../../../images/none/order_empty.png" class="no-order-img" />
+          <view class="text">无此类型记录</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="info-content-header-box">
+          <view class="ui-row" style="height:40px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>交易时间</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>交易金额</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>交易类型</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="info-content-box" wx:for="{{paypalinfo}}" wx:key="id">
+          <view class="ui-row ui-row" style="height:45px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.date}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>¥{{item.money}}</view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+              <view class="ui-col-content align-center valign-middle">
+                <view>{{item.type}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="no-more-goods" wx:if="{{!paypalinfo}}">
+          <image src="../../../../../images/none/order_empty.png" class="no-order-img" />
+          <view class="text">无此类型记录</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+
+</page>

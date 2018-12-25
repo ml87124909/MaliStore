@@ -1,0 +1,103 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+page {
+  background-color: #f5f5f5;
+}
+.history_content_box {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.history_content_box .history_content_header_box {
+  width: 100%;
+  height: 80rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  align-items: center;
+  display: flex;
+  padding-left: 30rpx;
+  color: #27323f;
+  background-color: #fff;
+}
+.history_content_box .history_content_header_box .history_del_box {
+  width: 75%;
+  text-align: right;
+}
+.history_content_box .histor_goods_box {
+  display: flex;
+  width: 95%;
+  height: 200rpx;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.history_content_box .histor_goods_box image {
+  width: 160rpx;
+  height: 160rpx;
+}
+.history_content_box .histor_goods_box .histor_goods_info {
+  width: 73%;
+  margin-left: 20rpx;
+  height: 150rpx;
+}
+.history_content_box .histor_goods_box .histor_goods_info .goods_name {
+  color: #27323f;
+  font-size: 30rpx;
+}
+.history_content_box .histor_goods_box .histor_goods_info .goods_introduce {
+  color: #7b8196;
+  font-size: 26rpx;
+  padding-top: 6rpx;
+}
+.history_content_box .histor_goods_box .histor_goods_info .goods_price {
+  color: #a18d65;
+  font-size: 32rpx;
+  padding-top: 8rpx;
+  float: left;
+}
+.history_content_box .histor_goods_box .histor_goods_info .goods_price text {
+  color: #7b8196;
+  font-size: 28rpx;
+  text-decoration: line-through;
+}
+.history_content_box .histor_goods_box .histor_goods_info .goods_del {
+  float: right;
+  padding-top: 18rpx;
+  color: #7b8196;
+  font-size: 24rpx;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-more-goods .no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+}

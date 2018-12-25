@@ -1,0 +1,33 @@
+.ui-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  z-index: 490;
+  user-select: none;
+  box-sizing: border-box;
+}
+.ui-nav-bar-content {
+  display: flex;
+}
+.ui-nav-bar-content .nav-bar-left {
+  position: relative;
+  padding: 0 30px;
+}
+.ui-nav-bar-content .nav-bar-center {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.ui-nav-bar-content .nav-bar-right {
+  text-align: right;
+}
+.ui-nav-bar-more:after {
+  content: "\2022\0020\2022\0020\2022\0020";
+  font-size: 16px;
+}

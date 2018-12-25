@@ -1,0 +1,6 @@
+<scroll-view scroll-with-animation class="ui-tabs ui-tabs-x" style="{{ selfStyle }}" scroll-x="{{ true }}" scroll-left="{{ scrollLeft }}">
+  <slot></slot>
+  <view class="ui-tabs-ink-bar-wrapper" wx:if="{{ inkBar }}" style="{{ inkBarWrapperStyle }}">
+    <view class="ui-tabs-ink-bar" style="{{ selfInkBarStyle }}"></view>
+  </view>
+</scroll-view>

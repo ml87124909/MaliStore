@@ -1,0 +1,31 @@
+.ui-badge {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  background: #ff2a00;
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 8px;
+  padding: 0 6px 0 7px;
+  background-clip: padding-box;
+  vertical-align: middle;
+}
+.ui-badge .plus {
+  display: inline;
+  padding-left: 1px;
+  line-height: 12px;
+  font-weight: bold;
+  transform: translateY(-1px);
+}
+.ui-badge.ui-badge-single {
+  padding: 0;
+  width: 16px;
+}
+.ui-badge.ui-badge-dot {
+  height: auto;
+  padding: 5px;
+}
+.ui-badge.small-dot {
+  padding: 3px;
+}

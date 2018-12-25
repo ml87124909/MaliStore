@@ -1,0 +1,74 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>发表评价</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="pingjia-content">
+    <view class="pingjia-list" wx:for="{{pingajiaList}}" wx:key="id">
+      <form bindsubmit="bindFormSubmit">
+        <input name="orderid" value="{{id}}" class="none"></input>
+        <input name="goodsid" value="{{item.id}}" class="none"></input>
+        <view class="ui-row" style="height:80px;">
+          <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 5px;flex:0 0 80px;">
+            <view class="ui-col-content align-center valign-middle">
+              <image class="goods-img" src="{{item.pic}}" />
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 5px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="goods-name">{{item.name}}</view>
+              <view class="goods-text">{{item.spec}}</view>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{item.statse == 0}}">
+          <view class="star-box">
+            <view class="text">评分：</view>
+            <ui-star star-width="30" star-height="30" bindchange="handleStar" data-id="{{item.id}}" _pid="{{_pid}}"></ui-star>
+            <view wx:if="{{starResult[0] == item.id && item.statse == 0}}" class="result">{{starResult[1]}}</view>
+          </view>
+          <textarea class="piangjia-textarea" placeholder="您觉得这个商品怎么样？请写下您对这个商品的评价～" name="textarea"></textarea>
+          <view class="submit-box">
+            <view class="right">
+              <button form-type="submit">提交评价</button>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{item.statse == 1}}">
+          <view class="star-box">
+            <view class="text">评分：</view>
+            <ui-star wx:if="{{item.goods_star}}" star-width="30" star-height="30" value="{{item.goods_star}}" readonly half _pid="{{_pid}}"></ui-star>
+          </view>
+          <view class="star-time">{{item.data_time}}</view>
+          <view class="star-text">{{item.goods_text}}</view>
+        </block>
+      </form>
+    </view>
+
+
+
+
+
+
+
+
+
+  </view>
+</page>

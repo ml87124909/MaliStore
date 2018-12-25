@@ -1,0 +1,29 @@
+<page>
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>购物车</view>
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <ui-fixed-view class="ui-fixed-view" top="{{NAV_HEIGHT}}" left="0" right="0" _pid="{{_pid}}">
+    <view class="fixed-view-content" wx:if="{{carttips}}">
+      <template is="carttips" data="{{carttips:carttips}}" />
+    </view>
+  </ui-fixed-view>
+  <view class="shop-cart-box {{goodsList.list.length > 0 ? 'cart_goods_padding' : ''}}">
+    <template is="{{goodsList.list.length > 0 ? 'cart-goods-list' : 'no-goods'}}" data="{{...goodsList}}" />
+    <view class="sales-goods" wx:if="{{sales && goodsList.list.length <= 0}}">
+      <view class="sales-title">
+        <ui-divider padding="20" _pid="{{_pid}}">
+          <view style="color:#27323f">猜你喜欢</view>
+        </ui-divider>
+      </view>
+      <template is="guessgoods" data="{{sales:sales}}" />
+    </view>
+  </view>
+</page>

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-v-tabs": "../../../packages/touchui-wx-components/ui-v-tabs/dist/index",
+    "ui-v-tab": "../../../packages/touchui-wx-components/ui-v-tab/dist/index",
+    "ui-divider": "../../../packages/touchui-wx-components/ui-divider/dist/index",
+    "ui-mask": "../../../packages/touchui-wx-components/ui-mask/dist/index"
+  },
+  "disableScroll": true
+}

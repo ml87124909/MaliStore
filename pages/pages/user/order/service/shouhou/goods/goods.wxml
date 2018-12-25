@@ -1,0 +1,79 @@
+<page>
+  <import src="../../../../../../component/menu/menu.wxml" />
+  <import src="../../../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>选择要售后的商品和数量</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <block wx:if="{{goodsList.list.length != 0}}">
+    <view class="goods-list-box">
+      <view class="sales-title">
+        <ui-divider padding="20" _pid="{{_pid}}">
+          <view style="color:#7b8196">一个商品只能申请一次售后</view>
+        </ui-divider>
+      </view>
+      <view class="goods-list ui-row" wx:for="{{goodsList.list}}" wx:key="id" style="height:90px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 40px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view wx:if="{{item.e_status == 0}}" class="selectTap {{item.active ? 'active':''}}" bindtap="selectTap" data-index="{{index}}"></view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 70px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image src="{{item.pic}}" class="images" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="name">{{item.name}}</view>
+            <view class="spec">{{item.spec}}</view>
+            <view class="number-box">
+              <view class="price">¥{{item.price}}</view>
+              <ui-stepper value="{{item.number}}" max="{{item.number}}" min="1" corner="butt" height="25" width="80" data-index="{{index}}" bindsubtraction="subtraction" bindaddition="addition" _pid="{{_pid}}"></ui-stepper>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="goods-footer">
+      <view class="ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="sele-box" bindtap="bindAllSelect">
+              <view class="selectTap {{goodsList.allSelect ? 'active':''}}"></view>
+              <view class="text" wx:if="{{shihouNum == 0}}">全选</view>
+              <view class="text" wx:if="{{shihouNum != 0}}">已选({{shihouNum}}件)</view>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 120px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view wx:if="{{shihouNum == 0}}" class="button nonebutton">下一步</view>
+            <view wx:if="{{shihouNum != 0}}" class="button" bindtap="toPayOrder">下一步</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{goodsList.list.length == 0}}">
+    <view class="no-more-goods">
+      <image src="../../../../../../../images/none/empty_goods.png" class="no-order-img" />
+      <view class="text">没有可以申请售后的商品</view>
+    </view>
+  </block>
+</page>

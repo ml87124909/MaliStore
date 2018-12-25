@@ -1,0 +1,36 @@
+<page>
+  <template name="swiper">
+    <view class="swiper-container">
+      <swiper circular autoplay interval="6000" duration="500" bindchange="swiperChange" class="swiper">
+        <block wx:for="{{swiper}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item.pic_url}}" class="img" bindtap="tapBanner" data-id="{{item.business_id}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{swiper}}" wx:key="unique">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </template>
+  <template name="goodswiper">
+    <view class="swiper-container">
+      <swiper circular autoplay interval="8000" duration="500" bindchange="swiperChange" class="swiper">
+        <swiper-item wx:for="{{swiper}}" wx:key="unique">
+          <image src="{{item.pic}}" class="img" />
+        </swiper-item>
+      </swiper>
+      <view class="dots">
+        <view class="dots-current">
+          <block wx:for="{{swiper}}" wx:key="unique">
+            <text class="dot{{index == swiperCurrent? ' active':''}}">{{index + 1}}</text>
+          </block>
+          <text class="b">/{{number}}</text>
+        </view>
+      </view>
+      <view wx:if="{{video}}" class="video-button" data-show="{{ true }}" bindtap="getvideoplayerTap">播放视频</view>
+    </view>
+  </template>
+</page>

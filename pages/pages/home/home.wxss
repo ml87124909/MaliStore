@@ -1,0 +1,359 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.three_swiper .swiper_item {
+  display: flex;
+  height: 200px;
+}
+.three_swiper .swiper_item image {
+  flex: 1;
+  margin-right: 5px;
+}
+.three_swiper .swiper_item image:last-child {
+  margin-right: 0;
+}
+.hidden {
+  display: none;
+}
+.scrollTop {
+  display: block;
+}
+.swiper-container {
+  position: relative;
+}
+.swiper-container .swiper {
+  height: 750rpx;
+}
+.swiper-container .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container .dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12rpx;
+  display: flex;
+  justify-content: center;
+  height: 10rpx;
+}
+.swiper-container .dots .dot {
+  margin: 0 5rpx;
+  width: 12rpx;
+  height: 8rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  transition: all 0.6s;
+  opacity: 0.5;
+}
+.swiper-container .dots .active {
+  width: 22rpx;
+  opacity: 1;
+}
+.homeicon {
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.ui-col-content image {
+  width: 90rpx;
+  height: 90rpx;
+  display: block;
+  margin: 0 auto;
+}
+.ui-col-content text {
+  font-size: 28rpx;
+  display: block;
+  color: #27323f;
+  text-align: center;
+}
+.ui-col-content .toplogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90rpx;
+}
+.ui-col-content .toplogo image {
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0;
+}
+.ui-col-content .toplogo text {
+  padding-left: 20rpx;
+}
+.pingtuna-container {
+  width: 100%;
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.pingtuna-title {
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #27323f;
+  font-size: 32rpx;
+}
+.pingtuna-title image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-bottom: -6rpx;
+  margin-left: 10rpx;
+  display: inline-block;
+}
+.pingtuna-container .pingtuna-list {
+  display: inline-block;
+  width: 49.8%;
+  height: 250rpx;
+  border-top: 1rpx solid #f5f5f5;
+  position: relative;
+}
+.pingtuna-container .pingtuna-list:nth-child(2n) {
+  border-right: 1rpx solid #f5f5f5;
+}
+.pingtuna-list image {
+  width: 180rpx;
+  height: 180rpx;
+  position: absolute;
+  right: 20rpx;
+  bottom: 0;
+}
+.pingtuna-list-title {
+  font-size: 28rpx;
+  color: #27323f;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuna-list-text {
+  font-size: 24rpx;
+  color: #999;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 4rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuna-list-info {
+  background-color: #b4a078;
+  color: #fff;
+  font-size: 20rpx;
+  float: left;
+  margin-left: 20rpx;
+  margin-top: 4rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+.kanjia-container {
+  width: 100%;
+  float: left;
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.kanjia-title {
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #27323f;
+  font-size: 32rpx;
+}
+.kanjia-title image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-bottom: -6rpx;
+  margin-left: 10rpx;
+  display: inline-block;
+}
+.kanjia-list {
+  float: left;
+  height: 230rpx;
+  width: 100%;
+  border-top: 1px solid #f5f5f5;
+}
+.kanjia-list-image {
+  float: left;
+  margin-left: 20rpx;
+  margin-top: 16rpx;
+}
+.kanjia-list-image image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 6rpx;
+}
+.kanjia-list-info {
+  float: left;
+  width: 65%;
+  margin-left: 20rpx;
+  height: 250rpx;
+  overflow: hidden;
+}
+.kanjia-list-info-title {
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  color: #27323f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kanjia-list-info-info {
+  font-size: 24rpx;
+  color: #7b8196;
+  margin-top: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kanjia-list-info-money {
+  margin-top: 30rpx;
+}
+.kanjia-list-info-money-a {
+  display: inline-block;
+  width: 33.33%;
+  font-size: 26rpx;
+  color: #7b8196;
+}
+.kanjia-list-info-money-a text {
+  display: block;
+}
+.kanjia-list-info-money-a .a {
+  color: #ffd305;
+  font-size: 30rpx;
+}
+.kanjia-list-info-money-a .b {
+  color: #27323f;
+}
+.topic-container {
+  width: 100%;
+  float: left;
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.topic-container .topic-title {
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #27323f;
+  font-size: 32rpx;
+}
+.topic-title image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-bottom: -6rpx;
+  margin-left: 10rpx;
+  display: inline-block;
+}
+.topic-list-box {
+  width: 100%;
+  height: 450rpx;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.topic-list-box .topic-list {
+  display: inline-block;
+  width: 85%;
+  margin-left: 20rpx;
+  overflow-x: scroll;
+  height: 430rpx;
+}
+.topic-list image {
+  width: 100%;
+  border-radius: 6rpx;
+  height: 77%;
+  overflow: hidden;
+}
+.topic-list-info {
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+}
+.topic-list-info-title {
+  font-size: 30rpx;
+  color: #27323f;
+  width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.topic-list-info-text {
+  font-size: 24rpx;
+  color: #7b8196;
+  margin-top: 10rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.topic-list-info-money {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #ffd305;
+  font-size: 30rpx;
+}
+.goods-container {
+  width: 100%;
+  float: left;
+  margin-bottom: 20rpx;
+}
+.goods-container .goods-title {
+  height: 120rpx;
+  color: #27323f;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goods-container .goods-title text {
+  padding-right: 12rpx;
+}
+.goods-list {
+  display: inline-block;
+  width: 45%;
+  margin-left: 26rpx;
+  height: 450rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.goods-list image {
+  width: 340rpx;
+  height: 340rpx;
+  border-radius: 6rpx;
+  background-color: #f5f5f5;
+}
+.goods-list-title {
+  font-size: 30rpx;
+  color: #27323f;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.goods-list-info-box {
+  display: flex;
+  align-items: center;
+}
+.goods-list-info-box .goods-list-money {
+  font-size: 36rpx;
+  color: #a18d65;
+  width: 77%;
+}
+.goods-list-info-box .goods-list-order {
+  color: #7b8196;
+  font-size: 26rpx;
+}

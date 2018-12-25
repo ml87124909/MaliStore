@@ -1,0 +1,609 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的订单</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="order-header-box">
+    <ui-tabs class="ui-tabs" index="{{ current }}" bindchange="handleChange" _pid="{{_pid}}">
+      <ui-tab _pid="{{_pid}}">全部</ui-tab>
+      <ui-tab _pid="{{_pid}}">待付款</ui-tab>
+      <ui-tab _pid="{{_pid}}">待发货</ui-tab>
+      <ui-tab _pid="{{_pid}}">待收货</ui-tab>
+      <ui-tab _pid="{{_pid}}">待评价</ui-tab>
+    </ui-tabs>
+  </view>
+  <view class="order-content-box">
+    <swiper style="height:{{WIN_HEIGHT}}px" class="content" current="{{ current }}" bindchange="handleContentChange">
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.number}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+                  <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
+                  <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+                  <view wx:if="{{item.status == 5}}" class="order-cancel">待收货</view>
+                  <view wx:if="{{item.status == 6}}" class="order-cancel">待评价</view>
+                  <view wx:if="{{item.status == 7}}" class="order-cancel">已完成</view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.pic}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">{{item.name}}</view>
+                    <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" style="height:100px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-two-box">
+                      <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                        <image src="{{item.pic}}" />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view wx:if="{{item.status == 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+                  <view wx:if="{{item.status != 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                    <text>付款</text>
+                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                  </view>
+                </view>
+              </view>
+
+              <view wx:if="{{item.status == 2}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getFahuoTips">提醒发货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 3}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">发货详情</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 4}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" data-show="{{ true }}" bindtap="handleShowMask" data-id="{{item.pick_number}}" data-status="{{item.pick_status}}">提货码</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 5}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">确认收货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 6}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">评价有礼</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 7}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no-more-goods" wx:if="{{!orderList}}">
+            <image src="../../../../images/none/empty_order.png" class="no-order-img" />
+            <view class="text">没有相关订单</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.number}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+                  <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
+                  <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+                  <view wx:if="{{item.status == 5}}" class="order-cancel">待收货</view>
+                  <view wx:if="{{item.status == 6}}" class="order-cancel">待评价</view>
+                  <view wx:if="{{item.status == 7}}" class="order-cancel">已完成</view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.pic}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">{{item.name}}</view>
+                    <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" style="height:100px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-two-box">
+                      <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                        <image src="{{item.pic}}" />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view wx:if="{{item.status == 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+                  <view wx:if="{{item.status != 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                    <text>付款</text>
+                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                  </view>
+                </view>
+              </view>
+
+              <view wx:if="{{item.status == 2}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getFahuoTips">提醒发货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 3}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">发货详情</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 4}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" data-show="{{ true }}" bindtap="handleShowMask" data-id="{{item.pick_number}}" data-status="{{item.pick_status}}">提货码</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 5}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">确认收货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 6}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">评价有礼</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 7}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no-more-goods" wx:if="{{!orderList}}">
+            <image src="../../../../images/none/empty_order.png" class="no-order-img" />
+            <view class="text">没有相关订单</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.number}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+                  <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
+                  <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+                  <view wx:if="{{item.status == 5}}" class="order-cancel">待收货</view>
+                  <view wx:if="{{item.status == 6}}" class="order-cancel">待评价</view>
+                  <view wx:if="{{item.status == 7}}" class="order-cancel">已完成</view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.pic}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">{{item.name}}</view>
+                    <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" style="height:100px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-two-box">
+                      <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                        <image src="{{item.pic}}" />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view wx:if="{{item.status == 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+                  <view wx:if="{{item.status != 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                    <text>付款</text>
+                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                  </view>
+                </view>
+              </view>
+
+              <view wx:if="{{item.status == 2}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getFahuoTips">提醒发货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 3}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">发货详情</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 4}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" data-show="{{ true }}" bindtap="handleShowMask" data-id="{{item.pick_number}}" data-status="{{item.pick_status}}">提货码</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 5}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">确认收货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 6}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">评价有礼</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 7}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no-more-goods" wx:if="{{!orderList}}">
+            <image src="../../../../images/none/empty_order.png" class="no-order-img" />
+            <view class="text">没有相关订单</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.number}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+                  <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
+                  <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+                  <view wx:if="{{item.status == 5}}" class="order-cancel">待收货</view>
+                  <view wx:if="{{item.status == 6}}" class="order-cancel">待评价</view>
+                  <view wx:if="{{item.status == 7}}" class="order-cancel">已完成</view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.pic}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">{{item.name}}</view>
+                    <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" style="height:100px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-two-box">
+                      <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                        <image src="{{item.pic}}" />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view wx:if="{{item.status == 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+                  <view wx:if="{{item.status != 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                    <text>付款</text>
+                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                  </view>
+                </view>
+              </view>
+
+              <view wx:if="{{item.status == 2}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getFahuoTips">提醒发货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 3}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">发货详情</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 4}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" data-show="{{ true }}" bindtap="handleShowMask" data-id="{{item.pick_number}}" data-status="{{item.pick_status}}">提货码</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 5}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">确认收货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 6}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">评价有礼</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 7}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no-more-goods" wx:if="{{!orderList}}">
+            <image src="../../../../images/none/empty_order.png" class="no-order-img" />
+            <view class="text">没有相关订单</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.number}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+                  <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
+                  <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+                  <view wx:if="{{item.status == 5}}" class="order-cancel">待收货</view>
+                  <view wx:if="{{item.status == 6}}" class="order-cancel">待评价</view>
+                  <view wx:if="{{item.status == 7}}" class="order-cancel">已完成</view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.pic}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">{{item.name}}</view>
+                    <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+              <view class="order-ui-row ui-row" style="height:100px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-two-box">
+                      <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                        <image src="{{item.pic}}" />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view wx:if="{{item.status == 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+                  <view wx:if="{{item.status != 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                    <text>付款</text>
+                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                  </view>
+                </view>
+              </view>
+
+              <view wx:if="{{item.status == 2}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getFahuoTips">提醒发货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 3}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">发货详情</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 4}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" data-show="{{ true }}" bindtap="handleShowMask" data-id="{{item.pick_number}}" data-status="{{item.pick_status}}">提货码</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 5}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">确认收货</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 6}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">评价有礼</view>
+                </view>
+              </view>
+              <view wx:if="{{item.status == 7}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no-more-goods" wx:if="{{!orderList}}">
+            <image src="../../../../images/none/empty_order.png" class="no-order-img" />
+            <view class="text">没有相关订单</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <ui-mask show="{{showMask}}" hide-on-tap="{{false}}" class="mask_wrap" custom-style="{{customStyle}}" _pid="{{_pid}}">
+    <view class="photo" style="width:520rpx">
+      <view class="top_view">
+        <span type="cancel" data-show="{{ false }}" bindtap="handleShowMask" size="48" class="icon_top ui-icon icon-cancel" style="font-size: 48px;"></span>
+        <view class="top_line"></view>
+      </view>
+      <view class="order-qrcode-box">
+        <view class="qrcode-title">请向店员展示提货码</view>
+        <canvas hidden="{{!showMask}}" class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
+        <view class="qrcode-state">状态：
+          <text wx:if="{{codeStatus == '已核验'}}" class="b">已核验</text>
+          <text wx:if="{{codeStatus == '未核验'}}" class="a">未核验</text>
+        </view>
+      </view>
+    </view>
+  </ui-mask>
+
+</page>

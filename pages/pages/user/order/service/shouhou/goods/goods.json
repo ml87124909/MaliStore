@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../../../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-divider": "../../../../../../../packages/touchui-wx-components/ui-divider/dist/index",
+    "ui-stepper": "../../../../../../../packages/touchui-wx-components/ui-stepper/dist/index"
+  }
+}

@@ -1,0 +1,109 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+page {
+  background-color: #f5f5f5;
+}
+.pingjia-list {
+  background-color: #fff;
+  border-top: 20rpx solid #f5f5f5;
+}
+.pingjia-list .none {
+  display: none;
+}
+.pingjia-list .goods-img {
+  width: 120rpx;
+  height: 120rpx;
+}
+.pingjia-list .goods-name {
+  color: #27323f;
+}
+.pingjia-list .goods-text {
+  color: #7b8196;
+  font-size: 24rpx;
+  padding-top: 10rpx;
+}
+.pingjia-list .star-box {
+  display: flex;
+  width: 93%;
+  height: 70rpx;
+  margin: 0 auto;
+  align-items: center;
+}
+.pingjia-list .star-box .text {
+  width: 90rpx;
+  color: #27323f;
+}
+.pingjia-list .star-box .result {
+  color: #27323f;
+  padding-left: 30rpx;
+  font-size: 24rpx;
+}
+.pingjia-list .piangjia-textarea {
+  width: 93%;
+  margin: 0 auto;
+  padding-top: 12rpx;
+  padding-bottom: 12rpx;
+  height: 180rpx;
+  color: #27323f;
+}
+.pingjia-list .submit-box {
+  border-top: 2rpx solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100rpx;
+}
+.pingjia-list .right {
+  padding-right: 30rpx;
+}
+.pingjia-list .right button {
+  width: 150rpx;
+  height: 64rpx;
+  padding-left: 0;
+  padding-right: 0;
+  border: 2rpx solid #e2e2e2;
+  color: #27323f;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4rpx;
+}
+.pingjia-list .right button::after {
+  border: 0;
+}
+.pingjia-list .star-time {
+  color: #7b8196;
+  width: 93%;
+  margin: 0 auto;
+  font-size: 24rpx;
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+}
+.pingjia-list .star-text {
+  color: #27323f;
+  width: 93%;
+  margin: 0 auto;
+  padding-bottom: 30rpx;
+  font-size: 28rpx;
+}

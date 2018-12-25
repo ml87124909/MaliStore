@@ -1,0 +1,3 @@
+<view class="ui-v-tab {{ active ? 'active' : '' }}" style="{{ selfStyle }}" bindtap="handleTap">
+  <slot></slot>
+</view>

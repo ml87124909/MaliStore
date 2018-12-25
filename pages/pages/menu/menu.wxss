@@ -1,0 +1,187 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.ui-divider {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 26rpx;
+}
+.three_swiper .swiper_item {
+  display: flex;
+  height: 200px;
+}
+.three_swiper .swiper_item image {
+  flex: 1;
+  margin-right: 5px;
+}
+.three_swiper .swiper_item image:last-child {
+  margin-right: 0;
+}
+.swiper-container {
+  position: relative;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+.swiper-container .swiper {
+  height: 210rpx;
+}
+.swiper-container .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container .dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12rpx;
+  display: flex;
+  justify-content: center;
+  height: 10rpx;
+}
+.swiper-container .dots .dot {
+  margin: 0 5rpx;
+  width: 12rpx;
+  height: 8rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  transition: all 0.6s;
+  opacity: 0.5;
+}
+.swiper-container .dots .dot.active {
+  width: 22rpx;
+  opacity: 1;
+}
+.menu-list {
+  position: fixed;
+  background-color: #fff;
+  left: 0;
+}
+.menu-list .ui-v-tab {
+  padding: 14px 10px !important;
+}
+.menu-right {
+  position: fixed;
+  width: 75%;
+  right: 0;
+  overflow: scroll;
+}
+.menu-right scroll-view {
+  padding-bottom: 160rpx;
+}
+.search-header-box .ui-col-content {
+  align-items: flex-start;
+}
+.search-header-box .ui-col-content image {
+  width: 28rpx;
+  height: 28rpx;
+  display: inline-block;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.search-header-box .ui-col-content .search-header-input {
+  background-color: #f5f5f5;
+  color: #999;
+  width: 65%;
+  margin-left: 20rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6rpx;
+}
+.search-header-box .ui-col-content .search-header-hover {
+  justify-content: flex-start;
+}
+.search-header-box .ui-col-content .search-header-hover input {
+  width: 74%;
+  text-align: left;
+  color: #27323f;
+  transition: all 0.6s;
+}
+.search-header-box .ui-col-content .search-header-hover .close {
+  background-color: #fff;
+  color: #27323f;
+  height: 100%;
+  width: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s;
+}
+.imgbox {
+  width: 130rpx;
+  height: 130rpx;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.small-title {
+  font-size: 26rpx;
+  text-align: center;
+  margin-top: 10rpx;
+  color: #27323f;
+}
+.goods-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding-bottom: 50rpx;
+}
+.goods-box .goods-list {
+  flex: 0 0 33.33%;
+  margin-top: 20rpx;
+}
+.show-search-box {
+  width: 90%;
+  margin: 0 auto;
+}
+.search-line {
+  width: 100%;
+  height: 20rpx;
+  background-color: #f5f5f5;
+}
+.show-search-box .show-search-hot {
+  width: 100%;
+  height: 100rpx;
+  color: #999;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+}
+.show-search-box .show-search-hot text {
+  display: flex;
+  width: 95%;
+}
+.show-search-box .show-search-hot image {
+  width: 38rpx;
+  height: 38rpx;
+}
+.show-search-box .seaech-list {
+  display: inline-block;
+  border: 2rpx solid #ddd;
+  font-size: 26rpx;
+  padding: 10rpx 20rpx;
+  margin-right: 20rpx;
+  color: #484648;
+  margin-bottom: 30rpx;
+  border-radius: 4rpx;
+}

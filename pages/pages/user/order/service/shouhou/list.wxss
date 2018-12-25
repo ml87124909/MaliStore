@@ -1,0 +1,179 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+page {
+  background-color: #f5f5f5;
+}
+.order-list {
+  color: #27323f;
+  background-color: #ffffff;
+}
+.order-list .order-ui-row {
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.order-list .order-ui-row .order-goods-name {
+  width: 95%;
+  font-size: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.order-list .order-ui-row .order-goods-info {
+  width: 95%;
+  padding-top: 12rpx;
+  color: #7b8196;
+  font-size: 26rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.order-list .order-button-time {
+  display: flex;
+  height: 60rpx;
+  background-color: #ffd305;
+  color: #27323f;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  border-radius: 4rpx;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  min-width: 160rpx;
+}
+.order-list .order-button-time text {
+  width: 60rpx;
+  padding-right: 6rpx;
+}
+.order-list .order-button {
+  border: 2rpx solid #e2e2e2;
+  margin-right: 26rpx;
+  color: #27323f;
+  padding: 10rpx 20rpx;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}
+.order-list .order-text {
+  font-size: 26rpx;
+  padding-right: 30rpx;
+}
+.order-list .order-cancel {
+  color: #7b8196;
+}
+.order-list .order-error {
+  color: #E64340;
+}
+.order-list .order-gerrn {
+  color: #50af51;
+}
+.order-list .order-orgin {
+  color: #f5871f;
+}
+.order-one-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-one-img image {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 4rpx;
+}
+.order-two-box {
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll;
+  margin-top: 6rpx;
+}
+.order-two-box .order-two-img {
+  width: 150rpx;
+  height: 150rpx;
+  display: inline-block;
+  margin-left: 40rpx;
+  margin-right: -10rpx;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-more-goods .no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+  width: 33%;
+  text-align: center;
+}
+.show-content {
+  width: 80%;
+  height: 500rpx;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 25%;
+}
+.show-content .title {
+  color: #27323f;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 30rpx;
+  font-size: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.show-content .text {
+  width: 90%;
+  margin: 0 auto;
+  height: 300rpx;
+  padding-top: 20rpx;
+  color: #27323f;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  margin-bottom: 20rpx;
+}
+.show-content .button {
+  width: 160rpx;
+  height: 60rpx;
+  border: 2rpx solid #e2e2e2;
+  float: right;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7b8196;
+  border-radius: 6rpx;
+}
+.show-content .button-green {
+  width: 220rpx;
+  color: #fff;
+  background-color: #50af51;
+  border: 0;
+}

@@ -1,0 +1,111 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>收益中心</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="share-header-box">
+    <view class="name">收益现金</view>
+    <view class="money">{{profitInfo.money}}
+      <text>元</text>
+    </view>
+    <view class="ui-row" style="height:20px;">
+      <view class="ui-col-left ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>获得优惠券：{{profitInfo.coupon}}张</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>获得积分：{{profitInfo.score}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="ui-tabs-bg">
+    <ui-tabs height="46" index="{{ current }}" probe="1" bindchange="handleChange" _pid="{{_pid}}">
+      <ui-tab _pid="{{_pid}}">收益记录</ui-tab>
+      <ui-tab _pid="{{_pid}}">收益说明</ui-tab>
+    </ui-tabs>
+  </view>
+  <view class="swiper_content" wx:if="{{ show_1 }}">
+    <view class="share-list" wx:for="{{profitInfo.record}}" wx:key="id">
+      <view class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="name" wx:if="{{item.type == 0}}">现金收益</view>
+            <view class="name" wx:if="{{item.type == 1}}">积分收益</view>
+            <view class="name" wx:if="{{item.type == 2}}">优惠券收益</view>
+            <view class="goods">
+              <text class="a">{{item.time}}</text>
+              <text class="b" wx:if="{{item.share_type == 0}}">分享返现</text>
+              <text class="b" wx:if="{{item.share_type == 1}}">分享返积分</text>
+              <text class="b" wx:if="{{item.share_type == 2}}">分享返优惠券</text>
+              <text class="b" wx:if="{{item.share_type == 3}}">好友下单返现</text>
+              <text class="b" wx:if="{{item.share_type == 4}}">好友下单返积分</text>
+              <text class="b" wx:if="{{item.share_type == 5}}">好友下单返优惠券</text>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+          <view class="ui-col-content align-center valign-middle">
+            <block wx:if="{{item.share_type == 2}}">
+              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}
+                <text>元</text>
+              </view>
+              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}
+                <text>折</text>
+              </view>
+            </block>
+            <block wx:elif="{{item.share_type == 5}}">
+              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}
+                <text>元</text>
+              </view>
+              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}
+                <text>折</text>
+              </view>
+            </block>
+            <block wx:else="">
+              <view class="number">
+                <text>+</text>{{item.number}}</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="no-more-goods" wx:if="{{!profitInfo.record}}">
+      <image src="../../../../images/none/profit_empty.png" class="no-order-img" />
+      <view class="text">还没有收益记录</view>
+    </view>
+  </view>
+  <view class="swiper_content" wx:if="{{ show_2 }}">
+    <view class="share-text-box">
+      <view class="sname">邀请好友得丰厚奖励，多邀多得！</view>
+      <view class="stitle">怎样获得奖励？</view>
+      <view class="stext">1、在商品详情页分享商品给好友可获得对应的积分、优惠券或者现金奖励；</view>
+      <view class="stext">2、分享奖励类型为：分享返、下单返</view>
+      <view class="stext">3、其中“分享返”的商品只要把该商品分享给好友或者生成商品海报发给好友，好友打开过该商品你即可获得对应的返现奖励。每个分享返的商品只有首次分享才会有奖励，多次分享或者多次生成海报均不在获得奖励；</view>
+      <view class="stext">4、其中“下单返”的商品需要把这个商品分享给你的好友或者生成商品海报分享给好友，你的好友只要通过你的链接或者二维码进入了小程序并且购买了返现商品，你就可以获得对应的奖励，奖励无上限，好友下单越多，你得的奖励越多；</view>
+      <view class="stitle">奖励怎么使用？</view>
+      <view class="stext">1、奖励的积分您可用于兑换商品或者优惠券；</view>
+      <view class="stext">2、奖励的优惠券您可以在下单时直接抵扣订单金额；</view>
+      <view class="stext">3、奖励的现金会支付到您的钱包内，您可以在购物时用于抵扣订单金额，也可以直接申请提现；</view>
+    </view>
+  </view>
+</page>

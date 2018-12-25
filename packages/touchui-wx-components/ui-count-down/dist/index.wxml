@@ -1,0 +1,14 @@
+<view class="ui-count-down">
+
+
+  <view wx:if="{{timeUp}}" class="time-up">
+    {{doneText}}
+  </view>
+
+
+  <view class="count-down-wrap" wx:if="{{!timeUp}}">
+    <view class="count-down-item" style="{{item.type === 'split' ? selfSplitStyle : selfNumberStyle}}" wx:for="{{itemArray}}" wx:key="">{{item.value}}</view>
+  </view>
+</view>
+
+<view></view>

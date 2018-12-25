@@ -1,0 +1,80 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>领券中心</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="coupons-box" wx:for="{{coupons}}" wx:key="id">
+    <view class="ui-row" style="height:130px;">
+      <view class="ui-col ui-col-4" style="flex: 0 0 33.33333333333333%;padding-right: 5px;">
+        <view class="ui-col-content">
+          <view class="coupons-image">
+            <image src="{{item.icons}}" />
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-8 valign-middle" style="flex: 0 0 66.66666666666666%;">
+        <view class="ui-col-content valign-middle">
+          <view class="ui-row" style="">
+            <view class="ui-col valign-middle" style="">
+              <view class="ui-col-content valign-middle">
+                <view wx:if="{{item.money_type == '满减'}}" class="coupons-title">满{{item.max_money}}减{{item.money}}元券</view>
+                <view wx:if="{{item.money_type == '折扣'}}" class="coupons-title">满{{item.max_money}}享{{item.money/10}}折券</view>
+              </view>
+            </view>
+          </view>
+          <view class="ui-row" style="">
+            <view class="ui-col" style="flex:0 0 130px;">
+              <view class="ui-col-content">
+                <view class="coupons-times">有效期：{{item.data_end}}</view>
+              </view>
+            </view>
+            <view class="ui-col" style="">
+              <view class="ui-col-content">
+                <view wx:if="{{item.goods_id}}" class="coupons-times">限指定商品可用</view>
+                <view wx:if="{{!item.goods_id}}" class="coupons-times">全场商品可用</view>
+              </view>
+            </view>
+          </view>
+          <view class="ui-row" style="">
+            <view class="ui-col" style="">
+              <view class="ui-col-content">
+                <view class="coupons-slider">
+                  <slider value="{{item.getnumber}}" block-size="12" min="0" max="{{item.number}}" activeColor="#ffd305" disabled active-color="#ffd305">
+                    <text>已领取{{item.percent}}%</text>
+                  </slider>
+                </view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-center align-center" style="">
+              <view class="ui-col-content align-center">
+                <view wx:if="{{item.state == 1 && item.type == '普通优惠券'}}" class="coupons-button" bindtap="getCouponsTap" data-id="{{item.id}}">立即领取</view>
+                <view wx:if="{{item.state == 1 && item.type == '积分优惠券'}}" class="coupons-button" bindtap="getCouponsTap" data-id="{{item.id}}">{{item.score}}积分兑换</view>
+                <view wx:if="{{item.state == 2}}" class="coupons-button coupons-button-ohter">已领过</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="my-coupons" bindtap="getMyCouponsTap">我的券</view>
+
+</page>

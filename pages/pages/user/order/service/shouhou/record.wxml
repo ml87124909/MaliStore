@@ -1,0 +1,165 @@
+<page>
+  <import src="../../../../../component/menu/menu.wxml" />
+  <import src="../../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>售后记录</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="order-content-box">
+    <view class="order-content-list">
+      <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+        <view class="order-ui-row ui-row" style="margin-top: 10px;height:40px;">
+          <view bindtap="getDetailsTap" data-id="{{item.order_id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-number">{{item.change_number}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 125px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+              <view wx:if="{{item.status == 89}}" class="order-cancel order-orgin">处理中</view>
+              <view wx:if="{{item.status == 88}}" class="order-cancel order-gerrn">
+                <text wx:if="{{item.type == 0}}">退换货成功</text>
+                <text wx:if="{{item.type == 1}}">仅退款成功</text>
+                <text wx:if="{{item.type == 2}}">退货退款成功</text>
+              </view>
+              <view wx:if="{{item.status == 87}}" class="order-cancel order-error">售后失败</view>
+              <view wx:if="{{item.status == 86}}" class="order-cancel order-orgin">待用户补充信息</view>
+              <view wx:if="{{item.status == 85}}" class="order-cancel order-orgin">待客服确认信息</view>
+            </view>
+          </view>
+        </view>
+        <view bindtap="getDetailsTap" data-id="{{item.order_id}}">
+          <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+              <view class="ui-col-content align-center valign-middle">
+                <view class="order-one-img">
+                  <image src="{{item.pic}}" />
+                </view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+              <view class="ui-col-content align-left valign-middle">
+                <view class="order-goods-name">{{item.name}}</view>
+                <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+                <view class="order-goods-number">¥{{item.mini_price}}
+                  <text>x{{item.number}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-money">售后商品:{{item.order_goods.length}}件</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="order-button-box">
+                <view class="order-button" bindtap="handleShowMask" data-show="{{ true }}" data-index="{{index}}">售后信息</view>
+                <view wx:if="{{item.status == -1}}" class="order-button button-cancel" bindtap="DeleteShouhouTap" data-id="{{item.refund_id}}">删除记录</view>
+                <view wx:if="{{item.status == 89}}" class="order-button button-green" bindtap="CancelShouhouTap" data-id="{{item.refund_id}}">撤销申请</view>
+                <view wx:if="{{item.status == 86}}" class="order-button button-orgin" bindtap="MakeShouhouTap" data-show="{{ true }}" data-id="{{item.refund_id}}" data-re="{{item.reason_re}}">补充信息</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="no-more-goods" wx:if="{{!orderList}}">
+        <image src="../../../../../../images/none/empty_shouhou.png" class="no-order-img" />
+        <view class="text">没有申请过任何售后</view>
+      </view>
+    </view>
+  </view>
+  <ui-mask show="{{showMask}}" hide-on-tap="{{false}}" _pid="{{_pid}}">
+    <view class="show-tuikuan-info">
+      <view class="title">
+        <view>申请售后信息</view>
+        <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="handleShowMask" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
+      </view>
+      <view class="numbe">售后单号：
+        <text>{{shopList.change_number}}</text>
+      </view>
+      <view class="times">售后类型：
+        <text wx:if="{{shopList.type == 0}}">退换货</text>
+        <text wx:if="{{shopList.type == 1}}">仅退款</text>
+        <text wx:if="{{shopList.type == 2}}">退货退款</text>
+      </view>
+      <view class="times">申请时间：
+        <text>{{shopList.date}}</text>
+      </view>
+      <view class="times" wx:if="{{shopList.kuaicode}}">退回信息：
+        <text>{{shopList.kuainame}}/{{shopList.kuaicode}}</text>
+      </view>
+      <view class="text-box">
+        <view class="text-title">申请原因：</view>
+        <view class="text-info">{{shopList.reason}}</view>
+      </view>
+      <view wx:if="{{shopList.pics}}" class="iamges-box">
+        <block wx:for="{{shopList.pics}}" wx:key="id">
+          <image src="{{item.pic}}" mode="aspectFill" bindtap="previewImageTap" data-img="{{item.pic}}" />
+        </block>
+      </view>
+    </view>
+  </ui-mask>
+  <ui-mask show="{{makeMask}}" hide-on-tap="{{false}}" _pid="{{_pid}}">
+    <view class="show-maskuaid-info">
+      <view class="title">
+        <view>补充运单信息</view>
+        <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="MakeShouhouTap" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
+      </view>
+      <view class="mask-content">
+        <view class="mask-error" wx:if="{{shreason}}">
+          <view class="name">驳回说明：</view>
+          <view class="text">{{shreason}}</view>
+        </view>
+        <form bindsubmit="bindFormSubmit">
+          <view class="mask-list">
+            <view class="name">快递公司</view>
+            <input name="name" type="text" placeholder="请输入快递公司名字"></input>
+          </view>
+          <view class="mask-list">
+            <view class="name">运单号码</view>
+            <input name="number" type="text" placeholder="请输入快递运单号码"></input>
+          </view>
+          <button class="mask-button" form-type="submit">提交</button>
+        </form>
+      </view>
+      <view class="mask-info" bindtap="getCopyShopTap">
+        <view class="name">退货寄件信息
+          <text>（点击可复制）</text>
+        </view>
+        <view class="info">
+          <view>收件姓名：</view>
+          <text>{{shopInfo.gname}}</text>
+        </view>
+        <view class="info">
+          <view>联系电话：</view>
+          <text>{{shopInfo.phone}}</text>
+        </view>
+        <view class="info">
+          <view>寄送地址：</view>
+          <text>{{shopInfo.gadds}}</text>
+        </view>
+      </view>
+    </view>
+  </ui-mask>
+
+</page>

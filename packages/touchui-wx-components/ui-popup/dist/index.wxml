@@ -1,0 +1,6 @@
+<view style="{{ selfStyle }}" class="ui-popup {{ show ? 'show' : '' }}" catchtouchmove="handleTouchMove">
+  <view style="{{ selfContentStyle }}" class="ui-popup-content {{ show ? 'show' : '' }} {{ position }}">
+    <slot></slot>
+  </view>
+  <view style="{{ selfMaskStyle }}" class="ui-popup-mask {{ show ? 'show' : '' }}" bindtap="handleMaskTap"></view>
+</view>

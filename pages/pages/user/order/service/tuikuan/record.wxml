@@ -1,0 +1,134 @@
+<page>
+  <import src="../../../../../component/menu/menu.wxml" />
+  <import src="../../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>退款记录</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="order-content-box">
+    <view class="order-content-list">
+      <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+        <view class="order-ui-row ui-row" style="margin-top: 10px;height:40px;">
+          <view bindtap="getDetailsTap" data-id="{{item.order_id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-number">{{item.refund_number}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+              <view wx:if="{{item.status == 99}}" class="order-cancel order-orgin">处理中</view>
+              <view wx:if="{{item.status == 98}}" class="order-cancel order-gerrn">退款成功</view>
+              <view wx:if="{{item.status == 97}}" class="order-cancel order-error">申请被驳回</view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.order_id}}">
+          <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+              <view class="ui-col-content align-center valign-middle">
+                <view class="order-one-img">
+                  <image src="{{item.pic}}" />
+                </view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+              <view class="ui-col-content align-left valign-middle">
+                <view class="order-goods-name">{{item.name}}</view>
+                <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.order_id}}">
+          <view class="order-ui-row ui-row" style="height:100px;">
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+              <view class="ui-col-content align-left valign-middle">
+                <view class="order-two-box">
+                  <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                    <image src="{{item.pic}}" />
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-money">退款金额:¥{{item.money}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 200px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="order-button-box">
+                <view class="order-button" bindtap="handleShowMask" data-show="{{ true }}" data-index="{{index}}">申请信息</view>
+                <view wx:if="{{item.status == 99}}" class="order-button button-green" bindtap="CancelTuikuanTap" data-id="{{item.refund_id}}">撤销申请</view>
+                <view wx:if="{{item.status == -1}}" class="order-button button-cancel" bindtap="DeleteTuikuanTap" data-id="{{item.refund_id}}">删除记录</view>
+                <view wx:if="{{item.status == 97}}" class="order-button button-error" bindtap="ViewReasonTap" data-show="{{ true }}" data-index="{{index}}">驳回原因</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="no-more-goods" wx:if="{{!orderList}}">
+        <image src="../../../../../../images/none/empty_shouhou.png" class="no-order-img" />
+        <view class="text">没有申请过任何退款</view>
+      </view>
+    </view>
+  </view>
+  <ui-mask show="{{showMask}}" hide-on-tap="{{false}}" _pid="{{_pid}}">
+    <view class="show-tuikuan-info">
+      <view class="title">
+        <view>申请退款信息</view>
+        <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="handleShowMask" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
+      </view>
+      <view class="numbe">退款单号：
+        <text>{{shopList.refund_number}}</text>
+      </view>
+      <view class="times">申请时间：
+        <text>{{shopList.date}}</text>
+      </view>
+      <view class="money">退款金额：
+        <text>¥{{shopList.money}}</text>
+      </view>
+      <view class="text-box">
+        <view class="text-title">申请原因：</view>
+        <view class="text-info">{{shopList.reason}}</view>
+      </view>
+      <view wx:if="{{shopList.pics}}" class="iamges-box">
+        <block wx:for="{{shopList.pics}}" wx:key="id">
+          <image src="{{item.pic}}" mode="aspectFill" bindtap="previewImageTap" data-img="{{item.pic}}" />
+        </block>
+      </view>
+    </view>
+  </ui-mask>
+  <ui-mask show="{{bohuiMask}}" hide-on-tap="{{false}}" _pid="{{_pid}}">
+    <view class="show-content">
+      <view class="title">
+        <view>驳回原因</view>
+        <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="ViewReasonTap" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
+      </view>
+      <view class="text">{{reaList.reason_re}}</view>
+      <view class="button-box">
+        <view class="button" bindtap="TuikuanAgainTap" data-id="{{reaList.order_id}}" data-tid="{{reaList.refund_id}}">重新申请</view>
+        <view class="button button-green" bindtap="TuikuanContinueTap" data-id="{{reaList.refund_id}}">继续交易</view>
+      </view>
+    </view>
+  </ui-mask>
+</page>

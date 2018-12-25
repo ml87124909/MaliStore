@@ -1,0 +1,215 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.score-header {
+  background: #fff;
+  width: 100%;
+  height: 620rpx;
+  align-items: center;
+  background: linear-gradient(to top, #ffcc33, #ffd305);
+  position: relative;
+}
+.score-header .score-number {
+  font-size: 100rpx;
+  color: #fff;
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+.score-header .score-name {
+  font-size: 26rpx;
+  width: 60%;
+  margin: 0 auto;
+}
+.score-header .score-max {
+  color: #fff;
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30rpx;
+  font-size: 24rpx;
+}
+.score-times {
+  width: 700rpx;
+  height: 150rpx;
+  font-size: 26rpx;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+.score-times .times-list {
+  width: 100rpx;
+  color: #dfb600;
+}
+.score-times .times-list .times-line {
+  padding-top: 7px;
+  border-bottom: 1px solid #dfb600;
+}
+.score-times .times-list .times-pus {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #dfb600;
+  position: absolute;
+  margin-left: 26rpx;
+  border-radius: 50%;
+  margin-top: -12rpx;
+  color: #eee;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.score-times .times-list .times-day {
+  padding-top: 30rpx;
+  text-align: center;
+}
+.score-times .item-on {
+  color: #fff;
+}
+.score-times .item-on .times-pus {
+  color: #ffd305;
+}
+.score-times .item-on .times-line {
+  border-bottom: 1px solid #fff;
+}
+.score-times .item-on .times-pus {
+  background-color: #fff;
+}
+.score-center {
+  display: flex;
+  height: 110rpx;
+  align-items: center;
+  justify-content: center;
+}
+.score-center .score-btn {
+  color: #27323f;
+  background-color: #fff;
+  width: 300rpx;
+  height: 72rpx;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.score-center .score-btn-none {
+  color: #dfb600;
+  background-color: #fff;
+  width: 300rpx;
+  height: 72rpx;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10rpx #dfb600;
+}
+/* -- 优惠券 --*/
+.coupons-box {
+  background-color: #fefefe;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 30rpx;
+  margin-top: 30rpx;
+  border: 2rpx solid #f2f2f2;
+  border-radius: 6rpx;
+  box-shadow: 0 0 16rpx #f2f2f2;
+}
+.coupons-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coupons-image image {
+  width: 200rpx;
+  height: 200rpx;
+}
+.coupons-title {
+  font-size: 32rpx;
+  color: #27323f;
+  margin-top: 10rpx;
+}
+.coupons-goods {
+  color: #27323f;
+  font-size: 28rpx;
+}
+.coupons-times {
+  font-size: 24rpx;
+  color: #7b8196;
+}
+.coupons-slider {
+  margin-top: -24rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.coupons-slider slider {
+  margin: 0;
+  width: 75%;
+}
+.coupons-slider text {
+  color: #ffd305;
+  font-size: 24rpx;
+}
+.coupons-button {
+  width: 160rpx;
+  height: 60rpx;
+  background-color: #ffd305;
+  color: #27323f;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -10rpx;
+  border-radius: 6rpx;
+}
+.coupons-button-ohter {
+  color: #fff;
+  background-color: #7b8196;
+}
+.column-content {
+  background-color: #eee;
+}
+.my-coupons {
+  position: fixed;
+  background-color: #ffd305;
+  color: #27323f;
+  width: 120rpx;
+  height: 68rpx;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  bottom: 220rpx;
+  box-shadow: 0 0 12rpx #eee;
+  right: 0;
+}

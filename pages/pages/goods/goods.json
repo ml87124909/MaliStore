@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-sticky": "../../../packages/touchui-wx-components/ui-sticky/dist/index",
+    "ui-tabs": "../../../packages/touchui-wx-components/ui-tabs/dist/index",
+    "ui-tab": "../../../packages/touchui-wx-components/ui-tab/dist/index",
+    "ui-mini-star": "../../../packages/touchui-wx-components/ui-mini-star/dist/index",
+    "ui-fixed-view": "../../../packages/touchui-wx-components/ui-fixed-view/dist/index",
+    "ui-badge": "../../../packages/touchui-wx-components/ui-badge/dist/index",
+    "ui-popup": "../../../packages/touchui-wx-components/ui-popup/dist/index",
+    "ui-mask": "../../../packages/touchui-wx-components/ui-mask/dist/index",
+    "txv-video": "plugin://tencentvideo/video"
+  },
+  "navigationBarTextStyle": "white"
+}

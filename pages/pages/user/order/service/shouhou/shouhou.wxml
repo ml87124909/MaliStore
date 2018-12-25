@@ -1,0 +1,148 @@
+<page>
+  <import src="../../../../../component/menu/menu.wxml" />
+  <import src="../../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>填写售后原因</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="shouhou-goods-box">
+    <view class="order-title">售后商品</view>
+    <view class="order-goods-list-box" wx:for="{{goodsList}}" wx:key="id">
+      <view class="ui-row" style="height:90px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 90px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="favorite-list-img">
+              <image src="{{item.pic}}" />
+            </view>
+          </view>
+        </view>
+        <view class="text ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view style="width: 100%;height:150rpx;">
+              <view class="ui-row" style="height:25px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <text class="goods-name">{{item.name}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="ui-row" style="height:25px;">
+                <view wx:if="{{item.spec}}" class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <text class="goods-info">{{item.spec}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="ui-row" style="height:25px;">
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <text class="price">¥{{item.price}}</text>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                  <view class="ui-col-content align-right valign-middle">
+                    <text class="times">x {{item.number}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="tuikuan-content">
+    <view class="kefu-box">
+      <view class="kefu-title">客服服务时间：
+        <text>{{shopInfo.shopInfo.times }}</text>
+      </view>
+      <view class="ui-row" style="height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <button open-type="contact" session-from="申请退款:{{orderDetails.number}}" class="button">在线客服</button>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-right: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="button" bindtap="getCallTap" data-phone="{{shopInfo.shopInfo.phone}}">电话客服</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+      <view class="order-title kanjia-title">售后申请</view>
+      <view class="tuikuan-box">
+        <view class="list ui-row" style="height:45px;">
+          <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view class="name">售后类型</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <view class="picker-box">
+                  <view class="picker">{{array[index]}}</view>
+                  <span type="arrow-down" size="14" color="#27323f" class="ui-icon icon-arrow-down" style="color: #27323f;font-size: 14px;"></span>
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="list ui-row" wx:if="{{index != 0}}" style="height:45px;">
+          <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view class="name">退款金额</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <input value="{{smoney}}" name="money" type="digit" placeholder="请输入退款金额"></input>
+            </view>
+          </view>
+          <!--<view class="seletap" bindtap="seleMoneyTap">全部金额</view>-->
+        </view>
+        <view class="list list-textarea ui-row" style="height:80px;">
+          <view class="ui-col ui-col-align-center align-center" style="flex:0 0 80px;">
+            <view class="ui-col-content align-center">
+              <view class="name">售后说明</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <textarea show-confirm-bar="{{confirm}}" name="text" maxlength="300" placeholder="为尽快处理您的售后申请，请详细填写（10～300字）"></textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-title">上传凭证
+        <text>(可选，最多上传4张)</text>
+      </view>
+      <view class="images-box">
+        <block wx:for="{{imgList}}" wx:key="id">
+          <image src="{{item}}" bindtap="previewImageTap" data-img="{{item}}" mode="aspectFill" />
+        </block>
+        <view class="images-add" bindtap="chooseImageTap"></view>
+      </view>
+      <button form-type="submit">提交售后申请</button>
+    </form>
+  </view>
+
+
+
+</page>

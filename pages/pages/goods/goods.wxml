@@ -1,0 +1,319 @@
+<page wx:if="{{goodsDetail}}">
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <import src="../../../static/wxParse/wxParse.wxml" />
+  <ui-nav-bar class="{{navigationbar ? 'hidden':'scrollTop'}}" slot="nav-bar" custom-style="{{ {backgroundColor:'rgba(255,255,255,.0)'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span class="goodsicon ui-icon icon-arrow-left" type="arrow-left" size="16" color="#fff" style="color: #fff;font-size: 16px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view></view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <ui-nav-bar class="hidden {{navigationbar}}" slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="16" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 16px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="goods-tabbar-title">{{goodsDetail.basicInfo.name}}</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <template is="goodswiper" data="{{swiper:goodsDetail.pics,swiperCurrent:swiperCurrent,number:picsnumber,video:goodsDetail.basicInfo.video}}" />
+  <template is="basicInfo" data="{{goodsDetail:goodsDetail,selectSizePrice:selectSizePrice,userInfo:userInfo,userVip:userVip,shopInfo:shopInfo}}" />
+  <template wx:if="{{goodsDetail.specInfo}}" is="goodsguige" data="{{propertyChildNames:propertyChildNames}}" />
+  <template wx:if="{{CouponsList}}" is="goodscoupons" data="{{GoodsCoupons:CouponsList}}" />
+  <view class="column-goods-line-box"></view>
+  <ui-sticky scroll-top="{{ scrollTop }}" top="{{NAV_HEIGHT}}" _pid="{{_pid}}">
+    <ui-tabs class="goods-content-tap" index="{{index}}" probe="1" active-tab-style="{{activeTabStyle}}" bindchange="handleChange" _pid="{{_pid}}">
+      <ui-tab class="goods-content-tap-btn" _pid="{{_pid}}">商品详情</ui-tab>
+      <ui-tab class="goods-content-tap-btn" _pid="{{_pid}}">客户评价</ui-tab>
+    </ui-tabs>
+    <view slot="sticky">
+      <ui-tabs tab-style="{{ {width:width/2+'px !important'} }}" class="goods-content-tap" index="{{index}}" probe="1" active-tab-style="{{activeTabStyle}}" bindchange="handleChange" _pid="{{_pid}}">
+        <ui-tab class="goods-content-tap-btn" _pid="{{_pid}}">商品详情</ui-tab>
+        <ui-tab class="goods-content-tap-btn" _pid="{{_pid}}">客户评价</ui-tab>
+      </ui-tabs>
+    </view>
+  </ui-sticky>
+  <view class="swiper_content" wx:if="{{ show1 }}">
+    <view class="goods-wxparse-box">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
+  </view>
+  <view class="swiper_content" wx:if="{{ show2 }}">
+    <view class="goods-reputation-box">
+      <view class="reputation-none" wx:if="{{!reputation}}">
+        <image src="../../../images/none/empty_comment.png" /> 还没有人评价
+      </view>
+      <view class="goods-reputa-list" wx:for="{{reputation}}" wx:key="id">
+        <view class="goods-reputa-avatar">
+          <image class="goods-avatar" src="{{item.user_avatar}}" />
+          <view class="goods-name">{{item.user_name}}</view>
+          <image class="goods-vip" wx:if="{{item.user_vip == 1}}" src="../../../images/vip.png" />
+          <ui-mini-star value="{{item.goods_star}}" _pid="{{_pid}}"></ui-mini-star>
+        </view>
+        <view class="goods-date-Reputation">
+          <view class="dateReputation">{{item.date_add}}</view>
+          <view class="goodsName">{{item.goods}}</view>
+        </view>
+        <view class="goods-reputa-mark">{{item.goods_reputation}}</view>
+        <view wx:if="{{item.goods_reply}}" class="goods-reply-reputa-mark">商家回复：{{item.goods_reply}}</view>
+      </view>
+    </view>
+  </view>
+  <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '下架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
+    <view class="fixed_bottom ui-row" bindtap="gethomeTap" style="height:50px;">
+      <view class="fixed_bottom_ui-col fixed_bottom_down ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
+        <view class="ui-col-content align-center valign-middle">
+          <view>商品已经下架了，去看看其他的吧～</view>
+        </view>
+      </view>
+    </view>
+    <view class="iphonex-bottom"></view>
+  </ui-fixed-view>
+  <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
+    <view class="fixed_bottom ui-row" style="height:50px;">
+      <view class="fixed_bottom_ui-col ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="fixed_bottom_box">
+            <image src="../../../images/goods_service.png" />
+            <button open-type="contact" session-from="weapp"></button>
+          </view>
+        </view>
+      </view>
+      <view class="fixed_bottom_ui-col ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="fixed_bottom_box" bindtap="goShopCar">
+            <image src="../../../images/shopping_cart.png" />
+            <ui-badge wx:if="{{shopNum}}" text="{{shopNum}}" custom-style="{{cartStyle}}" _pid="{{_pid}}"></ui-badge>
+          </view>
+        </view>
+      </view>
+      <view class="fixed_bottom_ui-col ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="fixed_bottom_box" bindtap="{{favicon == 0 ? 'fav':'del'}}">
+            <image wx:if="{{favicon == 0}}" src="../../../images/goods_collect.png" />
+            <image wx:if="{{favicon == 1}}" src="../../../images/goods_collect_checked.png" />
+          </view>
+        </view>
+      </view>
+      <view class="ui-col valign-middle" style="flex:0 0 118px;">
+        <view class="ui-col-content valign-middle">
+          <view class="form_list_cart" bindtap="toAddShopCar">加入购物车</view>
+        </view>
+      </view>
+      <view class="ui-col valign-middle" style="flex:0 0 120px;">
+        <view class="ui-col-content valign-middle">
+          <view class="form_list_buy" bindtap="tobuy">立即购买</view>
+        </view>
+      </view>
+    </view>
+    <view class="iphonex-bottom"></view>
+  </ui-fixed-view>
+  <view class="position-button-box">
+    <view wx:if="{{goodsDetail.shareInfo.share_type != 0 && shareTips == true && goodsDetail.basicInfo.status == '上架'}}" class="share-tips">
+      <view class="tips-text">分享得好礼</view>
+      <view class="arrow"></view>
+      <view class="arrow arrow-border"></view>
+      <view class="arrow arrow-bg"></view>
+    </view>
+    <!-- 分享按钮 -->
+    <view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" class="share-button" bindtap="getshareboxTap">
+      <image src="../../../images/share.png" />
+    </view>
+    <!-- 回首页按钮 -->
+    <view class="share-button share-gohome" bindtap="gethomeTap">
+      <image src="../../../images/home.png" />
+    </view>
+    <!-- 返回顶部按钮 -->
+    <view wx:if="{{gettopbtn}}" class="share-button share-home" bindtap="gettopTap">
+      <image src="../../../images/top.png" />
+    </view>
+  </view>
+  <!-- 规格弹窗 -->
+  <ui-popup show="{{ show }}" position="bottom" _pid="{{_pid}}">
+    <view class="ui-row" style="height:100px;">
+      <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="pop-img-box">
+            <image wx:if="{{!propertyChildImage}}" src="{{goodsDetail.basicInfo.pic}}" bindtap="previewqrTap" data-img="{{goodsDetail.basicInfo.pic}}" class="goods-thumbnail" />
+            <image wx:if="{{propertyChildImage}}" src="{{propertyChildImage}}" bindtap="previewqrTap" data-img="{{propertyChildImage}}" class="goods-thumbnail" />
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="pop-goods-des">
+            <view class="pop-goods-title">{{goodsDetail.basicInfo.name}}</view>
+            <view class="pop-goods-price">¥{{selectSizePrice}}
+              <text wx:if="{{propertyChildStore == null}}">库存:{{goodsDetail.basicInfo.stores}}</text>
+              <text wx:if="{{propertyChildStore >= 0 && propertyChildStore != null}}">库存:{{propertyChildStore}}</text>
+            </view>
+            <view class="pop-goods-guige" wx:if="{{goodsDetail.specInfo}}">{{propertyChildNames ? propertyChildNames:'请选择规格属性'}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="goodsDetail-propertychild-box">
+      <block wx:for="{{goodsDetail.specInfo}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+        <view class="size-label-box ui-row" style="">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="good-property-name-popup">{{property.spec_name}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="label-item-box">
+          <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.spec_childs}}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.spec_id}}" data-propertyname="{{property.spec_name}}" data-propertychildindex="{{index}}" data-propertychildid="{{item.chil_id}}" data-propertychildname="{{item.chil_name}}">
+            <view wx:if="{{!item.chil_icons}}" class="child-name">{{item.chil_name}}</view>
+            <image wx:if="{{item.chil_icons}}" class="lable-image" src="{{item.chil_icons}}" mode="aspectFill" />
+          </view>
+        </view>
+      </block>
+      <view class="size-label-box ui-row" style="">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="good-property-name-popup">数量</view>
+          </view>
+        </view>
+      </view>
+      <view class="label-stepper-box">
+        <view class="num-box">
+          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+          <view class="num-input">
+            <input type="number" value="{{buyNumber}}" disabled></input>
+          </view>
+          <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+        </view>
+      </view>
+    </view>
+    <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
+      <view class="fixed_bottom fixed_bottom_popup ui-row" style="height:50px;">
+        <view class="ui-col valign-middle" style="">
+          <view class="ui-col-content valign-middle">
+            <view class="form_list_cart" bindtap="addShopCar">加入购物车</view>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="">
+          <view class="ui-col-content valign-middle">
+            <view class="form_list_buy" bindtap="buyNow">立即购买</view>
+          </view>
+        </view>
+      </view>
+    </ui-fixed-view>
+  </ui-popup>
+  <!-- 领取优惠券弹窗 -->
+  <ui-popup show="{{ Couponshow }}" position="bottom" height="400" _pid="{{_pid}}">
+    <view class="popup-Couponshow-header-box ui-row" style="height:50px;">
+      <view class="ui-col ui-col-9 ui-col-align-center align-center valign-middle" style="flex: 0 0 75%;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="popup-Couponshow-title">领取优惠券</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 30px;">
+        <view class="ui-col-content align-right valign-middle">
+          <span bindtap="handleCouponshow" type="close" size="18" color="#C5C5C5" class="ui-icon icon-close" style="color: #C5C5C5;font-size: 18px;"></span>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-y style="height: 630rpx;">
+      <view class="popup-Couponshow-content-list" wx:for="{{GoodsCoupons}}" wx:key="id">
+        <view class="popup-Couponshow-content-box ui-row" style="height:66px;">
+          <view class="ui-col ui-col-4 ui-col-align-center align-center valign-middle" style="flex: 0 0 33.33333333333333%;padding-left: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view wx:if="{{item.money_type == '满减'}}" class="Couponshow-content-money">{{item.money}}
+                <text>元</text>
+              </view>
+              <view wx:if="{{item.money_type == '折扣'}}" class="Couponshow-content-money">{{item.money/10}}
+                <text>折</text>
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-5 ui-col-align-left align-left valign-middle" style="flex: 0 0 41.66666666666667%;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-name">{{item.name}}</view>
+              <view class="Couponshow-content-text">满{{item.max_money}}元可用</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;padding-right: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view wx:if="{{item.state == 1}}" class="Couponshow-content-button" bindtap="getCouponsTap" data-id="{{item.id}}">立即领取</view>
+              <image wx:if="{{item.state == 2}}" class="yiling" src="../../../images/yilling.png" />
+            </view>
+          </view>
+        </view>
+        <view class="popup-Couponshow-content-remark-box ui-row" wx:if="{{item.remark}}" style="height:30px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-remark">购买当前商品可使用</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </ui-popup>
+  <!-- 弹窗选择分享类型 -->
+  <ui-mask show="{{shareMask}}" custom-style="{{ shareboxStyle }}" effect="scale-in" blur="light" bindhide="maskHide" _pid="{{_pid}}">
+    <view class="nav_content">
+      <view class="ui-row" style="height:100px;">
+        <view class="nav_content_button ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image src="../../../images/wechat.png" />
+            <view>分享给好友</view>
+            <button open-type="share"></button>
+          </view>
+        </view>
+        <view bindtap="getshareimgTap" class="ui-col ui-col-align-center align-center valign-middle" style="padding-right: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image src="../../../images/friend.png" />
+            <view>生成商品海报</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </ui-mask>
+  <!-- 商品海报弹窗 -->
+  <ui-mask show="{{codeMask}}" hide-on-tap="{{false}}" class="mask_wrap" custom-style="{{codeboxStyle}}" _pid="{{_pid}}">
+    <view class="photo" style="width:600rpx">
+      <view class="top_view">
+        <span type="cancel" data-show="{{ false }}" bindtap="codeimgShowMask" size="48" class="icon_top ui-icon icon-cancel" style="font-size: 48px;"></span>
+        <view class="top_line"></view>
+      </view>
+      <image style="width:600rpx;height:1000rpx" mode="aspectFill" src="{{codeimg}}" data-img="{{codeimg}}" bindtap="previewqrTap" />
+    </view>
+  </ui-mask>
+  <!-- 商品视频弹窗 -->
+  <ui-mask show="{{videoMask}}" hide-on-tap="{{false}}" class="mask_wrap" custom-style="{{codeboxStyle}}" _pid="{{_pid}}">
+    <view wx:if="{{videoMask}}" class="photo" style="width:750rpx;left:0;right:0;">
+      <txv-video wx:if="{{goodsDetail.basicInfo.video}}" vid="{{goodsDetail.basicInfo.video}}" playerid="txv1" autoplay="{{false}}" width="{{'100%'}}" height="{{'800rpx'}}" _pid="{{_pid}}">
+        <cover-view class="txv-video-slot" data-show="{{ false }}" bindtap="getvideoplayerTap">
+          关闭视频
+        </cover-view>
+      </txv-video>
+
+    </view>
+  </ui-mask>
+  <!-- canvas海报 -->
+  <canvas canvas-id="shareCanvas" style="width:600px;height:1000px;opacity:0;position:fixed;left:-1000px;top:-1000px;"></canvas>
+</page>

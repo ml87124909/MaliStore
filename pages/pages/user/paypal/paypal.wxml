@@ -1,0 +1,51 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的钱包</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="paypal-header">
+    <view class="paypal-name">我的余额</view>
+    <view class="paypal-number">
+      <text>¥</text>{{amount.money}}</view>
+    <view class="paypal-info" bindtap="rechargeTap">充值返现</view>
+  </view>
+  <view class="paypal-withdraw">
+    <form bindsubmit="bindSave">
+      <view class="form-box">
+        <view class="row-wrap">
+          <view class="label">提现金额</view>
+          <view class="label-right">
+            <text class="lable-amount">¥</text>
+            <input name="amount" value="{{money}}" maxlength="6" class="input" type="digit" focus="{{focus}}"></input>
+          </view>
+          <input name="phone" value="{{money}}" placeholder="请输入微信号或者手机号" class="input-phone"></input>
+        </view>
+      </view>
+      <view class="form-button">
+        <button class="save-btn" formType="submit">申请提现</button>
+        <view class="lable-text">提现金额{{payinfo.pay_min}}元起，{{payinfo.pay_time}}</view>
+      </view>
+    </form>
+  </view>
+  <view class="recharge-box" bindtap="paypalinfoTap">
+    <view class="recharge-name">余额记录</view>
+  </view>
+
+</page>

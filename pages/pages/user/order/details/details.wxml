@@ -1,0 +1,353 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view wx:if="{{share == 0}}" bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view wx:if="{{share == 1}}" bindtap="getHomeTap" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="jd-home" size="16" color="#27323f" class="ui-icon icon-jd-home" style="color: #27323f;font-size: 16px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>订单详情</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <block wx:if="orderDetails">
+    <view class="adds-class-line"></view>
+    <view wx:if="{{orderDetails.pick_type == '快递配送'}}" class="adds-center-bg ui-row" style="height:90px;">
+      <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view class="address-user">
+            <view class="user-name">{{orderDetails.name}}</view>
+            <view class="user-phone">{{orderDetails.phone}}</view>
+          </view>
+          <view class="address-info">{{orderDetails.province}}{{orderDetails.city}}{{orderDetails.district}}{{orderDetails.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{orderDetails.pick_type == '上门自提'}}" class="adds-center-bg ui-row" style="height:100px;">
+      <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view class="order-ziti">
+            <view class="ziti-name">{{orderDetails.shopinfo.cname}}
+              <text wx:if="{{distance}}">（距离{{distance/1000}}km）</text>
+            </view>
+            <view class="ziti-numr" bindtap="getCallTap" data-phone="{{orderDetails.shopinfo.contact}}">{{orderDetails.shopinfo.contact}}</view>
+            <view class="ziti-adds">{{orderDetails.shopinfo.address}}</view>
+          </view>
+        </view>
+      </view>
+      <view bindtap="getLocationTap" data-latitude="{{orderDetails.shopinfo.longitude}}" data-longitude="{{orderDetails.shopinfo.latitude}}" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 70px;">
+        <view class="ui-col-content align-center valign-middle">
+          <image class="daohang" src="../../../../../images/daohang.png" />
+          <view class="getmd">去门店</view>
+        </view>
+      </view>
+    </view>
+    <view class="order-baoguo-list-box" wx:for="{{orderDetails.baoguo}}" wx:key="id">
+      <view wx:if="{{orderDetails.pick_type == '上门自提'}}" class="order-baoguo-header ui-row" style="height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 70px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="name">商品列表</view>
+          </view>
+        </view>
+        <view wx:if="{{orderDetails.status < 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view wx:if="{{orderDetails.pick_status == '未核验'}}" class="time">待自提</view>
+            <view wx:if="{{orderDetails.pick_status == '已核验'}}" class="time">已自提</view>
+          </view>
+        </view>
+        <view wx:elif="{{orderDetails.status > 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view wx:if="{{orderDetails.status == 99}}" class="time">退款处理中</view>
+            <view wx:if="{{orderDetails.status == 98}}" class="time">退款成功</view>
+            <view wx:if="{{orderDetails.status == 97}}" class="time">退款申请被驳回</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.pick_type == '无需配送'}}" class="order-baoguo-header ui-row" style="height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 70px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="name">商品列表</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view wx:if="{{orderDetails.status == 6}}" class="time">待评价</view>
+            <view wx:if="{{orderDetails.status == 7}}" class="time">已完成</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.pick_type == '快递配送'}}" class="order-baoguo-header ui-row" style="height:45px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;flex:0 0 90px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="name" wx:if="{{item.kuaid}}">包裹{{index+1}}</view>
+            <view class="name" wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1'}}">未发货商品</view>
+            <view class="name" wx:if="{{orderDetails.status == '-1' || orderDetails.status == '1'}}">订单商品</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="flex:0 0 180px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="kuai" wx:if="{{item.kuaid}}">{{item.kuaname}}：{{item.kuaid}}</view>
+          </view>
+        </view>
+        <view wx:if="{{orderDetails.status < 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="time" wx:if="{{item.kuaid && item.kuastate==0}}">已发货</view>
+            <view class="time" wx:if="{{item.kuaid && item.kuastate==1}}">已收货</view>
+            <view class="time" wx:if="{{!item.kuaid && orderDetails.status != '-1'}}">待发货</view>
+            <view class="time" wx:if="{{orderDetails.status == '-1'}}">已取消</view>
+          </view>
+        </view>
+        <view wx:elif="{{orderDetails.status > 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view wx:if="{{orderDetails.status == 99}}" class="time">退款处理中</view>
+            <view wx:if="{{orderDetails.status == 98}}" class="time">退款成功</view>
+            <view wx:if="{{orderDetails.status == 97}}" class="time">退款申请被驳回</view>
+          </view>
+        </view>
+      </view>
+      <view class="order-goods-list-box" wx:for-items="{{item.goods}}" wx:key="id">
+        <view class="ui-row" style="height:90px;">
+          <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 90px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view class="favorite-list-img">
+                <image src="{{item.pic}}" />
+              </view>
+            </view>
+          </view>
+          <view class="text ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view style="width: 100%;height:150rpx;">
+                <view class="ui-row" style="height:25px;">
+                  <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                    <view class="ui-col-content align-left valign-middle">
+                      <text class="goods-name">{{item.name}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-row" style="height:25px;">
+                  <view wx:if="{{item.spec}}" class="ui-col ui-col-align-left align-left valign-middle" style="">
+                    <view class="ui-col-content align-left valign-middle">
+                      <text class="goods-info">{{item.spec}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-row" style="height:25px;">
+                  <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                    <view class="ui-col-content align-left valign-middle">
+                      <text class="price">¥{{item.price}}</text>
+                    </view>
+                  </view>
+                  <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+                    <view class="ui-col-content align-right valign-middle">
+                      <text class="times">x {{item.number}}</text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-baoguo-footer ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+          <view class="ui-col-content align-right valign-middle">
+            <view wx:if="{{orderDetails.pick_type == '快递配送'}}" class="button-box">
+              <block wx:if="{{orderDetails.status < 90}}">
+                <view wx:if="{{orderDetails.status == 5 || orderDetails.status == 6 || orderDetails.status == 7 || item.kuaid}}" bindtap="getWuLiuTap" data-id="{{item.kuaid}}" data-name="{{item.kuaname}}" class="button">物流动态</view>
+                <view wx:if="{{orderDetails.status == 5 && item.kuastate == 0}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
+                <view wx:if="{{orderDetails.status == 3 && item.kuastate == 0 && item.kuaid}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
+                <view wx:if="{{orderDetails.status == 6}}" bindtap="geiPingjiaTap" data-id="{{orderDetails.id}}" data-kuaid="{{item.kuaid}}" class="button">评价有礼</view>
+                <view wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1'}}" bindtap="getFahuoTips" class="button">提醒发货</view>
+                <view wx:if="{{orderDetails.status == 1}}" bindtap="getOrderCancelTap" data-id="{{orderDetails.id}}" class="button">取消订单</view>
+                <view wx:if="{{orderDetails.status == 1}}" class="button paybutton" bindtap="getPayOrderTap" data-id="{{orderDetails.number}}">支付订单</view>
+              </block>
+            </view>
+            <view wx:if="{{orderDetails.pick_type == '上门自提'}}" class="button-box">
+              <view wx:if="{{orderDetails.status == 4}}" class="button" data-show="{{ true }}" bindtap="handleShowMask">提货码</view>
+              <view wx:if="{{orderDetails.status == 6}}" bindtap="geiPingjiaTap" data-id="{{orderDetails.id}}" class="button">评价有礼</view>
+            </view>
+            <view wx:if="{{orderDetails.pick_type == '无需配送'}}" class="button-box">
+              <view wx:if="{{orderDetails.status == 6}}" bindtap="geiPingjiaTap" data-id="{{orderDetails.id}}" class="button">评价有礼</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="order-info-box">
+      <view class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">订单编号：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">{{orderDetails.number}}</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="button" bindtap="getCopyNmuber" data-id="{{orderDetails.number}}">复制</view>
+          </view>
+        </view>
+      </view>
+      <view class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">下单时间：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">{{orderDetails.data_add}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.data_pay}}" class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">支付时间：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">{{orderDetails.data_pay}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="order-money-box">
+      <view class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">商品合计：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">¥{{orderDetails.goods_price}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.order_coupons != 0}}" class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">优惠券：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">-¥{{orderDetails.order_coupons}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">运费：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">¥{{orderDetails.order_yunfei}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.vip_sales}}" class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">会员折扣：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">x{{orderDetails.vip_sales*10}}折</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{orderDetails.order_balance != 0}}" class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">余额抵扣：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">-¥{{orderDetails.order_balance}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="order-money-true-box">
+      <view class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">实际支付：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">¥{{orderDetails.order_money}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="order-kefu-box">
+      <view class="order-kefu-name">客服服务时间：
+        <text>{{shopInfo.shopInfo.times }}</text>
+      </view>
+      <view class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <button open-type="contact" session-from="{{orderDetails.number}}" class="button">在线客服</button>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-right: 20px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="button" bindtap="getCallTap" data-phone="{{shopInfo.shopInfo.phone}}">电话客服</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="sales-goods">
+      <view class="sales-title">
+        <ui-divider padding="20" _pid="{{_pid}}">
+          <view style="color:#27323f">猜你喜欢</view>
+        </ui-divider>
+      </view>
+      <template is="guessgoods" data="{{sales:sales}}" />
+    </view>
+
+    <ui-mask show="{{showMask}}" hide-on-tap="{{false}}" class="mask_wrap" custom-style="{{customStyle}}" _pid="{{_pid}}">
+      <view class="photo" style="width:520rpx">
+        <view class="top_view">
+          <span type="cancel" data-show="{{ false }}" bindtap="handleShowMask" size="48" class="icon_top ui-icon icon-cancel" style="font-size: 48px;"></span>
+          <view class="top_line"></view>
+        </view>
+        <view class="order-qrcode-box">
+          <view class="qrcode-title">请向店员展示提货码</view>
+          <canvas hidden="{{!showMask}}" class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
+          <view class="qrcode-state">状态：
+            <text wx:if="{{orderDetails.pick_status == '已核验'}}" class="b">已核验</text>
+            <text wx:if="{{orderDetails.pick_status == '未核验'}}" class="a">未核验</text>
+          </view>
+        </view>
+      </view>
+    </ui-mask>
+  </block>
+</page>

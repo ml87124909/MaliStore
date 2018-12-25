@@ -1,0 +1,114 @@
+.ui-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 501;
+  transition-property: transform, visibility;
+  transition-duration: 300ms;
+  max-height: 100%;
+  overflow-y: scroll;
+  -webkit-backface-visibility: hidden;
+  visibility: hidden;
+}
+.ui-popup.show {
+  visibility: visible;
+}
+.ui-popup-content {
+  position: absolute;
+  background-color: #fff;
+}
+.ui-popup-content.bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 300ms;
+  transform: translate3d(0, 100%, 0);
+}
+.ui-popup-content.bottom.show {
+  transform: translate3d(0, 0, 0);
+}
+.ui-popup-content.top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: slideOut both .3s;
+  transform-origin: 50% 0;
+}
+.ui-popup-content.top.show {
+  animation: slideIn both .3s;
+  transform-origin: 50% 0;
+}
+.ui-popup-content.left {
+  width: auto;
+  height: 100%;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  transition: transform 300ms;
+  transform: translate3d(-100%, 0, 0);
+}
+.ui-popup-content.left.show {
+  transform: translate3d(0, 0, 0);
+}
+.ui-popup-content.right {
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  transition: transform 300ms;
+  transform: translate3d(100%, 0, 0);
+}
+.ui-popup-content.right.show {
+  transform: translate3d(0, 0, 0);
+}
+.ui-popup-mask {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  z-index: -1;
+  transition: opacity 400ms;
+}
+.ui-popup-mask.show {
+  opacity: 1;
+}
+.ui-popup-animate-top-enter-active {
+  animation: slideIn both .3s;
+  transform-origin: 50% 0;
+}
+.ui-popup-animate-top-leave-active {
+  animation: slideOut both .3s;
+  transform-origin: 50% 0;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+  }
+}

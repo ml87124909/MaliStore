@@ -1,0 +1,69 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>意见反馈</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="feedback-content">
+    <view class="feedback-picker-box">
+      <view class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 120px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="feedback-picker-name">反馈类型</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="feedback-picker">
+              <picker bindchange="bindPickerChange" value="{{index}}" range="{{feedback}}">
+                <view class="picker">
+                  {{feedback[index]}}
+                </view>
+              </picker>
+              <span type="arrow-down" size="14" color="#27323f" class="ui-icon icon-arrow-down" style="color: #27323f;font-size: 14px;"></span>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="feedback-textarea-box">
+      <textarea bindinput="feedbackText" placeholder="对我们的应用、商品、服务，您还有什么建议吗？您还希望在商城上买到什么？请告诉我们..." placeholder-style="color:#999;" show-confirm-bar="{{confirm}}">
+      </textarea>
+    </view>
+    <view class="feedback-phone-box">
+      <view class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 120px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="feedback-phone-name">手机号码</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="feedback-phone">
+              <input bindinput="phoneNumber" type="number" maxlength="11" placeholder="便于我们与您联系" placeholder-style="color:#999;"></input>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="feedback-button-box">
+      <view class="feedback-button" bindtap="getFeedBack">提交反馈</view>
+    </view>
+  </view>
+</page>

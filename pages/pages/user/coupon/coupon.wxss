@@ -1,0 +1,142 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.ui-tab {
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.coupon-new-box {
+  border-bottom: 2rpx solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 16rpx;
+}
+.coupon-new-input {
+  width: 85%;
+  border: 2rpx solid #f5f5f5;
+  height: 70rpx;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.coupon-new-input input {
+  text-align: left;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #27323f;
+}
+.coupon-new-button {
+  width: 160rpx;
+  color: #27323f;
+  background-color: #ffd305;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  border-radius: 4rpx;
+  font-size: 30rpx;
+}
+.coupon-new-button::after {
+  border: 0;
+}
+.coupon-list-box {
+  padding-bottom: 100rpx;
+}
+.popup-Couponshow-content-list {
+  color: #27323f;
+  background: linear-gradient(to right, #ffd305, #ffe229);
+  margin-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 5px;
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 26rpx;
+}
+.popup-Couponshow-content-list-none {
+  color: #ffffff;
+  background: linear-gradient(to right, #7b8196, #858ba0);
+}
+.popup-Couponshow-content-box .Couponshow-content-money {
+  font-size: 46rpx;
+}
+.popup-Couponshow-content-box .Couponshow-content-money text {
+  font-size: 28rpx;
+  margin-left: -10rpx;
+}
+.popup-Couponshow-content-box .Couponshow-content-name {
+  font-size: 30rpx;
+  margin-bottom: 6rpx;
+}
+.popup-Couponshow-content-box .Couponshow-content-text {
+  font-size: 24rpx;
+}
+.popup-Couponshow-content-box .Couponshow-content-button {
+  background-color: #27323f;
+  color: #ffd305;
+  padding: 8rpx 12rpx;
+  font-size: 26rpx;
+}
+.popup-Couponshow-content-box image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.popup-Couponshow-content-remark-box {
+  background-color: rgba(0, 0, 0, 0.08);
+  font-size: 26rpx;
+  padding: 8px 10px;
+  color: rgba(39, 50, 63, 0.8);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.popup-Couponshow-content-list-none .popup-Couponshow-content-remark-box {
+  color: #fff;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+}
+.no-more-goods .button-coupons {
+  background-color: #ffd305;
+  color: #27323f;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10rpx #ddd;
+  font-size: 30rpx;
+}

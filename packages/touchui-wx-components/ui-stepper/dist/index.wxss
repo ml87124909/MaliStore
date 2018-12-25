@@ -1,0 +1,28 @@
+.ui-stepper {
+  position: relative;
+}
+.ui-stepper .com {
+  float: left;
+  text-align: center;
+}
+.ui-stepper .stepper-minus {
+  border: 1px solid #CCC;
+  position: relative;
+}
+.ui-stepper .stepper-minus .minus {
+  background-color: black;
+}
+.ui-stepper .stepper-content {
+  border-bottom: 1px solid #CCC;
+  border-top: 1px solid #CCC;
+}
+.ui-stepper .stepper-plus {
+  border: 1px solid #CCC;
+  position: relative;
+}
+.minus-corner {
+  border-radius: 5px 0 0 5px;
+}
+.plus-corner {
+  border-radius: 0 5px 5px 0;
+}

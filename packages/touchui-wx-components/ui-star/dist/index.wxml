@@ -1,0 +1,7 @@
+<view class="ui-star" style="{{starsWrapStyle}}">
+  <view class="stars-wrap" style="{{starsWrapStyle}}" bindtap="tapHandler">
+    <view class="star-wrap" wx:for="{{starArray}}" wx:key="{{index}}" style="{{starWrapStyle}}">
+      <image src="{{data[item + 'Src']}}" />
+    </view>
+  </view>
+</view>

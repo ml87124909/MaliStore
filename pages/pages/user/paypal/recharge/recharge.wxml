@@ -1,0 +1,48 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>充值中心</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="recharge-hrader">
+    <view class="name">我的余额</view>
+    <view class="money">
+      <text>¥</text>{{amount.money}}</view>
+    <view class="info" bindtap="paypalinfoTap">充值记录</view>
+  </view>
+  <view class="recharge-money-box">
+    <form bindsubmit="bindSave">
+      <input name="money" placeholder="请输入充值金额" class="input-money" maxlength="6" type="digit"></input>
+      <view class="recharge-money-list">
+        <view class="list-name">充值返现
+          <text>(赠送金额可以购物使用但不能提现)</text>
+        </view>
+        <view class="list-box">
+          <view class="list" wx:for="{{payList}}" wx:key="{{index}}" bindtap="getPaypalTap" data-money="{{item.money}}">
+            <view class="name">
+              <text>¥</text>{{item.money}}</view>
+            <view class="info">赠送¥{{item.give}}</view>
+            <view class="money">实际到账¥{{item.round}}</view>
+          </view>
+        </view>
+      </view>
+      <button class="recharge-button" formType="submit">确认充值</button>
+    </form>
+  </view>
+</page>

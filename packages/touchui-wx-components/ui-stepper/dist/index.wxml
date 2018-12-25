@@ -1,0 +1,14 @@
+<view class="ui-stepper" style="{{stepperStyle}}">
+  <view class="com stepper-minus {{corner === 'round' ? 'minus-corner': ''}}" style="{{stepperBtnStyle}}" bindtap="minusHandler">
+    <view class="minus" style="{{minusStyle}}">
+    </view>
+  </view>
+  <view class="com stepper-content" style="{{stepperNumStyle}}">
+    {{selfValue}}
+  </view>
+  <view class="com stepper-plus {{corner === 'round' ? 'plus-corner': ''}}" bindtap="plusHandler" style="{{stepperBtnStyle}}">
+    <view class="plus" style="{{plusStyle}}"></view>
+    <view class="plus-col" style="{{plusColStyle}}">
+    </view>
+  </view>
+</view>

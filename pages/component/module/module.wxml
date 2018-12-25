@@ -1,0 +1,409 @@
+<page>
+  <template name="goodsguige">
+    <view class="column-goods-line-box"></view>
+    <view class="column-goods-GuiGe-box ui-row" data-show="{{ true }}" bindtap="openPopup" style="height:60px;">
+      <view class="ui-col" style="padding-left: 10px;">
+        <view class="ui-col-content">
+          <view class="column-content column-goods-GuiGe">{{propertyChildNames ? '已选：'+propertyChildNames:'规格数量选择'}}</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-right align-right" style="padding-right: 10px;flex:0 0 30px;">
+        <view class="ui-col-content align-right">
+          <view class="column-content column-goods-GuiGe-icon">
+            <span type="arrow-right" size="18" color="#C5C5C5" class="ui-icon icon-arrow-right" style="color: #C5C5C5;font-size: 18px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="goodscoupons">
+    <view class="column-goods-Coupons-box ui-row" data-show="{{ true }}" bindtap="openPopupCoupons" style="height:60px;">
+      <view class="ui-col ui-col-3" style="flex: 0 0 25%;padding-left: 10px;">
+        <view class="ui-col-content">
+          <view class="column-content column-goods-Coupons">领取优惠券</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view class="column-goods-Coupons-list">
+            <view class="money_tag" wx:for="{{GoodsCoupons}}" wx:key="id">
+              <block wx:if="{{item.money_type == '满减'}}">
+                <text class="left">满{{item.max_money}}减{{item.money}}</text>
+                <text class="right"></text>
+              </block>
+              <block wx:if="{{item.money_type == '折扣'}}">
+                <text class="left">满{{item.max_money}}元{{item.money/10}}折</text>
+                <text class="right"></text>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-right align-right" style="padding-right: 10px;flex:0 0 30px;">
+        <view class="ui-col-content align-right">
+          <view class="column-content column-goods-GuiGe-icon">
+            <span type="arrow-right" size="18" color="#C5C5C5" class="ui-icon icon-arrow-right" style="color: #C5C5C5;font-size: 18px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="carttips">
+    <block wx:for="{{carttips}}" wx:key="id">
+      <view class="cart-tip">
+        <i class="icon-cart"></i>{{item.name}}</view>
+    </block>
+  </template>
+  <template name="basicInfo">
+    <view class="ui-row" style="margin-top: 10px;height:60px;">
+      <view class="ui-col" style="padding-left: 10px;padding-right: 10px;">
+        <view class="ui-col-content">
+          <view class="column-content">
+            <view class="column-goods-title over">{{goodsDetail.basicInfo.name}}</view>
+            <view class="column-goods-risti" wx:if="{goodsDetail.basicInfo.introduce}}">{{goodsDetail.basicInfo.introduce}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="ui-row" style="height:40px;">
+      <view class="ui-col ui-col-6" style="flex: 0 0 50%;padding-left: 10px;padding-right: 5px;">
+        <view class="ui-col-content">
+          <view class="column-content column-price-content">
+            <view class="column-goods-price">¥{{goodsDetail.basicInfo.mini_price}}</view>
+            <view class="column-goods-original" wx:if="{{goodsDetail.basicInfo.original_price}}">¥{{goodsDetail.basicInfo.original_price}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col" style="padding-left: 5px;">
+        <view class="ui-col-content">
+          <view class="column-content column-price-content">
+            <block wx:if="{{goodDetail.shareInfo.share_time == 1}}">
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享可获得{{goodsDetail.shareInfo.share_number}}元现金</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享可获得{{goodsDetail.shareInfo.share_number}}积分</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享可获得{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
+            </block>
+            <block wx:else="">
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}元现金</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}积分</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享好友下单可返{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{goodsDetail.basicInfo.vip_open != 0 }}" class="ui-row" style="margin-bottom: 10px;margin-top: 5px;height:38px;">
+      <view class="ui-col" style="padding-left: 10px;padding-right: 10px;">
+        <view class="ui-col-content">
+          <block wx:if="{{shopInfo.vip_type == '购物升级'}}">
+            <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
+              <image src="../../../images/vip.png" />
+              <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
+              <view bindtap="getmamberTap" class="column-goods-vip-pay">会员中心
+                <i class="vip-right"></i>
+              </view>
+            </view>
+          </block>
+          <block wx:else="">
+            <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
+              <image src="../../../images/vip.png" />
+              <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
+              <view bindtap="getmamberTap" class="column-goods-vip-pay">立即开通
+                <i class="vip-right"></i>
+              </view>
+            </view>
+            <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
+              <image src="../../../images/vip.png" />
+              <view class="column-goods-vip">您是{{userInfo.vip_level_name}}，折后价格为 ¥{{userVip.vip_price}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="pingtuan">
+    <view wx:if="{{toptuan}}" class="pingtuna-container">
+      <view class="pingtuna-title" bindtap="tapSales" data-id="{{toptuaninfo.remark}}">
+        <text>{{toptuaninfo.value}}</text>
+        <image src="../../../images/home_more.png" />
+      </view>
+      <view class="pingtuna-list" wx:for="{{toptuan}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.businessId}}">
+        <view class="pingtuna-list-title">{{item.title}}</view>
+        <view wx:if="{{item.linkUrl}}" class="pingtuna-list-text">{{item.linkUrl}}</view>
+        <view wx:if="{{item.remark}}" class="pingtuna-list-info">{{item.remark}}</view>
+        <image src="{{item.picUrl}}" />
+      </view>
+    </view>
+  </template>
+  <template name="kanjia">
+    <view wx:if="{{topkan}}" class="kanjia-container" wx:for="{{topkan}}" wx:key="id">
+      <view class="kanjia-title" bindtap="tapSales" data-id="{{item.linkUrl}}">
+        <text>{{item.title}}</text>
+        <image src="../../../images/home_more.png" />
+      </view>
+      <view class="kanjia-list" wx:for-items="{{topkans}}" wx:key="{{index}}" bindtap="kanjiaTap" data-id="{{item.id}}">
+        <view class="kanjia-list-image">
+          <image src="{{item.pic}}" />
+        </view>
+        <view class="kanjia-list-info">
+          <view class="kanjia-list-info-title">{{item.name}}</view>
+          <view class="kanjia-list-info-info">{{item.characteristic}}</view>
+          <view class="kanjia-list-info-money">
+            <view class="kanjia-list-info-money-a">
+              <text class="a">Ұ{{pics[item.id].minPrice}}</text>
+              <text class="b">底价</text>
+            </view>
+            <view class="kanjia-list-info-money-a">
+              <text>Ұ{{pics[item.id].originalPrice}}</text>
+              <text>原价</text>
+            </view>
+            <view class="kanjia-list-info-money-a">
+              <text>{{pics[item.id].number}}件</text>
+              <text>限量</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="topic">
+    <view wx:if="{{toptopic}}" class="topic-container" wx:for="{{toptopic}}" wx:key="id">
+      <view class="topic-title" bindtap="tapSales" data-id="{{item.linkUrl}}">
+        <text>专题推荐</text>
+        <image src="../../../images/home_more.png" />
+      </view>
+      <scroll-view class="topic-list-box" scroll-x="true">
+        <view class="topic-list" wx:for-items="{{toptopics}}" wx:key="{{index}}" bindtap="toTopic" data-id="{{item.id}}">
+          <image src="{{item.pic}}" />
+          <view class="topic-list-info">
+            <view class="topic-list-info-title">{{item.title}}</view>
+            <view class="topic-list-info-text">{{item.descript}}</view>
+            <view wx:if="{{item.income}}" class="topic-list-info-money">{{item.income}}</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </template>
+  <template name="topgoods">
+    <view class="goods-container">
+      <view class="goods-title" bindtap="tapSales" data-id="/pages/pages/menu/newlist/newlist">
+        <text>今日上新</text>
+        <span type="arrow-right" size="14" color="#27323f" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 14px;"></span>
+      </view>
+      <view class="goods-list" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <image src="{{item.pic}}" />
+        <view class="goods-list-title">{{item.name}}</view>
+        <view class="goods-list-info-box">
+          <view class="goods-list-money">Ұ{{item.mini_price}}</view>
+          <view class="goods-list-order">已售{{item.orders}}</view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="searchkey">
+    <view class="show-search-box">
+      <view class="show-search-hot">热门搜索</view>
+      <block wx:for="{{searchTag}}" wx:key="id">
+        <view class="seaech-list" bindtap="getSearch" data-name="{{item.name}}">{{item.name}}</view>
+      </block>
+    </view>
+  </template>
+  <template name="searchdata">
+    <view class="show-search-box">
+      <view class="show-search-hot">
+        <text>历史记录</text>
+        <image src="../../../images/delete.png" bindtap="delSearch" />
+      </view>
+      <block wx:for="{{searchdata}}" wx:key="id">
+        <view class="seaech-list" bindtap="getSearch" data-name="{{item.name}}">{{item.name}}</view>
+      </block>
+    </view>
+    <view class="search-line"></view>
+  </template>
+  <template name="no-goods">
+    <view class="title-box">
+      <image class="box-none" src="../../../images/none/cart_empty.png" />
+      <text>购物车空空的</text>
+    </view>
+  </template>
+  <template name="cart-goods-list">
+    <view class="top-edit-btn" hidden="{{!saveHidden}}" bindtap="editTap">编辑</view>
+    <view class="top-edit-btn" hidden="{{saveHidden}}" bindtap="saveTap">完成</view>
+    <view class="goodsList">
+      <view class="a-gooods" wx:for="{{list}}" wx:key="{{index}}">
+        <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.left}}">
+          <view class="goods-info">
+            <view class="img-box">
+              <image src="{{item.goods_pic}}" class="img" />
+            </view>
+            <view class="text-box">
+              <view class="goods-title">{{item.goods_name}}</view>
+              <view class="goods-label">{{item.goods_label}}</view>
+              <view class="goods-price">¥ {{item.goods_price}}</view>
+              <view class="buy-num">
+                <view class="jian-btn {{item.buy_number==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
+                <input type="number" value="{{item.buy_number}}" disabled></input>
+                <view class="jia-btn {{item.buy_number==10? 'disabled' : ''}}" catchtap="jiaBtnTap" data-index="{{index}}">+</view>
+              </view>
+            </view>
+          </view>
+          <view class="delete-btn" data-index="{{index}}" catchtap="delItem">
+            <span type="delete" size="20" color="#27323f" class="ui-icon icon-delete" style="color: #27323f;font-size: 20px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="jiesuan-box">
+      <view class="left-price">
+        <view class="all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
+        <view class="total" hidden="{{noSelect}}">合计：¥{{totalPrice}}</view>
+      </view>
+      <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!saveHidden}}" bindtap="toPayOrder">下单</view>
+      <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{saveHidden}}" bindtap="deleteSelected">删除</view>
+    </view>
+  </template>
+  <template name="guessgoods">
+    <view class="goods-list">
+      <view class="goods-box" wx:for="{{sales}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <view class="img-box">
+          <image src="{{item.pic}}" class="image" />
+          <view wx:if="{{item.introduce}}" class="goods-characteristic">
+            <text>{{item.introduce}}</text>
+          </view>
+        </view>
+        <view class="goods-title">{{item.name}}</view>
+        <view class="goods-price-box">
+          <view class="goods-price">Ұ{{item.mini_price}}</view>
+          <view class="goods-price-naver">已售{{item.orders}}</view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template name="userListMenu">
+    <view class="user-line"></view>
+    <view class="ui-row-list" style="">
+      <view class="border-bottom ui-row" style="height:45px;">
+        <view class="text ui-col" style="padding-left: 20px;">
+          <view class="ui-col-content">我的服务</view>
+        </view>
+      </view>
+    </view>
+    <view class="ui-row" style="margin-bottom: 10px;margin-top: 20px;height:50px;">
+      <!--
+                <ui-col align="center" vertical-align="middle">
+                    <view class="cart-list cart-list-type">
+                        <image src="../../../images/user/6.png" />
+                        <text>拼团订单</text>
+                        <navigator url="/pages/pages/user/pingtuan/pingtuan" open-type="navigate" hover-class="none"></navigator>
+                    </view>
+                </ui-col>
+                <ui-col align="center" vertical-align="middle">
+                    <view class="cart-list cart-list-type">
+                        <image src="../../../images/user/7.png" />
+                        <text>砍价订单</text>
+                        <navigator url="/pages/pages/user/kanjia/kanjia" open-type="navigate" hover-class="none"></navigator>
+                    </view>
+                </ui-col>
+                -->
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/8.png" />
+            <text>会员中心</text>
+            <navigator url="/pages/pages/user/member/member" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/9.png" />
+            <text>我的钱包</text>
+            <navigator url="/pages/pages/user/paypal/paypal" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/10.png" />
+            <text>积分签到</text>
+            <navigator url="/pages/pages/coupons/score/score" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="user-line-small"></view>
+    <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/11.png" />
+            <text>优惠券</text>
+            <navigator url="/pages/pages/user/coupon/coupon" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/12.png" />
+            <text>收藏</text>
+            <navigator url="/pages/pages/user/favorite/favorite" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/13.png" />
+            <text>足迹</text>
+            <navigator url="/pages/pages/user/history/history" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="user-line-small"></view>
+    <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/14.png" />
+            <text>地址</text>
+            <navigator url="/pages/pages/user/address/address" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/15.png" />
+            <text>客服</text>
+            <button open-type="contact" session-from="weapp"></button>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="cart-list cart-list-type">
+            <image src="../../../images/user/16.png" />
+            <text>反馈</text>
+            <navigator url="/pages/pages/user/feedback/feedback" open-type="navigate" hover-class="none"></navigator>
+          </view>
+        </view>
+      </view>
+      <!--
+                <ui-col align="center" vertical-align="middle">
+                    <view class="cart-list cart-list-type">
+                        <image src="../../../images/user/17.png" />
+                        <text>帮助</text>
+                        <navigator url="/pages/pages/user/help/help" open-type="navigate" hover-class="none"></navigator>
+                    </view>
+                </ui-col>
+                -->
+    </view>
+    <!-- 重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务 -->
+    <view class="sample_power">
+      <i></i>
+    </view>
+  </template>
+</page>

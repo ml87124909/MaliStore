@@ -1,0 +1,88 @@
+<page>
+  <import src="../../../../../component/menu/menu.wxml" />
+  <import src="../../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>申请退款</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="order-content-box">
+    <view class="order-content-list">
+      <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+        <view class="order-ui-row ui-row" style="margin-top: 10px;height:40px;">
+          <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-number">{{item.number}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
+              <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+          <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+            <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+              <view class="ui-col-content align-center valign-middle">
+                <view class="order-one-img">
+                  <image src="{{item.pic}}" />
+                </view>
+              </view>
+            </view>
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+              <view class="ui-col-content align-left valign-middle">
+                <view class="order-goods-name">{{item.name}}</view>
+                <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.order_goods.length >= 2}}" bindtap="getDetailsTap" data-id="{{item.id}}">
+          <view class="order-ui-row ui-row" style="height:100px;">
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+              <view class="ui-col-content align-left valign-middle">
+                <view class="order-two-box">
+                  <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                    <image src="{{item.pic}}" />
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-money">合计:¥{{item.real_money}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="order-button" bindtap="getTuikuanTap" data-tp="{{item.status}}" data-id="{{item.id}}">申请退款</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="no-more-goods" wx:if="{{!orderList}}">
+        <image src="../../../../../../images/none/empty_tuikuan.png" class="no-order-img" />
+        <view class="text">待收货或待自提的订单才能申请退款</view>
+      </view>
+    </view>
+  </view>
+</page>

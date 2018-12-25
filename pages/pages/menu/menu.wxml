@@ -1,0 +1,55 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view class="search-header-box ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="search-header-input {{searcHover}}">
+            <image src="../../../images/search.png" bindtap="searcHover" data-show="{{ true }}" />
+            <text wx:if="{{!searcHover}}" bindtap="searcHover" data-show="{{ true }}">搜索商品，共{{gnumber}}款好物</text>
+            <input wx:if="{{searcHover}}" class="input" type="text" confirm-type="search" placeholder="请输入或选择关键字" focus="true" bindconfirm="search" placeholder-style="color:#999"></input>
+            <text class="close" wx:if="{{searcHover}}" data-show="{{ false }}" bindtap="searcHover">取消</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="margin-top:{{nav_height}}px"></view>
+  <view class="ui-row" style="">
+    <view wx:if="{{categories}}" class="menu-list ui-col ui-col-3" style="flex: 0 0 25%;">
+      <view class="ui-col-content">
+        <ui-v-tabs height="{{height}}" tab-style="{{tabStyle}}" active-tab-style="{{activeTabStyle}}" class="tab-item" index="{{current}}" data-key="current" _pid="{{_pid}}">
+          <ui-v-tab wx:for="{{categories}}" wx:key="id" bindtap="tabClick" data-id="{{item.id}}" data-name="{{item.name}}" _pid="{{_pid}}">{{item.name}}</ui-v-tab>
+        </ui-v-tabs>
+      </view>
+    </view>
+    <view class="menu-right ui-col" style="">
+      <view class="ui-col-content">
+        <scroll-view scroll-y>
+          <template is="swiper" data="{{swiper:menu,swiperCurrent:swiperCurrent}}" />
+          <view class="ui-divider">
+            <ui-divider padding="8" _pid="{{_pid}}">
+              <view style="color:#7b8196">{{activeCategoryName}}</view>
+            </ui-divider>
+          </view>
+          <view class="goods-box">
+            <view class="goods-list" wx:for="{{categorieslist}}" wx:key="id" bindtap="levelClick" data-id="{{item.id}}" data-name="{{item.pid_name}}" data-pid="{{item.pid}}">
+              <image class="imgbox" src="{{item.pic_icon}}" />
+              <view class="small-title">{{item.name}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <ui-mask show="{{showMask}}" top="{{top}}" custom-style="{{ customStyle }}" hide-on-tap="{{false}}" _pid="{{_pid}}">
+    <view class="content">
+      <block wx:if="{{searchHover}}">
+        <template is="searchdata" data="{{searchdata:searchHistory}}" />
+      </block>
+      <template wx:if="{{searchTag}}" is="searchkey" data="{{searchTag:searchTag}}" />
+    </view>
+  </ui-mask>
+</page>

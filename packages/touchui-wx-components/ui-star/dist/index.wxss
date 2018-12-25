@@ -1,0 +1,8 @@
+.ui-star .stars-wrap .star-wrap {
+  float: left;
+}
+.ui-star image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

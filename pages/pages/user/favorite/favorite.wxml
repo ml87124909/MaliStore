@@ -1,0 +1,71 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的收藏</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view wx:if="{{favoriteList}}" class="favorite-list-box">
+    <view wx:for="{{favoriteList}}" wx:key="id" bindtap="goodsTap" data-id="{{item.id}}" class="ui-row ui-row-border-bottom" style="height:100px;">
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+        <view class="ui-col-content align-center valign-middle">
+          <view class="favorite-list-img">
+            <image src="{{item.pic}}" />
+          </view>
+        </view>
+      </view>
+      <view class="text ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px; padding-right: 10px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view style="width: 100%;">
+            <view class="ui-row" style="height:25px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                <view class="ui-col-content align-left valign-middle">
+                  <text class="goods-name">{{item.name}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="height:30px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                <view class="ui-col-content align-left valign-middle">
+                  <text class="goods-info">{{item.introduce}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="ui-row" style="height:25px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                <view class="ui-col-content align-left valign-middle">
+                  <text class="price">¥{{item.mini_price}}</text>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <text class="times">{{item.data_add}}收藏</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!favoriteList}}" class="no-more-goods">
+    <image src="../../../../images/none/empty_collection.png" class="no-order-img" />
+    <view class="text">没有任何收藏</view>
+  </view>
+
+</page>

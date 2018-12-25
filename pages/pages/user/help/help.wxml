@@ -1,0 +1,49 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>帮助中心</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="help-list-box">
+    <view class="ui-row-list" style="">
+      <view class="ui-row" style="height:50px;">
+        <view class="ui-col valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content valign-middle">常见问题</view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span size="14" color="#27323f" type="arrow-right" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 14px;"></span>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row" style="height:50px;">
+        <view class="ui-col valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content valign-middle">购买相关</view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span size="14" color="#27323f" type="arrow-right" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 14px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</page>

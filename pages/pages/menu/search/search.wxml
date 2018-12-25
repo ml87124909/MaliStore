@@ -1,0 +1,63 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>商品搜索</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="search-header-box">
+    <view class="ui-row" style="height:50px;">
+      <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view class="search-header-input">
+            <input class="input" type="text" value="{{name}}" confirm-type="search" placeholder="请输入或选择关键字" bindinput="searchData" bindconfirm="search" placeholder-style="color:#999"></input>
+            <span wx:if="{{name}}" class="icon ui-icon icon-close" type="close" size="14" color="#27323f" bindtap="delSearchTap" style="color: #27323f;font-size: 14px;"></span>
+          </view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;flex:0 0 100px;">
+        <view class="ui-col-content align-left valign-middle">
+          <view class="search-header-button" bindtap="search">搜索</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="height:50px"></view>
+  <view wx:if="{{goods}}" class="goods-container">
+    <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+      <view class="img-box">
+        <image src="{{item.pic}}" class="image" mode="widthFix" lazy-load="true" />
+        <view wx:if="{{item.introduce}}" class="goods-characteristic">
+          <text>{{item.introduce}}</text>
+        </view>
+      </view>
+      <view class="goods-title">{{item.name}}</view>
+      <view style="display:flex;">
+        <view class="goods-price">Ұ{{item.mini_price}}</view>
+        <view class="goods-price-naver">已售{{item.orders}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!goods}}" class="no-more-goods">
+    <image src="../../../../images/none/search_empty.png" class="no-order-img" />
+    <view class="text">暂无商品，建议换个关键词试试
+      <view>
+      </view>
+    </view>
+  </view>
+</page>

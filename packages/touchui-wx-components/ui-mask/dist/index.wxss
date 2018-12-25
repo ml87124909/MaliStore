@@ -1,0 +1,46 @@
+.ui-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease-in;
+  -webkit-backface-visibility: hidden;
+  z-index: 700;
+}
+.ui-mask.scale-out {
+  transition: all 0.25s ease-in;
+  transform: scale(0);
+}
+.ui-mask.scale-out.show {
+  transform: scale(1);
+}
+.ui-mask.scale-in {
+  transition: all 0.25s ease-in;
+  transform: scale(1.5);
+}
+.ui-mask.scale-in.show {
+  transform: scale(1);
+}
+.ui-mask.blur-dark-android {
+  background: rgba(0, 0, 0, 0.85);
+}
+.ui-mask.blur-dark-ios {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+}
+.ui-mask.blur-light-android {
+  background: rgba(255, 255, 255, 0.96);
+}
+.ui-mask.blur-light-ios {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(30px) saturate(300%);
+}
+.ui-mask.show {
+  opacity: 1;
+  visibility: visible;
+}

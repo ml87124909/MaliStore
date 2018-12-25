@@ -1,0 +1,115 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>售后服务</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="list-box">
+    <view class="ui-row-list" style="">
+      <view bindtap="getDetailsTap" data-url="/pages/pages/user/order/service/tuikuan/list" class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image class="icons" src="../../../../../images/service/tk_icon.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="text">申请退款</view>
+            <view class="info">下单后因为个人原因不想要了需要取消订单申请退款</view>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span type="arrow-right" class="ui-icon icon-arrow-right" style="font-size: 16px;"></span>
+          </view>
+        </view>
+      </view>
+      <view bindtap="getDetailsTap" data-url="/pages/pages/user/order/service/shouhou/list" class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image class="icons" src="../../../../../images/service/sh_icon.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="text">申请售后</view>
+            <view class="info">发货后因为错发、漏发、质量问题需要申请售后或退款</view>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span type="arrow-right" class="ui-icon icon-arrow-right" style="font-size: 16px;"></span>
+          </view>
+        </view>
+      </view>
+      <view bindtap="getDetailsTap" data-url="/pages/pages/user/order/service/tuikuan/record" class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image class="icons" src="../../../../../images/service/tk_empy.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="text">退款记录</view>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span type="arrow-right" class="ui-icon icon-arrow-right" style="font-size: 16px;"></span>
+          </view>
+        </view>
+      </view>
+      <view bindtap="getDetailsTap" data-url="/pages/pages/user/order/service/shouhou/record" class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image class="icons" src="../../../../../images/service/sh_empy.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="text">售后记录</view>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span type="arrow-right" class="ui-icon icon-arrow-right" style="font-size: 16px;"></span>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row" style="height:60px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-center valign-middle">
+            <image class="icons" src="../../../../../images/service/kf_icon.png" />
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="text">在线客服</view>
+            <button open-type="contact" class="button"></button>
+          </view>
+        </view>
+        <view class="ui-col valign-middle" style="flex:0 0 30px;">
+          <view class="ui-col-content valign-middle">
+            <span type="arrow-right" class="ui-icon icon-arrow-right" style="font-size: 16px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</page>

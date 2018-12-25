@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-sticky": "../../../../packages/touchui-wx-components/ui-sticky/dist/index"
+  }
+}

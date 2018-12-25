@@ -1,0 +1,53 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>收货地址</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view wx:if="{{addressList}}" class="address-list-box">
+    <view class="address-list" wx:for="{{addressList}}" wx:key="{{index}}">
+      <view class="ui-row" style="height:80px;">
+        <view bindtap="selectTap" data-id="{{item.id}}" data-name="{{item.name}}" data-phone="{{item.phone}}" data-province="{{item.province}}" data-city="{{item.city}}" data-district="{{item.district}}" data-address="{{item.address}}" data-code="{{item.code}}" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="adress-name">{{item.name}}</view>
+            <view wx:if="{{item.default == '1'}}" class="address-active">默认</view>
+          </view>
+        </view>
+        <view bindtap="selectTap" data-id="{{item.id}}" data-name="{{item.name}}" data-phone="{{item.phone}}" data-province="{{item.province}}" data-city="{{item.city}}" data-district="{{item.district}}" data-address="{{item.address}}" data-code="{{item.code}}" class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="address-number">{{item.phone}}</view>
+            <view class="address-info">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+          </view>
+        </view>
+        <view bindtap="editAddess" data-id="{{item.id}}" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+          <view class="ui-col-content align-center valign-middle">
+            <span type="bianji" size="18" color="#7b8196" class="ui-icon icon-bianji" style="color: #7b8196;font-size: 18px;"></span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!addressList}}" class="no-more-goods">
+    <image src="../../../../images/none/address_empty.png" class="no-order-img" />
+    <view class="text">没有收货地址</view>
+  </view>
+  <view class="bottom-box" bindtap="addAddess">
+    <span type="plus" size="14" color="#27323f" class="ui-icon icon-plus" style="color: #27323f;font-size: 14px;"></span>新增地址
+  </view>
+</page>

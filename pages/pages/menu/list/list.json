@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-tabs": "../../../../packages/touchui-wx-components/ui-tabs/dist/index",
+    "ui-tab": "../../../../packages/touchui-wx-components/ui-tab/dist/index",
+    "ui-popup": "../../../../packages/touchui-wx-components/ui-popup/dist/index",
+    "ui-check-list": "../../../../packages/touchui-wx-components/ui-check-list/dist/index"
+  }
+}

@@ -1,0 +1,6 @@
+<view class="ui-sticky" style="{{ selfCustomStyle }}" bindtap="handleTap">
+  <slot></slot>
+  <view hidden="{{ !fixed }}" class="ui-sticky-faker" style="{{ fakerStyle }}">
+    <slot name="sticky"></slot>
+  </view>
+</view>

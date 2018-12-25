@@ -1,0 +1,187 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>我的优惠券</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <ui-tabs index="{{ current }}" probe="1" bindchange="handleChange" _pid="{{_pid}}">
+    <ui-tab class="ui-tab" _pid="{{_pid}}">未使用</ui-tab>
+    <ui-tab class="ui-tab" _pid="{{_pid}}">已使用</ui-tab>
+    <ui-tab class="ui-tab" _pid="{{_pid}}">已失效</ui-tab>
+  </ui-tabs>
+  <view class="swiper_content" wx:if="{{ show_1 }}">
+    <view class="coupon-new-box">
+      <form bindsubmit="formSubmit" style="width:100%;">
+        <view class="ui-row" style="height:50px;">
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 10px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="coupon-new-input">
+                <input type="text" name="code" placeholder="请输入优惠码" placeholder-style="color: #999"></input>
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="flex:0 0 120px;">
+            <view class="ui-col-content align-left valign-middle">
+              <button class="coupon-new-button" formType="submit">兑换</button>
+            </view>
+          </view>
+        </view>
+      </form>
+    </view>
+    <view class="coupon-list-box">
+      <view class="popup-Couponshow-content-list" wx:for="{{couponList}}" wx:key="id">
+        <view class="popup-Couponshow-content-box ui-row" style="height:66px;">
+          <view class="ui-col ui-col-4 ui-col-align-center align-center valign-middle" style="flex: 0 0 33.33333333333333%;padding-left: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view wx:if="{{item.money_type == '满减'}}" class="Couponshow-content-money">{{item.money}}
+                <text>元</text>
+              </view>
+              <view wx:if="{{item.money_type == '折扣'}}" class="Couponshow-content-money">{{item.money/10}}
+                <text>折</text>
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-5 ui-col-align-left align-left valign-middle" style="flex: 0 0 41.66666666666667%;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-name">{{item.name}}</view>
+              <view class="Couponshow-content-text" wx:if="{{item.remark}}">{{item.remark}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;padding-right: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <image wx:if="{{item.state == 0}}" class="yiling" src="../../../../images/coupons/keshi.png" />
+            </view>
+          </view>
+        </view>
+        <view class="popup-Couponshow-content-remark-box ui-row" style="height:30px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-remark">消费满{{item.max_money}}元可用</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="Couponshow-content-remark">{{item.date_end}}到期</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!couponList}}" class="no-more-goods">
+        <image src="../../../../images/none/coupon_empty.png" class="no-order-img" />
+        <view class="text">无此类型优惠券</view>
+        <view class="button-coupons" bindtap="getCouponsTap">去礼券中心领券 >></view>
+      </view>
+    </view>
+  </view>
+  <view class="swiper_content" wx:if="{{ show_2 }}">
+    <view class="coupon-list-box">
+      <view class="popup-Couponshow-content-list popup-Couponshow-content-list-none" wx:for="{{couponList}}" wx:key="id">
+        <view class="popup-Couponshow-content-box ui-row" style="height:66px;">
+          <view class="ui-col ui-col-4 ui-col-align-center align-center valign-middle" style="flex: 0 0 33.33333333333333%;padding-left: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view wx:if="{{item.money_type == '满减'}}" class="Couponshow-content-money">{{item.money}}
+                <text>元</text>
+              </view>
+              <view wx:if="{{item.money_type == '折扣'}}" class="Couponshow-content-money">{{item.money/10}}
+                <text>折</text>
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-5 ui-col-align-left align-left valign-middle" style="flex: 0 0 41.66666666666667%;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-name">{{item.name}}</view>
+              <view class="Couponshow-content-text" wx:if="{{item.remark}}">{{item.remark}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;padding-right: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <image wx:if="{{item.state == 1}}" class="yiling" src="../../../../images/coupons/yishi.png" />
+            </view>
+          </view>
+        </view>
+        <view class="popup-Couponshow-content-remark-box ui-row" style="height:30px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-remark">消费满{{item.max_money}}元可用</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="Couponshow-content-remark" wx:if="{{item.state == 1}}">优惠券已经使用</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!couponList}}" class="no-more-goods">
+        <image src="../../../../images/none/coupon_empty.png" class="no-order-img" />
+        <view class="text">无此类型优惠券</view>
+        <view class="button-coupons" bindtap="getCouponsTap">去礼券中心领券 >></view>
+      </view>
+    </view>
+  </view>
+  <view class="swiper_content" wx:if="{{ show_3 }}">
+    <view class="coupon-list-box">
+      <view class="popup-Couponshow-content-list popup-Couponshow-content-list-none" wx:for="{{couponList}}" wx:key="id">
+        <view class="popup-Couponshow-content-box ui-row" style="height:66px;">
+          <view class="ui-col ui-col-4 ui-col-align-center align-center valign-middle" style="flex: 0 0 33.33333333333333%;padding-left: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view wx:if="{{item.money_type == '满减'}}" class="Couponshow-content-money">{{item.money}}
+                <text>元</text>
+              </view>
+              <view wx:if="{{item.money_type == '折扣'}}" class="Couponshow-content-money">{{item.money/10}}
+                <text>折</text>
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-5 ui-col-align-left align-left valign-middle" style="flex: 0 0 41.66666666666667%;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-name">{{item.name}}</view>
+              <view class="Couponshow-content-text" wx:if="{{item.remark}}">{{item.remark}}</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;padding-right: 10px;">
+            <view class="ui-col-content align-center valign-middle">
+              <image wx:if="{{item.state == 2}}" class="yiling" src="../../../../images/coupons/yiguo.png" />
+              <image wx:if="{{item.state == 3}}" class="yiling" src="../../../../images/coupons/shixiao.png" />
+            </view>
+          </view>
+        </view>
+        <view class="popup-Couponshow-content-remark-box ui-row" style="height:30px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="Couponshow-content-remark">消费满{{item.max_money}}元可用</view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-right align-right valign-middle" style="">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="Couponshow-content-remark" wx:if="{{item.state == 2}}">优惠券已经过期</view>
+              <view class="Couponshow-content-remark" wx:if="{{item.state == 3}}">优惠券已经失效</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!couponList}}" class="no-more-goods">
+        <image src="../../../../images/none/coupon_empty.png" class="no-order-img" />
+        <view class="text">无此类型优惠券</view>
+        <view class="button-coupons" bindtap="getCouponsTap">去礼券中心领券 >></view>
+      </view>
+    </view>
+  </view>
+
+</page>

@@ -1,0 +1,95 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>会员中心</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <!--付费升级-->
+  <view class="vip-box" wx:if="{{vipType == '付费升级'}}">
+    <view class="{{vipState == 0 ? 'none-vip-user':'vip-user'}}">
+      <open-data class="avatar" type="userAvatarUrl"></open-data>
+      <open-data class="name" type="userNickName"></open-data>
+    </view>
+    <view class="none-vip-info-box" wx:if="{{vipState == 0}}">
+      <view class="vip-active">现在开通立享¥{{vipPrice}}/年</view>
+      <view class="vip-info">（超级会员平均可省¥{{shopInfo.shopInfo.vip_sale}}元/年）</view>
+    </view>
+    <view class="vip-info-box" wx:if="{{vipState == 1}}">
+      <view class="vip-active">超级会员</view>
+      <view class="vip-info">超级会员购物享受{{userInfo.vip_sale/10}}折会员折扣</view>
+      <view class="vip-info">您的会员权益将在{{userInfo.vip_time}}到期</view>
+    </view>
+    <view wx:if="{{vipState == 0}}" class="vip-btn" bindtap="getVipTap" data-id="0" data-money="{{vipPrice}}">立即开通超级会员</view>
+    <view wx:if="{{vipState == 1}}" class="vip-btn" bindtap="getVipTap" data-id="1" data-money="{{vipPrice}}">续费超级会员{{vipPrice}}/年</view>
+  </view>
+  <!--购物升级-->
+  <view class="vip-box" wx:if="{{vipType == '购物升级'}}">
+    <view class="vip-user">
+      <open-data class="avatar" type="userAvatarUrl"></open-data>
+      <view class="user-state">
+        <open-data class="name" type="userNickName"></open-data>
+        <view wx:if="{{vipState == 1}}" class="money">已经消费了¥{{userInfo.consume}}</view>
+      </view>
+    </view>
+    <view class="vip-level-info">
+      <view wx:for="{{vipInfoList}}" wx:key="id" class="times-list {{ userInfo.vip_level >= item.vip_id ? 'item-on':'' }}">
+        <text class="times-sale">{{item.vip_sale/10}}折</text>
+        <text class="times-pus">{{item.vip_price}}</text>
+        <view class="times-line"></view>
+        <view class="times-day">{{item.vip_name}}</view>
+      </view>
+    </view>
+    <view class="vip-level-text" wx:if="{{vipState == 0}}">购物达到指定金额即可享受对应折扣</view>
+    <view class="vip-level-text" wx:if="{{vipState == 1}}">您当前是{{userInfo.vip_level_name}},购物可享受{{userInfo.vip_sale/10}}折优惠</view>
+  </view>
+  <view class="vip-quanyi-box" wx:if="{{vipServeList}}">
+    <view class="vip-quanyi-title">{{vipListName}}</view>
+    <view class="vip-quanyi-list-box">
+      <view class="vip-quanyi-list" wx:for="{{vipServeList}}" wx:key="{{index}}">
+        <image src="{{item.pic_url}}" />
+        <view class="qy-name">
+          <text class="a">{{item.title}}</text>
+          <text class="b">{{item.remark}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="vip-goods-box">
+    <view class="vip-goods-box-title">超级会员价</view>
+    <view class="vip-goods-box-info">开通享全场99%商品超级会员价，可叠加使用优惠券</view>
+    <view class="vip-goods-list-box">
+      <view class="vip-goods-list" wx:for="{{vipGoods}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <view class="vip-goods-img-box">
+          <image src="{{item.pic}}" />
+          <view wx:if="{{item.introduce}}" class="goods-characteristic">
+            <text>{{item.introduce}}</text>
+          </view>
+        </view>
+        <view class="vip-goods-info-box">
+          <view class="vip-goods-name">{{item.name}}</view>
+          <view class="vip-goods-money">
+            <text class="tag">会员价</text>
+            <text class="a">¥{{item.vip_price}}</text>
+            <text class="b">¥{{item.mini_price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</page>

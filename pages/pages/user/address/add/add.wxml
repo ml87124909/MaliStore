@@ -1,0 +1,101 @@
+<page>
+  <import src="../../../../component/menu/menu.wxml" />
+  <import src="../../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view wx:if="{{!id}}">新增地址</view>
+          <view wx:if="{{id}}">修改地址</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="address-add-box">
+    <form bindsubmit="bindSave">
+      <view class="ui-row ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view>收货人</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <input name="linkMan" type="text" placeholder="收货人姓名" value="{{addressData.name}}{{wxaddress.userName}}"></input>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view>手机号码</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <input name="mobile" maxlength="11" type="number" placeholder="收货人手机号码" value="{{addressData.phone}}{{wxaddress.telNumber}}"></input>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view>所在地区</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="address-picker">
+              <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                <view class="picker">{{region[0]}}
+                  <text>-</text>{{region[1]}}
+                  <text>-</text>{{region[2]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view>详细地址</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <input name="address" type="text" placeholder="街道、楼牌号等" value="{{addressData.address}}{{wxaddress.detailInfo}}"></input>
+          </view>
+        </view>
+      </view>
+      <view class="ui-row ui-row" style="height:50px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view>邮政编号</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <input name="code" type="number" maxlength="6" placeholder="邮政编码信息" value="{{wxaddress.postalCode}}{{addressData.code}}"></input>
+          </view>
+        </view>
+      </view>
+      <view class="address-button">
+        <button class="save" formType="submit">保存地址信息</button>
+        <button wx:if="{{!addressData}}" class="wechat" bindtap="readFromWx">从微信读取</button>
+        <button class="delete" bindtap="deleteAddress" data-id="{{addressData.id}}" wx:if="{{addressData}}">删除该地址</button>
+        <button class="cancel" bindtap="navigateBack">取消</button>
+      </view>
+    </form>
+  </view>
+
+</page>

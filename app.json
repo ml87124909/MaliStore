@@ -1,0 +1,98 @@
+{
+  "pages": [
+    "pages/pages/home/home",
+    "pages/pages/menu/menu",
+    "pages/pages/goods/goods",
+    "pages/pages/menu/list/list",
+    "pages/pages/menu/search/search",
+    "pages/pages/menu/newlist/newlist",
+    "pages/pages/shopcart/shopcart",
+    "pages/pages/payorder/payorder",
+    "pages/pages/payorder/paypal/paypal",
+    "pages/pages/coupons/coupons",
+    "pages/pages/coupons/score/score",
+    "pages/pages/special/special",
+    "pages/pages/special/topics/topics",
+    "pages/pages/user/user",
+    "pages/pages/user/member/member",
+    "pages/pages/user/feedback/feedback",
+    "pages/pages/user/help/help",
+    "pages/pages/user/address/address",
+    "pages/pages/user/address/add/add",
+    "pages/pages/user/favorite/favorite",
+    "pages/pages/user/coupon/coupon",
+    "pages/pages/user/paypal/paypal",
+    "pages/pages/user/paypal/info/info",
+    "pages/pages/user/paypal/recharge/recharge",
+    "pages/pages/user/kanjia/kanjia",
+    "pages/pages/user/order/order",
+    "pages/pages/user/order/service/service",
+    "pages/pages/user/order/service/tuikuan/list",
+    "pages/pages/user/order/service/tuikuan/record",
+    "pages/pages/user/order/service/tuikuan/tuikuan",
+    "pages/pages/user/order/service/shouhou/list",
+    "pages/pages/user/order/service/shouhou/record",
+    "pages/pages/user/order/service/shouhou/shouhou",
+    "pages/pages/user/order/service/shouhou/goods/goods",
+    "pages/pages/user/order/details/details",
+    "pages/pages/user/order/wuliu/wuliu",
+    "pages/pages/user/order/pingjia/pingjia",
+    "pages/pages/user/history/history",
+    "pages/pages/user/pingtuan/pingtuan",
+    "pages/pages/user/share/share",
+    "pages/component/swiper/swiper",
+    "pages/component/menu/menu",
+    "pages/component/module/module"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#7b8196",
+    "selectedColor": "#27323f",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/pages/home/home",
+        "iconPath": "images/tabbar/home-off.png",
+        "selectedIconPath": "images/tabbar/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/pages/menu/menu",
+        "iconPath": "images/tabbar/menu-off.png",
+        "selectedIconPath": "images/tabbar/menu-on.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/pages/shopcart/shopcart",
+        "iconPath": "images/tabbar/cart-off.png",
+        "selectedIconPath": "images/tabbar/cart-on.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/pages/user/user",
+        "iconPath": "images/tabbar/my-off.png",
+        "selectedIconPath": "images/tabbar/my-on.png",
+        "text": "个人"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 24000
+  },
+  "theme": {
+    "theme-color": "#ffd305"
+  },
+  "plugins": {
+    "tencentvideo": {
+      "version": "1.2.4",
+      "provider": "wxa75efa648b60994b"
+    }
+  }
+}

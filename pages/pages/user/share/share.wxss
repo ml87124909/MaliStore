@@ -1,0 +1,140 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+page {
+  background-color: #fff;
+}
+.share-header-box {
+  width: 100%;
+  height: 300rpx;
+  background: linear-gradient(to top, #ffcc33, #ffd305);
+}
+.share-header-box .name {
+  color: #fff;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+.share-header-box .money {
+  text-align: center;
+  font-size: 70rpx;
+  color: #fff;
+  height: 140rpx;
+}
+.share-header-box .money text {
+  font-size: 40rpx;
+  margin-left: -10rpx;
+}
+.share-header-box .ui-row {
+  color: #fff;
+}
+.share-header-box .ui-row .ui-col-left {
+  border-right: 2rpx solid #f5f5f5;
+}
+.ui-tabs-bg {
+  height: 92rpx;
+  background-color: #fff;
+}
+.swiper_content {
+  border-top: 2rpx solid #f5f5f5;
+}
+.swiper_content .share-list {
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.swiper_content .share-list .name {
+  color: #27323f;
+  font-size: 30rpx;
+  padding-left: 30rpx;
+}
+.swiper_content .share-list .goods {
+  color: #7b8196;
+  font-size: 26rpx;
+  padding-left: 30rpx;
+  padding-top: 10rpx;
+}
+.swiper_content .share-list .goods .b {
+  padding-left: 50rpx;
+}
+.swiper_content .share-list .number {
+  color: #27323f;
+  font-size: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swiper_content .share-list .number text {
+  font-size: 32rpx;
+  padding-right: 6rpx;
+}
+.swiper_content .share-text-box {
+  padding-bottom: 60rpx;
+}
+.swiper_content .share-text-box .sname {
+  color: #27323f;
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  padding-top: 20rpx;
+}
+.swiper_content .share-text-box .stitle {
+  display: flex;
+  height: 38rpx;
+  align-items: center;
+  color: #27323f;
+  font-size: 30rpx;
+  border-left: 12rpx solid #27323f;
+  margin-left: 30rpx;
+  padding-left: 20rpx;
+  margin-bottom: 20rpx;
+  margin-top: 30rpx;
+}
+.swiper_content .share-text-box .stext {
+  width: 92%;
+  margin: 0 auto;
+  color: #27323f;
+  text-indent: 30rpx;
+  line-height: 46rpx;
+  font-size: 26rpx;
+  padding-bottom: 6rpx;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-more-goods .no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+  width: 350rpx;
+  text-align: center;
+}
