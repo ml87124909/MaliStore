@@ -1,2 +1,4 @@
-# MaliStore
-码力小店开发版，微信小程序商城，这应该是目前开源最全最好的一套微信小程序商城了～哈哈哈哈
+![码力小店项目说明][1]
+
+
+  [1]: https://xiaodu.maliapi.com/static/data/0d11025ea27e4c93ed9d269cece39adf.jpg
