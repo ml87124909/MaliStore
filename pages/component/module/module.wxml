@@ -102,8 +102,12 @@
                 <i class="vip-right"></i>
               </view>
             </view>
+            <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
+              <image src="../../../images/vip.png" />
+              <view class="column-goods-vip">您是{{userInfo.vip_level_name}}，折后价格为 ¥{{userVip.vip_price}}</view>
+            </view>
           </block>
-          <block wx:else="">
+          <block wx:elif="{{shopInfo.vip_type == '付费升级'}}">
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
               <image src="../../../images/vip.png" />
               <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>

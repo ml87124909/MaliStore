@@ -108,9 +108,7 @@ exports.default = Page({
             });
             return;
         }
-        console.log(orderid, goodsid);
         _server2.default.get(_urls2.default.links[0].pingjasend, { token: token, id: orderid, goods_id: goodsid, goods_star: starNumber, goods_text: textarea }).then(function (res) {
-            console.log(res);
             if (res.code == 0) {
                 var id = that.data.id;
                 var kid = that.data.kid;

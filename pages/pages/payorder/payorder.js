@@ -192,7 +192,11 @@ exports.default = Page({
                 goodsJsonStrTmp = ",";
             }
             var inviter_id = 0;
-            goodsJsonStrTmp += '{"goods_id":' + carShopBean.goods_id + ',"buy_number":' + carShopBean.buy_number + ',"goods_childs":"' + carShopBean.goods_childs + '","inviter_user":' + carShopBean.inviter_user + '}';
+            if (carShopBean.inviter_user) {
+                goodsJsonStrTmp += '{"goods_id":' + carShopBean.goods_id + ',"buy_number":' + carShopBean.buy_number + ',"goods_childs":"' + carShopBean.goods_childs + '","inviter_user":' + carShopBean.inviter_user + '}';
+            } else {
+                goodsJsonStrTmp += '{"goods_id":' + carShopBean.goods_id + ',"buy_number":' + carShopBean.buy_number + ',"goods_childs":"' + carShopBean.goods_childs + '","inviter_user":0 }';
+            }
             goodsJsonStr += goodsJsonStrTmp;
         }
         goodsJsonStr += "]";
@@ -206,6 +210,7 @@ exports.default = Page({
     },
     createOrder: function createOrder(e) {
         var that = this;
+        var userid = wx.getStorageSync('__appInviter');
         var loginToken = wx.getStorageSync('__appUserInfo').token;
         var remark = "";
         if (e) {
@@ -340,6 +345,9 @@ exports.default = Page({
                     });
                     that.getMyCoupons();
                     return;
+                }
+                if (e && userid) {
+                    wx.removeStorageSync('__appInviter');
                 }
                 wx.redirectTo({
                     url: "/pages/pages/payorder/paypal/paypal?id=" + res.data.order_number

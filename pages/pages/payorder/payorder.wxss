@@ -216,3 +216,9 @@
   left: 0;
   bottom: 0;
 }
+.fixed_bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+}
