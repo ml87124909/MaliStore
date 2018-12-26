@@ -47,6 +47,7 @@ var links = [{
 	'favoredels': urlDomain + '&part=user_favorite_del', //删除收藏商品
 	'ordecreate': urlDomain + '&part=order_create', //创建订单
 	'orderslist': urlDomain + '&part=order_list', //订单列表
+	'orderstats': urlDomain + '&part=order_state_list', //订单状态列表
 	'ordepaypal': urlDomain + '&part=order_paypal', //订单支付
 	'orderdetas': urlDomain + '&part=order_details', //订单详情
 	'ordercance': urlDomain + '&part=order_cancel', //订单取消

@@ -84,6 +84,20 @@
   margin: 0 auto;
   margin-bottom: 12rpx;
 }
+.cart-list .red-dot {
+  position: absolute;
+  background-color: #ff3f3e;
+  color: #fff;
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  right: 28rpx;
+  top: -16rpx;
+  font-size: 22rpx;
+}
 .cart-list text,
 .text {
   font-size: 26rpx;

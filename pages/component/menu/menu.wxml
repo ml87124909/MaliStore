@@ -27,7 +27,7 @@
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="cart-list" bindtap="goorderlist" data-index="1">
-            <view wx:if="{{noplay}}" class="red-dot">{{noplay}}</view>
+            <view wx:if="{{orderStatus.nopaypal != 0}}" class="red-dot">{{orderStatus.nopaypal}}</view>
             <image src="../../../images/user/1.png" />
             <text>待付款</text>
           </view>
@@ -36,7 +36,7 @@
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="cart-list" bindtap="goorderlist" data-index="2">
-            <view wx:if="{{notransfer}}" class="red-dot">{{notransfer}}</view>
+            <view wx:if="{{orderStatus.delivery != 0}}" class="red-dot">{{orderStatus.delivery}}</view>
             <image src="../../../images/user/2.png" />
             <text>待发货</text>
           </view>
@@ -45,7 +45,7 @@
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="cart-list" bindtap="goorderlist" data-index="3">
-            <view wx:if="{{noconfirm}}" class="red-dot">{{noconfirm}}</view>
+            <view wx:if="{{orderStatus.receiving != 0}}" class="red-dot">{{orderStatus.receiving}}</view>
             <image src="../../../images/user/3.png" />
             <text>待收货</text>
           </view>
@@ -54,7 +54,7 @@
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="cart-list" bindtap="goorderlist" data-index="4">
-            <view wx:if="{{noreputation}}" class="red-dot">{{noreputation}}</view>
+            <view wx:if="{{orderStatus.evaluate != 0}}" class="red-dot">{{orderStatus.evaluate}}</view>
             <image src="../../../images/user/4.png" />
             <text>待评价</text>
           </view>
@@ -63,6 +63,7 @@
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="cart-list">
+            <view wx:if="{{orderStatus.tuikuan + orderStatus.shouhou != 0}}" class="red-dot">{{orderStatus.tuikuan + orderStatus.shouhou}}</view>
             <image src="../../../images/user/5.png" />
             <text>退款/售后</text>
             <navigator url="/pages/pages/user/order/service/service" open-type="navigate" hover-class="none"></navigator>

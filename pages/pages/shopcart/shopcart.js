@@ -67,12 +67,36 @@ exports.default = Page({
     var that = this;
     that.initEleWidth();
     var shopList = [];
+    var token = wx.getStorageSync('__appUserInfo').token;
     var shopCarInfoMem = wx.getStorageSync("__shopCarInfo");
     if (shopCarInfoMem && shopCarInfoMem.shopList) {
       shopList = shopCarInfoMem.shopList;
     }
     that.data.goodsList.list = shopList;
     that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), shopList);
+    _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+      if (res.code == 0) {
+        if (res.data.nopaypal > 0) {
+          wx.showTabBarRedDot({ index: 3 });
+        } else {
+          wx.removeTabBarBadge({ index: 3 });
+        }
+      }
+    });
+    wx.getStorage({
+      key: '__shopCarInfo',
+      success: function success(res) {
+        if (res.data) {
+          if (res.data.shopNum > 0) {
+            wx.showTabBarRedDot({ index: 2 });
+          } else {
+            wx.removeTabBarBadge({ index: 2 });
+          }
+        } else {
+          wx.removeTabBarBadge({ index: 2 });
+        }
+      }
+    });
   },
   getEleWidth: function getEleWidth(w) {
     var real = 0;
@@ -207,7 +231,7 @@ exports.default = Page({
     var tempNumber = 0;
     shopCarInfo.shopList = list;
     for (var i = 0; i < list.length; i++) {
-      tempNumber = tempNumber + list[i].number;
+      tempNumber = tempNumber + list[i].buy_number;
     }
     shopCarInfo.shopNum = tempNumber;
     wx.setStorage({

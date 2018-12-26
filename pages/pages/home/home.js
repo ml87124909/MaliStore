@@ -24,6 +24,7 @@ exports.default = Page({
   },
   onShow: function onShow() {
     var that = this;
+    var token = wx.getStorageSync('__appUserInfo').token;
     if (app.globalData.userinfo == 1e4) {
       that.setData({ showMask: true });
       wx.hideTabBar();
@@ -35,6 +36,29 @@ exports.default = Page({
         }
       }, 1000);
     }
+    _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+      if (res.code == 0) {
+        if (res.data.nopaypal > 0) {
+          wx.showTabBarRedDot({ index: 3 });
+        } else {
+          wx.removeTabBarBadge({ index: 3 });
+        }
+      }
+    });
+    wx.getStorage({
+      key: '__shopCarInfo',
+      success: function success(res) {
+        if (res.data) {
+          if (res.data.shopNum > 0) {
+            wx.showTabBarRedDot({ index: 2 });
+          } else {
+            wx.removeTabBarBadge({ index: 2 });
+          }
+        } else {
+          wx.removeTabBarBadge({ index: 2 });
+        }
+      }
+    });
   },
   onLoad: function onLoad() {
     var that = this;

@@ -64,40 +64,35 @@ exports.default = Page({
                 searchTag: shopInfo.searchTag
             });
         }
-
-        /*
-        
-        plugin.get(urls.links[0].config, {key: "searchTag"}).then(res => {
-            if(res.code == 0){
-                var kb = res.data.value;
-                var ar = kb.split(',');
-                that.setData({searchTag: ar});
-            }
-        });
-        plugin.get(urls.links[0].categoryall, {}).then(res => {
-            if(res.code == 0){
-                var categories = [{ id: 0, name: `所有分类` }];
-                for (var i = 0; i < res.data.length; i++) {
-                    if (res.data[i].level == 1) {
-                    categories.push(res.data[i]);
-                    }
-                }
-                wx.hideLoading();
-                that.setData({categories: categories});
-                that.getGoodsList(0);
-            }
-        });
-        plugin.get(urls.links[0].glist, {}).then(res => {
-            if(res.code == 0){
-                that.setData({gnumber: res.data.length});
-            }
-        });
-        */
         that.searchData();
     },
     onShow: function onShow() {
         var that = this;
         that.searchData();
+        var token = wx.getStorageSync('__appUserInfo').token;
+        _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+            if (res.code == 0) {
+                if (res.data.nopaypal > 0) {
+                    wx.showTabBarRedDot({ index: 3 });
+                } else {
+                    wx.removeTabBarBadge({ index: 3 });
+                }
+            }
+        });
+        wx.getStorage({
+            key: '__shopCarInfo',
+            success: function success(res) {
+                if (res.data) {
+                    if (res.data.shopNum > 0) {
+                        wx.showTabBarRedDot({ index: 2 });
+                    } else {
+                        wx.removeTabBarBadge({ index: 2 });
+                    }
+                } else {
+                    wx.removeTabBarBadge({ index: 2 });
+                }
+            }
+        });
     },
     getGoodsList: function getGoodsList(categoryId) {
         var that = this;

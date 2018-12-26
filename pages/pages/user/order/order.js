@@ -61,7 +61,6 @@ exports.default = Page({
             postData.status = '6';
         }
         _server2.default.get(_urls2.default.links[0].orderslist, postData).then(function (res) {
-            console.log(res);
             wx.hideLoading();
             if (res.code == 0) {
                 that.setData({ orderList: res.data });

@@ -16,15 +16,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = Page({
     data: {},
-    onLoad: function onLoad() {
+    onShow: function onShow() {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
         _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
-            console.log(res);
             if (res.code == 0) {
                 that.setData({
                     amount: res.data
                 });
+            }
+        });
+        _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+            if (res.code == 0) {
+                that.setData({
+                    orderStatus: res.data
+                });
+                if (res.data.nopaypal > 0) {
+                    wx.showTabBarRedDot({ index: 3 });
+                } else {
+                    wx.removeTabBarBadge({ index: 3 });
+                }
+            }
+        });
+        wx.getStorage({
+            key: '__shopCarInfo',
+            success: function success(res) {
+                if (res.data) {
+                    if (res.data.shopNum > 0) {
+                        wx.showTabBarRedDot({ index: 2 });
+                    } else {
+                        wx.removeTabBarBadge({ index: 2 });
+                    }
+                } else {
+                    wx.removeTabBarBadge({ index: 2 });
+                }
             }
         });
     },
