@@ -72,7 +72,7 @@ exports.default = Page({
             goods: shops.homeGoods
           });
         }
-      }, 500);
+      }, 800);
     } else {
       that.setData({ shopInfo: shops });
       if (shops.shopInfo.home_type == 0) {

@@ -33,6 +33,7 @@ exports.default = Page({
     width: wx.WIN_WIDTH,
     current: 0,
     value: 0,
+    share: 0,
     show: false,
     show1: true,
     show2: false,
@@ -74,6 +75,58 @@ exports.default = Page({
     var cartInfo = wx.getStorageSync('__shopCarInfo');
     var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
     wx.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
+    if (e.id) {
+      that.setData({ id: e.id });
+      if (e.sid) {
+        that.setData({ share: e.sid });
+      } else if (e.uid) {
+        wx.setStorage({ key: "__appInviter", data: { id: e.uid } });
+        that.getshareuser();
+      }
+      //商品详情
+      that.getgoodsdeft(e.id);
+      //收藏状态
+      that.getfav(e.id);
+      //商品评论
+      that.reputation(e.id);
+      //商品优惠券
+      that.getGoodsCoupons(e.id);
+      //增加浏览记录
+      that.history(e.id);
+    } else {
+      var scene = decodeURIComponent(e.scene);
+      if (scene.length > 0 && scene != undefined) {
+        var scarr = scene.split(',');
+        var dilist = [];
+        for (var i = 0; i < scarr.length; i++) {
+          dilist.push(scarr[i].split('='));
+        }
+        if (dilist.length > 0) {
+          var dict = {};
+          for (var j = 0; j < dilist.length; j++) {
+            dict[dilist[j][0]] = dilist[j][1];
+          }
+          var id = dict.i;
+          var uid = dict.u;
+          var sid = dict.s;
+          that.setData({ id: id, share: sid });
+          if (uid) {
+            wx.setStorage({ key: "__appInviter", data: { id: uid } });
+            that.getshareuser();
+          }
+          //商品详情
+          that.getgoodsdeft(id);
+          //收藏状态
+          that.getfav(id);
+          //商品评论
+          that.reputation(id);
+          //商品优惠券
+          that.getGoodsCoupons(id);
+          //增加浏览记录
+          that.history(id);
+        }
+      }
+    }
     if (cartInfo) {
       that.setData({
         shopCarInfo: cartInfo,
@@ -82,8 +135,11 @@ exports.default = Page({
     }
     that.setData({ shopInfo: shopInfo });
     //商品详情
-    _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e.id }).then(function (res) {
-      console.log(res);
+  },
+  //商品详情
+  getgoodsdeft: function getgoodsdeft(e) {
+    var that = this;
+    _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e }).then(function (res) {
       wx.hideLoading();
       if (res.code == 0) {
         that.setData({
@@ -100,24 +156,18 @@ exports.default = Page({
         }
       }
     });
-    wx.setStorage({ key: "__appInviter", data: { id: 6 } });
-    if (e.uid) {
-      var token = wx.getStorageSync('__appUserInfo').token;
-      wx.setStorage({ key: "__appInviter", data: { id: e.uid } });
-      _server2.default.get(_urls2.default.links[0].sharegoods, { token: token, user: e.uid, goods: e.id }).then(function (res) {
-        if (res.code == 0) {
-          console.log('返现成功');
-        }
-      });
-    }
-    //收藏状态
-    that.getfav(e.id);
-    //商品评论
-    that.reputation(e.id);
-    //商品优惠券
-    that.getGoodsCoupons(e.id);
-    //增加浏览记录
-    that.history(e.id);
+  },
+  //用户返现
+  getshareuser: function getshareuser() {
+    var that = this;
+    var gid = that.data.id;
+    var uid = wx.getStorageSync('__appInviter').id;
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].sharegoods, { token: token, user: uid, goods: gid }).then(function (res) {
+      if (res.code == 0) {
+        console.log('返现成功');
+      }
+    });
   },
   //用户信息
   getuserInfo: function getuserInfo(e) {
@@ -337,7 +387,7 @@ exports.default = Page({
               success: function success(avatar) {
                 //用户头像
                 var userpic = avatar.tempFilePath;
-                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'id=123456', page: 'pages/store/index' }).then(function (res) {
+                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + app.globalData.userid + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
                   if (res.code == 0) {
                     wx.showLoading({ title: '下载小程序码' });
                     wx.downloadFile({
@@ -730,6 +780,12 @@ exports.default = Page({
       url: "/pages/pages/user/member/member"
     });
   },
+  //跳转首页
+  getHomeTap: function getHomeTap() {
+    wx.switchTab({
+      url: "/pages/pages/home/home"
+    });
+  },
   //分享事件
   onShareAppMessage: function onShareAppMessage() {
     var that = this;
@@ -739,7 +795,7 @@ exports.default = Page({
       if (data.shareInfo.share_title) {
         return {
           title: data.shareInfo.share_title,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid,
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid + '&sid=1',
           imageUrl: data.shareInfo.share_imgs,
           success: function success(res) {
             // 转发成功
@@ -751,7 +807,7 @@ exports.default = Page({
       } else {
         return {
           title: data.basicInfo.name + ' - ' + data.basicInfo.introduce,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid,
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid + '&sid=1',
           imageUrl: data.basicInfo.pic,
           success: function success(res) {
             // 转发成功
@@ -765,7 +821,7 @@ exports.default = Page({
       if (data.shareInfo.share_title) {
         return {
           title: data.shareInfo.share_title,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id,
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&sid=1',
           imageUrl: data.shareInfo.share_imgs,
           success: function success(res) {
             // 转发成功
@@ -777,7 +833,7 @@ exports.default = Page({
       } else {
         return {
           title: data.basicInfo.name + ' - ' + data.basicInfo.introduce,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id,
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&sid=1',
           imageUrl: data.basicInfo.pic,
           success: function success(res) {
             // 转发成功

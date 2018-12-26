@@ -5,9 +5,14 @@
   <import src="../../../static/wxParse/wxParse.wxml" />
   <ui-nav-bar class="{{navigationbar ? 'hidden':'scrollTop'}}" slot="nav-bar" custom-style="{{ {backgroundColor:'rgba(255,255,255,.0)'} }}" _pid="{{_pid}}">
     <view class="ui-row" style="height:46px;">
-      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+      <view wx:if="{{share == 0}}" bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
         <view class="ui-col-content align-center valign-middle">
           <span class="goodsicon ui-icon icon-arrow-left" type="arrow-left" size="16" color="#fff" style="color: #fff;font-size: 16px;"></span>
+        </view>
+      </view>
+      <view wx:if="{{share == 1}}" bindtap="getHomeTap" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span class="goodsicon ui-icon icon-jd-home" type="jd-home" size="16" color="#fff" style="color: #fff;font-size: 16px;"></span>
         </view>
       </view>
       <view class="ui-col ui-col-align-center align-center valign-middle" style="">
