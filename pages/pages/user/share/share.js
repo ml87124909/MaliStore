@@ -26,7 +26,6 @@ exports.default = Page({
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
         _server2.default.get(_urls2.default.links[0].userprofit, { token: token }).then(function (res) {
-            console.log(res);
             if (res.code == 0) {
                 that.setData({
                     profitInfo: res.data

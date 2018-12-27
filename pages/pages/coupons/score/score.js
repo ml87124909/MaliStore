@@ -18,7 +18,10 @@ exports.default = Page({
     data: {
         NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + 'px',
         score_sign_continuous: 0,
-        score: 0
+        score: 0,
+        signTrue: {
+            day: 0
+        }
     },
     onShow: function onShow() {
         //this.checkScoreSign();

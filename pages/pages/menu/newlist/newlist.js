@@ -27,7 +27,6 @@ exports.default = Page({
     getHistoryList: function getHistoryList() {
         var that = this;
         _server2.default.get(_urls2.default.links[0].newdagoods, {}).then(function (res) {
-            console.log(res);
             if (res.code == 0) {
                 that.setData({ historyList: res.data });
             } else {

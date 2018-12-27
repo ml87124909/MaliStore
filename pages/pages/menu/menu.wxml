@@ -27,7 +27,7 @@
     </view>
     <view class="menu-right ui-col" style="">
       <view class="ui-col-content">
-        <scroll-view scroll-y>
+        <scroll-view scroll-with-animation scroll-y>
           <template is="swiper" data="{{swiper:menu,swiperCurrent:swiperCurrent}}" />
           <view class="ui-divider">
             <ui-divider padding="8" _pid="{{_pid}}">
