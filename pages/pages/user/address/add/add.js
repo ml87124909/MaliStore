@@ -28,8 +28,8 @@ exports.default = Page({
         if (ctid) {
             wx.showLoading({ title: "\u52A0\u8F7D\u4E2D...", mask: true });
             _server2.default.get(_urls2.default.links[0].addresdefa, { token: token, id: ctid }).then(function (res) {
+                wx.hideLoading();
                 if (res.code == 0) {
-                    wx.hideLoading();
                     that.setData({
                         addressData: res.data,
                         region: [res.data.province, res.data.city, res.data.district]
@@ -43,19 +43,21 @@ exports.default = Page({
     },
     getPosition: function getPosition() {
         var that = this;
-        wx.showLoading({ title: "\u5B9A\u4F4D\u4E2D...", mask: true });
-        _server2.default.get(_urls2.default.links[0].tencentmap, { key: _urls2.default.mapkey }).then(function (res) {
-            if (res.status == 0) {
-                wx.hideLoading();
-                wx.showToast({ title: "\u5B9A\u4F4D\u6210\u529F", icon: 'none' });
-                that.setData({
-                    region: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district]
-                });
-            } else {
-                wx.hideLoading();
-                wx.showToast({ title: "\u5B9A\u4F4D\u5931\u8D25", icon: 'none' });
-            }
-        });
+        if (_urls2.default.mapkey) {
+            wx.showLoading({ title: "\u5B9A\u4F4D\u4E2D...", mask: true });
+            _server2.default.get(_urls2.default.links[0].tencentmap, { key: _urls2.default.mapkey }).then(function (res) {
+                if (res.status == 0) {
+                    wx.hideLoading();
+                    wx.showToast({ title: "\u5B9A\u4F4D\u6210\u529F", icon: 'none' });
+                    that.setData({
+                        region: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district]
+                    });
+                } else {
+                    wx.hideLoading();
+                    wx.showToast({ title: "\u5B9A\u4F4D\u5931\u8D25", icon: 'none' });
+                }
+            });
+        }
     },
     bindRegionChange: function bindRegionChange(e) {
         this.setData({
