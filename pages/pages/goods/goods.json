@@ -8,8 +8,7 @@
     "ui-fixed-view": "../../../packages/touchui-wx-components/ui-fixed-view/dist/index",
     "ui-badge": "../../../packages/touchui-wx-components/ui-badge/dist/index",
     "ui-popup": "../../../packages/touchui-wx-components/ui-popup/dist/index",
-    "ui-mask": "../../../packages/touchui-wx-components/ui-mask/dist/index",
-    "txv-video": "plugin://tencentvideo/video"
+    "ui-mask": "../../../packages/touchui-wx-components/ui-mask/dist/index"
   },
   "navigationBarTextStyle": "white"
 }

@@ -16,7 +16,25 @@
     </view>
   </template>
   <template name="goodswiper">
-    <view class="swiper-container">
+    <view wx:if="{{video}}" class="swiper-container">
+      <swiper circular interval="8000" duration="500" bindchange="swiperChange" class="swiper">
+        <swiper-item wx:if="{{video}}">
+          <video id="goodsVideo" src="{{video}}" show-fullscreen-btn="{{ false }}" direction="0" autoplay="{{ true }}" enable-progress-gesture="{{ false }}"></video>
+        </swiper-item>
+        <swiper-item wx:for="{{swiper}}" wx:key="unique">
+          <image src="{{item.pic}}" class="img" />
+        </swiper-item>
+      </swiper>
+      <view class="dots">
+        <view class="dots-current">
+          <block wx:for="{{swiper+1}}" wx:key="unique">
+            <text class="dot{{index == swiperCurrent? ' active':''}}">{{index + 1}}</text>
+          </block>
+          <text class="b">/{{number+1}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!video}}" class="swiper-container">
       <swiper circular autoplay interval="8000" duration="500" bindchange="swiperChange" class="swiper">
         <swiper-item wx:for="{{swiper}}" wx:key="unique">
           <image src="{{item.pic}}" class="img" />
@@ -30,7 +48,6 @@
           <text class="b">/{{number}}</text>
         </view>
       </view>
-      <view wx:if="{{video}}" class="video-button" data-show="{{ true }}" bindtap="getvideoplayerTap">播放视频</view>
     </view>
   </template>
 </page>

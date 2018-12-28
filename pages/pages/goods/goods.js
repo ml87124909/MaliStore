@@ -39,7 +39,6 @@ exports.default = Page({
     show2: false,
     codeMask: false,
     shareMask: false,
-    videoMask: false,
     shareTips: true,
     shopNum: 0,
     scrollTop: 0,
@@ -70,6 +69,10 @@ exports.default = Page({
   }), _defineProperty(_data, "codeboxStyle", {
     'background': 'rgba(51, 51, 51, 0.9)'
   }), _data),
+  onReady: function onReady() {
+    var that = this;
+    that.videoContext = wx.createVideoContext('goodsVideo');
+  },
   onLoad: function onLoad(e) {
     var that = this;
     var cartInfo = wx.getStorageSync('__shopCarInfo');
@@ -134,7 +137,6 @@ exports.default = Page({
       });
     }
     that.setData({ shopInfo: shopInfo });
-    //商品详情
   },
   //商品详情
   getgoodsdeft: function getgoodsdeft(e) {
@@ -333,13 +335,6 @@ exports.default = Page({
     var that = this;
     wx.previewImage({
       urls: [e.currentTarget.dataset.img]
-    });
-  },
-  //视频弹窗
-  getvideoplayerTap: function getvideoplayerTap(e) {
-    var show = e.currentTarget.dataset.show;
-    this.setData({
-      videoMask: show
     });
   },
   //关闭海报
@@ -704,9 +699,19 @@ exports.default = Page({
     });
   },
   swiperChange: function swiperChange(e) {
-    this.setData({
-      swiperCurrent: e.detail.current
-    });
+    var that = this;
+    var nums = e.detail.current;
+    var data = that.data.goodsDetail.basicInfo;
+    if (data.video) {
+      if (nums != 0) {
+        that.videoContext.pause();
+      } else {
+        that.videoContext.play();
+      }
+      that.setData({ swiperCurrent: nums });
+    } else {
+      that.setData({ swiperCurrent: nums });
+    }
   },
   navigateBack: function navigateBack() {
     wx.navigateBack();

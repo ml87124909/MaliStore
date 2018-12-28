@@ -308,17 +308,6 @@
       <image style="width:600rpx;height:1000rpx" mode="aspectFill" src="{{codeimg}}" data-img="{{codeimg}}" bindtap="previewqrTap" />
     </view>
   </ui-mask>
-  <!-- 商品视频弹窗 -->
-  <ui-mask show="{{videoMask}}" hide-on-tap="{{false}}" class="mask_wrap" custom-style="{{codeboxStyle}}" _pid="{{_pid}}">
-    <view wx:if="{{videoMask}}" class="photo" style="width:750rpx;left:0;right:0;">
-      <txv-video wx:if="{{goodsDetail.basicInfo.video}}" vid="{{goodsDetail.basicInfo.video}}" playerid="txv1" autoplay="{{false}}" width="{{'100%'}}" height="{{'800rpx'}}" _pid="{{_pid}}">
-        <cover-view class="txv-video-slot" data-show="{{ false }}" bindtap="getvideoplayerTap">
-          关闭视频
-        </cover-view>
-      </txv-video>
-
-    </view>
-  </ui-mask>
   <!-- canvas海报 -->
   <canvas canvas-id="shareCanvas" style="width:600px;height:1000px;opacity:0;position:fixed;left:-1000px;top:-1000px;"></canvas>
 </page>

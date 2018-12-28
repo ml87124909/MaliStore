@@ -1018,8 +1018,7 @@ page {
 }
 .goodsDetail-propertychild-box {
   min-height: 340rpx;
-  max-height: 640rpx;
-  overflow-y: scroll;
+  overflow: scroll;
   padding-bottom: 150rpx;
 }
 .fixed_bottom {
@@ -1027,4 +1026,8 @@ page {
   bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
+}
+video {
+  width: 750rpx;
+  height: 750rpx;
 }

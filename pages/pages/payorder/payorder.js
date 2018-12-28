@@ -346,7 +346,7 @@ exports.default = Page({
                     that.getMyCoupons();
                     return;
                 }
-                if (_urls2.default.stypes == 'A') {
+                if (_urls2.default.stypes == 'B') {
                     if (e && userid) {
                         wx.removeStorageSync('__appInviter');
                     }

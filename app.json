@@ -89,10 +89,9 @@
   "theme": {
     "theme-color": "#ffd305"
   },
-  "plugins": {
-    "tencentvideo": {
-      "version": "1.2.4",
-      "provider": "wxa75efa648b60994b"
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   }
 }
