@@ -82,5 +82,6 @@ var links = [{
 
 module.exports = {
 	links: links,
-	mapkey: _config2.default.mapkey
+	mapkey: _config2.default.mapkey,
+	stypes: _config2.default.stypes
 };

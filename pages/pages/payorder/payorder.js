@@ -346,8 +346,10 @@ exports.default = Page({
                     that.getMyCoupons();
                     return;
                 }
-                if (e && userid) {
-                    wx.removeStorageSync('__appInviter');
+                if (_urls2.default.stypes == 'A') {
+                    if (e && userid) {
+                        wx.removeStorageSync('__appInviter');
+                    }
                 }
                 wx.redirectTo({
                     url: "/pages/pages/payorder/paypal/paypal?id=" + res.data.order_number
