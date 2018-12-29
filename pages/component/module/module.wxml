@@ -284,126 +284,128 @@
   </template>
   <template name="userListMenu">
     <view class="user-line"></view>
-    <view class="ui-row-list" style="">
-      <view class="border-bottom ui-row" style="height:45px;">
-        <view class="text ui-col" style="padding-left: 20px;">
-          <view class="ui-col-content">我的服务</view>
-        </view>
-      </view>
-    </view>
-    <view class="ui-row" style="margin-bottom: 10px;margin-top: 20px;height:50px;">
-      <!--
-                <ui-col align="center" vertical-align="middle">
-                    <view class="cart-list cart-list-type">
-                        <image src="../../../images/user/6.png" />
-                        <text>拼团订单</text>
-                        <navigator url="/pages/pages/user/pingtuan/pingtuan" open-type="navigate" hover-class="none"></navigator>
-                    </view>
-                </ui-col>
-                <ui-col align="center" vertical-align="middle">
-                    <view class="cart-list cart-list-type">
-                        <image src="../../../images/user/7.png" />
-                        <text>砍价订单</text>
-                        <navigator url="/pages/pages/user/kanjia/kanjia" open-type="navigate" hover-class="none"></navigator>
-                    </view>
-                </ui-col>
-                -->
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/8.png" />
-            <text>会员中心</text>
-            <navigator url="/pages/pages/user/member/member" open-type="navigate" hover-class="none"></navigator>
+    <view class="user-bg">
+      <view class="ui-row-list" style="">
+        <view class="border-bottom ui-row" style="height:45px;">
+          <view class="text ui-col" style="padding-left: 20px;">
+            <view class="ui-col-content">我的服务</view>
           </view>
         </view>
       </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/9.png" />
-            <text>我的钱包</text>
-            <navigator url="/pages/pages/user/paypal/paypal" open-type="navigate" hover-class="none"></navigator>
+      <view class="ui-row" style="margin-bottom: 10px;margin-top: 20px;height:50px;">
+        <!--
+                    <ui-col align="center" vertical-align="middle">
+                        <view class="cart-list cart-list-type">
+                            <image src="../../../images/user/6.png" />
+                            <text>拼团订单</text>
+                            <navigator url="/pages/pages/user/pingtuan/pingtuan" open-type="navigate" hover-class="none"></navigator>
+                        </view>
+                    </ui-col>
+                    <ui-col align="center" vertical-align="middle">
+                        <view class="cart-list cart-list-type">
+                            <image src="../../../images/user/7.png" />
+                            <text>砍价订单</text>
+                            <navigator url="/pages/pages/user/kanjia/kanjia" open-type="navigate" hover-class="none"></navigator>
+                        </view>
+                    </ui-col>
+                    -->
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/8.png" />
+              <text>会员中心</text>
+              <navigator url="/pages/pages/user/member/member" open-type="navigate" hover-class="none"></navigator>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/9.png" />
+              <text>我的钱包</text>
+              <navigator url="/pages/pages/user/paypal/paypal" open-type="navigate" hover-class="none"></navigator>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/10.png" />
+              <text>积分签到</text>
+              <navigator url="/pages/pages/coupons/score/score" open-type="navigate" hover-class="none"></navigator>
+            </view>
           </view>
         </view>
       </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/10.png" />
-            <text>积分签到</text>
-            <navigator url="/pages/pages/coupons/score/score" open-type="navigate" hover-class="none"></navigator>
+      <view class="user-line-small"></view>
+      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/11.png" />
+              <text>优惠券</text>
+              <navigator url="/pages/pages/user/coupon/coupon" open-type="navigate" hover-class="none"></navigator>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/12.png" />
+              <text>收藏</text>
+              <navigator url="/pages/pages/user/favorite/favorite" open-type="navigate" hover-class="none"></navigator>
+            </view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/13.png" />
+              <text>足迹</text>
+              <navigator url="/pages/pages/user/history/history" open-type="navigate" hover-class="none"></navigator>
+            </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="user-line-small"></view>
-    <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/11.png" />
-            <text>优惠券</text>
-            <navigator url="/pages/pages/user/coupon/coupon" open-type="navigate" hover-class="none"></navigator>
+      <view class="user-line-small"></view>
+      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/14.png" />
+              <text>地址</text>
+              <navigator url="/pages/pages/user/address/address" open-type="navigate" hover-class="none"></navigator>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/12.png" />
-            <text>收藏</text>
-            <navigator url="/pages/pages/user/favorite/favorite" open-type="navigate" hover-class="none"></navigator>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/15.png" />
+              <text>客服</text>
+              <button open-type="contact" session-from="weapp"></button>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/13.png" />
-            <text>足迹</text>
-            <navigator url="/pages/pages/user/history/history" open-type="navigate" hover-class="none"></navigator>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/16.png" />
+              <text>反馈</text>
+              <navigator url="/pages/pages/user/feedback/feedback" open-type="navigate" hover-class="none"></navigator>
+            </view>
           </view>
         </view>
+        <!--
+                    <ui-col align="center" vertical-align="middle">
+                        <view class="cart-list cart-list-type">
+                            <image src="../../../images/user/17.png" />
+                            <text>帮助</text>
+                            <navigator url="/pages/pages/user/help/help" open-type="navigate" hover-class="none"></navigator>
+                        </view>
+                    </ui-col>
+                    -->
       </view>
-    </view>
-    <view class="user-line-small"></view>
-    <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/14.png" />
-            <text>地址</text>
-            <navigator url="/pages/pages/user/address/address" open-type="navigate" hover-class="none"></navigator>
-          </view>
-        </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/15.png" />
-            <text>客服</text>
-            <button open-type="contact" session-from="weapp"></button>
-          </view>
-        </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list cart-list-type">
-            <image src="../../../images/user/16.png" />
-            <text>反馈</text>
-            <navigator url="/pages/pages/user/feedback/feedback" open-type="navigate" hover-class="none"></navigator>
-          </view>
-        </view>
-      </view>
-      <!--
-                <ui-col align="center" vertical-align="middle">
-                    <view class="cart-list cart-list-type">
-                        <image src="../../../images/user/17.png" />
-                        <text>帮助</text>
-                        <navigator url="/pages/pages/user/help/help" open-type="navigate" hover-class="none"></navigator>
-                    </view>
-                </ui-col>
-                -->
     </view>
     <!-- 重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务 -->
     <view class="sample_power">

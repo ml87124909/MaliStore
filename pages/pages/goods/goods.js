@@ -142,6 +142,7 @@ exports.default = Page({
   getgoodsdeft: function getgoodsdeft(e) {
     var that = this;
     _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e }).then(function (res) {
+      console.log(res);
       wx.hideLoading();
       if (res.code == 0) {
         that.setData({

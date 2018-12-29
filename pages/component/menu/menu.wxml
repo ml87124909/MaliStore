@@ -10,63 +10,65 @@
     </view>
   </template>
   <template name="userNavMenu">
-    <view class="my-order-box">
-      <view class="border-bottom ui-row" style="height:45px;">
-        <view class="text ui-col" style="padding-left: 20px;">
-          <view class="ui-col-content">我的订单</view>
-        </view>
-        <view class="ui-col valign-middle" style="flex:0 0 30px;">
-          <view class="ui-col-content valign-middle">
-            <span type="arrow-right" color="#27323f" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 16px;"></span>
+    <view class="user-bg">
+      <view class="my-order-box">
+        <view class="border-bottom ui-row" style="height:45px;">
+          <view class="text ui-col" style="padding-left: 20px;">
+            <view class="ui-col-content">我的订单</view>
+          </view>
+          <view class="ui-col valign-middle" style="flex:0 0 30px;">
+            <view class="ui-col-content valign-middle">
+              <span type="arrow-right" color="#27323f" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 16px;"></span>
+            </view>
           </view>
         </view>
+        <navigator url="/pages/pages/user/order/order?id=0" open-type="navigate" hover-class="none"></navigator>
       </view>
-      <navigator url="/pages/pages/user/order/order?id=0" open-type="navigate" hover-class="none"></navigator>
-    </view>
-    <view class="ui-row" style="margin-bottom: 10px;margin-top: 20px;height:50px;">
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list" bindtap="goorderlist" data-index="1">
-            <view wx:if="{{orderStatus.nopaypal != 0}}" class="red-dot">{{orderStatus.nopaypal}}</view>
-            <image src="../../../images/user/1.png" />
-            <text>待付款</text>
+      <view class="ui-row" style="margin-top: 20px;height:50px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list" bindtap="goorderlist" data-index="1">
+              <view wx:if="{{orderStatus.nopaypal != 0}}" class="red-dot">{{orderStatus.nopaypal}}</view>
+              <image src="../../../images/user/1.png" />
+              <text>待付款</text>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list" bindtap="goorderlist" data-index="2">
-            <view wx:if="{{orderStatus.delivery != 0}}" class="red-dot">{{orderStatus.delivery}}</view>
-            <image src="../../../images/user/2.png" />
-            <text>待发货</text>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list" bindtap="goorderlist" data-index="2">
+              <view wx:if="{{orderStatus.delivery != 0}}" class="red-dot">{{orderStatus.delivery}}</view>
+              <image src="../../../images/user/2.png" />
+              <text>待发货</text>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list" bindtap="goorderlist" data-index="3">
-            <view wx:if="{{orderStatus.receiving != 0}}" class="red-dot">{{orderStatus.receiving}}</view>
-            <image src="../../../images/user/3.png" />
-            <text>待收货</text>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list" bindtap="goorderlist" data-index="3">
+              <view wx:if="{{orderStatus.receiving != 0}}" class="red-dot">{{orderStatus.receiving}}</view>
+              <image src="../../../images/user/3.png" />
+              <text>待收货</text>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list" bindtap="goorderlist" data-index="4">
-            <view wx:if="{{orderStatus.evaluate != 0}}" class="red-dot">{{orderStatus.evaluate}}</view>
-            <image src="../../../images/user/4.png" />
-            <text>待评价</text>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list" bindtap="goorderlist" data-index="4">
+              <view wx:if="{{orderStatus.evaluate != 0}}" class="red-dot">{{orderStatus.evaluate}}</view>
+              <image src="../../../images/user/4.png" />
+              <text>待评价</text>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-        <view class="ui-col-content align-center valign-middle">
-          <view class="cart-list">
-            <view wx:if="{{orderStatus.tuikuan + orderStatus.shouhou != 0}}" class="red-dot">{{orderStatus.tuikuan + orderStatus.shouhou}}</view>
-            <image src="../../../images/user/5.png" />
-            <text>退款/售后</text>
-            <navigator url="/pages/pages/user/order/service/service" open-type="navigate" hover-class="none"></navigator>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list">
+              <view wx:if="{{orderStatus.tuikuan + orderStatus.shouhou != 0}}" class="red-dot">{{orderStatus.tuikuan + orderStatus.shouhou}}</view>
+              <image src="../../../images/user/5.png" />
+              <text>退款/售后</text>
+              <navigator url="/pages/pages/user/order/service/service" open-type="navigate" hover-class="none"></navigator>
+            </view>
           </view>
         </view>
       </view>

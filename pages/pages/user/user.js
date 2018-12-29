@@ -15,7 +15,16 @@ var _server2 = _interopRequireDefault(_server);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = Page({
-    data: {},
+    data: {
+        orderStatus: {
+            nopaypal: 0,
+            delivery: 0,
+            receiving: 0,
+            evaluate: 0,
+            tuikuan: 0,
+            shouhou: 0
+        }
+    },
     onShow: function onShow() {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
