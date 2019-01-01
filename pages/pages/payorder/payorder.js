@@ -315,6 +315,7 @@ exports.default = Page({
         } else {
             postData.formId = e.detail.formId;
         }
+        console.log(postData);
         _server2.default.post(_urls2.default.links[0].ordecreate, postData).then(function (res) {
             if (res.code == 701) {
                 wx.showConfirm({

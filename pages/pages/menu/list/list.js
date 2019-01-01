@@ -14,6 +14,7 @@ var _server2 = _interopRequireDefault(_server);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var app = getApp();
 exports.default = Page({
     data: {
         NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT,
@@ -42,7 +43,21 @@ exports.default = Page({
             active: '',
             arrow: 'slide_down',
             bindtap: 'openPopup2'
-        }]
+        }],
+        noneLogin: false
+    },
+    onShow: function onShow() {
+        var that = this;
+        if (app.globalData.userinfo == 1e4) {
+            that.setData({ noneLogin: true });
+        } else {
+            that.setData({ noneLogin: false });
+            setTimeout(function () {
+                if (app.globalData.userinfo == 1e4) {
+                    that.setData({ noneLogin: true });
+                }
+            }, 1000);
+        }
     },
     onLoad: function onLoad(e) {
         var that = this;
@@ -71,6 +86,16 @@ exports.default = Page({
                 that.setData({ goods: '' });
             }
         });
+    },
+    checklogin: function checklogin() {
+        if (app.globalData.userinfo == 1e4) {
+            wx.navigateTo({
+                url: "/pages/pages/login/login"
+            });
+            return;
+        } else {
+            that.setData({ noneLogin: false });
+        }
     },
     handleChange: function handleChange(e) {
         var that = this;

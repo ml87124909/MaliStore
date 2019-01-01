@@ -1027,7 +1027,7 @@ page {
   left: 0 !important;
   width: 100% !important;
 }
-video {
+.swiper video {
   width: 750rpx;
   height: 750rpx;
 }

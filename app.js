@@ -62,7 +62,6 @@ exports.default = App({
             });
             return;
           }
-          that.globalData.userid = res.data.uid;
           wx.setStorage({ key: "__appUserInfo", data: { uid: res.data.uid, token: res.data.token } });
         });
       }

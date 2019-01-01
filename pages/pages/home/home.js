@@ -20,31 +20,25 @@ exports.default = Page({
     NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + "px",
     swiperCurrent: 0,
     pics: {},
-    showMask: false
+    showMask: false,
+    noneLogin: false
   },
   onShow: function onShow() {
     var that = this;
     var token = wx.getStorageSync('__appUserInfo').token;
     if (app.globalData.userinfo == 1e4) {
-      that.setData({ showMask: true });
-      wx.hideTabBar();
+      that.setData({ noneLogin: true });
     } else {
+      that.setData({ noneLogin: false });
       setTimeout(function () {
         if (app.globalData.userinfo == 1e4) {
-          that.setData({ showMask: true });
-          wx.hideTabBar();
+          that.setData({ noneLogin: true });
         }
       }, 1000);
     }
-    _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
-      if (res.code == 0) {
-        if (res.data.nopaypal > 0) {
-          wx.showTabBarRedDot({ index: 3 });
-        } else {
-          wx.removeTabBarBadge({ index: 3 });
-        }
-      }
-    });
+    if (token) {
+      that.getorderstats();
+    }
     wx.getStorage({
       key: '__shopCarInfo',
       success: function success(res) {
@@ -62,13 +56,8 @@ exports.default = Page({
   },
   onLoad: function onLoad() {
     var that = this;
-    var token = wx.getStorageSync('__appUserInfo').token;
     var shops = wx.getStorageSync('__appShopInfo');
-    if (!token) {
-      setTimeout(function () {
-        var token = wx.getStorageSync('__appUserInfo').token;
-      }, 500);
-    }
+    var token = wx.getStorageSync('__appUserInfo').token;
     if (!shops) {
       setTimeout(function () {
         var shops = wx.getStorageSync('__appShopInfo');
@@ -136,33 +125,25 @@ exports.default = Page({
       }
     });
   },
-  userlogin: function userlogin(e) {
-    var that = this;
-    var iv = e.detail.iv;
-    var rawData = e.detail.rawData;
-    var signature = e.detail.signature;
-    var encryptedData = e.detail.encryptedData;
-    wx.login({
-      success: function success(wxs) {
-        _server2.default.get(_urls2.default.links[0].wxregister, { iv: iv, code: wxs.code, rawData: rawData, signature: signature, encryptedData: encryptedData }).then(function (res) {
-          console.log(res);
-          if (res.code != 0) {
-            wx.showConfirm({
-              content: "\u9700\u8981\u60A8\u7684\u6388\u6743\uFF0C\u624D\u80FD\u6B63\u5E38\u4F7F\u7528\u54E6\uFF5E",
-              showCancel: false,
-              confirmColor: '#ffd305',
-              confirmText: "\u91CD\u65B0\u6388\u6743",
-              success: function success(res) {}
-            });
-            return;
-          } else {
-            that.setData({ showMask: false });
-            app.login();
-            wx.showToast({ title: "\u5FAE\u4FE1\u6388\u6743\u6210\u529F", icon: 'none' });
-            app.globalData.userinfo = 0;
-            wx.showTabBar();
-          }
-        });
+  checklogin: function checklogin() {
+    if (app.globalData.userinfo == 1e4) {
+      wx.navigateTo({
+        url: "/pages/pages/login/login"
+      });
+      return;
+    } else {
+      that.setData({ noneLogin: false });
+    }
+  },
+  getorderstats: function getorderstats() {
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+      if (res.code == 0) {
+        if (res.data.nopaypal > 0) {
+          wx.showTabBarRedDot({ index: 3 });
+        } else {
+          wx.removeTabBarBadge({ index: 3 });
+        }
       }
     });
   },

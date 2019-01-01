@@ -70,15 +70,17 @@ exports.default = Page({
         var that = this;
         that.searchData();
         var token = wx.getStorageSync('__appUserInfo').token;
-        _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
-            if (res.code == 0) {
-                if (res.data.nopaypal > 0) {
-                    wx.showTabBarRedDot({ index: 3 });
-                } else {
-                    wx.removeTabBarBadge({ index: 3 });
+        if (token) {
+            _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+                if (res.code == 0) {
+                    if (res.data.nopaypal > 0) {
+                        wx.showTabBarRedDot({ index: 3 });
+                    } else {
+                        wx.removeTabBarBadge({ index: 3 });
+                    }
                 }
-            }
-        });
+            });
+        }
         wx.getStorage({
             key: '__shopCarInfo',
             success: function success(res) {

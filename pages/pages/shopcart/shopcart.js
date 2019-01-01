@@ -27,7 +27,8 @@ exports.default = Page({
       noSelect: false,
       list: []
     },
-    delBtnWidth: 120
+    delBtnWidth: 120,
+    noneLogin: false
   },
   onLoad: function onLoad() {
     var that = this;
@@ -72,17 +73,29 @@ exports.default = Page({
     if (shopCarInfoMem && shopCarInfoMem.shopList) {
       shopList = shopCarInfoMem.shopList;
     }
+    if (app.globalData.userinfo == 1e4) {
+      that.setData({ noneLogin: true });
+    } else {
+      that.setData({ noneLogin: false });
+      setTimeout(function () {
+        if (app.globalData.userinfo == 1e4) {
+          that.setData({ noneLogin: true });
+        }
+      }, 1000);
+    }
     that.data.goodsList.list = shopList;
     that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), shopList);
-    _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
-      if (res.code == 0) {
-        if (res.data.nopaypal > 0) {
-          wx.showTabBarRedDot({ index: 3 });
-        } else {
-          wx.removeTabBarBadge({ index: 3 });
+    if (token) {
+      _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+        if (res.code == 0) {
+          if (res.data.nopaypal > 0) {
+            wx.showTabBarRedDot({ index: 3 });
+          } else {
+            wx.removeTabBarBadge({ index: 3 });
+          }
         }
-      }
-    });
+      });
+    }
     wx.getStorage({
       key: '__shopCarInfo',
       success: function success(res) {
@@ -97,6 +110,16 @@ exports.default = Page({
         }
       }
     });
+  },
+  checklogin: function checklogin() {
+    if (app.globalData.userinfo == 1e4) {
+      wx.navigateTo({
+        url: "/pages/pages/login/login"
+      });
+      return;
+    } else {
+      that.setData({ noneLogin: false });
+    }
   },
   getEleWidth: function getEleWidth(w) {
     var real = 0;

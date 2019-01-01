@@ -14,8 +14,12 @@ var _server2 = _interopRequireDefault(_server);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var app = getApp();
 exports.default = Page({
     data: {
+        amount: {
+            score: 0
+        },
         orderStatus: {
             nopaypal: 0,
             delivery: 0,
@@ -23,30 +27,25 @@ exports.default = Page({
             evaluate: 0,
             tuikuan: 0,
             shouhou: 0
-        }
+        },
+        noneLogin: false
     },
     onShow: function onShow() {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
-        _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
-            if (res.code == 0) {
-                that.setData({
-                    amount: res.data
-                });
-            }
-        });
-        _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
-            if (res.code == 0) {
-                that.setData({
-                    orderStatus: res.data
-                });
-                if (res.data.nopaypal > 0) {
-                    wx.showTabBarRedDot({ index: 3 });
-                } else {
-                    wx.removeTabBarBadge({ index: 3 });
+        if (app.globalData.userinfo == 1e4) {
+            that.setData({ noneLogin: true });
+        } else {
+            that.setData({ noneLogin: false });
+            setTimeout(function () {
+                if (app.globalData.userinfo == 1e4) {
+                    that.setData({ noneLogin: true });
                 }
-            }
-        });
+            }, 1000);
+        }
+        if (token) {
+            that.getorderstats();
+        }
         wx.getStorage({
             key: '__shopCarInfo',
             success: function success(res) {
@@ -61,6 +60,37 @@ exports.default = Page({
                 }
             }
         });
+        if (token) {
+            _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
+                if (res.code == 0) {
+                    that.setData({
+                        amount: res.data
+                    });
+                }
+            });
+        }
+    },
+    getorderstats: function getorderstats() {
+        var token = wx.getStorageSync('__appUserInfo').token;
+        _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
+            if (res.code == 0) {
+                if (res.data.nopaypal > 0) {
+                    wx.showTabBarRedDot({ index: 3 });
+                } else {
+                    wx.removeTabBarBadge({ index: 3 });
+                }
+            }
+        });
+    },
+    checklogin: function checklogin() {
+        if (app.globalData.userinfo == 1e4) {
+            wx.navigateTo({
+                url: "/pages/pages/login/login"
+            });
+            return;
+        } else {
+            that.setData({ noneLogin: false });
+        }
     },
     shareProditTap: function shareProditTap() {
         wx.navigateTo({

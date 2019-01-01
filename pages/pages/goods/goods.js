@@ -38,8 +38,10 @@ exports.default = Page({
     show1: true,
     show2: false,
     codeMask: false,
+    showMask: false,
     shareMask: false,
     shareTips: true,
+    noneLogin: false,
     shopNum: 0,
     scrollTop: 0,
     favicon: 0,
@@ -73,29 +75,58 @@ exports.default = Page({
     var that = this;
     that.videoContext = wx.createVideoContext('goodsVideo');
   },
+  onShow: function onShow() {
+    var that = this;
+    if (app.globalData.userinfo == 1e4) {
+      that.setData({ noneLogin: true });
+    } else {
+      that.setData({ noneLogin: false });
+      setTimeout(function () {
+        if (app.globalData.userinfo == 1e4) {
+          that.setData({ noneLogin: true });
+        }
+      }, 1000);
+      that.onLoad(that.data.StoData);
+    }
+  },
   onLoad: function onLoad(e) {
     var that = this;
+    var token = wx.getStorageSync('__appUserInfo').token;
     var cartInfo = wx.getStorageSync('__shopCarInfo');
     var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
+    that.setData({ StoData: e });
+    //店铺信息
+    if (shopInfo) {
+      that.setData({ shopInfo: shopInfo });
+    }
+    //购物车信息
+    if (cartInfo) {
+      that.setData({ shopCarInfo: cartInfo, shopNum: cartInfo.shopNum });
+    }
     wx.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
     if (e.id) {
       that.setData({ id: e.id });
       if (e.sid) {
         that.setData({ share: e.sid });
-      } else if (e.uid) {
+      }
+      if (e.uid && e.uid != 'undefined') {
         wx.setStorage({ key: "__appInviter", data: { id: e.uid } });
-        that.getshareuser();
+        if (token) {
+          that.getshareuser();
+        }
       }
       //商品详情
       that.getgoodsdeft(e.id);
-      //收藏状态
-      that.getfav(e.id);
-      //商品评论
-      that.reputation(e.id);
-      //商品优惠券
-      that.getGoodsCoupons(e.id);
-      //增加浏览记录
-      that.history(e.id);
+      if (token) {
+        //收藏状态
+        that.getfav(e.id);
+        //商品评论
+        that.reputation(e.id);
+        //商品优惠券
+        that.getGoodsCoupons(e.id);
+        //增加浏览记录
+        that.history(e.id);
+      }
     } else {
       var scene = decodeURIComponent(e.scene);
       if (scene.length > 0 && scene != undefined) {
@@ -113,34 +144,43 @@ exports.default = Page({
           var uid = dict.u;
           var sid = dict.s;
           that.setData({ id: id, share: sid });
-          if (uid) {
+          if (uid && uid != 'undefined') {
             wx.setStorage({ key: "__appInviter", data: { id: uid } });
-            that.getshareuser();
+            if (token) {
+              that.getshareuser();
+            }
           }
           //商品详情
           that.getgoodsdeft(id);
-          //收藏状态
-          that.getfav(id);
-          //商品评论
-          that.reputation(id);
-          //商品优惠券
-          that.getGoodsCoupons(id);
-          //增加浏览记录
-          that.history(id);
+          if (token) {
+            //收藏状态
+            that.getfav(e.id);
+            //商品评论
+            that.reputation(e.id);
+            //商品优惠券
+            that.getGoodsCoupons(e.id);
+            //增加浏览记录
+            that.history(e.id);
+          }
         }
       }
     }
-    if (cartInfo) {
-      that.setData({
-        shopCarInfo: cartInfo,
-        shopNum: cartInfo.shopNum
+  },
+  //检查登录状态
+  checklogin: function checklogin() {
+    if (app.globalData.userinfo == 1e4) {
+      wx.navigateTo({
+        url: "/pages/pages/login/login"
       });
+      return;
+    } else {
+      that.setData({ noneLogin: false });
     }
-    that.setData({ shopInfo: shopInfo });
   },
   //商品详情
   getgoodsdeft: function getgoodsdeft(e) {
     var that = this;
+    var token = wx.getStorageSync('__appUserInfo').token;
     _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e }).then(function (res) {
       console.log(res);
       wx.hideLoading();
@@ -152,10 +192,15 @@ exports.default = Page({
           selectSizePrice: res.data.basicInfo.mini_price
         });
         _wxParse2.default.wxParse('content', 'html', res.data.basicInfo.content, that, 5);
-        if (res.data.vipInfo) {
-          that.getuserInfo(res.data.vipInfo);
-        } else {
-          that.getuserInfo();
+        if (res.data.basicInfo.video) {
+          that.getVideoUrl(res.data.basicInfo.video);
+        }
+        if (token) {
+          if (res.data.vipInfo) {
+            that.getuserInfo(res.data.vipInfo);
+          } else {
+            that.getuserInfo();
+          }
         }
       }
     });
@@ -167,9 +212,31 @@ exports.default = Page({
     var uid = wx.getStorageSync('__appInviter').id;
     var token = wx.getStorageSync('__appUserInfo').token;
     _server2.default.get(_urls2.default.links[0].sharegoods, { token: token, user: uid, goods: gid }).then(function (res) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'success',
+        duration: 2000
+      });
       if (res.code == 0) {
-        console.log('返现成功');
+        //console.log('返现成功')
       }
+    });
+  },
+  //解析视频地址
+  getVideoUrl: function getVideoUrl(e) {
+    var that = this;
+    var Vurl = 'https://vv.video.qq.com/getinfo?vids=' + e + '&platform=101001&charge=0&otype=json';
+    _server2.default.get(Vurl, {}).then(function (res) {
+      var dataJson = res.replace(/QZOutputJson=/, '') + "qwe";
+      var dataJson1 = dataJson.replace(/;qwe/, '');
+      var data = JSON.parse(dataJson1);
+      var url = data.vl.vi[0].ul.ui[0].url;
+      var fu = data.vl.vi[0].fn;
+      var fvkey = data.vl.vi[0].fvkey;
+      var videoUrl = url + fu + '?vkey=' + fvkey;
+      that.setData({
+        videoUrl: videoUrl
+      });
     });
   },
   //用户信息
@@ -349,6 +416,7 @@ exports.default = Page({
   getshareimgTap: function getshareimgTap() {
     var that = this;
     var cimg = that.data.codeimg;
+    var user = wx.getStorageSync('__appUserInfo').uid;
     if (cimg) {
       //如果已经生成过，直接显示
       that.setData({
@@ -383,7 +451,7 @@ exports.default = Page({
               success: function success(avatar) {
                 //用户头像
                 var userpic = avatar.tempFilePath;
-                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + app.globalData.userid + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
+                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + user + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
                   if (res.code == 0) {
                     wx.showLoading({ title: '下载小程序码' });
                     wx.downloadFile({
@@ -796,12 +864,13 @@ exports.default = Page({
   onShareAppMessage: function onShareAppMessage() {
     var that = this;
     var data = that.data.goodsDetail;
+    var user = wx.getStorageSync('__appUserInfo').uid;
     if (data.shareInfo.share_type != 0) {
       //分享返现
       if (data.shareInfo.share_title) {
         return {
           title: data.shareInfo.share_title,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid + '&sid=1',
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + user + '&sid=1',
           imageUrl: data.shareInfo.share_imgs,
           success: function success(res) {
             // 转发成功
@@ -813,7 +882,7 @@ exports.default = Page({
       } else {
         return {
           title: data.basicInfo.name + ' - ' + data.basicInfo.introduce,
-          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + app.globalData.userid + '&sid=1',
+          path: '/pages/pages/goods/goods?id=' + data.basicInfo.id + '&uid=' + user + '&sid=1',
           imageUrl: data.basicInfo.pic,
           success: function success(res) {
             // 转发成功

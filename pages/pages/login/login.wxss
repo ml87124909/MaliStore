@@ -1,0 +1,60 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.login {
+  height: 600rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.login .logo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 100%;
+}
+.login .title {
+  color: #27323f;
+  font-size: 38rpx;
+  padding-top: 20rpx;
+}
+.login .text {
+  color: #27323f;
+  padding-top: 22rpx;
+  font-size: 28rpx;
+  padding-bottom: 60rpx;
+}
+.login button {
+  background-color: #ffd305;
+  width: 382rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #27323f;
+  border-radius: 2rpx;
+}
+.login button::after {
+  border: 0;
+}

@@ -242,7 +242,7 @@ page {
   left: 0;
   border-bottom: 1px solid #f5f5f5;
   background-color: #fff;
-  z-index: 999999;
+  z-index: 98;
   box-shadow: 0 0 12px 0 #eee;
   align-items: center;
 }

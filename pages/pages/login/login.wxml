@@ -1,0 +1,30 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>{{shopInfo.gname}}</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="login">
+    <image class="logo" src="{{shopInfo.gpic}}" />
+    <view class="title">{{shopInfo.gname}}</view>
+    <view class="text">亲，首次进入需要授权才能使用哦</view>
+    <button open-type="getUserInfo" bindgetuserinfo="userlogin">授权微信账号登录</button>
+  </view>
+</page>

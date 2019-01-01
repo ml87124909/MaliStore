@@ -77,12 +77,12 @@
       <view class="ui-col" style="padding-left: 5px;">
         <view class="ui-col-content">
           <view class="column-content column-price-content">
-            <block wx:if="{{goodDetail.shareInfo.share_time == 1}}">
+            <block wx:if="{{goodsDetail.shareInfo.share_time == 1}}">
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享可获得{{goodsDetail.shareInfo.share_number}}元现金</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享可获得{{goodsDetail.shareInfo.share_number}}积分</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享可获得{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
             </block>
-            <block wx:else="">
+            <block wx:elif="{{goodsDetail.shareInfo.share_time == 2}}">
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}元现金</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}积分</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享好友下单可返{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
@@ -91,7 +91,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{goodsDetail.basicInfo.vip_open != 0 }}" class="ui-row" style="margin-bottom: 10px;margin-top: 5px;height:38px;">
+    <view wx:if="{{goodsDetail.basicInfo.vip_open != 0 && !noneLogin}}" class="ui-row" style="margin-bottom: 10px;margin-top: 5px;height:38px;">
       <view class="ui-col" style="padding-left: 10px;padding-right: 10px;">
         <view class="ui-col-content">
           <block wx:if="{{shopInfo.vip_type == '购物升级'}}">

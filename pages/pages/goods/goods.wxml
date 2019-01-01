@@ -1,4 +1,5 @@
-<page wx:if="{{goodsDetail}}">
+<page>
+  <view wx:if="{{noneLogin}}" class="loginActive" bindtap="checklogin"></view>
   <import src="../../component/menu/menu.wxml" />
   <import src="../../component/swiper/swiper.wxml" />
   <import src="../../component/module/module.wxml" />
@@ -44,8 +45,8 @@
       </view>
     </view>
   </ui-nav-bar>
-  <template is="goodswiper" data="{{swiper:goodsDetail.pics,swiperCurrent:swiperCurrent,number:picsnumber,video:goodsDetail.basicInfo.video}}" />
-  <template is="basicInfo" data="{{goodsDetail:goodsDetail,selectSizePrice:selectSizePrice,userInfo:userInfo,userVip:userVip,shopInfo:shopInfo}}" />
+  <template is="goodswiper" data="{{swiper:goodsDetail.pics,swiperCurrent:swiperCurrent,number:picsnumber,video:videoUrl}}" />
+  <template is="basicInfo" data="{{goodsDetail:goodsDetail,selectSizePrice:selectSizePrice,userInfo:userInfo,userVip:userVip,shopInfo:shopInfo,noneLogin:noneLogin}}" />
   <template wx:if="{{goodsDetail.specInfo}}" is="goodsguige" data="{{propertyChildNames:propertyChildNames}}" />
   <template wx:if="{{CouponsList}}" is="goodscoupons" data="{{GoodsCoupons:CouponsList}}" />
   <view class="column-goods-line-box"></view>

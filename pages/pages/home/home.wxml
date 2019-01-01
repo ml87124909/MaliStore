@@ -1,4 +1,5 @@
 <page>
+  <view wx:if="{{noneLogin}}" class="loginActive" bindtap="checklogin"></view>
   <import src="../../component/menu/menu.wxml" />
   <import src="../../component/swiper/swiper.wxml" />
   <import src="../../component/module/module.wxml" />
@@ -22,25 +23,4 @@
   <template is="kanjia" data="{{topkan:topkan,topkans:topkans,pics:pics}}" />
   <template is="topic" data="{{toptopic:toptopic,toptopics:toptopics}}" />
   <template is="topgoods" data="{{topgoods:topgoods,goods:goods}}" />
-
-  <ui-mask show="{{showMask}}" hide-on-tap="{{false}}" effect="scale-out" animation="" _pid="{{_pid}}">
-    <view class="login-content-box">
-      <view class="login-content">
-        <image src="{{shopInfo.shopInfo.gpic}}" />
-        <view class="login-name">{{shopInfo.shopInfo.gname}}</view>
-        <view class="login-text-box">
-          <view class="login-text-name">需要您的授权才能正常使用哦！</view>
-          <view class="login-text-info">
-            <text>·</text>请允许我们获得您的公开资讯</view>
-          <view class="login-text-info">
-            <text>·</text>我们不会公布您的这些信息</view>
-          <view class="login-text-info">
-            <text>·</text>只是为了给您提供更好的服务</view>
-        </view>
-        <button open-type="getUserInfo" bindgetuserinfo="userlogin">微信授权</button>
-      </view>
-    </view>
-  </ui-mask>
-
-
 </page>
