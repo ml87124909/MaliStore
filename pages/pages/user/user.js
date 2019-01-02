@@ -71,9 +71,11 @@ exports.default = Page({
         }
     },
     getorderstats: function getorderstats() {
+        var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
         _server2.default.get(_urls2.default.links[0].orderstats, { token: token }).then(function (res) {
             if (res.code == 0) {
+                that.setData({ orderStatus: res.data });
                 if (res.data.nopaypal > 0) {
                     wx.showTabBarRedDot({ index: 3 });
                 } else {

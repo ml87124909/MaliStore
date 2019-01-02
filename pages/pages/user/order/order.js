@@ -25,6 +25,7 @@ exports.default = Page({
         WIN_HEIGHT: wx.DEFAULT_CONTENT_HEIGHT - wx.DEFAULT_HEADER_HEIGHT + 20,
         current: 0,
         fahuo: 0,
+        share: 0,
         showMask: false,
         customStyle: {
             'background': 'rgba(51, 51, 51, 0.9)'
@@ -32,7 +33,10 @@ exports.default = Page({
     },
     onLoad: function onLoad(e) {
         var that = this;
-        that.handleChangeBtn(e);
+        that.handleChangeBtn(e.id);
+        if (e.share) {
+            that.setData({ share: e.share });
+        }
     },
     getOrderList: function getOrderList(e) {
         var that = this;
@@ -70,7 +74,7 @@ exports.default = Page({
         });
     },
     handleChangeBtn: function handleChangeBtn(e) {
-        var btnIndex = e.id;
+        var btnIndex = e;
         this.data.current = btnIndex;
         this.setData({
             current: this.data.current
@@ -199,6 +203,12 @@ exports.default = Page({
         var id = e.currentTarget.dataset.id;
         wx.redirectTo({
             url: "/pages/pages/payorder/paypal/paypal?id=" + id
+        });
+    },
+    getHomeTap: function getHomeTap() {
+        console.log('sadasdas');
+        wx.switchTab({
+            url: "/pages/pages/home/home"
         });
     },
     navigateBack: function navigateBack() {

@@ -35,7 +35,7 @@ function wxpay(app, money, orderId, page, nextAction) {
           // 2 跳转会员页
           // 3 跳转余额记录页（充值记录）
           if (page == 0) {
-            wx.reLaunch({
+            wx.redirectTo({
               url: '/pages/pages/user/order/order?id=0&share=1'
             });
           }

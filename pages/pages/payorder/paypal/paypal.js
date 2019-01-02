@@ -41,25 +41,54 @@ exports.default = Page({
         customStyle: {
             'background': 'rgba(51, 51, 51, 0.9)'
         },
-        shareText: "\u5E2E\u6211\u4ED8\u6B3E\u624D\u662F\u771F\u53CB\u8C0A"
+        shareText: "\u5E2E\u6211\u4ED8\u6B3E\u624D\u662F\u771F\u53CB\u8C0A",
+        noneLogin: false
+    },
+    onShow: function onShow() {
+        var that = this;
+        if (app.globalData.userinfo == 1e4) {
+            that.setData({ noneLogin: true });
+            that.checklogin();
+        } else {
+            that.setData({ noneLogin: false });
+            setTimeout(function () {
+                if (app.globalData.userinfo == 1e4) {
+                    that.setData({ noneLogin: true });
+                    that.checklogin();
+                }
+            }, 1000);
+            that.onLoad(that.data.StoData);
+        }
     },
     onLoad: function onLoad(e) {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
+        that.setData({ StoData: e });
         if (e.share) {
             that.setData({
                 share: e.share
             });
         }
-        _server2.default.get(_urls2.default.links[0].ordepaypal, { token: token, number: e.id }).then(function (res) {
-            console.log(res);
-            if (res.code == 0) {
-                that.setData({
-                    orderNumber: e.id,
-                    oederPaypal: res.data
-                });
-            }
-        });
+        if (token) {
+            _server2.default.get(_urls2.default.links[0].ordepaypal, { token: token, number: e.id }).then(function (res) {
+                if (res.code == 0) {
+                    that.setData({
+                        orderNumber: e.id,
+                        oederPaypal: res.data
+                    });
+                }
+            });
+        }
+    },
+    checklogin: function checklogin() {
+        if (app.globalData.userinfo == 1e4) {
+            wx.navigateTo({
+                url: "/pages/pages/login/login"
+            });
+            return;
+        } else {
+            that.setData({ noneLogin: false });
+        }
     },
     bindtimeup: function bindtimeup() {
         var that = this;

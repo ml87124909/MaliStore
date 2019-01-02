@@ -268,7 +268,7 @@
           </view>
         </view>
       </view>
-      <view wx:if="{{orderDetails.vip_sales}}" class="order-info-list ui-row" style="height:28px;">
+      <view wx:if="{{orderDetails.vip_sales && orderDetails.vip_sales != 1}}" class="order-info-list ui-row" style="height:28px;">
         <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
           <view class="ui-col-content align-right valign-middle">
             <view class="name">会员折扣：</view>
