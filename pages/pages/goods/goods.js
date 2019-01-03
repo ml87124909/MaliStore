@@ -416,7 +416,7 @@ exports.default = Page({
   getshareimgTap: function getshareimgTap() {
     var that = this;
     var cimg = that.data.codeimg;
-    var user = wx.getStorageSync('__appUserInfo').uid;
+    var userid = wx.getStorageSync('__appUserInfo').uid;
     if (cimg) {
       //如果已经生成过，直接显示
       that.setData({
@@ -451,7 +451,7 @@ exports.default = Page({
               success: function success(avatar) {
                 //用户头像
                 var userpic = avatar.tempFilePath;
-                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + user + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
+                _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + userid + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
                   if (res.code == 0) {
                     wx.showLoading({ title: '下载小程序码' });
                     wx.downloadFile({
