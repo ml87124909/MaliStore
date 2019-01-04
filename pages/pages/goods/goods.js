@@ -182,7 +182,6 @@ exports.default = Page({
     var that = this;
     var token = wx.getStorageSync('__appUserInfo').token;
     _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e }).then(function (res) {
-      console.log(res);
       wx.hideLoading();
       if (res.code == 0) {
         that.setData({
@@ -246,9 +245,14 @@ exports.default = Page({
     if (e) {
       _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
         if (res.code == 0) {
-          for (var i = 0; i < e.length; i++) {
-            if (e[i].vip_id == res.data.vip_level) {
-              that.setData({ userVip: e[i] });
+          if (res.data.vip_level == 0) {
+            var price = that.data.goodsDetail.basicInfo.mini_price * res.data.vip_sale / 100;
+            that.setData({ userVip: price.toFixed(2) });
+          } else {
+            for (var i = 0; i < e.length; i++) {
+              if (e[i].vip_id == res.data.vip_level) {
+                that.setData({ userVip: e[i].vip_price });
+              }
             }
           }
           that.setData({ userInfo: res.data });
