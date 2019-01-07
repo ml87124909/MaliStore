@@ -38,7 +38,7 @@
       </view>
     </ui-sticky>
     <view class="histor_goods_box" wx:for="{{item.goods}}" wx:key="id">
-      <image src="{{item.pic}}" bindtap="toDetailsTap" data-id="{{item.id}}" />
+      <image lazy-load="true" src="{{item.pic}}" bindtap="toDetailsTap" data-id="{{item.id}}" />
       <view class="histor_goods_info">
         <view class="goods_name" bindtap="toDetailsTap" data-id="{{item.id}}">{{item.name}}</view>
         <view class="goods_introduce" bindtap="toDetailsTap" data-id="{{item.id}}">{{item.introduce}}</view>

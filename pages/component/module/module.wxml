@@ -96,27 +96,27 @@
         <view class="ui-col-content">
           <block wx:if="{{shopInfo.vip_type == '购物升级'}}">
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
-              <image src="../../../images/vip.png" />
+              <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
               <view bindtap="getmamberTap" class="column-goods-vip-pay">会员中心
                 <i class="vip-right"></i>
               </view>
             </view>
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
-              <image src="../../../images/vip.png" />
+              <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">您是{{userInfo.vip_level_name}}，折后价格为 ¥{{userVip}}</view>
             </view>
           </block>
           <block wx:elif="{{shopInfo.vip_type == '付费升级'}}">
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
-              <image src="../../../images/vip.png" />
+              <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">超级会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
               <view bindtap="getmamberTap" class="column-goods-vip-pay">立即开通
                 <i class="vip-right"></i>
               </view>
             </view>
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
-              <image src="../../../images/vip.png" />
+              <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">您是超级会员，折后价格为 ¥{{userVip}}</view>
             </view>
           </block>
@@ -128,13 +128,13 @@
     <view wx:if="{{toptuan}}" class="pingtuna-container">
       <view class="pingtuna-title" bindtap="tapSales" data-id="{{toptuaninfo.remark}}">
         <text>{{toptuaninfo.value}}</text>
-        <image src="../../../images/home_more.png" />
+        <image src="../../../images/home_more.png" lazy-load="true" />
       </view>
       <view class="pingtuna-list" wx:for="{{toptuan}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.businessId}}">
         <view class="pingtuna-list-title">{{item.title}}</view>
         <view wx:if="{{item.linkUrl}}" class="pingtuna-list-text">{{item.linkUrl}}</view>
         <view wx:if="{{item.remark}}" class="pingtuna-list-info">{{item.remark}}</view>
-        <image src="{{item.picUrl}}" />
+        <image src="{{item.picUrl}}" lazy-load="true" />
       </view>
     </view>
   </template>
@@ -142,11 +142,11 @@
     <view wx:if="{{topkan}}" class="kanjia-container" wx:for="{{topkan}}" wx:key="id">
       <view class="kanjia-title" bindtap="tapSales" data-id="{{item.linkUrl}}">
         <text>{{item.title}}</text>
-        <image src="../../../images/home_more.png" />
+        <image src="../../../images/home_more.png" lazy-load="true" />
       </view>
       <view class="kanjia-list" wx:for-items="{{topkans}}" wx:key="{{index}}" bindtap="kanjiaTap" data-id="{{item.id}}">
         <view class="kanjia-list-image">
-          <image src="{{item.pic}}" />
+          <image src="{{item.pic}}" lazy-load="true" />
         </view>
         <view class="kanjia-list-info">
           <view class="kanjia-list-info-title">{{item.name}}</view>
@@ -173,11 +173,11 @@
     <view wx:if="{{toptopic}}" class="topic-container" wx:for="{{toptopic}}" wx:key="id">
       <view class="topic-title" bindtap="tapSales" data-id="{{item.linkUrl}}">
         <text>专题推荐</text>
-        <image src="../../../images/home_more.png" />
+        <image src="../../../images/home_more.png" lazy-load="true" />
       </view>
       <scroll-view class="topic-list-box" scroll-x="true">
         <view class="topic-list" wx:for-items="{{toptopics}}" wx:key="{{index}}" bindtap="toTopic" data-id="{{item.id}}">
-          <image src="{{item.pic}}" />
+          <image src="{{item.pic}}" lazy-load="true" />
           <view class="topic-list-info">
             <view class="topic-list-info-title">{{item.title}}</view>
             <view class="topic-list-info-text">{{item.descript}}</view>
@@ -194,7 +194,7 @@
         <span type="arrow-right" size="14" color="#27323f" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 14px;"></span>
       </view>
       <view class="goods-list" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
-        <image src="{{item.pic}}" />
+        <image src="{{item.pic}}" lazy-load="true" />
         <view class="goods-list-title">{{item.name}}</view>
         <view class="goods-list-info-box">
           <view class="goods-list-money">Ұ{{item.mini_price}}</view>
@@ -215,7 +215,7 @@
     <view class="show-search-box">
       <view class="show-search-hot">
         <text>历史记录</text>
-        <image src="../../../images/delete.png" bindtap="delSearch" />
+        <image src="../../../images/delete.png" lazy-load="true" bindtap="delSearch" />
       </view>
       <block wx:for="{{searchdata}}" wx:key="id">
         <view class="seaech-list" bindtap="getSearch" data-name="{{item.name}}">{{item.name}}</view>
@@ -225,7 +225,7 @@
   </template>
   <template name="no-goods">
     <view class="title-box">
-      <image class="box-none" src="../../../images/none/cart_empty.png" />
+      <image class="box-none" lazy-load="true" src="../../../images/none/cart_empty.png" />
       <text>购物车空空的</text>
     </view>
   </template>
@@ -237,7 +237,7 @@
         <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.left}}">
           <view class="goods-info">
             <view class="img-box">
-              <image src="{{item.goods_pic}}" class="img" />
+              <image lazy-load="true" src="{{item.goods_pic}}" class="img" />
             </view>
             <view class="text-box">
               <view class="goods-title">{{item.goods_name}}</view>
@@ -269,7 +269,7 @@
     <view class="goods-list">
       <view class="goods-box" wx:for="{{sales}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
         <view class="img-box">
-          <image src="{{item.pic}}" class="image" />
+          <image lazy-load="true" src="{{item.pic}}" class="image" />
           <view wx:if="{{item.introduce}}" class="goods-characteristic">
             <text>{{item.introduce}}</text>
           </view>

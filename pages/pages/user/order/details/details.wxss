@@ -273,6 +273,9 @@
 .goods-wxparse-box .wxParse-p {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .goods-wxparse-box .wxParse-p .wxParse-inline {
   font-size: 28rpx;

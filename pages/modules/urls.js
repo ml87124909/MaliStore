@@ -36,6 +36,7 @@ var links = [{
 	'couponlist': urlDomain + '&part=coupons_list', //优惠券列表
 	'getcoupons': urlDomain + '&part=coupons_fetch', //领取优惠券
 	'mincoupons': urlDomain + '&part=my_coupons', //用户领取的优惠券
+	'checkcuops': urlDomain + '&part=coupons_check', //检查优惠券是否可以领取
 	'ordercoups': urlDomain + '&part=order_coupons', //检索订单可用优惠券
 	'getqrcodes': urlDomain + '&part=goods_qrcode', //生成小程序码
 	'addreslist': urlDomain + '&part=user_address_list', //用户地址列表

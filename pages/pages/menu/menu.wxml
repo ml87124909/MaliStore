@@ -7,7 +7,7 @@
       <view class="search-header-box ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
           <view class="search-header-input {{searcHover}}">
-            <image src="../../../images/search.png" bindtap="searcHover" data-show="{{ true }}" />
+            <image lazy-load="true" src="../../../images/search.png" bindtap="searcHover" data-show="{{ true }}" />
             <text wx:if="{{!searcHover}}" bindtap="searcHover" data-show="{{ true }}">搜索商品，共{{gnumber}}款好物</text>
             <input wx:if="{{searcHover}}" class="input" type="text" confirm-type="search" placeholder="请输入或选择关键字" focus="true" bindconfirm="search" placeholder-style="color:#999"></input>
             <text class="close" wx:if="{{searcHover}}" data-show="{{ false }}" bindtap="searcHover">取消</text>
@@ -36,7 +36,7 @@
           </view>
           <view class="goods-box">
             <view class="goods-list" wx:for="{{categorieslist}}" wx:key="id" bindtap="levelClick" data-id="{{item.id}}" data-name="{{item.pid_name}}" data-pid="{{item.pid}}">
-              <image class="imgbox" src="{{item.pic_icon}}" />
+              <image lazy-load="true" class="imgbox" src="{{item.pic_icon}}" />
               <view class="small-title">{{item.name}}</view>
             </view>
           </view>

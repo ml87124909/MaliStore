@@ -4,7 +4,7 @@
       <swiper circular autoplay interval="6000" duration="500" bindchange="swiperChange" class="swiper">
         <block wx:for="{{swiper}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.pic_url}}" class="img" bindtap="tapBanner" data-id="{{item.business_id}}" />
+            <image src="{{item.pic_url}}" lazy-load="true" class="img" bindtap="tapBanner" data-id="{{item.business_id}}" />
           </swiper-item>
         </block>
       </swiper>
@@ -22,7 +22,7 @@
           <video id="goodsVideo" src="{{video}}" show-fullscreen-btn="{{ false }}" direction="0" autoplay="{{ true }}" enable-progress-gesture="{{ false }}"></video>
         </swiper-item>
         <swiper-item wx:for="{{swiper}}" wx:key="unique">
-          <image src="{{item.pic}}" class="img" />
+          <image lazy-load="true" src="{{item.pic}}" class="img" />
         </swiper-item>
       </swiper>
       <view class="dots">
@@ -37,7 +37,7 @@
     <view wx:if="{{!video}}" class="swiper-container">
       <swiper circular autoplay interval="8000" duration="500" bindchange="swiperChange" class="swiper">
         <swiper-item wx:for="{{swiper}}" wx:key="unique">
-          <image src="{{item.pic}}" class="img" />
+          <image lazy-load="true" src="{{item.pic}}" class="img" />
         </swiper-item>
       </swiper>
       <view class="dots">

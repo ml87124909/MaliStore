@@ -3,7 +3,7 @@
     <view class="homeicon ui-row" style="height:100px;">
       <view lign="center" wx:for="{{homeicon}}" wx:key="id" bindtap="tapSales" data-id="{{item.link_url}}" class="ui-col valign-middle" style="">
         <view class="ui-col-content valign-middle">
-          <image src="{{item.pic_url}}" />
+          <image lazy-load="true" src="{{item.pic_url}}" />
           <text>{{item.title}}</text>
         </view>
       </view>

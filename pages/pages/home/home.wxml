@@ -23,4 +23,30 @@
   <template is="kanjia" data="{{topkan:topkan,topkans:topkans,pics:pics}}" />
   <template is="topic" data="{{toptopic:toptopic,toptopics:toptopics}}" />
   <template is="topgoods" data="{{topgoods:topgoods,goods:goods}}" />
+  <view bindtap="getCouponsTap" class="coupons-icon {{couponsIcon ? 'coupons-icon-open':''}}">
+    <image src="../../../images/coupons/coupons_icon.png" />
+    <view class="text">新年红包</view>
+  </view>
+  <ui-mask show="{{CouponsMask}}" custom-style="{{ customStyle }}" hide-on-tap="{{false}}" effect="scale-out" animation="" _pid="{{_pid}}">
+    <view class="coupons-content">
+      <span bindtap="closeCouponsTap" class="close {{bopen}} ui-icon icon-close" type="close" size="17" color="#ffffff" style="color: #ffffff;font-size: 17px;"></span>
+      <view class="coupons-bg">
+        <view class="coupons-info-box">
+          <image src="{{couponsInfo.icons}}" />
+          <view class="info-box">
+            <view wx:if="{{couponsInfo.type==0}}" class="price">
+              <text>¥</text>{{couponsInfo.money}}</view>
+            <view wx:if="{{couponsInfo.type==1}}" class="price">{{couponsInfo.money/10}}
+              <text>折</text>
+            </view>
+            <view class="name">{{couponsInfo.name}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="coupons-fr {{copen}}">
+        <view class="shop-nm">{{shopInfo.shopInfo.gname}}</view>
+        <view bindtap="userGetCouponsTap" class="coupons-btn {{bopen}}">立即领取</view>
+      </view>
+    </view>
+  </ui-mask>
 </page>

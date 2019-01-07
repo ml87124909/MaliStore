@@ -71,6 +71,8 @@ page {
   width: 45%;
   margin: 20px 0 0 13px;
   display: inline-block;
+  box-shadow: 0 0 20rpx #f5f5f5;
+  border-radius: 4rpx;
 }
 .img-box image {
   width: 100%;

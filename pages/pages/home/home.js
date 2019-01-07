@@ -21,10 +21,16 @@ exports.default = Page({
     swiperCurrent: 0,
     pics: {},
     showMask: false,
-    noneLogin: false
+    noneLogin: false,
+    couponsIcon: false,
+    CouponsMask: false,
+    customStyle: {
+      'background-color': 'rgba(255, 255, 255, 0)'
+    }
   },
   onShow: function onShow() {
     var that = this;
+    var shops = wx.getStorageSync('__appShopInfo');
     var token = wx.getStorageSync('__appUserInfo').token;
     if (app.globalData.userinfo == 1e4) {
       that.setData({ noneLogin: true });
@@ -38,6 +44,15 @@ exports.default = Page({
     }
     if (token) {
       that.getorderstats();
+    }
+    if (!shops) {
+      setTimeout(function () {
+        if (shops.shopInfo.coupons) {
+          that.getCheckCoupons();
+        }
+      }, 800);
+    } else {
+      that.getCheckCoupons();
     }
     wx.getStorage({
       key: '__shopCarInfo',
@@ -70,8 +85,7 @@ exports.default = Page({
               });
             }
           });
-        }
-        if (shops.shopInfo.home_type == 1) {
+        } else if (shops.shopInfo.home_type == 1) {
           _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
             if (res.code == 0) {
               that.setData({
@@ -79,8 +93,7 @@ exports.default = Page({
               });
             }
           });
-        }
-        if (shops.shopInfo.home_type == 2) {
+        } else if (shops.shopInfo.home_type == 2) {
           that.setData({
             goods: shops.homeGoods
           });
@@ -96,8 +109,7 @@ exports.default = Page({
             });
           }
         });
-      }
-      if (shops.shopInfo.home_type == 1) {
+      } else if (shops.shopInfo.home_type == 1) {
         _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
           if (res.code == 0) {
             that.setData({
@@ -105,8 +117,7 @@ exports.default = Page({
             });
           }
         });
-      }
-      if (shops.shopInfo.home_type == 2) {
+      } else if (shops.shopInfo.home_type == 2) {
         that.setData({
           goods: shops.homeGoods
         });
@@ -124,6 +135,27 @@ exports.default = Page({
         that.setData({ sale: res.data });
       }
     });
+  },
+  getCheckCoupons: function getCheckCoupons() {
+    var that = this;
+    var shops = wx.getStorageSync('__appShopInfo');
+    var token = wx.getStorageSync('__appUserInfo').token;
+    if (token) {
+      _server2.default.get(_urls2.default.links[0].checkcuops, { token: token, id: shops.shopInfo.coupons }).then(function (res) {
+        if (res.code == 0) {
+          that.setData({ couponsInfo: res.data });
+          setTimeout(function () {
+            that.setData({ CouponsMask: true });
+            setTimeout(function () {
+              that.setData({ copen: 'coupons-op' });
+              setTimeout(function () {
+                that.setData({ bopen: 'coubtn-op' });
+              }, 1000);
+            }, 600);
+          }, 1000);
+        }
+      });
+    }
   },
   checklogin: function checklogin() {
     if (app.globalData.userinfo == 1e4) {
@@ -171,7 +203,7 @@ exports.default = Page({
     if (t.scrollTop >= 280) {
       wx.setNavigationBarColor({
         frontColor: '#000000',
-        backgroundColor: '#ffffff'
+        backgroundColor: 'rgba(255,255,255,.0)'
       });
       this.setData({
         navigationbar: "scrollTop"
@@ -179,12 +211,49 @@ exports.default = Page({
     } else {
       wx.setNavigationBarColor({
         frontColor: '#ffffff',
-        backgroundColor: '#ffffff'
+        backgroundColor: 'rgba(255,255,255,.0)'
       });
       this.setData({
         navigationbar: ""
       });
     }
+  },
+  closeCouponsTap: function closeCouponsTap() {
+    var that = this;
+    that.setData({ bopen: '' });
+    setTimeout(function () {
+      that.setData({ copen: '' });
+      setTimeout(function () {
+        that.setData({ CouponsMask: false, couponsIcon: true });
+      }, 1000);
+    }, 600);
+  },
+  getCouponsTap: function getCouponsTap() {
+    var that = this;
+    that.setData({ CouponsMask: true, couponsIcon: false });
+    setTimeout(function () {
+      that.setData({ copen: 'coupons-op' });
+      setTimeout(function () {
+        that.setData({ bopen: 'coubtn-op' });
+      }, 1000);
+    }, 600);
+  },
+  userGetCouponsTap: function userGetCouponsTap() {
+    var that = this;
+    var data = that.data.couponsInfo;
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].getcoupons, { id: data.id, token: token }).then(function (res) {
+      if (res.code == 0) {
+        wx.showToast({ title: "\u4F18\u60E0\u5238\u9886\u53D6\u6210\u529F", icon: 'none' });
+        that.setData({ bopen: '' });
+        setTimeout(function () {
+          that.setData({ copen: '' });
+          setTimeout(function () {
+            that.setData({ CouponsMask: false, couponsIcon: false });
+          }, 1000);
+        }, 1000);
+      }
+    });
   },
   onShareAppMessage: function onShareAppMessage() {
     return {
