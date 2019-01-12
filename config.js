@@ -1,7 +1,7 @@
 'use strict';
 
 var config = {
-  'version': '1.1.1',
+  'version': '1.1.2',
   //版本标识，不用管
   'suburl': 'https://api.maliapi.com/api/1?viewid=home',
   //suburl在码力小店后台首页——>基本信息
