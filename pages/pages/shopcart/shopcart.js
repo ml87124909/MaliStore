@@ -32,37 +32,29 @@ exports.default = Page({
   },
   onLoad: function onLoad() {
     var that = this;
-    var shopInfo = wx.getStorageSync("__appShopInfo");
-    if (shopInfo) {
-      if (shopInfo.cartText) {
-        that.setData({
-          carttips: shopInfo.cartText
-        });
+    _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+      if (res.code == 0) {
+        if (res.data.cartText) {
+          that.setData({ carttips: res.data.cartText });
+        }
+        var shopInfo = res.data.shopInfo;
+        if (shopInfo.cart_type == 0) {
+          _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
+            if (res.code == 0) {
+              that.setData({ sales: res.data });
+            }
+          });
+        } else if (shopInfo.cart_type == 1) {
+          _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
+            if (res.code == 0) {
+              that.setData({ sales: res.data });
+            }
+          });
+        } else if (shopInfo.cart_type == 2) {
+          that.setData({ sales: res.data.cartGoods });
+        }
       }
-      if (shopInfo.shopInfo.cart_type == 0) {
-        _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
-          if (res.code == 0) {
-            that.setData({
-              sales: res.data
-            });
-          }
-        });
-      }
-      if (shopInfo.shopInfo.cart_type == 1) {
-        _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
-          if (res.code == 0) {
-            that.setData({
-              sales: res.data
-            });
-          }
-        });
-      }
-      if (shopInfo.shopInfo.cart_type == 2) {
-        that.setData({
-          sales: shopInfo.cartGoods
-        });
-      }
-    }
+    });
   },
   onShow: function onShow() {
     var that = this;

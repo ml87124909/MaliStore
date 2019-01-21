@@ -412,4 +412,20 @@
       <i></i>
     </view>
   </template>
+  <template name="hcategory">
+    <view class="category" wx:for="{{category}}" wx:key="id">
+      <view class="imageBox" bindtap="getMenuListTap" data-id="{{item.id}}" data-pid="{{item.pid}}" data-name="{{item.pid_name}}">
+        <image src="{{item.pic_imgs}}" mode="widthFix" lazy-load="true" />
+      </view>
+      <view class="goodsBox">
+        <view class="goods" wx:for="{{categoryGoods[item.id][0]}}" wx:for-item="item2" wx:key="id">
+          <image src="{{item2.pic}}" lazy-load="true" />
+          <view class="infoBox">
+            <view class="name">{{item2.name}}</view>
+            <view class="price">¥{{item2.mini_price}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </template>
 </page>

@@ -1,5 +1,6 @@
 'use strict';
 
+var app = getApp();
 function serverGet(url, data) {
     var promise = new Promise(function (resolve) {
         var postData = data;

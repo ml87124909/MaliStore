@@ -9,8 +9,8 @@
         <view class="ui-col ui-col-align-center align-center valign-middle" style="">
           <view class="ui-col-content align-center valign-middle">
             <view class="toplogo">
-              <image src="{{shopInfo.shopInfo.gpic}}" />
-              <text>{{shopInfo.shopInfo.gname}}</text>
+              <image src="{{shopInfo.gpic}}" />
+              <text>{{shopInfo.gname}}</text>
             </view>
           </view>
         </view>
@@ -19,6 +19,7 @@
   </view>
   <template is="swiper" data="{{swiper:home,swiperCurrent:swiperCurrent}}" />
   <template is="homeicon" data="{{homeicon:sale}}" />
+  <template is="hcategory" data="{{category:category,categoryGoods:categoryGoods}}" />
   <template is="pingtuan" data="{{toptuan:toptuan,toptuaninfo:toptuaninfo}}" />
   <template is="kanjia" data="{{topkan:topkan,topkans:topkans,pics:pics}}" />
   <template is="topic" data="{{toptopic:toptopic,toptopics:toptopics}}" />
@@ -44,7 +45,7 @@
         </view>
       </view>
       <view class="coupons-fr {{copen}}">
-        <view class="shop-nm">{{shopInfo.shopInfo.gname}}</view>
+        <view class="shop-nm">{{shopInfo.gname}}</view>
         <view bindtap="userGetCouponsTap" class="coupons-btn {{bopen}}">立即领取</view>
       </view>
     </view>

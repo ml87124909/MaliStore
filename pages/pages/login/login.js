@@ -22,8 +22,11 @@ exports.default = Page({
     },
     onLoad: function onLoad() {
         var that = this;
-        var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
-        that.setData({ shopInfo: shopInfo });
+        _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+            if (res.code == 0) {
+                that.setData({ shopInfo: res.data.shopInfo });
+            }
+        });
     },
     userlogin: function userlogin(e) {
         var that = this;

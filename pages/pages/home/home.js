@@ -28,31 +28,75 @@ exports.default = Page({
       'background-color': 'rgba(255, 255, 255, 0)'
     }
   },
+  onLoad: function onLoad() {
+    var that = this;
+    //轮播幻灯片
+    _server2.default.get(_urls2.default.links[0].imgsbanner, { type: 'home' }).then(function (res) {
+      if (res.code == 0) {
+        that.setData({ home: res.data });
+      }
+    });
+    //分类菜单
+    _server2.default.get(_urls2.default.links[0].imgsbanner, { type: 'menu' }).then(function (res) {
+      if (res.code == 0) {
+        that.setData({ sale: res.data });
+      }
+    });
+    //专题板块
+    wx.nextTick(function () {
+      _server2.default.get(_urls2.default.links[0].mlcategory, { type: 'home' }).then(function (res) {
+        if (res.code == 0) {
+          that.setData({ category: res.data });
+          var goods = {};
+          for (var i = 0; i < res.data.length; i++) {
+            that.getCategoryGoods(res.data[i].id, goods);
+          }
+        }
+      });
+    });
+    //首页商品
+    _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+      if (res.code == 0) {
+        var shopInfo = res.data.shopInfo;
+        that.setData({ shopInfo: shopInfo });
+        if (shopInfo.home_type == 0) {
+          _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
+            if (res.code == 0) {
+              that.setData({ goods: res.data });
+            }
+          });
+        } else if (shopInfo.home_type == 1) {
+          _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
+            if (res.code == 0) {
+              that.setData({ goods: res.data });
+            }
+          });
+        } else if (shopInfo.home_type == 2) {
+          that.setData({ goods: res.data.homeGoods });
+        }
+        that.getCheckCoupons(shopInfo.coupons);
+      }
+    });
+  },
   onShow: function onShow() {
     var that = this;
-    var shops = wx.getStorageSync('__appShopInfo');
+    var shops = that.data.shopInfo;
     var token = wx.getStorageSync('__appUserInfo').token;
     if (app.globalData.userinfo == 1e4) {
       that.setData({ noneLogin: true });
     } else {
       that.setData({ noneLogin: false });
-      setTimeout(function () {
+      wx.nextTick(function () {
         if (app.globalData.userinfo == 1e4) {
           that.setData({ noneLogin: true });
         }
-      }, 1000);
+      });
     }
     if (token) {
       that.getorderstats();
-    }
-    if (!shops) {
-      setTimeout(function () {
-        if (shops.shopInfo.coupons) {
-          that.getCheckCoupons();
-        }
-      }, 800);
-    } else {
-      that.getCheckCoupons();
+      if (shops) {
+        that.getCheckCoupons(shops.coupons);
+      }
     }
     wx.getStorage({
       key: '__shopCarInfo',
@@ -69,79 +113,24 @@ exports.default = Page({
       }
     });
   },
-  onLoad: function onLoad() {
+  getCategoryGoods: function getCategoryGoods(id, goods) {
     var that = this;
-    var shops = wx.getStorageSync('__appShopInfo');
-    var token = wx.getStorageSync('__appUserInfo').token;
-    if (!shops) {
-      setTimeout(function () {
-        var shops = wx.getStorageSync('__appShopInfo');
-        that.setData({ shopInfo: shops });
-        if (shops.shopInfo.home_type == 0) {
-          _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
-            if (res.code == 0) {
-              that.setData({
-                goods: res.data
-              });
-            }
-          });
-        } else if (shops.shopInfo.home_type == 1) {
-          _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
-            if (res.code == 0) {
-              that.setData({
-                goods: res.data
-              });
-            }
-          });
-        } else if (shops.shopInfo.home_type == 2) {
-          that.setData({
-            goods: shops.homeGoods
-          });
-        }
-      }, 800);
-    } else {
-      that.setData({ shopInfo: shops });
-      if (shops.shopInfo.home_type == 0) {
-        _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
-          if (res.code == 0) {
-            that.setData({
-              goods: res.data
-            });
-          }
-        });
-      } else if (shops.shopInfo.home_type == 1) {
-        _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
-          if (res.code == 0) {
-            that.setData({
-              goods: res.data
-            });
-          }
-        });
-      } else if (shops.shopInfo.home_type == 2) {
+    _server2.default.get(_urls2.default.links[0].mlgoodlist, { category_id: id, page_size: 10 }).then(function (res) {
+      if (res.code == 0) {
+        var cgoods = [];
+        cgoods.push(res.data);
+        goods[id] = cgoods;
         that.setData({
-          goods: shops.homeGoods
+          categoryGoods: goods
         });
-      }
-    }
-    //轮播幻灯片
-    _server2.default.get(_urls2.default.links[0].imgsbanner, { type: 'home' }).then(function (res) {
-      if (res.code == 0) {
-        that.setData({ home: res.data });
-      }
-    });
-    //分类菜单
-    _server2.default.get(_urls2.default.links[0].imgsbanner, { type: 'menu' }).then(function (res) {
-      if (res.code == 0) {
-        that.setData({ sale: res.data });
       }
     });
   },
-  getCheckCoupons: function getCheckCoupons() {
+  getCheckCoupons: function getCheckCoupons(e) {
     var that = this;
-    var shops = wx.getStorageSync('__appShopInfo');
     var token = wx.getStorageSync('__appUserInfo').token;
     if (token) {
-      _server2.default.get(_urls2.default.links[0].checkcuops, { token: token, id: shops.shopInfo.coupons }).then(function (res) {
+      _server2.default.get(_urls2.default.links[0].checkcuops, { token: token, id: e }).then(function (res) {
         if (res.code == 0) {
           that.setData({ couponsInfo: res.data });
           setTimeout(function () {
@@ -257,9 +246,9 @@ exports.default = Page({
   },
   onShareAppMessage: function onShareAppMessage() {
     return {
-      title: app.globalData.shopInfo.shopInfo.sname,
+      title: this.shopInfo.sname,
       path: '/pages/pages/home/home',
-      imageUrl: app.globalData.shopInfo.shopInfo.spic,
+      imageUrl: this.shopInfo.spic,
       success: function success(res) {
         // 转发成功
       },
@@ -298,6 +287,14 @@ exports.default = Page({
         url: e.currentTarget.dataset.id
       });
     }
+  },
+  getMenuListTap: function getMenuListTap(e) {
+    var cid = e.currentTarget.dataset.id;
+    var pid = e.currentTarget.dataset.pid;
+    var name = e.currentTarget.dataset.name;
+    wx.navigateTo({
+      url: "/pages/pages/menu/list/list?id=" + cid + '&pid=' + pid + '&name=' + name
+    });
   }
 
 });

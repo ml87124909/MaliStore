@@ -42,63 +42,29 @@ exports.default = Page({
     },
     onLoad: function onLoad(e) {
         var that = this;
-        var shop = wx.getStorageSync('__appShopInfo');
-        that.orderDetailsTap(e.id);
         that.setData({ id: e.id });
-        if (shop) {
-            that.setData({ shopInfo: shop });
-            if (shop.shopInfo.order_type == 0) {
-                _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
-                    if (res.code == 0) {
-                        that.setData({
-                            sales: res.data
-                        });
-                    }
-                });
-            }
-            if (shop.shopInfo.order_type == 1) {
-                _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
-                    if (res.code == 0) {
-                        that.setData({
-                            sales: res.data
-                        });
-                    }
-                });
-            }
-            if (shop.shopInfo.order_type == 2) {
-                that.setData({
-                    sales: shop.orderGoods
-                });
-            }
-        } else {
-            setTimeout(function () {
-                var shop = wx.getStorageSync('__appShopInfo');
-                that.setData({ shopInfo: shop });
-                if (shop.shopInfo.order_type == 0) {
+        that.orderDetailsTap(e.id);
+        _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+            if (res.code == 0) {
+                var shopInfo = res.data.shopInfo;
+                that.setData({ shopInfo: shopInfo });
+                if (shopInfo.order_type == 0) {
                     _server2.default.get(_urls2.default.links[0].mlgoodlist, {}).then(function (res) {
                         if (res.code == 0) {
-                            that.setData({
-                                sales: res.data
-                            });
+                            that.setData({ sales: res.data });
                         }
                     });
-                }
-                if (shop.shopInfo.order_type == 1) {
+                } else if (shopInfo.order_type == 1) {
                     _server2.default.get(_urls2.default.links[0].mlgoodlist, { status: 1 }).then(function (res) {
                         if (res.code == 0) {
-                            that.setData({
-                                sales: res.data
-                            });
+                            that.setData({ sales: res.data });
                         }
                     });
+                } else if (shopInfo.order_type == 2) {
+                    that.setData({ sales: res.data.orderGoods });
                 }
-                if (shop.shopInfo.order_type == 2) {
-                    that.setData({
-                        sales: shop.orderGoods
-                    });
-                }
-            }, 500);
-        }
+            }
+        });
     },
     orderDetailsTap: function orderDetailsTap(e) {
         var that = this;

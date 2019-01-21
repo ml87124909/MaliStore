@@ -309,7 +309,7 @@
     </view>
     <view class="order-kefu-box">
       <view class="order-kefu-name">客服服务时间：
-        <text>{{shopInfo.shopInfo.times }}</text>
+        <text>{{shopInfo.times }}</text>
       </view>
       <view class="ui-row" style="height:60px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
@@ -319,7 +319,7 @@
         </view>
         <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-right: 20px;">
           <view class="ui-col-content align-center valign-middle">
-            <view class="button" bindtap="getCallTap" data-phone="{{shopInfo.shopInfo.phone}}">电话客服</view>
+            <view class="button" bindtap="getCallTap" data-phone="{{shopInfo.phone}}">电话客服</view>
           </view>
         </view>
       </view>
