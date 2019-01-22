@@ -418,7 +418,7 @@
         <image src="{{item.pic_imgs}}" mode="widthFix" lazy-load="true" />
       </view>
       <view class="goodsBox">
-        <view class="goods" wx:for="{{categoryGoods[item.id][0]}}" wx:for-item="item2" wx:key="id">
+        <view class="goods" wx:for="{{categoryGoods[item.id][0]}}" wx:for-item="item2" wx:key="id" bindtap="toDetailsTap" data-id="{{item2.id}}">
           <image src="{{item2.pic}}" lazy-load="true" />
           <view class="infoBox">
             <view class="name">{{item2.name}}</view>
