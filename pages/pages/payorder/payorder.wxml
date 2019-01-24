@@ -155,11 +155,13 @@
           </view>
         </view>
       </ui-accordion>
-      <view wx:if="{{balance >= 0}}" class="ui-row" style="height:50px;">
-        <view class="ui-col ui-col-8 valign-middle" style="flex: 0 0 66.66666666666666%;padding-left: 10px;">
+      <view wx:if="{{balance > 0}}" class="ui-row" style="height:50px;">
+        <view class="ui-col ui-col-8 valign-middle" style="flex: 0 0 66.66666666666666%;padding-left: 20px;">
           <view class="ui-col-content valign-middle">
-            <view class="ui-check-list">
-              <ui-check-list label-position="right" options="{{ yuepay }}" bindchange="change" color="#ffd305" _pid="{{_pid}}"></ui-check-list>
+            <view class="ui-check-list" bindtap="change" data-id="{{yveState}}">
+              <switch wx:if="{{yveMoney}}" checked type="checkbox" color="#ffd305"></switch>
+              <switch wx:if="{{!yveMoney}}" type="checkbox" color="#ffd305"></switch>
+              <view>使用余额进行支付</view>
             </view>
           </view>
         </view>
@@ -258,7 +260,8 @@
       <view class="fixed_bottom ui-row" style="height:60px;">
         <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
           <view class="ui-col-content align-left valign-middle">
-            <view style="font-size:32rpx;">还需支付：¥{{allMoney}}</view>
+            <view wx:if="{{!plusMoney}}" style="font-size:32rpx;">还需支付：¥{{allMoney}}</view>
+            <view wx:if="{{plusMoney}}" style="font-size:32rpx;">还需支付：¥{{plusMoney}}</view>
             <view style="color:#ffd305;font-size:24rpx;padding-top:6rpx;" wx:if="{{VipState==1}}">您是尊贵的{{ViplevelName}}，已为您节省 ¥{{VipSmallMoney}}</view>
           </view>
         </view>

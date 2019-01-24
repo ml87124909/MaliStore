@@ -37,6 +37,15 @@
   padding-bottom: 150rpx;
   background-color: #ffffff;
 }
+.ui-check-list {
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+}
+.ui-check-list switch {
+  zoom: .8;
+  padding-right: 10rpx;
+}
 .adds-center-bg {
   height: 70px;
   background-color: #fffaf9;

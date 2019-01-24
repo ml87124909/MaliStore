@@ -9,9 +9,6 @@ function serverGet(url, data) {
             data: postData,
             success: function success(res) {
                 resolve(res.data);
-                if (res.data.code != 0) {
-                    console.log(url, res.data);
-                }
             }
         });
     });
@@ -28,9 +25,6 @@ function serverPost(url, data) {
             header: { 'content-type': 'application/x-www-form-urlencoded' },
             success: function success(res) {
                 resolve(res.data);
-                if (res.data.code != 0) {
-                    console.log(url, res.data);
-                }
             }
         });
     });

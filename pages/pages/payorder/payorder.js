@@ -24,6 +24,8 @@ exports.default = Page({
         NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + 'px',
         yuepay: [{ key: 'yve', value: "\u4F7F\u7528\u4F59\u989D\u8FDB\u884C\u652F\u4ED8" }],
         goodsList: [],
+        yveState: true,
+        yveMoney: false,
         confirm: false,
         //isNeedLogistics: 0, 
         allGoodsPrice: 0,
@@ -42,6 +44,7 @@ exports.default = Page({
         couponsName: '请选择优惠券',
         balance: 0,
         balMoney: 0,
+        plusMoney: '',
         wuLiuName: "\u8BF7\u9009\u62E9\u914D\u9001\u65B9\u5F0F"
         //inlineDescListValue: [0],
     },
@@ -67,53 +70,62 @@ exports.default = Page({
     },
     onLoad: function onLoad(e) {
         var that = this;
-        var orderType = e.orderType;
-        if (orderType) {
-            this.setData({
-                //isNeedLogistics: 1,
-                orderType: e.orderType
-            });
-        }
-        //商铺列表
-        _server2.default.get(_urls2.default.links[0].mlshopslis, {}).then(function (res) {
-            if (res.code == 0) {
-                wx.getLocation({
-                    type: 'wgs84', // 默认wgs84
-                    success: function success(gps) {
-                        var distance = [];
-                        for (var i = 0; i < res.data.length; i++) {
-                            that.mapCTX = new _qqmapWxJssdkMin2.default({ key: _urls2.default.mapkey });
-                            that.mapCTX.calculateDistance({
-                                from: {
-                                    latitude: res.data[i].longitude,
-                                    longitude: res.data[i].latitude
-                                },
-                                to: [{
-                                    location: {
-                                        lat: gps.latitude,
-                                        lng: gps.longitude
-                                    }
-                                }],
-                                success: function success(ctx) {
-                                    distance.push(ctx.result.elements[0].distance);
-                                    that.setData({ distance: distance });
-                                }
-                            });
-                        }
-                    }
-                });
-                that.setData({ shopsList: res.data });
-            }
-        });
-    },
-    getBalanceNumber: function getBalanceNumber(e) {
-        var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
+        if (e.orderType) {
+            this.setData({ orderType: e.orderType });
+        }
+        //获取用户余额
         _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
             if (res.code == 0) {
                 that.setData({ balance: res.data.money });
             }
         });
+        //获取商铺列表
+        _server2.default.get(_urls2.default.links[0].mlshopslis, {}).then(function (res) {
+            if (res.code == 0) {
+                that.setData({ shopsList: res.data });
+                if (_urls2.default.mapkey) {
+                    wx.getLocation({
+                        type: 'wgs84', // 默认wgs84
+                        success: function success(gps) {
+                            var distance = [];
+                            for (var i = 0; i < res.data.length; i++) {
+                                that.mapCTX = new _qqmapWxJssdkMin2.default({ key: _urls2.default.mapkey });
+                                that.mapCTX.calculateDistance({
+                                    from: {
+                                        latitude: res.data[i].longitude,
+                                        longitude: res.data[i].latitude
+                                    },
+                                    to: [{
+                                        location: {
+                                            lat: gps.latitude,
+                                            lng: gps.longitude
+                                        }
+                                    }],
+                                    success: function success(ctx) {
+                                        distance.push(ctx.result.elements[0].distance);
+                                        that.setData({ distance: distance });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    },
+    change: function change(e) {
+        var that = this;
+        var val = e.currentTarget.dataset.id;
+        if (val) {
+            that.setData({ yveState: false, yveMoney: val });
+            that.getBalanceNumber(val);
+        } else {
+            that.setData({ yveState: true, yveMoney: val, balMoney: 0, plusMoney: '' });
+        }
+    },
+    getBalanceNumber: function getBalanceNumber(e) {
+        var that = this;
         if (e) {
             var balance = that.data.balance;
             if (that.data.VipState == 0) {
@@ -121,10 +133,8 @@ exports.default = Page({
             } else {
                 var alPrice = that.data.VipGoodsAndYunPrice;
             }
-            var cuMoney = that.data.couponsMoney;
-            var allmoney = alPrice - cuMoney;
-            if (allmoney >= 0) {
-                var allmoney = alPrice - cuMoney;
+            if (alPrice >= 0) {
+                var allmoney = alPrice;
             } else {
                 var allmoney = 0;
             }
@@ -139,9 +149,13 @@ exports.default = Page({
                 return;
             } else {
                 if (balance - allmoney >= 0) {
-                    that.setData({ balMoney: allmoney });
+                    var pickMoney = allmoney - allmoney;
+                    var plusMoney = pickMoney.toFixed(2);
+                    that.setData({ balMoney: allmoney, plusMoney: plusMoney });
                 } else {
-                    that.setData({ balMoney: balance });
+                    var pickMoney = allmoney - balance.toFixed(2);
+                    var plusMoney = pickMoney.toFixed(2);
+                    that.setData({ balMoney: balance, plusMoney: plusMoney });
                 }
             }
         }
@@ -378,20 +392,17 @@ exports.default = Page({
         var that = this;
         var val = e.detail.value;
         var list = that.data.inlineDescList;
+        var balMoney = that.data.balMoney;
         that.setData({
             inlineDescListValue: val,
-            wuLiuName: list[val].value
+            wuLiuName: list[val].value,
+            yveState: true,
+            yveMoney: false,
+            balMoney: 0,
+            plusMoney: ''
         });
-        that.createOrder();
-    },
-    change: function change(e) {
-        var that = this;
-        var val = e.detail.value[0];
-        if (val == 'yve') {
-            that.setData({ yveMoney: val });
-            that.getBalanceNumber(val);
-        } else {
-            that.setData({ yveMoney: null, balMoney: 0 });
+        if (balMoney != 0) {
+            wx.showToast({ title: '已取消余额支付', icon: 'none' });
         }
         that.createOrder();
     },
@@ -417,22 +428,38 @@ exports.default = Page({
         var type = e.currentTarget.dataset.type;
         var name = e.currentTarget.dataset.name;
         var money = e.currentTarget.dataset.money;
+        var balMoney = that.data.balMoney;
         that.setData({
             couponsName: name,
             coupon_id: id,
             couponsMoney: money,
-            couponstype: type
+            couponstype: type,
+            yveState: true,
+            yveMoney: false,
+            balMoney: 0,
+            plusMoney: ''
         });
+        if (balMoney != 0) {
+            wx.showToast({ title: '已取消余额支付', icon: 'none' });
+        }
         that.createOrder();
     },
     bindCancelCoupon: function bindCancelCoupon() {
         var that = this;
+        var balMoney = that.data.balMoney;
         that.setData({
             couponsName: '请选择优惠券',
             coupon_id: null,
             couponstype: null,
-            couponsMoney: 0
+            couponsMoney: 0,
+            yveState: true,
+            yveMoney: false,
+            balMoney: 0,
+            plusMoney: ''
         });
+        if (balMoney != 0) {
+            wx.showToast({ title: '已取消余额支付', icon: 'none' });
+        }
         that.createOrder();
     },
     getPayPalTap: function getPayPalTap() {
