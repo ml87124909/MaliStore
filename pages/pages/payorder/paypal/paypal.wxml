@@ -28,28 +28,63 @@
   </ui-nav-bar>
   <view style="height:{{NAV_HEIGHT}}"></view>
   <view class="user-ordey-type" wx:if="{{share == 0}}">
-    <block wx:if="{{oederPaypal.money != 0}}">
+    <block wx:if="{{orderMoney != 0}}">
       <view class="time-count-box">
         <view class="time-count-text">支付剩余时间</view>
         <ui-count-down wx:if="{{oederPaypal.data_close}}" done-text="付款已经结束" number-style="{{numberStyle}}" time="{{oederPaypal.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" _pid="{{_pid}}"></ui-count-down>
       </view>
       <view class="money-paypal-box">
         <view class="money-real">需支付：
-          <text>¥{{oederPaypal.money}}
+          <text>¥{{orderMoney}}
             <text></text>
           </text>
         </view>
         <view class="money-text">订单号：{{orderNumber}}</view>
       </view>
       <view class="money-button-box" wx:if="{{orderClose == 0}}">
-        <view class="money-wechatpay" bindtap="toPayTap" data-id="{{oederPaypal.id}}" data-money="{{oederPaypal.money}}">微信支付</view>
-        <view class="money-wechatpay money-other" data-show="{{ true }}" bindtap="handleShowMask">找Ta代付</view>
+        <!--
+                    <view class="money-wechatpay" bindtap="toPayTap" data-id="{{oederPaypal.id}}" data-money="{{orderMoney}}">微信支付</view>
+                    <view class="money-wechatpay money-other" data-show="{{ true }}" bindtap="handleShowMask">找Ta代付</view>
+                    -->
+        <view class="money-box" bindtap="selectTap" data-id="1">
+          <view class="icon">
+            <image src="../../../../images/wechatPay.png" />
+          </view>
+          <view class="info">
+            <view class="title">微信支付</view>
+            <view class="text">使用微信安全支付</view>
+          </view>
+          <view class="button {{wechatPay? 'active':''}}"></view>
+        </view>
+        <view wx:if="{{balance!=0}}" class="money-box" bindtap="selectTap" data-id="2">
+          <view class="icon">
+            <image src="../../../../images/yue.png" />
+          </view>
+          <view class="info">
+            <view class="title">使用余额进行支付</view>
+            <view class="text">当前可用余额：{{balance}}元</view>
+          </view>
+          <view class="button {{yuePay? 'active':''}}"></view>
+        </view>
+        <view class="money-box" bindtap="selectTap" data-id="3">
+          <view class="icon">
+            <image src="../../../../images/wechat_icon.png" style="width:60rpx;height:60rpx;" />
+          </view>
+          <view class="info">
+            <view class="title">微信好友代付</view>
+            <view class="text">帮你付款才是真爱</view>
+          </view>
+          <view class="button {{daifuPay? 'active':''}}"></view>
+        </view>
+        <view class="footer-button" bindtap="getOrderPayTap" data-id="{{payType}}">
+          <view class="price">{{payText}}</view>
+        </view>
       </view>
       <view wx:else="" class="money-button-box">
         <view class="money-wechatpay money-close" bindtap="getHomeTap">订单因超时未支付已被关闭</view>
       </view>
     </block>
-    <block wx:if="{{oederPaypal.money == 0}}">
+    <block wx:if="{{orderMoney == 0}}">
       <view class="money-success">
         <image src="../../../../images/paypal.png" />
         <text>订单支付成功</text>
@@ -74,7 +109,7 @@
     </ui-mask>
   </view>
   <view class="user-ordey-type" wx:if="{{share == 1}}">
-    <block wx:if="{{oederPaypal.money != 0}}">
+    <block wx:if="{{orderMoney != 0}}">
       <view class="user-order-top-box">
         <image src="{{oederPaypal.useravatar}}" />
         <text>{{oederPaypal.usernmae}}</text>
@@ -83,7 +118,7 @@
       <view class="user-order-money-box">
         <view class="user-order-money-title">代付金额</view>
         <view class="user-order-money">
-          <text>¥</text>{{oederPaypal.money}}</view>
+          <text>¥</text>{{orderMoney}}</view>
         <view class="user-order-receiver">收货人：{{oederPaypal.receiver}}</view>
       </view>
       <view class="user-order-time-count">
@@ -91,7 +126,7 @@
         <ui-count-down wx:if="{{oederPaypal.data_close}}" done-text="：已过期" number-style="{{numberStyle}}" time="{{oederPaypal.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" _pid="{{_pid}}"></ui-count-down>
       </view>
       <view class="user-order-button-box">
-        <view wx:if="{{orderClose == 0}}" class="user-order-button-wechatpay" bindtap="toUserPayTap" data-id="{{oederPaypal.id}}" data-money="{{oederPaypal.money}}">豪爽支付</view>
+        <view wx:if="{{orderClose == 0}}" class="user-order-button-wechatpay" bindtap="toUserPayTap" data-id="{{oederPaypal.id}}" data-money="{{orderMoney}}">豪爽支付</view>
         <view wx:else="" class="user-order-button-wechatpay user-order-button-close" bindtap="getHomeTap">订单因超时未支付已被关闭</view>
         <view class="user-order-button-info">
           <view class="user-order-button-info-title">代付说明：</view>
@@ -146,7 +181,7 @@
         </view>
       </view>
     </block>
-    <block wx:if="{{oederPaypal.money == 0}}">
+    <block wx:if="{{orderMoney == 0}}">
       <view class="money-success-bg">
         <view class="money-success">
           <image src="../../../../images/paypal.png" />

@@ -99,7 +99,7 @@
     <view class="iphonex-bottom"></view>
   </ui-fixed-view>
   <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
-    <view class="fixed_bottom ui-row" style="height:50px;">
+    <view class="fixed_bottom ui-row" style="height:{{iphonex? '70':'50'}}px;">
       <view class="fixed_bottom_ui-col ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
         <view class="ui-col-content align-center valign-middle">
           <view class="fixed_bottom_box">
@@ -215,7 +215,7 @@
       </view>
     </view>
     <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
-      <view class="fixed_bottom fixed_bottom_popup ui-row" style="height:50px;">
+      <view class="fixed_bottom fixed_bottom_popup ui-row" style="height:{{iphonex? '70':'50'}}px;">
         <view class="ui-col valign-middle" style="">
           <view class="ui-col-content valign-middle">
             <view class="form_list_cart" bindtap="addShopCar">加入购物车</view>
@@ -265,7 +265,7 @@
           <view class="ui-col ui-col-3 ui-col-align-center align-center valign-middle" style="flex: 0 0 25%;padding-right: 10px;">
             <view class="ui-col-content align-center valign-middle">
               <view wx:if="{{item.state == 1}}" class="Couponshow-content-button" bindtap="getCouponsTap" data-id="{{item.id}}">立即领取</view>
-              <image wx:if="{{item.state == 2}}" class="yiling" src="../../../images/yilling.png" />
+              <image wx:if="{{item.state == 2}}" class="yiling" src="../../../images/coupons/yilingqu.png" />
             </view>
           </view>
         </view>

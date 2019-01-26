@@ -46,7 +46,8 @@ exports.default = Page({
             if (res.code == 0) {
                 var nextAction = {
                     ctype: 5,
-                    id: res.data.id
+                    id: res.data.id,
+                    ptype: 0
                 };
                 wxpay.wxpay(app, money, res.data.id, 3, nextAction);
             } else if (res.code == 701) {
@@ -67,7 +68,8 @@ exports.default = Page({
             if (res.code == 0) {
                 var nextAction = {
                     ctype: 5,
-                    id: res.data.id
+                    id: res.data.id,
+                    ptype: 0
                 };
                 wxpay.wxpay(app, money, res.data.id, 3, nextAction);
             } else if (res.code == 701) {

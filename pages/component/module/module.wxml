@@ -66,7 +66,7 @@
       </view>
     </view>
     <view class="ui-row" style="height:40px;">
-      <view class="ui-col ui-col-6" style="flex: 0 0 50%;padding-left: 10px;padding-right: 5px;">
+      <view class="ui-col ui-col-5" style="flex: 0 0 41.66666666666667%;padding-left: 10px;padding-right: 5px;">
         <view class="ui-col-content">
           <view class="column-content column-price-content">
             <view class="column-goods-price">¥{{goodsDetail.basicInfo.mini_price}}</view>
@@ -80,12 +80,12 @@
             <block wx:if="{{goodsDetail.shareInfo.share_time == 1}}">
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享可获得{{goodsDetail.shareInfo.share_number}}元现金</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享可获得{{goodsDetail.shareInfo.share_number}}积分</view>
-              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享可获得{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享可获得{{goodsDetail.shareInfo.share_number>=1?goodsDetail.shareInfo.share_number+'元':goodsDetail.shareInfo.share_number*100+'折'}}优惠券</view>
             </block>
             <block wx:elif="{{goodsDetail.shareInfo.share_time == 2}}">
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 1}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}元现金</view>
               <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 2}}">分享好友下单可返{{goodsDetail.shareInfo.share_number}}积分</view>
-              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享好友下单可返{{goodsDetail.shareInfo.share_type_str}}元优惠券</view>
+              <view class="column-goods-score" wx:if="{{goodsDetail.shareInfo.share_type == 3}}">分享好友下单可返{{goodsDetail.shareInfo.share_number>=1?goodsDetail.shareInfo.share_number+'元':goodsDetail.shareInfo.share_number*100+'折'}}优惠券</view>
             </block>
           </view>
         </view>

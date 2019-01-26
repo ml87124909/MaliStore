@@ -824,7 +824,7 @@ page {
 }
 .goodsicon {
   font-size: 16px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #ffd305;
   width: 50rpx;
   height: 50rpx;
   border-radius: 50%;
@@ -864,18 +864,20 @@ page {
 .fixed_bottom .form_list_buy {
   background: #ffd305;
   color: #27323f;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
+  height: 100%;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fixed_bottom .form_list_cart {
   background: #ffffff;
   color: #27323f;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
+  height: 100%;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fixed_bottom_popup {
   box-shadow: 0 0 0 0 #fff;

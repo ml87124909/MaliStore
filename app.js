@@ -23,7 +23,7 @@ exports.default = App({
   onLaunch: function onLaunch() {
     _system2.default.attachInfo();
     this.login();
-    //this.shopinfo();
+    this.shopinfo();
   },
   shopinfo: function shopinfo() {
     _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {

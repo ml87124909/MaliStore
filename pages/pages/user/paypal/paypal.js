@@ -25,13 +25,19 @@ exports.default = Page({
     onShow: function onShow() {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
-        var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
         _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
             if (res.code == 0) {
                 that.setData({
-                    amount: res.data,
-                    payinfo: shopInfo
+                    amount: res.data
                 });
+            }
+        });
+        _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+            if (res.code == 0) {
+                that.setData({
+                    payinfo: res.data.shopInfo
+                });
+                wx.setStorage({ key: '__appShopInfo', data: res.data });
             }
         });
     },

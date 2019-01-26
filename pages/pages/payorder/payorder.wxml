@@ -111,7 +111,7 @@
         </view>
       </ui-accordion>
     </view>
-    <view class="pay-ui-row" wx:if="{{hasNoCoupons || balance != 0}}" style="border-top:20rpx solid #f5f5f5;">
+    <view class="pay-ui-row" wx:if="{{hasNoCoupons}}" style="border-top:20rpx solid #f5f5f5;">
       <ui-accordion bindchange="slide" header-height="50" wx:if="{{hasNoCoupons}}" _pid="{{_pid}}">
         <view slot="header">
           <view class="ui-row ui-row-border-bottom" style="height:50px;">
@@ -155,25 +155,6 @@
           </view>
         </view>
       </ui-accordion>
-      <view wx:if="{{balance > 0}}" class="ui-row" style="height:50px;">
-        <view class="ui-col ui-col-8 valign-middle" style="flex: 0 0 66.66666666666666%;padding-left: 20px;">
-          <view class="ui-col-content valign-middle">
-            <view class="ui-check-list" bindtap="change" data-id="{{yveState}}">
-              <switch wx:if="{{yveMoney}}" checked type="checkbox" color="#ffd305"></switch>
-              <switch wx:if="{{!yveMoney}}" type="checkbox" color="#ffd305"></switch>
-              <view>使用余额进行支付</view>
-            </view>
-          </view>
-        </view>
-        <view bindtap="getPayPalTap" class="ui-col ui-col-4 valign-middle" style="flex: 0 0 33.33333333333333%;padding-right: 10px;">
-          <view class="ui-col-content valign-middle">
-            <view class="youhuiquan-box">
-              <text>{{balance}}元</text>
-              <span type="arrow-right" size="18" color="#C5C5C5" class="ui-icon icon-arrow-right" style="color: #C5C5C5;font-size: 18px;"></span>
-            </view>
-          </view>
-        </view>
-      </view>
     </view>
     <view class="pay-ui-row bottom20" style="border-top:20rpx solid #f5f5f5;border-bottom:2rpx dashed #e6e6e6; padding-bottom:10rpx;">
       <view class="ui-row" style="height:40px;">
@@ -209,14 +190,6 @@
         </view>
         <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
           <view class="ui-col-content align-right valign-middle">¥{{yunPrice}}</view>
-        </view>
-      </view>
-      <view wx:if="{{yveMoney}}" class="ui-row" style="height:40px;">
-        <view class="ui-col valign-middle" style="padding-left: 20px;">
-          <view class="ui-col-content valign-middle">余额抵扣</view>
-        </view>
-        <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
-          <view class="ui-col-content align-right valign-middle">- ¥{{balMoney}}</view>
         </view>
       </view>
     </view>
@@ -260,8 +233,7 @@
       <view class="fixed_bottom ui-row" style="height:60px;">
         <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
           <view class="ui-col-content align-left valign-middle">
-            <view wx:if="{{!plusMoney}}" style="font-size:32rpx;">还需支付：¥{{allMoney}}</view>
-            <view wx:if="{{plusMoney}}" style="font-size:32rpx;">还需支付：¥{{plusMoney}}</view>
+            <view style="font-size:32rpx;">还需支付：¥{{allMoney}}</view>
             <view style="color:#ffd305;font-size:24rpx;padding-top:6rpx;" wx:if="{{VipState==1}}">您是尊贵的{{ViplevelName}}，已为您节省 ¥{{VipSmallMoney}}</view>
           </view>
         </view>

@@ -37,6 +37,7 @@ exports.default = Page({
     show: false,
     show1: true,
     show2: false,
+    iphonex: false,
     codeMask: false,
     showMask: false,
     shareMask: false,
@@ -165,6 +166,9 @@ exports.default = Page({
         }
       }
     }
+    if (wx.IPHONEX == 0) {
+      that.setData({ iphonex: true });
+    }
   },
   //检查登录状态
   checklogin: function checklogin() {
@@ -211,11 +215,6 @@ exports.default = Page({
     var uid = wx.getStorageSync('__appInviter').id;
     var token = wx.getStorageSync('__appUserInfo').token;
     _server2.default.get(_urls2.default.links[0].sharegoods, { token: token, user: uid, goods: gid }).then(function (res) {
-      wx.showToast({
-        title: res.msg,
-        icon: 'success',
-        duration: 2000
-      });
       if (res.code == 0) {
         //console.log('返现成功')
       }

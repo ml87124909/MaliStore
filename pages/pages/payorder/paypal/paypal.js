@@ -23,21 +23,26 @@ exports.default = Page({
         numberStyle: {
             backgroundColor: '#27323f',
             color: '#fff',
-            paddingLeft: '4px',
-            paddingRight: '4px',
-            marginLeft: '5px',
-            marginRight: '5px',
-            borderRadius: '2px',
-            fontSize: '12px',
-            minWidth: '30px',
+            paddingLeft: '8rpx',
+            paddingRight: '8rpx',
+            marginLeft: '10rpx',
+            marginRight: '10rpx',
+            borderRadius: '4rpx',
+            fontSize: '26rpx',
+            minWidth: '60rpx',
             display: 'inline-block',
             textAlign: 'center',
-            lineHeight: '20px'
+            lineHeight: '60rpx'
         },
         share: 0,
+        payType: 0,
+        balance: 0,
         orderClose: 0,
         confirm: false,
         showMask: false,
+        yuePay: false,
+        daifuPay: false,
+        wechatPay: true,
         customStyle: {
             'background': 'rgba(51, 51, 51, 0.9)'
         },
@@ -68,15 +73,102 @@ exports.default = Page({
             that.setData({
                 share: e.share
             });
+        } else {
+            _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
+                if (res.code == 0) {
+                    that.setData({ balance: res.data.money });
+                }
+            });
         }
         if (token) {
             _server2.default.get(_urls2.default.links[0].ordepaypal, { token: token, number: e.id }).then(function (res) {
                 if (res.code == 0) {
                     that.setData({
                         orderNumber: e.id,
-                        oederPaypal: res.data
+                        oederPaypal: res.data,
+                        orderMoney: res.data.money.toFixed(2),
+                        payText: '微信支付 ¥' + res.data.money
                     });
                 }
+            });
+        }
+    },
+    selectTap: function selectTap(e) {
+        var that = this;
+        var id = e.currentTarget.dataset.id;
+        var money = that.data.orderMoney;
+        var balance = that.data.balance;
+        if (id == 1) {
+            this.setData({
+                payType: 0,
+                wechatPay: true,
+                daifuPay: false,
+                yuePay: false,
+                payText: '微信支付 ¥' + money
+            });
+        } else if (id == 2) {
+            if (balance >= money) {
+                that.setData({
+                    payType: 1,
+                    wechatPay: false,
+                    daifuPay: false,
+                    yuePay: true,
+                    payText: '余额支付 ¥' + money
+                });
+            } else {
+                var plusMoney = money - balance;
+                var allsMoney = plusMoney.toFixed(2);
+                that.setData({
+                    payType: 2,
+                    wechatPay: true,
+                    daifuPay: false,
+                    yuePay: true,
+                    payText: '余额支付 ¥' + balance + '，微信支付 ¥' + allsMoney
+                });
+            }
+        } else if (id == 3) {
+            this.setData({
+                payType: 3,
+                wechatPay: false,
+                daifuPay: true,
+                yuePay: false,
+                payText: '找微信好友代付'
+            });
+        }
+    },
+    getOrderPayTap: function getOrderPayTap(e) {
+        var that = this;
+        var id = e.currentTarget.dataset.id;
+        var data = that.data.oederPaypal;
+        var money = that.data.orderMoney;
+        if (id == 0) {
+            //微信支付
+            var nextAction = {
+                ctype: 0,
+                id: data.id,
+                ptype: 0
+            };
+            wxpay.wxpay(app, money, data.id, 0, nextAction);
+        } else if (id == 1) {
+            //余额支付
+            var nextAction = {
+                ctype: 0,
+                id: data.id,
+                ptype: 1
+            };
+            wxpay.wxpay(app, money, data.id, 0, nextAction);
+        } else if (id == 2) {
+            //微信+余额支付
+            var nextAction = {
+                ctype: 0,
+                id: data.id,
+                ptype: 2
+            };
+            wxpay.wxpay(app, money, data.id, 0, nextAction);
+        } else if (id == 3) {
+            //微信好友代付
+            that.setData({
+                showMask: true
             });
         }
     },
@@ -132,46 +224,26 @@ exports.default = Page({
         var that = this;
         var share = that.data.share;
         var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
+        that.setData({ showMask: false });
         if (res.from === 'button') {
             if (share == 0) {
                 return {
                     title: that.data.shareText,
                     path: '/pages/pages/payorder/paypal/paypal?id=' + that.data.orderNumber + '&share=1',
-                    imageUrl: that.data.oederPaypal.orderGoods[0].pic,
-                    success: function success(res) {
-                        // 转发成功
-                        wx.switchTab({
-                            url: "/pages/pages/home/home"
-                        });
-                    },
-                    fail: function fail(res) {
-                        // 转发失败
-                    }
+                    imageUrl: that.data.oederPaypal.orderGoods[0].pic
                 };
             } else {
                 return {
                     title: shopInfo.sname,
                     path: '/pages/pages/home/home',
-                    imageUrl: shopInfo.spic,
-                    success: function success(res) {
-                        // 转发成功
-                        wx.switchTab({
-                            url: "/pages/pages/home/home"
-                        });
-                    }
+                    imageUrl: shopInfo.spic
                 };
             }
         } else {
             return {
                 title: shopInfo.sname,
                 path: '/pages/pages/home/home',
-                imageUrl: shopInfo.spic,
-                success: function success(res) {
-                    // 转发成功
-                    wx.switchTab({
-                        url: "/pages/pages/home/home"
-                    });
-                }
+                imageUrl: shopInfo.spic
             };
         }
     },
