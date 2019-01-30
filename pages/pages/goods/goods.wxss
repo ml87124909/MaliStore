@@ -855,11 +855,11 @@ page {
   border-right-width: 1px;
 }
 .iphonex-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 67rpx;
+  background-color: #fff;
 }
 .fixed_bottom {
-  background: #fff;
-  box-shadow: 0 0px 15px 0 #eaeaea;
+  background-color: #fff;
 }
 .fixed_bottom .form_list_buy {
   background: #ffd305;
@@ -1024,13 +1024,19 @@ page {
 .goodsDetail-propertychild-box {
   min-height: 340rpx;
   overflow: scroll;
-  padding-bottom: 150rpx;
+  margin-bottom: 150rpx;
+}
+.iphonexPropertychild {
+  margin-bottom: 210rpx;
 }
 .fixed_bottom {
   position: fixed !important;
   bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
+}
+.iphonexBottom {
+  bottom: 67rpx !important;
 }
 .swiper video {
   width: 750rpx;

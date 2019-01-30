@@ -89,17 +89,17 @@
     </view>
   </view>
   <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '下架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
-    <view class="fixed_bottom ui-row" bindtap="gethomeTap" style="height:50px;">
+    <view class="fixed_bottom {{iphonex?'iphonexBottom':''}} ui-row" bindtap="gethomeTap" style="height:50px;">
       <view class="fixed_bottom_ui-col fixed_bottom_down ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
         <view class="ui-col-content align-center valign-middle">
           <view>商品已经下架了，去看看其他的吧～</view>
         </view>
       </view>
     </view>
-    <view class="iphonex-bottom"></view>
+    <view class="{{iphonex?'iphonex-bottom':''}}"></view>
   </ui-fixed-view>
   <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
-    <view class="fixed_bottom ui-row" style="height:{{iphonex? '70':'50'}}px;">
+    <view class="fixed_bottom {{iphonex?'iphonexBottom':''}} ui-row" style="height:50px;">
       <view class="fixed_bottom_ui-col ui-col ui-col-align-center align-center valign-middle" style="padding-right: 1px;">
         <view class="ui-col-content align-center valign-middle">
           <view class="fixed_bottom_box">
@@ -135,7 +135,7 @@
         </view>
       </view>
     </view>
-    <view class="iphonex-bottom"></view>
+    <view class="{{iphonex?'iphonex-bottom':''}}"></view>
   </ui-fixed-view>
   <view class="position-button-box">
     <view wx:if="{{goodsDetail.shareInfo.share_type != 0 && shareTips == true && goodsDetail.basicInfo.status == '上架'}}" class="share-tips">
@@ -181,7 +181,7 @@
         </view>
       </view>
     </view>
-    <view class="goodsDetail-propertychild-box">
+    <view class="goodsDetail-propertychild-box {{iphonex?'iphonexPropertychild':''}}">
       <block wx:for="{{goodsDetail.specInfo}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
         <view class="size-label-box ui-row" style="">
           <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
@@ -215,7 +215,7 @@
       </view>
     </view>
     <ui-fixed-view wx:if="{{goodsDetail.basicInfo.status == '上架'}}" bottom="0" left="0" right="0" _pid="{{_pid}}">
-      <view class="fixed_bottom fixed_bottom_popup ui-row" style="height:{{iphonex? '70':'50'}}px;">
+      <view class="fixed_bottom fixed_bottom_popup {{iphonex?'iphonexBottom':''}} ui-row" style="height:50px;">
         <view class="ui-col valign-middle" style="">
           <view class="ui-col-content valign-middle">
             <view class="form_list_cart" bindtap="addShopCar">加入购物车</view>
@@ -227,6 +227,7 @@
           </view>
         </view>
       </view>
+      <view class="{{iphonex?'iphonex-bottom':''}}"></view>
     </ui-fixed-view>
   </ui-popup>
   <!-- 领取优惠券弹窗 -->
