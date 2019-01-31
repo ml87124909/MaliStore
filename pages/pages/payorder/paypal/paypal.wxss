@@ -138,6 +138,9 @@ page {
   justify-content: center;
   font-size: 30rpx;
 }
+.money-button-box .iphonexBottom {
+  bottom: 67rpx !important;
+}
 .user-order-top-box {
   background-color: #fff;
   display: flex;

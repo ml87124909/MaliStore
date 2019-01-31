@@ -92,6 +92,9 @@ exports.default = Page({
                 }
             });
         }
+        if (wx.IPHONEX == 0) {
+            that.setData({ iphonex: true });
+        }
     },
     selectTap: function selectTap(e) {
         var that = this;

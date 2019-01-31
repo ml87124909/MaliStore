@@ -76,7 +76,7 @@
           </view>
           <view class="button {{daifuPay? 'active':''}}"></view>
         </view>
-        <view class="footer-button" bindtap="getOrderPayTap" data-id="{{payType}}">
+        <view class="footer-button {{iphonex?'iphonexBottom':''}}" bindtap="getOrderPayTap" data-id="{{payType}}">
           <view class="price">{{payText}}</view>
         </view>
       </view>

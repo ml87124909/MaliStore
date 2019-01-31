@@ -230,7 +230,7 @@
       </view>
     </view>
     <ui-fixed-view bottom="0" left="0" right="0" class="fixed-top-bottom" _pid="{{_pid}}">
-      <view class="fixed_bottom ui-row" style="height:60px;">
+      <view class="fixed_bottom {{iphonex?'iphonexBottom':''}} ui-row" style="height:50px;">
         <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
           <view class="ui-col-content align-left valign-middle">
             <view style="font-size:32rpx;">还需支付：¥{{allMoney}}</view>
@@ -247,7 +247,7 @@
           </view>
         </view>
       </view>
-      <view class="iphonex-bottom"></view>
+      <view class="{{iphonex?'iphonex-bottom':''}}"></view>
     </ui-fixed-view>
   </form>
 </page>

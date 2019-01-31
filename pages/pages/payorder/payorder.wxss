@@ -127,19 +127,20 @@
   padding-top: 20rpx;
 }
 .iphonex-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 67rpx;
+  background-color: #fff;
 }
 .fixed_bottom {
   color: #27323f;
   background: #fff;
-  box-shadow: 0 0px 15px 0 #eaeaea;
+  border-top: 2rpx solid #f5f5f5;
 }
 .fixed_bottom .form_list {
   background: #ffd305;
   color: #27323f;
-  height: 60px;
+  height: 50px;
   text-align: center;
-  line-height: 60px;
+  line-height: 50px;
   font-size: 32rpx;
   position: relative;
 }
@@ -230,4 +231,7 @@
   bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
+}
+.iphonexBottom {
+  bottom: 67rpx !important;
 }

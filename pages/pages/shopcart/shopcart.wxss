@@ -156,6 +156,9 @@ page {
   padding: 10rpx 20rpx 5rpx 0;
 }
 .goods-info .text-box .goods-label {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 26rpx;
   color: #7b8196;
   height: 38rpx;
