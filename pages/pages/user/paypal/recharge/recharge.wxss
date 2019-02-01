@@ -153,3 +153,6 @@ page {
 .recharge-money-box .recharge-button::after {
   border: 0;
 }
+.recharge-money-box .iphonexBottom {
+  bottom: 67rpx;
+}

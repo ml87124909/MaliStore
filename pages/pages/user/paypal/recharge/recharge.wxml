@@ -42,7 +42,7 @@
           </view>
         </view>
       </view>
-      <button class="recharge-button" formType="submit">确认充值</button>
+      <button class="recharge-button {{iphonex?'iphonexBottom':''}}" formType="submit">确认充值</button>
     </form>
   </view>
 </page>

@@ -29,6 +29,9 @@ exports.default = Page({
                 that.setData({ payList: res.data });
             }
         });
+        if (wx.IPHONEX == 0) {
+            that.setData({ iphonex: true });
+        }
     },
     onShow: function onShow() {
         var that = this;

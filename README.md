@@ -41,13 +41,13 @@
 - [ ] 转盘抽奖
 
 ## 问题反馈
-扫描微信二维码，添加 **码力小助手** 为联系人
+扫描微信二维码，添加 [**码力小助手（WeChatID: kutche）**][4] 为联系人
 发送消息“**码力小店**”，即可获取最新的微信群二维码
  
 如果你在配置过程中遇到问题或者有更好的开发建议
 请在群内反馈交流。
 
-![此处输入图片的描述][4]
+![此处输入图片的描述][5]
 
 ## License
 MIT License
@@ -64,6 +64,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
   [1]: https://www.maliapi.com/
-  [2]: https://xiaodu.maliapi.com/static/data/fb9ddced1a007156a81540d5f1a0786e.jpg
+  [2]: https://xiaodu.maliapi.com/static/data/5da8f63d1cfe8b23abd7bcdc42d9131a.jpg
   [3]: https://www.maliapi.com/
   [4]: https://xiaodu.maliapi.com/static/data/510b3dc7c4d1a29f573384ef97688dd1.png
+  [5]: https://xiaodu.maliapi.com/static/data/510b3dc7c4d1a29f573384ef97688dd1.png

@@ -90,14 +90,14 @@
   position: fixed;
   background-color: #ffd305;
   color: #27323f;
-  width: 120rpx;
-  height: 68rpx;
+  width: 160rpx;
+  height: 78rpx;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   bottom: 220rpx;
   box-shadow: 0 0 12rpx #eee;
   right: 0;

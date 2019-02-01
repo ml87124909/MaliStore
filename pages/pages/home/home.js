@@ -192,7 +192,7 @@ exports.default = Page({
     if (t.scrollTop >= 280) {
       wx.setNavigationBarColor({
         frontColor: '#000000',
-        backgroundColor: 'rgba(255,255,255,.0)'
+        backgroundColor: '#ffffff'
       });
       this.setData({
         navigationbar: "scrollTop"
@@ -200,7 +200,7 @@ exports.default = Page({
     } else {
       wx.setNavigationBarColor({
         frontColor: '#ffffff',
-        backgroundColor: 'rgba(255,255,255,.0)'
+        backgroundColor: '#ffffff'
       });
       this.setData({
         navigationbar: ""
