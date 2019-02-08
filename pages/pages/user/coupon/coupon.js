@@ -122,6 +122,15 @@ exports.default = Page({
                     success: function success(res) {}
                 });
             }
+            if (res.code == 301) {
+                wx.showConfirm({
+                    content: "\u4F18\u60E0\u5238\u5DF2\u7ECF\u9886\u5B8C\u4E86\r\n\u4E0B\u6B21\u8981\u65E9\u70B9\u6765\u54E6\uFF5E",
+                    showCancel: false,
+                    confirmColor: '#ffd305',
+                    confirmText: "\u6211\u77E5\u9053\u4E86",
+                    success: function success(res) {}
+                });
+            }
         });
     },
     getCouponsTap: function getCouponsTap() {

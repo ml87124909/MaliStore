@@ -92,11 +92,16 @@
         </view>
       </view>
       <view wx:if="{{orderDetails.pick_type == '快递配送'}}" class="order-baoguo-header ui-row" style="height:45px;">
-        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;flex:0 0 90px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
           <view class="ui-col-content align-left valign-middle">
-            <view class="name" wx:if="{{item.kuaid}}">包裹{{index+1}}</view>
-            <view class="name" wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1'}}">未发货商品</view>
-            <view class="name" wx:if="{{orderDetails.status == '-1' || orderDetails.status == '1'}}">订单商品</view>
+            <block wx:if="{{item.kuaname!='商家配送'}}">
+              <view class="name" wx:if="{{item.kuaid}}">包裹{{index+1}}</view>
+              <view class="name" wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1'}}">未发货商品</view>
+              <view class="name" wx:if="{{orderDetails.status == '-1' || orderDetails.status == '1'}}">订单商品</view>
+            </block>
+            <block wx:else="">
+              <view class="name">自营配送商品</view>
+            </block>
           </view>
         </view>
         <view class="ui-col ui-col-align-left align-left valign-middle" style="flex:0 0 180px;">
@@ -106,10 +111,16 @@
         </view>
         <view wx:if="{{orderDetails.status < 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
           <view class="ui-col-content align-right valign-middle">
-            <view class="time" wx:if="{{item.kuaid && item.kuastate==0}}">已发货</view>
-            <view class="time" wx:if="{{item.kuaid && item.kuastate==1}}">已收货</view>
-            <view class="time" wx:if="{{!item.kuaid && orderDetails.status != '-1'}}">待发货</view>
-            <view class="time" wx:if="{{orderDetails.status == '-1'}}">已取消</view>
+            <block wx:if="{{item.kuaname!='商家配送'}}">
+              <view class="time" wx:if="{{item.kuaid && item.kuastate==0}}">已发货</view>
+              <view class="time" wx:if="{{item.kuaid && item.kuastate==1}}">已收货</view>
+              <view class="time" wx:if="{{!item.kuaid && orderDetails.status != '-1'}}">待发货</view>
+              <view class="time" wx:if="{{orderDetails.status == '-1'}}">已取消</view>
+            </block>
+            <block wx:else="">
+              <view class="time" wx:if="{{item.kuastate==0}}">已发货</view>
+              <view class="time" wx:if="{{item.kuastate==1}}">已收货</view>
+            </block>
           </view>
         </view>
         <view wx:elif="{{orderDetails.status > 90}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 12px;">
@@ -168,11 +179,13 @@
           <view class="ui-col-content align-right valign-middle">
             <view wx:if="{{orderDetails.pick_type == '快递配送'}}" class="button-box">
               <block wx:if="{{orderDetails.status < 90}}">
-                <view wx:if="{{orderDetails.status == 5 || orderDetails.status == 6 || orderDetails.status == 7 || item.kuaid}}" bindtap="getWuLiuTap" data-id="{{item.kuaid}}" data-name="{{item.kuaname}}" class="button">物流动态</view>
+                <block wx:if="{{item.kuaname != '商家配送'}}">
+                  <view wx:if="{{orderDetails.status == 5 || orderDetails.status == 6 || orderDetails.status == 7 || item.kuaid}}" bindtap="getWuLiuTap" data-id="{{item.kuaid}}" data-name="{{item.kuaname}}" class="button">物流动态</view>
+                </block>
                 <view wx:if="{{orderDetails.status == 5 && item.kuastate == 0}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
                 <view wx:if="{{orderDetails.status == 3 && item.kuastate == 0 && item.kuaid}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
                 <view wx:if="{{orderDetails.status == 6}}" bindtap="geiPingjiaTap" data-id="{{orderDetails.id}}" data-kuaid="{{item.kuaid}}" class="button">评价有礼</view>
-                <view wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1'}}" bindtap="getFahuoTips" class="button">提醒发货</view>
+                <view wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1' && item.kuaname != '商家配送'}}" bindtap="getFahuoTips" class="button">提醒发货</view>
                 <view wx:if="{{orderDetails.status == 1}}" bindtap="getOrderCancelTap" data-id="{{orderDetails.id}}" class="button">取消订单</view>
                 <view wx:if="{{orderDetails.status == 1}}" class="button paybutton" bindtap="getPayOrderTap" data-id="{{orderDetails.number}}">支付订单</view>
               </block>
