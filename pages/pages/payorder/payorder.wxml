@@ -62,10 +62,19 @@
         </view>
         <view slot="content">
           <view class="accordion_content_row ui-row" style="">
-            <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;padding-right: 20px;">
+            <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;padding-right: 18px;">
               <view class="ui-col-content align-left valign-middle">
                 <view class="ui-check-list-box">
-                  <ui-check-list bindchange="addschange" label-position="left" max="1" options="{{inlineDescList}}" value="{{inlineDescListValue}}" _pid="{{_pid}}"></ui-check-list>
+                  <radio-group class="radio-group" bindchange="radioChange">
+                    <label class="radio" wx:for="{{inlineDescList}}" wx:key="id">
+                      <text>{{item.value}}</text>
+                      <radio value="{{item.key}}" checked="{{item.checked}}" color="#ffd305">
+                      </radio>
+                    </label>
+                  </radio-group>
+                  <!--
+                                    <ui-check-list bindchange="addschange" label-position="left" max="1" options="{{inlineDescList}}" value="{{inlineDescListKey}}"></ui-check-list>
+                                    -->
                 </view>
               </view>
             </view>
@@ -73,7 +82,7 @@
         </view>
       </ui-accordion>
     </view>
-    <view class="shops-ui-row" wx:if="{{inlineDescListValue[0] == 1}}">
+    <view class="shops-ui-row" wx:if="{{inlineDescListKey == 1}}">
       <ui-accordion bindchange="slide" header-height="50" _pid="{{_pid}}">
         <view slot="header">
           <view class="ui-row ui-row-border-bottom" style="height:50px;">

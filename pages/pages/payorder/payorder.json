@@ -2,7 +2,6 @@
   "usingComponents": {
     "ui-nav-bar": "../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
     "ui-accordion": "../../../packages/touchui-wx-components/ui-accordion/dist/index",
-    "ui-check-list": "../../../packages/touchui-wx-components/ui-check-list/dist/index",
     "ui-fixed-view": "../../../packages/touchui-wx-components/ui-fixed-view/dist/index"
   }
 }

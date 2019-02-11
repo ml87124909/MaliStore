@@ -210,6 +210,19 @@
   display: block;
   width: 100%;
 }
+.ui-check-list-box .radio-group {
+  display: flex;
+  flex-direction: column;
+}
+.ui-check-list-box .radio-group .radio {
+  display: flex;
+  height: 90rpx;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.ui-check-list-box .radio-group .radio text {
+  width: 95%;
+}
 .ui-check-list-box .ui-check-list .cells {
   background-color: #27323f;
 }

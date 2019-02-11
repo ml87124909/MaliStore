@@ -43,7 +43,6 @@ exports.default = Page({
         shopsName: '请选择自提门店',
         couponsName: '请选择优惠券',
         wuLiuName: "\u8BF7\u9009\u62E9\u914D\u9001\u65B9\u5F0F"
-        //inlineDescListValue: [0],
     },
     onShow: function onShow() {
         var that = this;
@@ -123,9 +122,10 @@ exports.default = Page({
             if (res.code == 0) {
                 for (var i = 0; i < res.data.length; i++) {
                     if (res.data[i].default == '1') {
+                        res.data[i].checked = true;
                         that.setData({
                             wuLiuName: res.data[i].value,
-                            inlineDescListValue: [res.data[i].key]
+                            inlineDescListKey: res.data[i].key
                         });
                     }
                 }
@@ -183,12 +183,12 @@ exports.default = Page({
             part: 'order_create',
             token: loginToken,
             goodsJsonStr: that.data.goodsJsonStr,
-            kuaid: that.data.inlineDescListValue[0],
+            kuaid: that.data.inlineDescListKey,
             coupon_id: that.data.coupon_id,
             remark: remark
         };
         //上门自提 & 无须配送
-        if (that.data.inlineDescListValue[0] >= 1) {
+        if (that.data.inlineDescListKey >= 1) {
             if (!that.data.curAddressData) {
                 wx.showConfirm({
                     content: "\u8BF7\u5148\u8BBE\u7F6E\u60A8\u7684\u8054\u7CFB\u4FE1\u606F\uFF01",
@@ -212,7 +212,7 @@ exports.default = Page({
             postData.phone = that.data.curAddressData.phone;
         }
         //快递配送
-        if (that.data.inlineDescListValue[0] == 0) {
+        if (that.data.inlineDescListKey == 0) {
             if (!that.data.curAddressData) {
                 wx.showConfirm({
                     content: "\u8BF7\u5148\u8BBE\u7F6E\u60A8\u7684\u6536\u8D27\u5730\u5740\uFF01",
@@ -250,7 +250,7 @@ exports.default = Page({
             }
         }
         //上门自提，选择门店
-        if (e && that.data.inlineDescListValue[0] == 1 && that.data.mendian_id == null) {
+        if (e && that.data.inlineDescListKey == 1 && that.data.mendian_id == null) {
             wx.showConfirm({
                 content: "\u4E0A\u95E8\u81EA\u63D0\u9700\u8981\u9009\u62E9\u95E8\u5E97\r\n\u8BF7\u9009\u62E9\u60A8\u5C31\u8FD1\u7684\u81EA\u63D0\u95E8\u5E97",
                 cancelColor: "#999999",
@@ -334,14 +334,18 @@ exports.default = Page({
             }
         });
     },
-    addschange: function addschange(e) {
+    radioChange: function radioChange(e) {
         var that = this;
         var val = e.detail.value;
         var list = that.data.inlineDescList;
-        that.setData({
-            inlineDescListValue: val,
-            wuLiuName: list[val].value
-        });
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].key == val[0]) {
+                that.setData({
+                    wuLiuName: list[i].value,
+                    inlineDescListKey: list[i].key
+                });
+            }
+        }
         that.createOrder();
     },
     bindChangeShops: function bindChangeShops(e) {
