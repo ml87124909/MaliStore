@@ -155,13 +155,13 @@ exports.default = Page({
           that.getgoodsdeft(id);
           if (token) {
             //收藏状态
-            that.getfav(e.id);
+            that.getfav(id);
             //商品评论
-            that.reputation(e.id);
+            that.reputation(id);
             //商品优惠券
-            that.getGoodsCoupons(e.id);
+            that.getGoodsCoupons(id);
             //增加浏览记录
-            that.history(e.id);
+            that.history(id);
           }
         }
       }
