@@ -84,6 +84,7 @@
   width: 75%;
   right: 0;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .menu-right scroll-view {
   padding-bottom: 160rpx;

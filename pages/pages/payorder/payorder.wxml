@@ -201,6 +201,11 @@
           <view class="ui-col-content align-right valign-middle">¥{{yunPrice}}</view>
         </view>
       </view>
+      <view wx:if="{{couponsMoney!=0}}" class="ui-row" style="height:20px;">
+        <view style="font-size:24rpx;color:#f00;" class="ui-col ui-col-align-center align-center valign-middle">
+          <view class="ui-col-content align-center valign-middle">取消订单不会退还已经使用的优惠券，请下单后及时支付</view>
+        </view>
+      </view>
     </view>
     <view class="pay-ui-row">
       <block wx:for-items="{{goodsList}}" wx:key="{{index}}">

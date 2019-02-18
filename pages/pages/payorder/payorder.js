@@ -323,7 +323,7 @@ exports.default = Page({
         _server2.default.get(_urls2.default.links[0].ordercoups, { token: token, goodsJsonStr: that.data.goodsJsonStr }).then(function (res) {
             if (res.code == 0) {
                 var coupons = res.json.filter(function (entity) {
-                    return entity.max_money <= that.data.allGoodsAndYunPrice;
+                    return entity.max_money <= that.data.allGoodsPrice;
                 });
                 if (coupons.length > 0) {
                     that.setData({
