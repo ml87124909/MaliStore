@@ -44,7 +44,7 @@
       <open-data class="avatar" type="userAvatarUrl"></open-data>
       <view class="user-state">
         <open-data class="name" type="userNickName"></open-data>
-        <view wx:if="{{vipState == 1}}" class="money">已经消费了¥{{userInfo.consume}}</view>
+        <view class="money">已经消费了¥{{userInfo.consume}}</view>
       </view>
     </view>
     <view class="vip-level-info">

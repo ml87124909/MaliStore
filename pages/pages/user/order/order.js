@@ -31,8 +31,16 @@ exports.default = Page({
             'background': 'rgba(51, 51, 51, 0.9)'
         }
     },
+    onshow: function onshow() {
+        var that = this;
+        var data = that.data.setDataE;
+        if (data) {
+            that.onLoad(that.data.setDataE);
+        }
+    },
     onLoad: function onLoad(e) {
         var that = this;
+        that.setData({ setDataE: e });
         that.handleChangeBtn(e.id);
         if (e.share) {
             that.setData({ share: e.share });
