@@ -246,9 +246,9 @@ exports.default = Page({
   },
   onShareAppMessage: function onShareAppMessage() {
     return {
-      title: this.shopInfo.sname,
+      title: this.data.shopInfo.sname,
       path: '/pages/pages/home/home',
-      imageUrl: this.shopInfo.spic,
+      imageUrl: this.data.shopInfo.spic,
       success: function success(res) {
         // 转发成功
       },
