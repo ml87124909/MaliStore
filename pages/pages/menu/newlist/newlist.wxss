@@ -62,11 +62,17 @@ page {
 .history_content_box .histor_goods_box .histor_goods_info .goods_name {
   color: #27323f;
   font-size: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .history_content_box .histor_goods_box .histor_goods_info .goods_introduce {
   color: #7b8196;
   font-size: 26rpx;
   padding-top: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .history_content_box .histor_goods_box .histor_goods_info .goods_price {
   color: #a18d65;

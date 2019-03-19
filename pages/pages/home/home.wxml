@@ -35,11 +35,8 @@
         <view class="coupons-info-box">
           <image src="{{couponsInfo.icons}}" />
           <view class="info-box">
-            <view wx:if="{{couponsInfo.type==0}}" class="price">
-              <text>¥</text>{{couponsInfo.money}}</view>
-            <view wx:if="{{couponsInfo.type==1}}" class="price">{{couponsInfo.money/10}}
-              <text>折</text>
-            </view>
+            <view wx:if="{{couponsInfo.type==0}}" class="price"><text>¥</text>{{couponsInfo.money}}</view>
+            <view wx:if="{{couponsInfo.type==1}}" class="price">{{couponsInfo.money/10}}<text>折</text></view>
             <view class="name">{{couponsInfo.name}}</view>
           </view>
         </view>

@@ -94,20 +94,14 @@
         <view>申请售后信息</view>
         <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="handleShowMask" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
       </view>
-      <view class="numbe">售后单号：
-        <text>{{shopList.change_number}}</text>
-      </view>
+      <view class="numbe">售后单号：<text>{{shopList.change_number}}</text></view>
       <view class="times">售后类型：
         <text wx:if="{{shopList.type == 0}}">退换货</text>
         <text wx:if="{{shopList.type == 1}}">仅退款</text>
         <text wx:if="{{shopList.type == 2}}">退货退款</text>
       </view>
-      <view class="times">申请时间：
-        <text>{{shopList.date}}</text>
-      </view>
-      <view class="times" wx:if="{{shopList.kuaicode}}">退回信息：
-        <text>{{shopList.kuainame}}/{{shopList.kuaicode}}</text>
-      </view>
+      <view class="times">申请时间：<text>{{shopList.date}}</text></view>
+      <view class="times" wx:if="{{shopList.kuaicode}}">退回信息：<text>{{shopList.kuainame}}/{{shopList.kuaicode}}</text></view>
       <view class="text-box">
         <view class="text-title">申请原因：</view>
         <view class="text-info">{{shopList.reason}}</view>
@@ -143,9 +137,7 @@
         </form>
       </view>
       <view class="mask-info" bindtap="getCopyShopTap">
-        <view class="name">退货寄件信息
-          <text>（点击可复制）</text>
-        </view>
+        <view class="name">退货寄件信息<text>（点击可复制）</text></view>
         <view class="info">
           <view>收件姓名：</view>
           <text>{{shopInfo.gname}}</text>

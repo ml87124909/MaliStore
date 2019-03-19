@@ -42,9 +42,7 @@
       <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
         <view class="ui-col-content align-left valign-middle">
           <view class="order-ziti">
-            <view class="ziti-name">{{orderDetails.shopinfo.cname}}
-              <text wx:if="{{distance}}">（距离{{distance/1000}}km）</text>
-            </view>
+            <view class="ziti-name">{{orderDetails.shopinfo.cname}}<text wx:if="{{distance}}">（距离{{distance/1000}}km）</text></view>
             <view class="ziti-numr" bindtap="getCallTap" data-phone="{{orderDetails.shopinfo.contact}}">{{orderDetails.shopinfo.contact}}</view>
             <view class="ziti-adds">{{orderDetails.shopinfo.address}}</view>
           </view>
@@ -321,9 +319,7 @@
       </view>
     </view>
     <view class="order-kefu-box">
-      <view class="order-kefu-name">客服服务时间：
-        <text>{{shopInfo.times }}</text>
-      </view>
+      <view class="order-kefu-name">客服服务时间：<text>{{shopInfo.times }}</text></view>
       <view class="ui-row" style="height:60px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
           <view class="ui-col-content align-center valign-middle">

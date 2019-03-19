@@ -46,9 +46,7 @@
           </view>
           <textarea class="piangjia-textarea" placeholder="您觉得这个商品怎么样？请写下您对这个商品的评价～" name="textarea"></textarea>
           <view class="submit-box">
-            <view class="right">
-              <button form-type="submit">提交评价</button>
-            </view>
+            <view class="right"><button form-type="submit">提交评价</button></view>
           </view>
         </block>
         <block wx:if="{{item.statse == 1}}">

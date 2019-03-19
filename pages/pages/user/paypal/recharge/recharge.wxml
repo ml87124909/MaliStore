@@ -22,21 +22,17 @@
   <view style="height:{{NAV_HEIGHT}}"></view>
   <view class="recharge-hrader">
     <view class="name">我的余额</view>
-    <view class="money">
-      <text>¥</text>{{amount.money}}</view>
+    <view class="money"><text>¥</text>{{amount.money}}</view>
     <view class="info" bindtap="paypalinfoTap">充值记录</view>
   </view>
   <view class="recharge-money-box">
     <form bindsubmit="bindSave">
       <input name="money" placeholder="请输入充值金额" class="input-money" maxlength="6" type="digit"></input>
       <view class="recharge-money-list">
-        <view class="list-name">充值返现
-          <text>(赠送金额可以购物使用但不能提现)</text>
-        </view>
+        <view class="list-name">充值返现<text>(赠送金额可以购物使用但不能提现)</text></view>
         <view class="list-box">
           <view class="list" wx:for="{{payList}}" wx:key="{{index}}" bindtap="getPaypalTap" data-money="{{item.money}}">
-            <view class="name">
-              <text>¥</text>{{item.money}}</view>
+            <view class="name"><text>¥</text>{{item.money}}</view>
             <view class="info">赠送¥{{item.give}}</view>
             <view class="money">实际到账¥{{item.round}}</view>
           </view>

@@ -50,8 +50,7 @@
   </template>
   <template name="carttips">
     <block wx:for="{{carttips}}" wx:key="id">
-      <view class="cart-tip">
-        <i class="icon-cart"></i>{{item.name}}</view>
+      <view class="cart-tip"><i class="icon-cart"></i>{{item.name}}</view>
     </block>
   </template>
   <template name="basicInfo">
@@ -98,9 +97,7 @@
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
               <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
-              <view bindtap="getmamberTap" class="column-goods-vip-pay">会员中心
-                <i class="vip-right"></i>
-              </view>
+              <view bindtap="getmamberTap" class="column-goods-vip-pay">会员中心<i class="vip-right"></i></view>
             </view>
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
               <image src="../../../images/vip.png" lazy-load="true" />
@@ -111,9 +108,7 @@
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
               <image src="../../../images/vip.png" lazy-load="true" />
               <view class="column-goods-vip">超级会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
-              <view bindtap="getmamberTap" class="column-goods-vip-pay">立即开通
-                <i class="vip-right"></i>
-              </view>
+              <view bindtap="getmamberTap" class="column-goods-vip-pay">立即开通<i class="vip-right"></i></view>
             </view>
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
               <image src="../../../images/vip.png" lazy-load="true" />
@@ -408,9 +403,7 @@
       </view>
     </view>
     <!-- 重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务 -->
-    <view class="sample_power">
-      <i></i>
-    </view>
+    <view class="sample_power"><i></i></view>
   </template>
   <template name="hcategory">
     <view class="category" wx:for="{{category}}" wx:key="id">

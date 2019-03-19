@@ -14,5 +14,21 @@
   </view>
 </view>
 <wxs module="util">
-  module.exports = { isChecked: function (value, item) { if (typeof item === 'object') { return value.indexOf(item.key) > -1 } return value.indexOf(item) > -1 }, getItem: function (options, item) { return typeof item === 'object' ? item.value : item }, getCheckedClass: function (value, item) { if (typeof item === 'object') { return value.indexOf(item.key) > -1 ? 'is-checked' : '' } return value.indexOf(item) > -1 ? 'is-checked' : '' } }
+  module.exports = {
+  isChecked: function (value, item) {
+  if (typeof item === 'object') {
+  return value.indexOf(item.key) > -1
+  }
+  return value.indexOf(item) > -1
+  },
+  getItem: function (options, item) {
+  return typeof item === 'object' ? item.value : item
+  },
+  getCheckedClass: function (value, item) {
+  if (typeof item === 'object') {
+  return value.indexOf(item.key) > -1 ? 'is-checked' : ''
+  }
+  return value.indexOf(item) > -1 ? 'is-checked' : ''
+  }
+  }
 </wxs>

@@ -57,9 +57,7 @@
           <view class="ui-col-content align-left valign-middle">
             <view class="address-picker">
               <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-                <view class="picker">{{region[0]}}
-                  <text>-</text>{{region[1]}}
-                  <text>-</text>{{region[2]}}</view>
+                <view class="picker">{{region[0]}}<text>-</text>{{region[1]}}<text>-</text>{{region[2]}}</view>
               </picker>
             </view>
           </view>

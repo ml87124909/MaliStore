@@ -52,8 +52,7 @@
     </view>
     <view class="special-topic-list-box">
       <view class="special-topic-list" bindtap="getTopicTap" data-id="12">
-        <image src="../../../images/pay_coupon.png" />
-        <text>199元起</text>
+        <image src="../../../images/pay_coupon.png" /><text>199元起</text>
         <view class="special-topic-list-title">选择一种风格，选择一种人生</view>
         <view class="special-topic-list-text">ins风、北欧风、复古风等数十款好物限时特价</view>
       </view>

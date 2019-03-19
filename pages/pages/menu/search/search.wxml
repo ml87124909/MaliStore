@@ -56,8 +56,7 @@
   </view>
   <view wx:if="{{!goods}}" class="no-more-goods">
     <image src="../../../../images/none/search_empty.png" class="no-order-img" />
-    <view class="text">暂无商品，建议换个关键词试试
-      <view>
+    <view class="text">暂无商品，建议换个关键词试试<view>
       </view>
     </view>
   </view>

@@ -22,9 +22,7 @@
   <view style="height:{{NAV_HEIGHT}}"></view>
   <view class="share-header-box">
     <view class="name">收益现金</view>
-    <view class="money">{{profitInfo.money}}
-      <text>元</text>
-    </view>
+    <view class="money">{{profitInfo.money}}<text>元</text></view>
     <view class="ui-row" style="height:20px;">
       <view class="ui-col-left ui-col ui-col-align-center align-center valign-middle" style="">
         <view class="ui-col-content align-center valign-middle">
@@ -66,24 +64,15 @@
         <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">
           <view class="ui-col-content align-center valign-middle">
             <block wx:if="{{item.share_type == 2}}">
-              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}
-                <text>元</text>
-              </view>
-              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}
-                <text>折</text>
-              </view>
+              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}<text>元</text></view>
+              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}<text>折</text></view>
             </block>
             <block wx:elif="{{item.share_type == 5}}">
-              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}
-                <text>元</text>
-              </view>
-              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}
-                <text>折</text>
-              </view>
+              <view class="number" wx:if="{{item.number >= 1}}">{{item.number}}<text>元</text></view>
+              <view class="number" wx:if="{{item.number < 1}}">{{item.number*10}}<text>折</text></view>
             </block>
             <block wx:else="">
-              <view class="number">
-                <text>+</text>{{item.number}}</view>
+              <view class="number"><text>+</text>{{item.number}}</view>
             </block>
           </view>
         </view>

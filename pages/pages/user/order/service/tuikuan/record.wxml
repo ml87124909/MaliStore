@@ -98,15 +98,9 @@
         <view>申请退款信息</view>
         <span type="close" size="14" color="#27323f" data-show="{{ false }}" bindtap="handleShowMask" class="ui-icon icon-close" style="color: #27323f;font-size: 14px;"></span>
       </view>
-      <view class="numbe">退款单号：
-        <text>{{shopList.refund_number}}</text>
-      </view>
-      <view class="times">申请时间：
-        <text>{{shopList.date}}</text>
-      </view>
-      <view class="money">退款金额：
-        <text>¥{{shopList.money}}</text>
-      </view>
+      <view class="numbe">退款单号：<text>{{shopList.refund_number}}</text></view>
+      <view class="times">申请时间：<text>{{shopList.date}}</text></view>
+      <view class="money">退款金额：<text>¥{{shopList.money}}</text></view>
       <view class="text-box">
         <view class="text-title">申请原因：</view>
         <view class="text-info">{{shopList.reason}}</view>

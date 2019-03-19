@@ -464,9 +464,21 @@ exports.default = Page({
                           //商品小程序码
                           var code = qr.tempFilePath;
                           //商品名字
-                          var name = data.basicInfo.name;
+                          var nams = data.basicInfo.name;
+                          var nsta = nams.split('');
+                          if (nsta.length >= 15) {
+                            var name = data.basicInfo.name.substr(0, 15) + '...';
+                          } else {
+                            var name = data.basicInfo.name;
+                          }
                           //商品介绍
-                          var itce = data.basicInfo.introduce;
+                          var itcs = data.basicInfo.introduce.substr(0, 20);
+                          var ista = itcs.split('');
+                          if (ista.length >= 20) {
+                            var itce = data.basicInfo.introduce.substr(0, 19) + '...';
+                          } else {
+                            var itce = data.basicInfo.introduce;
+                          }
                           //商品价格
                           var prie = data.basicInfo.mini_price;
                           //用户名字

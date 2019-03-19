@@ -30,12 +30,8 @@
         </view>
         <view class="ui-col ui-col-align-left align-left valign-middle" style="">
           <view class="ui-col-content align-left valign-middle">
-            <view class="name">物流公司：
-              <text>{{name}}</text>
-            </view>
-            <view class="name">物流单号：
-              <text>{{id}}</text>
-            </view>
+            <view class="name">物流公司：<text>{{name}}</text></view>
+            <view class="name">物流单号：<text>{{id}}</text></view>
           </view>
         </view>
         <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 80px;">

@@ -76,11 +76,7 @@
               </view>
             </view>
           </view>
-          <view class="info-text" wx:if="{{item.remark}}">财务备注：
-            <text>{{item.remark}}
-              <text></text>
-            </text>
-          </view>
+          <view class="info-text" wx:if="{{item.remark}}">财务备注：<text>{{item.remark}}<text></text></text></view>
         </view>
         <view class="no-more-goods" wx:if="{{!paypalinfo}}">
           <image src="../../../../../images/none/order_empty.png" class="no-order-img" />

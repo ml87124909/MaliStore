@@ -44,8 +44,7 @@
     </view>
     <view class="feedback-textarea-box">
       <textarea bindinput="feedbackText" placeholder="对我们的应用、商品、服务，您还有什么建议吗？您还希望在商城上买到什么？请告诉我们..." placeholder-style="color:#999;" show-confirm-bar="{{confirm}}">
-      </textarea>
-    </view>
+            </textarea></view>
     <view class="feedback-phone-box">
       <view class="ui-row" style="height:60px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 120px;">

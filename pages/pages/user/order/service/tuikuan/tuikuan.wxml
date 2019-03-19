@@ -85,9 +85,7 @@
       </view>
     </view>
     <view class="kefu-box">
-      <view class="kefu-title">客服服务时间：
-        <text>{{shopInfo.shopInfo.times }}</text>
-      </view>
+      <view class="kefu-title">客服服务时间：<text>{{shopInfo.shopInfo.times }}</text></view>
       <view class="ui-row" style="height:45px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 20px;">
           <view class="ui-col-content align-center valign-middle">
@@ -130,9 +128,7 @@
           </view>
         </view>
       </view>
-      <view class="order-title">上传凭证
-        <text>(可选，最多上传4张)</text>
-      </view>
+      <view class="order-title">上传凭证<text>(可选，最多上传4张)</text></view>
       <view class="images-box">
         <block wx:for="{{imgList}}" wx:key="id">
           <image src="{{item}}" bindtap="previewImageTap" data-img="{{item}}" mode="aspectFill" />
