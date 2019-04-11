@@ -66,7 +66,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
   [1]: https://www.maliapi.com/
-  [2]: https://xiaodu.maliapi.com/static/data/5da8f63d1cfe8b23abd7bcdc42d9131a.jpg
+  [2]: https://xiaodu.maliapi.com/static/data/159cb65c03ef1199a19b433dc59f493a.jpg
   [3]: https://www.maliapi.com/
   [4]: https://xiaodu.maliapi.com/static/data/510b3dc7c4d1a29f573384ef97688dd1.png
   [5]: https://xiaodu.maliapi.com/static/data/510b3dc7c4d1a29f573384ef97688dd1.png
