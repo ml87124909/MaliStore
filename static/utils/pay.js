@@ -17,6 +17,7 @@ function wxpay(app, money, orderId, page, nextAction) {
     remark = "支付订单 ：" + orderId;
   }
   _server2.default.get(_urls2.default.links[0].wechatpays, { token: token, money: money, remark: remark, payName: '在线支付', nextAction: nextAction }).then(function (res) {
+    console.log(res);
     if (res.code == 0) {
       //发起微信支付
       wx.requestPayment({
@@ -34,6 +35,8 @@ function wxpay(app, money, orderId, page, nextAction) {
           // 1 跳转首页
           // 2 跳转会员页
           // 3 跳转余额记录页（充值记录）
+          // 4 跳转我的拼团页
+          console.log('page', page);
           if (page == 0) {
             wx.redirectTo({
               url: '/pages/pages/user/order/order?id=0&share=1'
@@ -45,6 +48,10 @@ function wxpay(app, money, orderId, page, nextAction) {
           } else if (page == 3) {
             wx.navigateTo({
               url: '/pages/pages/user/paypal/info/info?id=1'
+            });
+          } else if (page == 4) {
+            wx.redirectTo({
+              url: '/pages/pages/user/pingtuan/pingtuan'
             });
           }
         }
@@ -67,6 +74,10 @@ function wxpay(app, money, orderId, page, nextAction) {
       } else if (page == 3) {
         wx.navigateTo({
           url: '/pages/pages/user/paypal/info/info?id=1'
+        });
+      } else if (page == 4) {
+        wx.redirectTo({
+          url: '/pages/pages/user/pingtuan/pingtuan'
         });
       }
     }

@@ -82,3 +82,6 @@ page {
 .bottom-box span {
   padding-right: 10rpx;
 }
+.iphonex-bottom {
+  bottom: 67rpx !important;
+}

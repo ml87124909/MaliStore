@@ -69,7 +69,7 @@
   opacity: 1;
 }
 .homeicon {
-  border-bottom: 20rpx solid #f5f5f5;
+  background-color: #fff;
 }
 .ui-col-content image {
   width: 90rpx;
@@ -99,70 +99,78 @@
 .ui-col-content .toplogo text {
   padding-left: 20rpx;
 }
-.pingtuna-container {
-  width: 100%;
+.pingtuanBox {
   border-bottom: 20rpx solid #f5f5f5;
+  background-color: #fff;
+  padding-bottom: 20rpx;
 }
-.pingtuna-title {
-  text-align: center;
-  height: 90rpx;
-  line-height: 90rpx;
+.pingtuanBox .pingtuanContent {
+  width: 95%;
+  margin: 0 auto;
+  background-color: #ffeabf;
+  border-radius: 20rpx;
+  padding-bottom: 30rpx;
+}
+.pingtuanBox .pingtuanContent .header .name {
   color: #27323f;
   font-size: 32rpx;
 }
-.pingtuna-title image {
-  width: 36rpx;
-  height: 36rpx;
-  margin-bottom: -6rpx;
-  margin-left: 10rpx;
-  display: inline-block;
-}
-.pingtuna-container .pingtuna-list {
-  display: inline-block;
-  width: 49.8%;
-  height: 250rpx;
-  border-top: 1rpx solid #f5f5f5;
-  position: relative;
-}
-.pingtuna-container .pingtuna-list:nth-child(2n) {
-  border-right: 1rpx solid #f5f5f5;
-}
-.pingtuna-list image {
-  width: 180rpx;
-  height: 180rpx;
-  position: absolute;
-  right: 20rpx;
-  bottom: 0;
-}
-.pingtuna-list-title {
-  font-size: 28rpx;
+.pingtuanBox .pingtuanContent .header .text {
   color: #27323f;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 20rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 26rpx;
 }
-.pingtuna-list-text {
+.pingtuanBox .pingtuanContent .goodsContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods {
+  width: 220rpx;
+  margin-left: 14rpx;
+  margin-top: 14rpx;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods .image {
+  width: 220rpx;
+  height: 220rpx;
+  background-color: #f5f5f5;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods .info {
+  width: 220rpx;
+  padding-bottom: 20rpx;
+  background-color: #fff;
+  border-bottom-left-radius: 12rpx;
+  border-bottom-right-radius: 12rpx;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods .info .title {
+  text-align: center;
+  padding-top: 20rpx;
+  padding-bottom: 4rpx;
+  color: #ffd305;
+  font-size: 26rpx;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods .info .title text {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.pingtuanBox .pingtuanContent .goodsContent .goods .info .text {
+  text-align: center;
   font-size: 24rpx;
-  color: #999;
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 4rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #7b8196;
+  padding-bottom: 16rpx;
 }
-.pingtuna-list-info {
-  background-color: #b4a078;
-  color: #fff;
-  font-size: 20rpx;
-  float: left;
-  margin-left: 20rpx;
-  margin-top: 4rpx;
-  padding: 2rpx 8rpx;
-  border-radius: 6rpx;
+.pingtuanBox .pingtuanContent .goodsContent .goods .info .button {
+  background-color: #ffd305;
+  color: #27323f;
+  width: 120rpx;
+  margin: 0 auto;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46rpx;
+  border-radius: 50rpx;
 }
 .kanjia-container {
   width: 100%;
@@ -310,6 +318,7 @@
 .goods-container {
   width: 100%;
   float: left;
+  background-color: #ffffff;
   margin-bottom: 20rpx;
 }
 .goods-container .goods-title {
@@ -349,8 +358,8 @@
   align-items: center;
 }
 .goods-list-info-box .goods-list-money {
+  color: #ffd305;
   font-size: 36rpx;
-  color: #a18d65;
   width: 50%;
 }
 .goods-list-info-box .goods-list-order {
@@ -360,6 +369,7 @@
   text-align: right;
 }
 .category {
+  background-color: #fff;
   border-bottom: 20rpx solid #f5f5f5;
 }
 .category .imageBox {
@@ -376,6 +386,7 @@
   height: 380rpx;
   align-items: center;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .category .goodsBox .goods {
   margin-left: 20rpx;
@@ -405,7 +416,7 @@
   -webkit-line-clamp: 2;
 }
 .category .goodsBox .goods .infoBox .price {
-  color: #a18d65;
+  color: #ffd305;
   font-size: 30rpx;
 }
 .coupons-icon {

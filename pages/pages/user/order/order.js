@@ -18,7 +18,6 @@ var _qrcode2 = _interopRequireDefault(_qrcode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var qrcode;
 exports.default = Page({
     data: {
         NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + 'px',
@@ -170,18 +169,25 @@ exports.default = Page({
         var show = e.currentTarget.dataset.show;
         var status = e.currentTarget.dataset.status;
         if (id) {
-            qrcode = new _qrcode2.default('canvas', {
-                text: id,
-                width: 150,
-                height: 150,
-                colorDark: "#27323f",
-                colorLight: "white",
-                correctLevel: _qrcode2.default.CorrectLevel.H
-            });
-            qrcode.makeCode(id);
+            _qrcode2.default.api.draw(id, 'canvas', 200, 200);
+            setTimeout(function () {
+                that.canvasToQrTempImage();
+            }, 800);
             that.setData({ codeStatus: status });
         }
         that.setData({ showMask: show });
+    },
+    canvasToQrTempImage: function canvasToQrTempImage() {
+        var that = this;
+        wx.canvasToTempFilePath({
+            canvasId: 'canvas',
+            success: function success(res) {
+                var tempFilePath = res.tempFilePath;
+                that.setData({
+                    imageQrPath: tempFilePath
+                });
+            }
+        });
     },
     getFahuoTips: function getFahuoTips() {
         var that = this;
@@ -209,9 +215,16 @@ exports.default = Page({
     },
     getPayOrderTap: function getPayOrderTap(e) {
         var id = e.currentTarget.dataset.id;
-        wx.redirectTo({
-            url: "/pages/pages/payorder/paypal/paypal?id=" + id
-        });
+        var type = e.currentTarget.dataset.type;
+        if (type == 2) {
+            wx.redirectTo({
+                url: "/pages/pages/payorder/paypal/paypal?id=" + id + '&pt=2'
+            });
+        } else {
+            wx.redirectTo({
+                url: "/pages/pages/payorder/paypal/paypal?id=" + id
+            });
+        }
     },
     getHomeTap: function getHomeTap() {
         console.log('sadasdas');

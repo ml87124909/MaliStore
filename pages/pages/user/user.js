@@ -51,12 +51,12 @@ exports.default = Page({
             success: function success(res) {
                 if (res.data) {
                     if (res.data.shopNum > 0) {
-                        wx.showTabBarRedDot({ index: 2 });
+                        wx.showTabBarRedDot({ index: 3 });
                     } else {
-                        wx.removeTabBarBadge({ index: 2 });
+                        wx.removeTabBarBadge({ index: 3 });
                     }
                 } else {
-                    wx.removeTabBarBadge({ index: 2 });
+                    wx.removeTabBarBadge({ index: 3 });
                 }
             }
         });
@@ -77,9 +77,9 @@ exports.default = Page({
             if (res.code == 0) {
                 that.setData({ orderStatus: res.data });
                 if (res.data.nopaypal > 0) {
-                    wx.showTabBarRedDot({ index: 3 });
+                    wx.showTabBarRedDot({ index: 4 });
                 } else {
-                    wx.removeTabBarBadge({ index: 3 });
+                    wx.removeTabBarBadge({ index: 4 });
                 }
             }
         });

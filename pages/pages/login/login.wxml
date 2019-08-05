@@ -26,5 +26,6 @@
     <view class="title">{{shopInfo.gname}}</view>
     <view class="text">亲，首次进入需要授权才能使用哦</view>
     <button open-type="getUserInfo" bindgetuserinfo="userlogin">授权微信账号登录</button>
+    <view class="close" bindtap="navigateBack">暂不登录</view>
   </view>
 </page>

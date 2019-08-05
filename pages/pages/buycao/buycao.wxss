@@ -1,0 +1,158 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10rpx;
+}
+.header .title {
+  color: #27323f;
+  font-size: 36rpx;
+  line-height: 56rpx;
+}
+.header .info-box {
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.header .info-box .info {
+  height: 60rpx;
+  align-items: center;
+  display: flex;
+  color: #bfbfbf;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+}
+.header .info-box .info image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 6rpx;
+}
+.topic-content {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  padding-bottom: 100rpx;
+}
+.topic-content .wxParse-p {
+  color: #27323f;
+  font-size: 28rpx;
+  line-height: 56rpx;
+}
+.topic-content .goods-list .goods-box {
+  width: 45%;
+  margin: 20px 0 0 13px;
+  display: inline-block;
+  box-shadow: 0 0 20rpx #f5f5f5;
+  border-radius: 4rpx;
+}
+.topic-content .goods-list .img-box image {
+  width: 100%;
+  display: block;
+}
+.topic-content .goods-list .img-box {
+  width: 100%;
+  background-color: #f5f5f5;
+  margin-bottom: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.topic-content .goods-list .goods-characteristic {
+  font-size: 22rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: rgba(240, 236, 225, 0.88);
+  color: #a18d65;
+  height: 35px;
+  line-height: 35px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.topic-content .goods-list .goods-characteristic text {
+  padding-left: 5px;
+}
+.topic-content .goods-list .goods-title {
+  font-size: 28rpx;
+  color: #27323f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+.topic-content .goods-list .goods-price {
+  color: #ffd305;
+  font-size: 28rpx;
+  text-align: left;
+  padding: 3px 4px;
+}
+.topic-content .goods-list .goods-original {
+  color: #bfbfbf;
+  text-decoration: line-through;
+  font-size: 28rpx;
+  text-align: left;
+  padding: 3px 4px;
+}
+.topic-content .goods-list .goods-price-naver {
+  color: #7b8196;
+  font-size: 24rpx;
+  line-height: 28px;
+  width: 100%;
+  text-align: right;
+  padding: 0 3px;
+}
+.fixed-button {
+  position: fixed;
+  bottom: 100rpx;
+  width: 60rpx;
+  right: 30rpx;
+}
+.fixed-button .button {
+  width: 66rpx;
+  height: 66rpx;
+  background-color: #ffd305;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx #e2e2e2;
+  position: relative;
+}
+.fixed-button .button image {
+  width: 46rpx;
+  height: 46rpx;
+}
+.fixed-button .button button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}

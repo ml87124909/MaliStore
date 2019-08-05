@@ -50,4 +50,20 @@
       </view>
     </view>
   </template>
+  <template name="pingtuanswiper">
+    <view class="swiper-container">
+      <swiper circular autoplay interval="6000" duration="500" bindchange="swiperChange" class="swiper">
+        <block wx:for="{{swiper}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item.pic_url}}" lazy-load="true" class="img" bindtap="tapBanner" data-id="{{item.business_id}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{swiper}}" wx:key="unique">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </template>
 </page>

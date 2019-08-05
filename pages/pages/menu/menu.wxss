@@ -88,6 +88,7 @@
 }
 .menu-right scroll-view {
   padding-bottom: 160rpx;
+  -webkit-overflow-scrolling: touch;
 }
 .search-header-box .ui-col-content {
   align-items: flex-start;

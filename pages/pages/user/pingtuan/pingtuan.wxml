@@ -20,41 +20,88 @@
     </view>
   </ui-nav-bar>
   <view style="height:{{NAV_HEIGHT}}"></view>
-  <view class="order-header-box">
-    <ui-tabs class="ui-tabs" index="{{ current }}" bindchange="handleChange" _pid="{{_pid}}">
-      <ui-tab _pid="{{_pid}}">全部</ui-tab>
-      <ui-tab _pid="{{_pid}}">拼团中</ui-tab>
-      <ui-tab _pid="{{_pid}}">拼团成功</ui-tab>
-      <ui-tab _pid="{{_pid}}">拼团失败</ui-tab>
-    </ui-tabs>
-  </view>
-  <view class="order-content-box">
-    <swiper style="height:{{WIN_HEIGHT}}px" class="content" current="{{ current }}" bindchange="handleContentChange">
-      <swiper-item>
-        <view class="no-more-goods">
-          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
-          <view class="text">没有拼团订单</view>
+  <view class="order-content-list">
+    <view class="order-list" wx:for="{{orderList}}" wx:key="id">
+      <view class="order-ui-row ui-row" style="height:40px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="order-number">{{item.number}}</view>
+          </view>
         </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="no-more-goods">
-          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
-          <view class="text">没有拼团订单</view>
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-right valign-middle">
+            <image wx:if="{{item.status == 10}}" class="order-logo" src="../../../../images/pingtuan/ing.png" />
+            <image wx:elif="{{item.status == 11}}" class="order-logo" src="../../../../images/pingtuan/err.png" />
+            <image wx:elif="{{item.status > 1}}" class="order-logo" src="../../../../images/pingtuan/vit.png" />
+            <view wx:if="{{item.status == 1}}" class="order-cancel">待支付</view>
+            <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
+          </view>
         </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="no-more-goods">
-          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
-          <view class="text">没有拼团订单</view>
+      </view>
+      <view wx:if="{{item.order_goods.length == 1}}">
+        <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="id" style="height:90px;">
+          <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+            <view class="ui-col-content align-center valign-middle">
+              <view class="order-one-img">
+                <image src="{{item.pic}}" />
+              </view>
+            </view>
+          </view>
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-goods-name">{{item.name}}</view>
+              <view class="order-goods-info" wx:if="{{item.spec}}">{{item.spec}}</view>
+            </view>
+          </view>
         </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="no-more-goods">
-          <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img" />
-          <view class="text">没有拼团订单</view>
+      </view>
+      <view wx:if="{{item.order_goods.length >= 2}}">
+        <view class="order-ui-row ui-row" style="height:100px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="order-two-box">
+                <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="id">
+                  <image src="{{item.pic}}" />
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
-      </swiper-item>
-    </swiper>
-  </view>
-
-</page>
+      </view>
+      <view class="ui-row" style="height:45px;">
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view wx:if="{{item.status == 10 || item.status == 11 || item.status > 1}}" class="order-money">合计:¥{{item.real_money}}</view>
+            <view wx:elif="{{item.status <= 1}}" class="order-money">应付:¥{{item.real_money}}</view>
+          </view>
+        </view>
+        <view wx:if="{{item.status > 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 100px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="order-button" bindtap="getPingTuanTap" data-id="{{item.ptkid}}">拼团详情</view>
+          </view>
+        </view>
+        <view wx:if="{{item.status != 10 && item.status != 11 && item.status > 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 100px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="order-button" bindtap="getDetailsTap" data-id="{{item.id}}">订单详情</view>
+          </view>
+        </view>
+        <view wx:if="{{item.status == -1}}" class="ui-col ui-col-align-right align-right valign-middle" style="">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
+          </view>
+        </view>
+        <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+              <text>付款</text>
+              <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                        </view>
+                    </view></view>
+                </view>
+            </view>
+            <view class="no-more-goods" wx:if="{{!orderList}}">
+                <image src="../../../../images/none/empty_pingtuan.png" class="no-order-img"/>
+                <view class="text">没有开团订单</view>
+            </view>
+        </view>
+    </page>

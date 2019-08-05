@@ -1,0 +1,83 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.info-content .state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  width: 80%;
+  margin: 0 auto;
+}
+.info-content .state .text {
+  color: #273039;
+  font-size: 30rpx;
+  padding-top: 20rpx;
+}
+.info-content .state .time {
+  color: #9ea2a6;
+  font-size: 24rpx;
+  padding-top: 10rpx;
+}
+.info-content .moneyBox {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.info-content .moneyBox .lable {
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+.info-content .moneyBox .lable .money {
+  width: 160rpx;
+  text-align: left;
+  font-size: 26rpx;
+  color: #9ea2a6;
+}
+.info-content .moneyBox .lable .text {
+  color: #273039;
+  font-size: 28rpx;
+}
+.info-content .buttonBox {
+  display: flex;
+  height: 260rpx;
+  align-items: center;
+  justify-content: center;
+}
+.info-content .buttonBox .button {
+  color: #fff;
+  background-color: #39b571;
+  width: 200rpx;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100rpx;
+  margin-right: 30rpx;
+}
+.info-content .buttonBox .paypal {
+  color: #39b571;
+  background-color: #fff;
+  border: 2rpx solid #39b571;
+}

@@ -1,15 +1,19 @@
 'use strict';
 
+var _ref;
+
 var _config = require('../../config.js');
 
 var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var subDomain = _config2.default.suburl;
 var mlwxappId = wx.getAccountInfoSync();
 var urlDomain = subDomain + '&appid=' + mlwxappId.miniProgram.appId;
-var links = [{
+var links = [(_ref = {
 	/* 第三方接口 */
 	'tencentmap': 'https://apis.map.qq.com/ws/location/v1/ip', //腾讯地图
 	/* 系统接口 */
@@ -78,8 +82,15 @@ var links = [{
 	'vipopaypal': urlDomain + '&part=user_vip_paypal', //开通、续费会员
 	'wuliuinfos': urlDomain + '&part=order_wuliuinfo', //查询物流信息
 	'uploadfile': urlDomain + '&part=get_upload', //文件上传
-	'sharegoods': urlDomain + '&part=goods_share' //商品分享返现
-}];
+	'sharegoods': urlDomain + '&part=goods_share', //商品分享返现
+	'pingtuanls': urlDomain + '&part=pingtuan_goods_list', //获取拼团列表
+	'recptgoods': urlDomain + '&part=pingtuan_goods_recommend', //获取推荐的拼团商品
+	'openptgods': urlDomain + '&part=pingtuan_goods', //获取商品已经开启的拼团
+	'openewtuan': urlDomain + '&part=pingtuan_new_tuan', //检查团长能否开新团
+	'opentyuanc': urlDomain + '&part=pingtuan_join_tuan', //检查团员能否参团
+	'ptundetail': urlDomain + '&part=pingtuan_details', //拼团详情
+	'checkmoney': urlDomain + '&part=check_money_pay', //自助买单接口
+	'paypalcode': urlDomain + '&part=user_paypal_code' }, _defineProperty(_ref, 'paypalinfo', urlDomain + '&part=user_paypal_info'), _defineProperty(_ref, 'paypalsock', 'wss://api.maliapi.com/ws/1?appid=' + mlwxappId.miniProgram.appId), _defineProperty(_ref, 'categoryls', urlDomain + '&part=topic_category'), _defineProperty(_ref, 'topiclists', urlDomain + '&part=topic_list'), _defineProperty(_ref, 'topiconten', urlDomain + '&part=topic_content'), _defineProperty(_ref, 'addtolikes', urlDomain + '&part=topic_likes_add'), _defineProperty(_ref, 'deltolikes', urlDomain + '&part=topic_likes_del'), _ref)];
 
 module.exports = {
 	links: links,

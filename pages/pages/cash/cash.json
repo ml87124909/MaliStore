@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ui-popup": "../../../packages/touchui-wx-components/ui-popup/dist/index"
+  },
+  "navigationStyle": "default",
+  "navigationBarTitleText": "商家收银台"
+}

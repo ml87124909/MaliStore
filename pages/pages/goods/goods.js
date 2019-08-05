@@ -71,6 +71,16 @@ exports.default = Page({
     'background-color': 'rgba(255, 255, 255, 0.8)'
   }), _defineProperty(_data, "codeboxStyle", {
     'background': 'rgba(51, 51, 51, 0.9)'
+  }), _defineProperty(_data, "numberStyle", {
+    backgroundColor: '#ffd305',
+    color: '#27323f',
+    paddingLeft: '8rpx',
+    paddingRight: '8rpx',
+    marginLeft: '8rpx',
+    marginRight: '8rpx',
+    borderRadius: '2rpx',
+    fontSize: '24rpx',
+    display: 'inline-block'
   }), _data),
   onReady: function onReady() {
     var that = this;
@@ -104,7 +114,6 @@ exports.default = Page({
     if (cartInfo) {
       that.setData({ shopCarInfo: cartInfo, shopNum: cartInfo.shopNum });
     }
-    wx.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
     if (e.id) {
       that.setData({ id: e.id });
       if (e.sid) {
@@ -185,9 +194,10 @@ exports.default = Page({
   getgoodsdeft: function getgoodsdeft(e) {
     var that = this;
     var token = wx.getStorageSync('__appUserInfo').token;
-    _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e }).then(function (res) {
-      wx.hideLoading();
+    wx.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
+    _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e, token: token }).then(function (res) {
       if (res.code == 0) {
+        wx.hideLoading();
         that.setData({
           buyNumMax: res.data.basicInfo.stores,
           goodsDetail: res.data,
@@ -204,7 +214,28 @@ exports.default = Page({
           } else {
             that.getuserInfo();
           }
+          if (res.data.pingtuanInfo) {
+            that.setData({
+              pingtuan: res.data.pingtuanInfo,
+              selectSizePTprice: res.data.pingtuanInfo.price
+            });
+            that.checkPingTuanGoodsList(e);
+          }
         }
+      } else {
+        that.getgoodsdeft(e);
+      }
+    });
+  },
+  //该商品是否有在进行中的拼团
+  checkPingTuanGoodsList: function checkPingTuanGoodsList(e) {
+    var that = this;
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].openptgods, { token: token, goods: e }).then(function (res) {
+      if (res.code == 0) {
+        that.setData({
+          openPingTuanList: res.data
+        });
       }
     });
   },
@@ -245,7 +276,11 @@ exports.default = Page({
       _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
         if (res.code == 0) {
           if (res.data.vip_level == 0) {
-            var price = that.data.goodsDetail.basicInfo.mini_price * res.data.vip_sale / 100;
+            if (that.data.goodsDetail.pingtuanInfo) {
+              var price = that.data.goodsDetail.pingtuanInfo.price * res.data.vip_sale / 100;
+            } else {
+              var price = that.data.goodsDetail.basicInfo.mini_price * res.data.vip_sale / 100;
+            }
             that.setData({ userVip: price.toFixed(2) });
           } else {
             for (var i = 0; i < e.length; i++) {
@@ -306,7 +341,8 @@ exports.default = Page({
             buyNumMax: res.data.goods_stores,
             buyNumber: res.data.goods_stores > 0 ? 1 : 0,
             goodsbarcode: res.data.goods_barcode,
-            propertyChildStore: res.data.goods_stores
+            propertyChildStore: res.data.goods_stores,
+            selectSizePTprice: res.data.goods_pingtuan
           });
         }
       });
@@ -322,6 +358,7 @@ exports.default = Page({
     var _this = this;
 
     _server2.default.get(_urls2.default.links[0].reputation, { goods_id: id }).then(function (res) {
+      //console.log(res);
       if (res.code == 0) {
         _this.setData({ reputation: res.data });
       } else {
@@ -441,8 +478,21 @@ exports.default = Page({
       var ctxs = wx.createCanvasContext('shareCanvas');
       wx.showLoading({ title: '正在准备生成' });
       //下载商品海报
+      //console.log(data.basicInfo.pic)
+      var basPic = data.basicInfo.pic
+      if (data.basicInfo.pic.search("https:") == -1 ){
+        var basPic = data.basicInfo.pic.replace(/'http:'/g, 'https:'); //商品图片
+      }
+      
+      /*if (_urls2.default.images === 'A') {
+        var basPic = data.basicInfo.pic.replace(/'http:\\/\\/'/g, 'https:\\/\\/'); //商品图片
+      } else {
+        var basPic = data.basicInfo.pic; //商品图片
+      }*/
+      
+      //console.log(basPic)
       wx.downloadFile({
-        url: data.basicInfo.pic,
+        url: basPic,
         success: function success(pic) {
           if (pic.statusCode === 200) {
             //商品海报图片
@@ -455,10 +505,17 @@ exports.default = Page({
                 //用户头像
                 var userpic = avatar.tempFilePath;
                 _server2.default.get(_urls2.default.links[0].getqrcodes, { scene: 'i=' + data.basicInfo.id + ',u=' + userid + ',s=1', page: 'pages/pages/goods/goods' }).then(function (res) {
+                  //console.log(res)
                   if (res.code == 0) {
                     wx.showLoading({ title: '下载小程序码' });
+                    //已经将后台这个返回的链接默认为https
+                    /*if (_urls2.default.images === 'A') {
+                      var qrcodePic = res.data.qrimg.replace(/http:/g, 'https:'); //二维码图片
+                    } else {
+                      var qrcodePic = res.data.qrimg; //二维码图片
+                    }*/
                     wx.downloadFile({
-                      url: res.data.qrimg,
+                      url: qrcodePic,
                       success: function success(qr) {
                         if (qr.statusCode === 200) {
                           //商品小程序码
@@ -600,6 +657,95 @@ exports.default = Page({
       duration: 2000
     });
   },
+  //发起拼团
+  fPingtuan: function fPingtuan() {
+    var that = this;
+    if (that.data.goodsDetail.specInfo && !that.data.canSubmit) {
+      wx.hideLoading();
+      if (!that.data.canSubmit) {
+        wx.showModal({
+          title: "\u63D0\u793A",
+          content: "\u8BF7\u9009\u62E9\u5546\u54C1\u89C4\u683C\uFF01",
+          showCancel: false
+        });
+      }
+      wx.showModal({
+        title: "\u63D0\u793A",
+        content: "\u8BF7\u5148\u9009\u62E9\u89C4\u683C\u5C3A\u5BF8\u54E6~",
+        showCancel: false
+      });
+      return;
+    }
+    if (that.data.buyNumber < 1) {
+      wx.hideLoading();
+      wx.showModal({
+        title: "\u63D0\u793A",
+        content: "\u8D2D\u4E70\u6570\u91CF\u4E0D\u80FD\u4E3A0\uFF01",
+        showCancel: false
+      });
+      return;
+    }
+    setTimeout(function () {
+      wx.hideLoading();
+      var buyNowInfo = that.buliduBuyNowInfo(1);
+      that.setData({ show: false });
+      wx.setStorage({
+        key: "__buyNowInfo",
+        data: buyNowInfo
+      });
+      wx.navigateTo({
+        url: "/pages/pages/payorder/payorder?orderType=buyNow&ktype=0&ktid=" + that.data.goodsDetail.pingtuanInfo.id
+      });
+    }, 1000);
+    wx.showLoading({
+      title: '商品准备中...'
+    });
+  },
+  //参加拼团
+  cPingtuan: function cPingtuan() {
+    var that = this;
+    var ktid = that.data.canTuanId;
+    if (that.data.goodsDetail.specInfo && !that.data.canSubmit) {
+      wx.hideLoading();
+      if (!that.data.canSubmit) {
+        wx.showModal({
+          title: "\u63D0\u793A",
+          content: "\u8BF7\u9009\u62E9\u5546\u54C1\u89C4\u683C\uFF01",
+          showCancel: false
+        });
+      }
+      wx.showModal({
+        title: "\u63D0\u793A",
+        content: "\u8BF7\u5148\u9009\u62E9\u89C4\u683C\u5C3A\u5BF8\u54E6~",
+        showCancel: false
+      });
+      return;
+    }
+    if (that.data.buyNumber < 1) {
+      wx.hideLoading();
+      wx.showModal({
+        title: "\u63D0\u793A",
+        content: "\u8D2D\u4E70\u6570\u91CF\u4E0D\u80FD\u4E3A0\uFF01",
+        showCancel: false
+      });
+      return;
+    }
+    setTimeout(function () {
+      wx.hideLoading();
+      var buyNowInfo = that.buliduBuyNowInfo(1);
+      that.setData({ show: false });
+      wx.setStorage({
+        key: "__buyNowInfo",
+        data: buyNowInfo
+      });
+      wx.navigateTo({
+        url: "/pages/pages/payorder/payorder?orderType=buyNow&ktype=1&ktid=" + ktid
+      });
+    }, 1000);
+    wx.showLoading({
+      title: '商品准备中...'
+    });
+  },
   buyNow: function buyNow() {
     var that = this;
     if (that.data.goodsDetail.specInfo && !that.data.canSubmit) {
@@ -643,7 +789,7 @@ exports.default = Page({
       title: '商品准备中...'
     });
   },
-  buliduBuyNowInfo: function buliduBuyNowInfo() {
+  buliduBuyNowInfo: function buliduBuyNowInfo(e) {
     var that = this;
     var shopCarMap = {};
     var guid = wx.getStorageSync('__appInviter').id;
@@ -652,7 +798,11 @@ exports.default = Page({
     shopCarMap.goods_name = that.data.goodsDetail.basicInfo.name;
     shopCarMap.goods_childs = that.data.propertyChildIds;
     shopCarMap.goods_label = that.data.propertyChildNames;
-    shopCarMap.goods_price = that.data.selectSizePrice;
+    if (e) {
+      shopCarMap.goods_price = that.data.selectSizePTprice;
+    } else {
+      shopCarMap.goods_price = that.data.selectSizePrice;
+    }
     shopCarMap.active = true;
     shopCarMap.buy_number = that.data.buyNumber;
     shopCarMap.goods_weight = that.data.goodsDetail.basicInfo.weight;
@@ -851,6 +1001,156 @@ exports.default = Page({
       show: true
     });
   },
+  //发起拼团点击事件
+  toPingtuan: function toPingtuan() {
+    var that = this;
+    var id = that.data.goodsDetail.basicInfo.id;
+    var ptid = that.data.goodsDetail.pingtuanInfo.id;
+    var data = that.data.goodsDetail.specInfo;
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].openewtuan, { token: token, goods: id, ptid: ptid }).then(function (res) {
+      if (res.code == 0) {
+        //that.setData({favicon: 1});
+        if (data) {
+          that.setData({
+            shopType: "fPingtuan",
+            show: true
+          });
+        } else {
+          that.setData({
+            shopType: "fPingtuan",
+            show: true
+          });
+        }
+      } else if (res.code == 301) {
+        wx.showConfirm({
+          content: "\u62FC\u56E2\u4FE1\u606F\u4E0D\u6B63\u786E\uFF0C\u8BF7\u68C0\u67E5\u540E\u91CD\u8BD5",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 302) {
+        wx.showConfirm({
+          content: "\u62FC\u56E2\u5DF2\u7ECF\u7ED3\u675F\uFF0C\u4E0B\u6B21\u65E9\u70B9\u6765\u5662",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 303) {
+        wx.showConfirm({
+          content: "\u6B64\u5546\u54C1\u5DF2\u7ECF\u5F00\u8FC7\u56E2\uFF0C\u8BF7\u7EE7\u7EED\u4E4B\u524D\u7684\u62FC\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 304) {
+        wx.showConfirm({
+          content: "\u8BE5\u5546\u54C1\u4EC5\u9650\u65B0\u7528\u6237\u53EF\u4EE5\u5F00\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 305) {
+        wx.showConfirm({
+          content: "\u8BE5\u5546\u54C1\u4EC5\u9650\u8001\u7528\u6237\u53EF\u4EE5\u5F00\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      }
+    });
+  },
+  //参加拼团点击事件
+  toFaqiPingtuan: function toFaqiPingtuan(e) {
+    var that = this;
+    var ptid = that.data.goodsDetail.pingtuanInfo.id;
+    var ptkid = e.currentTarget.dataset.id;
+    var goods = that.data.goodsDetail.basicInfo.id;
+    var token = wx.getStorageSync('__appUserInfo').token;
+    _server2.default.get(_urls2.default.links[0].opentyuanc, { goods: goods, ptid: ptid, ptkid: ptkid, token: token }).then(function (res) {
+      console.log(ptkid, res);
+      if (res.code == 0) {
+        that.setData({
+          show: true,
+          shopType: "cPingtuan",
+          canTuanId: e.currentTarget.dataset.id
+        });
+      } else if (res.code == 301) {
+        wx.showConfirm({
+          content: "\u62FC\u56E2ID\u4E0D\u6B63\u786E\uFF0C\u8BF7\u68C0\u67E5\u540E\u91CD\u8BD5",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 302) {
+        wx.showConfirm({
+          content: "\u5F00\u56E2ID\u4E0D\u6B63\u786E\uFF0C\u8BF7\u68C0\u67E5\u540E\u91CD\u8BD5",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 303) {
+        wx.showConfirm({
+          content: "\u62FC\u56E2\u5DF2\u7ECF\u7ED3\u675F\uFF0C\u4E0B\u6B21\u65E9\u70B9\u6765\u54E6",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 304) {
+        wx.showConfirm({
+          content: "\u62FC\u56E2\u5DF2\u7ECF\u8FC7\u671F\uFF0C\u4E0D\u80FD\u5728\u8FDB\u884C\u53C2\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 305) {
+        wx.showConfirm({
+          content: "\u8BE5\u5546\u54C1\u4EC5\u9650\u65B0\u7528\u6237\u53EF\u4EE5\u53C2\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 306) {
+        wx.showConfirm({
+          content: "\u8BE5\u5546\u54C1\u4EC5\u9650\u8001\u7528\u6237\u53EF\u4EE5\u53C2\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      } else if (res.code == 307) {
+        wx.showConfirm({
+          content: "\u5DF2\u6709\u6B63\u5728\u8FDB\u884C\u7684\u62FC\u56E2\uFF0C\u8BF7\u7EE7\u7EED\u4E4B\u524D\u7684\u62FC\u56E2",
+          showCancel: false,
+          confirmColor: '#ffd305',
+          confirmText: "\u6211\u77E5\u9053\u4E86",
+          success: function success(res) {}
+        });
+        return;
+      }
+    });
+  },
   //跳转购物车事件
   goShopCar: function goShopCar() {
     wx.reLaunch({
@@ -873,6 +1173,18 @@ exports.default = Page({
   getHomeTap: function getHomeTap() {
     wx.switchTab({
       url: "/pages/pages/home/home"
+    });
+  },
+  //跳转拼团详情页
+  getPingtuanTap: function getPingtuanTap(e) {
+    wx.navigateTo({
+      url: "/pages/pages/goods/pingtuan?id=" + e.currentTarget.dataset.id
+    });
+  },
+  //跳转拼团说明页
+  getPingtuanInfotap: function getPingtuanInfotap() {
+    wx.navigateTo({
+      url: "/pages/pages/goods/ptinfo"
     });
   },
   //分享事件

@@ -30,6 +30,11 @@ exports.default = Page({
             }
         });
     },
+    onLoad: function onLoad() {
+        if (wx.IPHONEX == 0) {
+            this.setData({ iphonex: true });
+        }
+    },
     selectTap: function selectTap(e) {
         var id = e.currentTarget.dataset.id;
         var name = e.currentTarget.dataset.name;

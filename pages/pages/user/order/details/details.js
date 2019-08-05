@@ -42,6 +42,9 @@ exports.default = Page({
     },
     onLoad: function onLoad(e) {
         var that = this;
+        if (e.share) {
+            that.setData({ share: 1 });
+        }
         that.setData({ id: e.id });
         that.orderDetailsTap(e.id);
         _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {

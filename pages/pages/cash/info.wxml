@@ -1,0 +1,38 @@
+<view>
+  <view class="info-content">
+    <view class="state">
+      <icon wx:if="{{cashInfo.state==1}}" type="success" size="52"></icon>
+      <icon wx:else="" type="warn" size="52"></icon>
+      <view class="text">{{cashInfo.state==1?'支付成功':'支付失败'}}</view>
+      <view class="time" wx:if="{{cashInfo.paytime}}">支付时间：{{cashInfo.paytime}}</view>
+    </view>
+    <view class="moneyBox">
+      <view class="lable">
+        <view class="money">买单金额</view>
+        <view class="text">{{cashInfo.money}}元</view>
+      </view>
+      <view class="lable" wx:if="{{cashInfo.counpon!=0}}">
+        <view class="money">优惠券抵扣</view>
+        <view class="text">-{{cashInfo.counpon}}元</view>
+      </view>
+      <view class="lable" wx:if="{{cashInfo.vipsale!=0}}">
+        <view class="money">会员折扣</view>
+        <view class="text">-{{cashInfo.vipsale}}元</view>
+      </view>
+      <view class="lable">
+        <view class="money">实际支付</view>
+        <view class="text">{{cashInfo.truemoney}}元</view>
+      </view>
+      <view class="lable" wx:if="{{cashInfo.score!=0}}">
+        <view class="money">获得积分</view>
+        <view class="text">+{{cashInfo.score}}分</view>
+      </view>
+    </view>
+    <view class="buttonBox">
+      <view class="button" bindtap="getHomeTap">商城首页</view>
+      <view class="button paypal" bindtap="navigateBack">继续买单</view>
+    </view>
+
+
+  </view>
+</view>

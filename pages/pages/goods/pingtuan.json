@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-count-down": "../../../packages/touchui-wx-components/ui-count-down/dist/index",
+    "ui-popup": "../../../packages/touchui-wx-components/ui-popup/dist/index",
+    "ui-fixed-view": "../../../packages/touchui-wx-components/ui-fixed-view/dist/index",
+    "ui-mask": "../../../packages/touchui-wx-components/ui-mask/dist/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

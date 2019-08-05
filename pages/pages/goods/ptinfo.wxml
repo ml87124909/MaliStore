@@ -1,0 +1,37 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>拼团说明</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="content">
+    <view class="title">如何当团长？</view>
+    <view class="text">选取喜爱的拼团商品→开团井支付金额→邀请好友参团→达到成团人数→拼团成功→发货→确认收货→交易完成</view>
+    <view class="title">如何参团？</view>
+    <view class="text">打开邀请链接→立即参团并支付金额→继续分享加速成团→达到成团人数→拼团成功→发货→确认收货→交易完成</view>
+    <view class="title">如何辨别用户身份？</view>
+    <view class="text">未进行过开团或参与过拼团的用户均视为新用户，反之进行过开团或者参与过拼团的用户就视为老用户</view>
+    <view class="title">什么情况会拼团失败？</view>
+    <view class="text">开团达指定时间仍未凑齐开团人数的，拼团失败。拼团失败后可以再次发起拼团</view>
+    <view class="title">拼团失败金额如何返还？</view>
+    <view class="text">拼团失败后，退款会在1- 5个工作日内原路退回支付账户中，用余额抵扣的部分会退回你的余额，你可以在个人→我的钱包里面查看</view>
+    <view class="title">拼团订单可以取消吗？</view>
+    <view class="text">当成功开团或者参团后，订单不能进行取消。如果商品有问题你可以在拼团成功后申请售后</view>
+  </view>
+</page>

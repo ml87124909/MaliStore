@@ -31,7 +31,28 @@ function serverPost(url, data) {
     return promise;
 }
 
+function serverWebSocket(url, token) {
+    var promise = new Promise(function (resolve, reject) {
+        wx.connectSocket({
+            url: url + '&token=' + token,
+            header: { 'content-type': 'application/x-www-form-urlencoded' }
+        });
+        wx.onSocketOpen(function (res) {
+            console.log(new Date(), '\u8FDE\u63A5\u670D\u52A1\u5668\u6210\u529F\uFF01'), resolve(res);
+        });
+        wx.onSocketClose(function (res) {
+            console.log(new Date(), '\u670D\u52A1\u5668\u5DF2\u7ECF\u65AD\u5F00\u94FE\u63A5!'), reject(res);
+            wx.connectSocket({
+                url: url + '&token=' + token,
+                header: { 'content-type': 'application/x-www-form-urlencoded' }
+            });
+        });
+    });
+    return promise;
+}
+
 module.exports = {
     get: serverGet,
-    post: serverPost
+    post: serverPost,
+    websocket: serverWebSocket
 };

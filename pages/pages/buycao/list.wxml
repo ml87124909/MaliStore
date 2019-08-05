@@ -1,0 +1,59 @@
+<page>
+  <import src="../../component/menu/menu.wxml" />
+  <import src="../../component/swiper/swiper.wxml" />
+  <import src="../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>种草甄选</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <view class="header-box">
+    <view class="category-list">
+      <block wx:for="{{categoryList}}" wx:key="id">
+        <view class="category" bindtap="getTopicListTap" data-id="{{item.id}}">
+          <image src="{{item.pic}}" />
+          <view class="bg"></view>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="topic-content">
+    <view class="topic" wx:for="{{topicList}}" wx:key="id" bindtap="getTopiceTap" data-id="{{item.id}}">
+      <view class="info">
+        <view class="title">{{item.title}}</view>
+        <view class="texts">{{item.sketch}}</view>
+        <view class="icon-lists">
+          <view class="icon">
+            <image src="../../../images/view-icon.png" />
+            {{item.views}}次浏览
+          </view>
+          <view class="icon">
+            <image src="../../../images/like-icon.png" />
+            {{item.likes}}人点赞
+          </view>
+        </view>
+      </view>
+      <view class="image">
+        <image mode="aspectFill" src="{{item.pic}}" />
+      </view>
+    </view>
+    <view wx:if="{{!topicList}}" class="no-more-goods">
+      <image src="../../../images/none/empty_shouhoujilu.png" class="no-order-img" />
+      <view class="text">暂无相关内容</view>
+    </view>
+  </view>
+</page>

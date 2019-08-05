@@ -189,3 +189,29 @@ page {
   background-color: #ffffff;
   padding-bottom: 30rpx;
 }
+.code {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #ffd305;
+  padding: 4rpx 20rpx;
+  border-radius: 100rpx;
+  position: relative;
+}
+.code image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.code text {
+  color: #27323f;
+  padding-left: 4rpx;
+}
+.code navigator {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+}

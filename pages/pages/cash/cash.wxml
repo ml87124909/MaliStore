@@ -1,0 +1,117 @@
+<view>
+  <view class="cash-header">
+    <view class="user" wx:if="{{shopInfo}}">
+      <image src="{{shopInfo.gpic}}" />
+    </view>
+    <form bindsubmit="formSubmit">
+      <view class="lable">
+        <view class="name">消费金额</view>
+        <input type="digit" name="money" value="{{money}}" placeholder="¥0.00" maxlength="6" focus></input>
+      </view>
+      <view class="lable">
+        <view class="name">优惠券</view>
+        <view wx:if="{{!couponList}}" class="coupon none" data-show="{{ true }}" bindtap="handleCouponNewMask">无可用优惠券</view>
+        <view wx:if="{{couponList}}" class="coupon" data-show="{{ true }}" bindtap="handleCouponMask">
+          <block wx:if="{{couponId}}">
+            <text wx:if="{{couponType=='满减'}}">满{{couponMax}}元减{{couponMoney}}元券</text>
+            <text wx:else="">满{{couponMax}}元{{couponMoney/10}}折券</text>
+          </block>
+          <block wx:else="">
+            <text>请选择优惠券</text>
+          </block>
+        </view>
+      </view>
+      <view class="lable" wx:if="{{userInfo && userInfo.vip_state==1}}">
+        <view class="name">会员折扣</view>
+        <view class="uservip">{{userInfo.vip_level_name}}({{userInfo.vip_sale/10}}折)</view>
+      </view>
+      <button form-type="submit">微信支付</button>
+    </form>
+    <view class="money" data-show="{{ true }}" bindtap="handleBalanceMask">余额付款<text wx:if="{{userInfo.money}}">({{userInfo.money}}元)</text></view>
+  </view>
+
+  <ui-popup show="{{ couponNewMask }}" hide-on-tap="{{false}}" position="bottom" _pid="{{_pid}}">
+    <view class="couponMask">
+      <view class="nameBox">
+        <view class="text">领取优惠券</view>
+        <span data-show="{{ false }}" class="close ui-icon icon-close" bindtap="handleCouponNewMask" type="close" size="16" color="#e94f4f" style="color: #e94f4f;font-size: 16px;"></span>
+      </view>
+      <scroll-view scroll-y class="couponBox">
+        <view class="list" wx:for="{{couponNewList}}" wx:key="id">
+          <view class="money" style="color:#f76260;" wx:if="{{item.money_type=='满减'}}">{{item.money}}<text>元</text></view>
+          <view class="money" style="color:#f76260;" wx:if="{{item.money_type=='折扣'}}">{{item.money/10}}<text>折</text></view>
+          <view class="names">
+            <view class="name">消费满{{item.max_money}}元可使用</view>
+            <view class="text">{{item.data_end}}到期</view>
+          </view>
+          <view class="check">
+            <view wx:if="{{item.state==1}}" style="background-color:#f76260;" bindtap="bindGetNewCouponTap" data-id="{{item.id}}" class="button">立即领取</view>
+            <view wx:else="" class="button" style="background-color:#dfdfdf;">已经领取</view>
+          </view>
+        </view>
+        <view wx:if="{{!couponNewList}}" class="noneImgTops">
+          <image src="../../../images/none_coupons.png" />
+          <text>暂无可用优惠券</text>
+        </view>
+      </scroll-view>
+    </view>
+  </ui-popup>
+
+  <ui-popup show="{{ couponMask }}" hide-on-tap="{{false}}" position="bottom" _pid="{{_pid}}">
+    <view class="couponMask">
+      <view class="nameBox">
+        <view class="text">选择要使用的优惠券</view>
+        <span data-show="{{ false }}" class="close ui-icon icon-close" bindtap="handleCouponMask" type="close" size="16" color="#e94f4f" style="color: #e94f4f;font-size: 16px;"></span>
+      </view>
+      <scroll-view scroll-y class="couponBox">
+        <view class="list" wx:for="{{couponList}}" wx:key="id">
+          <view class="money" wx:if="{{item.money_type=='满减'}}">{{item.money}}<text>元</text></view>
+          <view class="money" wx:if="{{item.money_type=='折扣'}}">{{item.money/10}}<text>折</text></view>
+          <view class="names">
+            <view class="name">消费满{{item.max_money}}元可使用</view>
+            <view class="text">{{item.date_end}}到期</view>
+          </view>
+          <view class="check">
+            <view wx:if="{{couponId == item.id}}" bindtap="bindCancelCoupon" class="button check">取消使用</view>
+            <view wx:else="" bindtap="bindChangeCoupon" data-id="{{item.id}}" data-type="{{item.money_type}}" data-money="{{item.money}}" data-max="{{item.max_money}}" class="button">使用</view>
+          </view>
+        </view>
+        <view class="getNewCoupon" bindtap="handleGetCouponMask">领取更多优惠券</view>
+      </scroll-view>
+    </view>
+  </ui-popup>
+
+  <ui-popup show="{{ balanceMask }}" hide-on-tap="{{false}}" position="bottom" _pid="{{_pid}}">
+    <view class="balanceMask">
+      <view class="user">
+        <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
+        <span data-show="{{ false }}" class="close ui-icon icon-close" bindtap="handleBalanceMask" type="close" size="20" color="#fff" style="color: #fff;font-size: 20px;"></span>
+        <span bindtap="handleBalanceRefresh" type="refresh" class="refresh ui-icon icon-refresh" size="22" color="#fff" style="color: #fff;font-size: 22px;"></span>
+      </view>
+      <view class="qrcode">
+        <view class="money">可用余额<text>{{userInfo.money}}元</text></view>
+        <block wx:if="{{imageBarPath}}">
+          <image src="{{imageBarPath}}" style="width:600rpx;height:160rpx;" />
+        </block>
+        <block wx:if="{{imageQrPath}}">
+          <image src="{{imageQrPath}}" style="width:380rpx;height:380rpx;" />
+        </block>
+        <view class="info">付款码每30秒自动更新</view>
+      </view>
+      <view class="recharge" wx:if="{{rechargeArray}}">
+        <view class="picker">
+          <picker bindchange="bindPickerChange" value="{{rechargeIndex}}" range="{{rechargeArray}}">
+            <view class="picker">
+              {{rechargeArray[rechargeIndex]}}<span type="arrow-down" size="16" color="#fff" style="margin-left:20rpx;color: #fff;font-size: 16px;" class="ui-icon icon-arrow-down"></span>
+            </view>
+          </picker>
+        </view>
+        <view class="info">充值送现金，充的越多送的越多</view>
+        <view class="button" bindtap="getRechargeTap">立即充值</view>
+      </view>
+    </view>
+  </ui-popup>
+
+  <canvas class="QRcanvas" canvas-id="QRcanvas" style="width:380rpx;height:380rpx;position:fixed;left:-1000rpx;top:-1000rpx;"></canvas>
+  <canvas class="BARcanvas" canvas-id="BARcanvas" style="width:600px;height:160px;position:fixed;left:-1000rpx;top:-1000rpx;"></canvas>
+</view>

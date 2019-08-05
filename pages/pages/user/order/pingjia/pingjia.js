@@ -87,10 +87,14 @@ exports.default = Page({
     },
     bindFormSubmit: function bindFormSubmit(e) {
         var that = this;
+        var indexid = e.detail.value.indexid;
         var orderid = e.detail.value.orderid;
         var goodsid = e.detail.value.goodsid;
         var textarea = e.detail.value.textarea;
         var starNumber = that.data.starNumber;
+        var imgList = that.data.imgList;
+        var timestamp = Date.parse(new Date());
+        var timestamp = timestamp / 1000;
         var token = wx.getStorageSync('__appUserInfo').token;
         if (!starNumber) {
             wx.showToast({
@@ -108,6 +112,36 @@ exports.default = Page({
             });
             return;
         }
+        if (imgList.nums == indexid) {
+            wx.showLoading({ title: "\u56FE\u7247\u4E0A\u4F20\u4E2D" });
+            for (var i = 0; i < imgList.list.length; i++) {
+                wx.uploadFile({
+                    url: _urls2.default.links[0].uploadfile,
+                    filePath: imgList.list[i],
+                    name: 'name',
+                    formData: {
+                        'ctype': '3', //商品评论类型
+                        'viewid': 'home',
+                        'part': 'get_upload',
+                        'orderId': orderid, //订单ID
+                        'goodsId': goodsid, //商品ID
+                        'timestamp': timestamp //时间戳
+                    },
+                    success: function success(res) {
+                        if (res.statusCode != 200) {
+                            wx.showConfirm({
+                                content: "\u56FE\u7247\u4E0A\u4F20\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5",
+                                confirmColor: "#ffd305",
+                                confirmText: "\u786E\u5B9A",
+                                showCancel: 'false',
+                                success: function success(res) {}
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        }
         _server2.default.get(_urls2.default.links[0].pingjasend, { token: token, id: orderid, goods_id: goodsid, goods_star: starNumber, goods_text: textarea }).then(function (res) {
             if (res.code == 0) {
                 var id = that.data.id;
@@ -124,6 +158,32 @@ exports.default = Page({
                     duration: 2000
                 });
             }
+        });
+    },
+    chooseImageTap: function chooseImageTap(e) {
+        var that = this;
+        var index = e.currentTarget.dataset.index;
+        wx.chooseImage({
+            count: 4,
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success: function success(res) {
+                var imgList = {};
+                imgList.nums = index;
+                imgList.list = res.tempFilePaths;
+                that.setData({
+                    imgList: imgList
+                });
+            }
+        });
+    },
+    previewImageTap: function previewImageTap(e) {
+        var that = this;
+        var img = e.currentTarget.dataset.img;
+        var image = that.data.imgList;
+        wx.previewImage({
+            current: img,
+            urls: image
         });
     },
     navigateBack: function navigateBack() {

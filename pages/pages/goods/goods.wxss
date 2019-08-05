@@ -334,6 +334,18 @@
   font-size: 28rpx;
   color: #27323f;
 }
+.goods-reputa-images {
+  display: flex;
+  width: 100%;
+  height: 180rpx;
+  align-items: center;
+  padding-bottom: 10rpx;
+}
+.goods-reputa-images image {
+  width: 160rpx;
+  height: 160rpx;
+  margin-left: 20rpx;
+}
 .goods-reply-reputa-mark {
   display: flex;
   padding: 10rpx;
@@ -879,6 +891,90 @@ page {
   align-items: center;
   justify-content: center;
 }
+.fixed_bottom .pingtuan_button_box {
+  display: flex;
+  align-items: center;
+}
+.fixed_bottom .pingtuan_button_box .home_button {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+  position: relative;
+}
+.fixed_bottom .pingtuan_button_box .home_button image {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 2rpx;
+  margin-top: 8rpx;
+}
+.fixed_bottom .pingtuan_button_box .home_button button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.fixed_bottom .pingtuan_button_box .home_button .text {
+  font-size: 24rpx;
+  color: #7f7f7f;
+  padding-left: 2rpx;
+}
+.fixed_bottom .pingtuan_button_box .left_button {
+  width: 280rpx;
+  height: 88rpx;
+  color: #999999;
+  background-color: rgba(255, 211, 5, 0.2);
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .pingtuan_button_box .left_button .price {
+  font-size: 32rpx;
+  margin-bottom: -6rpx;
+  font-weight: 600;
+}
+.fixed_bottom .pingtuan_button_box .left_button .text {
+  font-size: 22rpx;
+}
+.fixed_bottom .pingtuan_button_box .right_button {
+  width: 280rpx;
+  height: 88rpx;
+  background-color: #ffd305;
+  color: #27323f;
+  border-top-right-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .pingtuan_button_box .right_button .price {
+  font-size: 32rpx;
+  margin-bottom: -6rpx;
+  font-weight: 600;
+}
+.fixed_bottom .pingtuan_button_box .right_button .text {
+  font-size: 22rpx;
+}
+.fixed_bottom .pingtuan_button_box .all_button {
+  width: 560rpx;
+  height: 88rpx;
+  background-color: #ffd305;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100rpx;
+  color: #27323f;
+  font-size: 32rpx;
+}
 .fixed_bottom_popup {
   box-shadow: 0 0 0 0 #fff;
 }
@@ -946,11 +1042,31 @@ page {
   padding-top: 12rpx;
   display: flex;
   align-items: center;
+  width: 400rpx;
 }
 .pop-goods-des .pop-goods-price text {
   font-size: 24rpx;
   padding-left: 10%;
   color: #7b8196;
+}
+.pop-goods-des .pop-goods-ptuan-price {
+  display: flex;
+  padding-top: 12rpx;
+  color: #7b8196;
+  width: 400rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptprice {
+  font-size: 26rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptprice text {
+  color: #a18d65;
+  font-size: 32rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptchil {
+  font-size: 26rpx;
+  padding-left: 10%;
+  display: flex;
+  align-items: center;
 }
 .pop-goods-des .pop-goods-guige {
   white-space: nowrap;
@@ -1034,6 +1150,7 @@ page {
   bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
+  box-shadow: 0 -7px 10px rgba(255, 211, 5, 0.1);
 }
 .iphonexBottom {
   bottom: 67rpx !important;
@@ -1041,4 +1158,139 @@ page {
 .swiper video {
   width: 750rpx;
   height: 750rpx;
+}
+.pingtuan_basic {
+  background-color: #ffd305;
+  position: relative;
+}
+.pingtuan_basic .price {
+  font-size: 50rpx;
+  color: #27323f;
+  font-weight: 600;
+}
+.pingtuan_basic .price text {
+  font-size: 36rpx;
+  font-weight: normal;
+  text-decoration: line-through;
+  padding-left: 8rpx;
+}
+.pingtuan_basic .texts {
+  font-size: 28rpx;
+  color: #27323f;
+}
+.pingtuan_basic .times-right {
+  color: #ffd305;
+  background-color: #27323f;
+}
+.pingtuan_basic .times-right .time-name {
+  padding-bottom: 10rpx;
+}
+.pingtuan_basic .times-right:after {
+  position: absolute;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  border: solid transparent;
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: #27323f;
+  border-width: 10px;
+  top: 50%;
+  right: 100%;
+  margin-top: -10px;
+}
+.pingtuanTextInfo {
+  display: flex;
+  border-top: 20rpx solid #f5f5f5;
+  height: 120rpx;
+  align-items: center;
+}
+.pingtuanTextInfo .text {
+  color: #27323f;
+  padding-left: 20rpx;
+  width: 93%;
+}
+.pingtuanList {
+  border-top: 20rpx solid #f5f5f5;
+  border-bottom: 20rpx solid #f5f5f5;
+}
+.pingtuanList .header {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+  color: #27323f;
+}
+.pingtuanList .header text {
+  padding-left: 20rpx;
+}
+.pingtuanList .userList {
+  display: flex;
+  height: 130rpx;
+  align-items: center;
+  border-bottom: 2rpx dashed #f5f5f5;
+}
+.pingtuanList .userList .imageBox {
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pingtuanList .userList .imageBox image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+}
+.pingtuanList .userList .nameBox {
+  width: 260rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pingtuanList .userList .nameBox .name {
+  width: 100%;
+  color: #27323f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuanList .userList .nameBox .text {
+  color: #999;
+  font-size: 26rpx;
+}
+.pingtuanList .userList .timeBox {
+  width: 190rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.pingtuanList .userList .timeBox .info {
+  color: #27323f;
+  font-size: 26rpx;
+  padding-bottom: 2rpx;
+}
+.pingtuanList .userList .timeBox .info text {
+  color: #ffd305;
+  font-weight: bold;
+  padding-right: 8rpx;
+}
+.pingtuanList .userList .timeBox .text {
+  display: flex;
+  color: #999;
+  font-size: 24rpx;
+}
+.pingtuanList .userList .button {
+  background-color: #ffd305;
+  color: #27323f;
+  width: 120rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100rpx;
+  margin-left: 30rpx;
 }

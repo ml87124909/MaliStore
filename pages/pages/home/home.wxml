@@ -19,8 +19,8 @@
   </view>
   <template is="swiper" data="{{swiper:home,swiperCurrent:swiperCurrent}}" />
   <template is="homeicon" data="{{homeicon:sale}}" />
+  <template is="pingtuan" data="{{ptGoodsList:ptGoodsList}}" />
   <template is="hcategory" data="{{category:category,categoryGoods:categoryGoods}}" />
-  <template is="pingtuan" data="{{toptuan:toptuan,toptuaninfo:toptuaninfo}}" />
   <template is="kanjia" data="{{topkan:topkan,topkans:topkans,pics:pics}}" />
   <template is="topic" data="{{toptopic:toptopic,toptopics:toptopics}}" />
   <template is="topgoods" data="{{topgoods:topgoods,goods:goods}}" />

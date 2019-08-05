@@ -1,0 +1,177 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+page {
+  background-color: #f5f5f5;
+}
+.swiper-container {
+  position: relative;
+}
+.swiper-container .swiper {
+  height: 408rpx;
+}
+.swiper-container .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container .dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50rpx;
+  display: flex;
+  justify-content: center;
+  height: 10rpx;
+}
+.swiper-container .dots .dot {
+  margin: 0 5rpx;
+  width: 12rpx;
+  height: 8rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  transition: all 0.6s;
+  opacity: 0.5;
+}
+.swiper-container .dots .active {
+  width: 22rpx;
+  opacity: 1;
+}
+.swiper_content {
+  padding-top: 20rpx;
+}
+.swiper_content .text-info {
+  text-align: center;
+  color: #999;
+}
+.pingtuanGoodsbBox {
+  width: 95%;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-top: -30rpx;
+  padding-top: 20rpx;
+  padding-bottom: 60rpx;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+}
+.pingtuanGoodsbBox .pingtuanList {
+  display: flex;
+  border-bottom: 2rpx solid #f5f5f5;
+  height: 260rpx;
+  align-items: center;
+}
+.pingtuanGoodsbBox .pingtuanList .images {
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #f5f5f5;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  position: relative;
+}
+.pingtuanGoodsbBox .pingtuanList .images text {
+  position: absolute;
+  background-color: #ffd305;
+  top: 20rpx;
+  font-size: 18rpx;
+  padding: 2rpx 6rpx;
+  left: -6rpx;
+  border-bottom-right-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  color: #ffffff;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox {
+  width: 450rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .title {
+  color: #27323f;
+  font-size: 32rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .introduce {
+  color: #7b8196;
+  font-size: 28rpx;
+  padding-top: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .oldPrice {
+  color: #bfbfbf;
+  font-size: 26rpx;
+  padding-top: 16rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .oldPrice text {
+  text-decoration: line-through;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox .price {
+  color: #ffd305;
+  font-size: 42rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox .price text {
+  font-size: 32rpx;
+  padding-right: 4rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox .number {
+  padding-left: 20rpx;
+  color: #27323f;
+  font-size: 28rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox .button {
+  position: absolute;
+  right: 0;
+  background-color: #ffd305;
+  color: #27323f;
+  width: 140rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6rpx;
+}
+.pingtuanGoodsbBox .pingtuanList .infoBox .priceBox .active {
+  background-color: #27323f;
+  color: #ffd305;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-more-goods .no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+}

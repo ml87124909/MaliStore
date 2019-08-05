@@ -47,7 +47,7 @@
     <image src="../../../../images/none/address_empty.png" class="no-order-img" />
     <view class="text">没有收货地址</view>
   </view>
-  <view class="bottom-box" bindtap="addAddess">
+  <view class="bottom-box {{iphonex?'iphonex-bottom':''}}" bindtap="addAddess">
     <span type="plus" size="14" color="#27323f" class="ui-icon icon-plus" style="color: #27323f;font-size: 14px;"></span>新增地址
   </view>
 </page>

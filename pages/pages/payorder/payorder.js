@@ -47,7 +47,7 @@ exports.default = Page({
     onShow: function onShow() {
         var that = this;
         var shopList = [];
-        if ("buyNow" == that.data.orderType) {
+        if (that.data.orderType == 'buyNow') {
             var buyNowInfoMem = wx.getStorageSync('__buyNowInfo');
             if (buyNowInfoMem && buyNowInfoMem.shopList) {
                 shopList = buyNowInfoMem.shopList;
@@ -67,8 +67,21 @@ exports.default = Page({
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
         if (e.orderType) {
-            this.setData({ orderType: e.orderType });
+            that.setData({ orderType: e.orderType });
         }
+        if (e.ktid) {
+            that.setData({
+                ktid: e.ktid,
+                ktype: e.ktype
+            });
+        }
+        if (wx.IPHONEX == 0) {
+            that.setData({ iphonex: true });
+        }
+        that.zitiShippingList();
+    },
+    zitiShippingList: function zitiShippingList() {
+        var that = this;
         //获取商铺列表
         _server2.default.get(_urls2.default.links[0].mlshopslis, {}).then(function (res) {
             if (res.code == 0) {
@@ -102,9 +115,6 @@ exports.default = Page({
                 }
             }
         });
-        if (wx.IPHONEX == 0) {
-            that.setData({ iphonex: true });
-        }
     },
     initShippingAddress: function initShippingAddress() {
         var that = this;
@@ -178,7 +188,6 @@ exports.default = Page({
             remark = e.detail.value.remark;
         }
         var postData = {
-            ctype: 0,
             viewid: 'home',
             part: 'order_create',
             token: loginToken,
@@ -275,10 +284,33 @@ exports.default = Page({
         } else {
             postData.formId = e.detail.formId;
         }
+        if (that.data.ktype == 0) {
+            //开团订单
+            postData.ctype = 2;
+            postData.ptype = 0;
+            postData.ptkid = that.data.ktid;
+        } else if (that.data.ktype == 1) {
+            //参团订单
+            postData.ctype = 2;
+            postData.ptype = 1;
+            postData.ptkid = that.data.ktid;
+        } else {
+            //普通订单
+            postData.ctype = 0;
+        }
         _server2.default.post(_urls2.default.links[0].ordecreate, postData).then(function (res) {
             if (res.code == 701) {
                 wx.showConfirm({
                     content: "\u60A8\u7684\u8D26\u6237\u5DF2\u7ECF\u88AB\u7981\u7528\uFF0C\u4E0D\u80FD\u521B\u5EFA\u8BA2\u5355\r\n\u5982\u6709\u7591\u95EE\uFF0C\u8BF7\u8054\u7CFB\u5BA2\u670D\u5DE5\u4F5C\u4EBA\u5458",
+                    cancelColor: "#999999",
+                    confirmColor: "#ffd305",
+                    success: function success(res) {}
+                });
+                return;
+            }
+            if (res.code == 307) {
+                wx.showConfirm({
+                    content: "\u5DF2\u6709\u672A\u5B8C\u6210\u7684\u62FC\u56E2\u8BA2\u5355\uFF0C\u8BF7\u7EE7\u7EED\u4E4B\u524D\u7684\u62FC\u56E2",
                     cancelColor: "#999999",
                     confirmColor: "#ffd305",
                     success: function success(res) {}
@@ -310,6 +342,12 @@ exports.default = Page({
                     if (e && userid) {
                         wx.removeStorageSync('__appInviter');
                     }
+                }
+                if (that.data.ktype) {
+                    wx.redirectTo({
+                        url: "/pages/pages/payorder/paypal/paypal?id=" + res.data.order_number + '&pt=2'
+                    });
+                    return;
                 }
                 wx.redirectTo({
                     url: "/pages/pages/payorder/paypal/paypal?id=" + res.data.order_number
@@ -387,6 +425,54 @@ exports.default = Page({
             couponsMoney: 0
         });
         that.createOrder();
+    },
+    formCouponsAdd: function formCouponsAdd(e) {
+        var that = this;
+        var token = wx.getStorageSync('__appUserInfo').token;
+        var number = e.detail.value.number;
+        if (!number) {
+            wx.showModal({
+                content: '如有优惠码，请输入',
+                showCancel: false
+            });
+            return;
+        }
+        _server2.default.get(_urls2.default.links[0].getcoupons, { token: token, key: number }).then(function (res) {
+            if (res.code == 0) {
+                wx.showToast({
+                    title: "\u5151\u6362\u6210\u529F",
+                    icon: 'success',
+                    mask: true,
+                    duration: 1000
+                });
+                self.setData({ cValue: '' });
+                that.getMyCoupons();
+            }
+            if (res.code == 200) {
+                wx.showConfirm({
+                    content: "\u4F18\u60E0\u5238\u53E3\u4EE4\u4E0D\u6B63\u786E\r\n\u8BF7\u786E\u8BA4\u540E\u91CD\u65B0\u8F93\u5165",
+                    showCancel: false,
+                    confirmColor: '#ffd305',
+                    confirmText: "\u6211\u77E5\u9053\u4E86"
+                });
+            }
+            if (res.code == 300) {
+                wx.showConfirm({
+                    content: "\u60A8\u5DF2\u9886\u8FC7\u6B64\u4F18\u60E0\u5238\r\n\u4E0D\u80FD\u5728\u8FDB\u884C\u5151\u6362\u4E86",
+                    showCancel: false,
+                    confirmColor: '#ffd305',
+                    confirmText: "\u6211\u77E5\u9053\u4E86"
+                });
+            }
+            if (res.code == 301) {
+                wx.showConfirm({
+                    content: "\u4F18\u60E0\u5238\u5DF2\u7ECF\u9886\u5B8C\u4E86\r\n\u4E0B\u6B21\u8981\u65E9\u70B9\u6765\u54E6\uFF5E",
+                    showCancel: false,
+                    confirmColor: '#ffd305',
+                    confirmText: "\u6211\u77E5\u9053\u4E86"
+                });
+            }
+        });
     },
     getPayPalTap: function getPayPalTap() {
         wx.navigateTo({

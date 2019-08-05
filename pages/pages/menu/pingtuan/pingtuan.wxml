@@ -1,0 +1,51 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/swiper/swiper.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>热门拼团</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  <template is="pingtuanswiper" data="{{swiper:pingtuan,swiperCurrent:swiperCurrent}}" />
+  <view class="pingtuanGoodsbBox">
+    <block wx:if="{{pingtuanList}}">
+      <view class="pingtuanList" wx:for="{{pingtuanList}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <view class="images">
+          <text wx:if="{{item.ptuan_ktype==1}}">新用户团</text>
+          <text wx:if="{{item.ptuan_ktype==2}}">老用户团</text>
+          <text wx:if="{{item.ptuan_ktype==3}}">无门槛团</text>
+          <image src="{{item.pic}}" />
+        </view>
+        <view class="infoBox">
+          <view class="title">{{item.name}}</view>
+          <view class="introduce">{{item.introduce}}</view>
+          <view class="oldPrice">单买价<text>¥{{item.original_price}}</text></view>
+          <view class="priceBox">
+            <view class="price"><text>¥</text>{{item.pt_price}}</view>
+            <view class="number">{{item.ptuan_success}}人团</view>
+            <view class="button">去开团</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{!pingtuanList}}" class="no-more-goods">
+      <image src="../../../../images/none/empty_goods.png" class="no-order-img" />
+      <view class="text">暂无拼团商品</view>
+    </view>
+  </view>
+</page>

@@ -23,6 +23,37 @@
   color: #27323f;
   background-color: #fff;
 }
+.dhConponsBox {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  height: 100rpx;
+}
+.dhConponsBox .Ctitle {
+  width: 130rpx;
+}
+.dhConponsBox input {
+  width: 440rpx;
+  color: #27323f;
+  height: 80rpx;
+}
+.dhConponsBox .button {
+  background-color: #27323f;
+  color: #ffd305;
+  padding: 4rpx 20rpx;
+  margin-left: 8rpx;
+  position: relative;
+}
+.dhConponsBox .button button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+}
 .youhuiquan-box {
   display: flex;
   justify-content: flex-end;

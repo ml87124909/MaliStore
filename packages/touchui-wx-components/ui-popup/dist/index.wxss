@@ -19,6 +19,8 @@
 .ui-popup-content {
   position: absolute;
   background-color: #fff;
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
 }
 .ui-popup-content.bottom {
   bottom: 0;

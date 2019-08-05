@@ -25,6 +25,7 @@
       <form bindsubmit="bindFormSubmit">
         <input name="orderid" value="{{id}}" class="none"></input>
         <input name="goodsid" value="{{item.id}}" class="none"></input>
+        <input name="indexid" value="{{index}}" class="none"></input>
         <view class="ui-row" style="height:80px;">
           <view class="ui-col ui-col-align-center align-center valign-middle" style="padding-left: 5px;flex:0 0 80px;">
             <view class="ui-col-content align-center valign-middle">
@@ -45,6 +46,12 @@
             <view wx:if="{{starResult[0] == item.id && item.statse == 0}}" class="result">{{starResult[1]}}</view>
           </view>
           <textarea class="piangjia-textarea" placeholder="您觉得这个商品怎么样？请写下您对这个商品的评价～" name="textarea"></textarea>
+          <view class="images-box">
+            <block wx:if="{{imgList.nums==index}}">
+              <image src="{{item}}" bindtap="previewImageTap" data-img="{{item}}" mode="aspectFill" wx:for="{{imgList.list}}" wx:key="id" />
+            </block>
+            <view class="images-add" bindtap="chooseImageTap" data-index="{{index}}"></view>
+          </view>
           <view class="submit-box">
             <view class="right"><button form-type="submit">提交评价</button></view>
           </view>
@@ -56,6 +63,9 @@
           </view>
           <view class="star-time">{{item.data_time}}</view>
           <view class="star-text">{{item.goods_text}}</view>
+          <view class="pingjia-box" wx:if="{{item.pics}}">
+            <image mode="aspectFill" wx:for="{{item.pics}}" wx:key="id" src="{{item.pic}}" />
+          </view>
         </block>
       </form>
     </view>

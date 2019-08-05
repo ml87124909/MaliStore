@@ -1,0 +1,141 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.header-box {
+  width: 100%;
+  height: 230rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+  position: fixed;
+  background-color: #fff;
+}
+.header-box .category-list {
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
+.header-box .category-list .category {
+  width: 160rpx;
+  height: 160rpx;
+  display: inline-block;
+  margin-left: 20rpx;
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.header-box .category-list .category .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  top: 0;
+  opacity: .3;
+}
+.header-box .category-list .category .name {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.topic-content {
+  margin-top: 230rpx;
+}
+.topic-content .topic {
+  display: flex;
+  height: 250rpx;
+  width: 92%;
+  margin: 0 auto;
+  align-items: center;
+}
+.topic-content .topic .info {
+  width: 480rpx;
+  display: flex;
+  flex-direction: column;
+  height: 200rpx;
+  margin-right: 20rpx;
+}
+.topic-content .topic .info .title {
+  color: #27323f;
+  font-size: 30rpx;
+  padding-top: 8rpx;
+  line-clamp: 2;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.topic-content .topic .info .texts {
+  color: #7b8196;
+  font-size: 26rpx;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-top: 10rpx;
+}
+.topic-content .topic .info .icon-lists {
+  display: flex;
+  font-size: 24rpx;
+  height: 60rpx;
+  align-items: center;
+  color: #bfbfbf;
+}
+.topic-content .topic .info .icon-lists .icon {
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+.topic-content .topic .info .icon-lists .icon image {
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 6rpx;
+}
+.topic-content .topic .image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.no-more-goods {
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.no-more-goods .no-order-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+.no-more-goods .text {
+  font-size: 26rpx;
+  color: #bfbfbf;
+}

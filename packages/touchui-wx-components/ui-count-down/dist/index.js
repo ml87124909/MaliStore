@@ -41,7 +41,7 @@ exports.default = Component({
       type: [String, Object],
       value: '',
       observer: function observer(val) {
-        console.log(123);
+        //console.log(123)
         this.setData({
           selfSplitStyle: _StyleHelper2.default.getPlainStyle(val)
         });
@@ -51,7 +51,7 @@ exports.default = Component({
       type: [String, Object],
       value: '',
       observer: function observer(val) {
-        console.log(_StyleHelper2.default.getPlainStyle(val));
+        //console.log(StyleHelper.getPlainStyle(val))
         this.setData({
           selfNumberStyle: _StyleHelper2.default.getPlainStyle(val)
         });
@@ -77,7 +77,7 @@ exports.default = Component({
       selfSplitStyle: _StyleHelper2.default.getPlainStyle(this.data.splitStyle),
       selfNumberStyle: _StyleHelper2.default.getPlainStyle(this.data.numberStyle)
     });
-    console.log(this.data.selfNumberStyle);
+    //console.log(this.data.selfNumberStyle)
 
     this.onPageShow();
   },

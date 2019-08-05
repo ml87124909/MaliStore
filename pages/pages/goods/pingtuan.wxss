@@ -1,0 +1,654 @@
+/* 1像素解决方案 */
+/*
+ * 清除1px
+ */
+/*
+ * 清除浮动
+ */
+/*
+ * mobile
+ */
+/*
+ * 1px
+ */
+/*
+ * text
+ */
+/* 垂直居中 */
+/* 水平居中 */
+/* 水平垂直居中 */
+/* 超出部分出省略号 */
+/* 多行文本超出部分省略号 */
+.goods-header-box {
+  width: 100%;
+  height: 280rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.goods-header-box .image {
+  width: 230rpx;
+  height: 230rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goods-header-box .image image {
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #f5f5f5;
+}
+.goods-header-box .info {
+  height: 200rpx;
+  width: 500rpx;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.goods-header-box .info .name {
+  font-size: 30rpx;
+  color: #27323f;
+  padding-bottom: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.goods-header-box .info .text {
+  font-size: 28rpx;
+  color: #7b8196;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.goods-header-box .info .info {
+  color: #999;
+  height: 50rpx;
+  font-size: 24rpx;
+  padding-top: 20rpx;
+}
+.goods-header-box .info .price-box {
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.goods-header-box .info .price-box .price {
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+}
+.goods-header-box .info .price-box .price text {
+  color: #ffd305;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-left: 10rpx;
+}
+.goods-header-box .info .price-box .oldnew {
+  background-color: #ffd305;
+  color: #27323f;
+  font-size: 24rpx;
+  border-radius: 100rpx;
+  padding: 4rpx 10rpx;
+  margin-left: 20rpx;
+}
+.goods-centent-box {
+  padding-bottom: 30rpx;
+  padding-top: 20rpx;
+  position: relative;
+}
+.goods-centent-box .logo {
+  position: absolute;
+  width: 160rpx;
+  height: 160rpx;
+  right: 40rpx;
+  top: -60rpx;
+}
+.goods-centent-box .times-box {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  color: #7b8196;
+}
+.goods-centent-box .info-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  color: #27323f;
+  margin-bottom: 50rpx;
+}
+.goods-centent-box .info-box text {
+  color: #ffd305;
+  font-weight: bold;
+  padding-left: 6rpx;
+  padding-right: 6rpx;
+}
+.goods-centent-box .user-box {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+.goods-centent-box .user-box .tuan {
+  width: 100rpx;
+  height: 100rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20rpx;
+  margin-bottom: 30rpx;
+}
+.goods-centent-box .user-box .tuan image {
+  border-radius: 100%;
+  border: 2rpx solid #f5f5f5;
+}
+.goods-centent-box .user-box .tuan text {
+  position: absolute;
+  background-color: #ffd305;
+  font-size: 22rpx;
+  padding: 2rpx 16rpx;
+  border-radius: 50rpx;
+  bottom: -20rpx;
+}
+.goods-centent-box .user-box .none {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 100%;
+  font-size: 48rpx;
+  font-weight: 300;
+  margin-left: 20rpx;
+  margin-bottom: 30rpx;
+  border: 2rpx dashed #999;
+  color: #999;
+}
+.goods-centent-box .user-box .user {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+  margin-left: 20rpx;
+  margin-bottom: 30rpx;
+}
+.goods-centent-box .button {
+  width: 80%;
+  height: 80rpx;
+  margin: 0 auto;
+  background-color: #ffd305;
+  color: #27323f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+}
+.goods-centent-box .tips {
+  color: #999;
+  text-align: center;
+  font-size: 24rpx;
+  padding-top: 20rpx;
+}
+.pingtuan-more {
+  border-top: 20rpx solid #f5f5f5;
+}
+.pingtuan-more .pingtuan-header {
+  border-bottom: 2rpx solid #f5f5f5;
+  display: flex;
+  width: 100%;
+  height: 80rpx;
+  align-items: center;
+  padding-left: 20rpx;
+  color: #27323f;
+}
+.pingtuan-more .pingtuanList {
+  display: flex;
+  border-bottom: 2rpx solid #f5f5f5;
+  height: 260rpx;
+  align-items: center;
+}
+.pingtuan-more .pingtuanList .images {
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #f5f5f5;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.pingtuan-more .pingtuanList .infoBox {
+  width: 450rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pingtuan-more .pingtuanList .infoBox .title {
+  color: #27323f;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuan-more .pingtuanList .infoBox .introduce {
+  color: #7b8196;
+  font-size: 28rpx;
+  padding-top: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pingtuan-more .pingtuanList .infoBox .oldPrice {
+  color: #bfbfbf;
+  font-size: 26rpx;
+  padding-top: 16rpx;
+}
+.pingtuan-more .pingtuanList .infoBox .oldPrice text {
+  text-decoration: line-through;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox .price {
+  color: #ffd305;
+  font-size: 42rpx;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox .price text {
+  font-size: 32rpx;
+  padding-right: 4rpx;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox .number {
+  padding-left: 20rpx;
+  color: #27323f;
+  font-size: 28rpx;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox .button {
+  position: absolute;
+  right: 0;
+  background-color: #ffd305;
+  color: #27323f;
+  width: 140rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6rpx;
+}
+.pingtuan-more .pingtuanList .infoBox .priceBox .active {
+  background-color: #27323f;
+  color: #ffd305;
+}
+.pingtuan-more .goods-wxparse-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fixed_bottom_ui-col {
+  position: relative;
+}
+.fixed_bottom_ui-col:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300%;
+  height: 300%;
+  border: 0 #ccc solid;
+  box-sizing: border-box;
+  transform-origin: 0 0;
+  transform: scale(0.33333333);
+  pointer-events: none;
+  z-index: 0;
+  border-right-width: 1px;
+}
+.iphonex-bottom {
+  height: 67rpx;
+  background-color: #fff;
+}
+.fixed_bottom {
+  background-color: #fff;
+}
+.fixed_bottom .form_list_buy {
+  background: #ffd305;
+  color: #27323f;
+  height: 100%;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .form_list_cart {
+  background: #ffffff;
+  color: #27323f;
+  height: 100%;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .pingtuan_button_box {
+  display: flex;
+  align-items: center;
+}
+.fixed_bottom .pingtuan_button_box .home_button {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+  position: relative;
+}
+.fixed_bottom .pingtuan_button_box .home_button image {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 2rpx;
+  margin-top: 8rpx;
+}
+.fixed_bottom .pingtuan_button_box .home_button button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.fixed_bottom .pingtuan_button_box .home_button .text {
+  font-size: 24rpx;
+  color: #7f7f7f;
+  padding-left: 2rpx;
+}
+.fixed_bottom .pingtuan_button_box .left_button {
+  width: 280rpx;
+  height: 88rpx;
+  color: #999999;
+  background-color: rgba(255, 211, 5, 0.2);
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .pingtuan_button_box .left_button .price {
+  font-size: 32rpx;
+  margin-bottom: -6rpx;
+  font-weight: 600;
+}
+.fixed_bottom .pingtuan_button_box .left_button .text {
+  font-size: 22rpx;
+}
+.fixed_bottom .pingtuan_button_box .right_button {
+  width: 280rpx;
+  height: 88rpx;
+  background-color: #ffd305;
+  color: #27323f;
+  border-top-right-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fixed_bottom .pingtuan_button_box .right_button .price {
+  font-size: 32rpx;
+  margin-bottom: -6rpx;
+  font-weight: 600;
+}
+.fixed_bottom .pingtuan_button_box .right_button .text {
+  font-size: 22rpx;
+}
+.fixed_bottom_popup {
+  box-shadow: 0 0 0 0 #fff;
+}
+.fixed_bottom_popup .form_list_cart {
+  position: relative;
+}
+.fixed_bottom_popup .form_list_cart:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300%;
+  height: 300%;
+  border: 0 #ccc solid;
+  box-sizing: border-box;
+  transform-origin: 0 0;
+  transform: scale(0.33333333);
+  pointer-events: none;
+  z-index: 0;
+  border-top-width: 1px;
+}
+.fixed_bottom_box image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.fixed_bottom_box button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.goods-content-tap {
+  background-color: #fff;
+  display: flex;
+}
+.goods-content-tap-btn {
+  width: 50%;
+  text-align: center;
+}
+.pop-img-box .goods-thumbnail {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 4rpx;
+  background-color: #f5f5f5;
+}
+.pop-goods-des {
+  text-align: left;
+  color: #27323f;
+  font-size: 28rpx;
+  padding-right: 14rpx;
+  width: 100%;
+}
+.pop-goods-des .pop-goods-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  color: #27323f;
+}
+.pop-goods-des .pop-goods-price {
+  color: #a18d65;
+  font-size: 30rpx;
+  padding-top: 12rpx;
+  display: flex;
+  align-items: center;
+  width: 400rpx;
+}
+.pop-goods-des .pop-goods-price text {
+  font-size: 24rpx;
+  padding-left: 10%;
+  color: #7b8196;
+}
+.pop-goods-des .pop-goods-ptuan-price {
+  display: flex;
+  padding-top: 12rpx;
+  color: #7b8196;
+  width: 400rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptprice {
+  font-size: 26rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptprice text {
+  color: #a18d65;
+  font-size: 32rpx;
+}
+.pop-goods-des .pop-goods-ptuan-price .ptchil {
+  font-size: 26rpx;
+  padding-left: 10%;
+  display: flex;
+  align-items: center;
+}
+.pop-goods-des .pop-goods-guige {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  font-size: 26rpx;
+  color: #7b8196;
+  padding-top: 12rpx;
+}
+.good-property-name-popup {
+  font-size: 28rpx;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+.label-item-box {
+  width: 95%;
+  margin: 0 auto;
+}
+.label-item-box .label-item {
+  border: 2rpx solid #ddd;
+  display: inline-block;
+  border-radius: 4rpx;
+  color: #27323f;
+  font-size: 26rpx;
+  margin-right: 10px;
+  margin-bottom: 20rpx;
+}
+.label-item-box .label-item .lable-image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 4rpx;
+  background-color: #f5f5f5;
+}
+.label-item-box .label-item .child-name {
+  padding: 10rpx 18rpx;
+}
+.label-item-box .active {
+  color: #27323f;
+  background-color: #ffd305;
+  border: 2rpx solid #ffd305;
+}
+.label-stepper-box {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20rpx;
+  align-items: center;
+}
+.label-stepper-box .num-box {
+  display: flex;
+}
+.label-stepper-box .num-box .num-jian,
+.label-stepper-box .num-box .num-input,
+.label-stepper-box .num-box .num-jia {
+  width: 80rpx;
+  height: 64rpx;
+  line-height: 62rpx;
+  text-align: center;
+  border: 1px solid #eee;
+}
+.label-stepper-box .num-box .num-input {
+  font-size: 28rpx;
+}
+.label-stepper-box .num-box .num-input input {
+  height: 100%;
+}
+.label-stepper-box .num-box .hui {
+  background-color: #f5f5f9;
+}
+.goodsDetail-propertychild-box {
+  min-height: 340rpx;
+  overflow: scroll;
+  margin-bottom: 150rpx;
+}
+.iphonexPropertychild {
+  margin-bottom: 210rpx;
+}
+.fixed_bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  box-shadow: 0 -7px 10px rgba(255, 211, 5, 0.1);
+}
+.iphonexBottom {
+  bottom: 67rpx !important;
+}
+.nav_content {
+  width: 100%;
+  height: 100%;
+  color: #27323f;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav_content image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.nav_content .nav_content_button {
+  position: relative;
+}
+.nav_content .nav_content_button button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.mask_wrap .photo {
+  padding: 0;
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+}
+.mask_wrap .photo image {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+.mask_wrap .photo .ui-icon {
+  display: block;
+  text-align: center;
+  font-size: 96rpx;
+  color: #fff;
+}
+.mask_wrap .photo .icon_top {
+  text-align: right;
+}
+.mask_wrap .photo .top_view {
+  position: relative;
+}
+.mask_wrap .photo .top_view .top_line {
+  position: absolute;
+  bottom: 0px;
+  right: 24px;
+  width: 2px;
+  height: 15px;
+  background-color: #fff;
+}
+.mask_wrap .txv-video-slot {
+  position: absolute;
+  top: 20rpx;
+  left: 15px;
+  color: #fff;
+  padding: 6rpx 10rpx;
+  border-radius: 6rpx;
+}

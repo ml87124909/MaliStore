@@ -102,7 +102,7 @@
               </view>
               <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;">
                 <view class="ui-col-content align-right valign-middle">
-                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                  <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                     <text>付款</text>
                     <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
@@ -185,7 +185,7 @@
                                     <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
                                 </view></view>
                                 <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;"><view class="ui-col-content align-right valign-middle">
-                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                                         <text>付款</text> 
                                         <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
@@ -268,7 +268,7 @@
                                     <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
                                 </view></view>
                                 <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;"><view class="ui-col-content align-right valign-middle">
-                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                                         <text>付款</text> 
                                         <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
@@ -351,7 +351,7 @@
                                     <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
                                 </view></view>
                                 <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;"><view class="ui-col-content align-right valign-middle">
-                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                                         <text>付款</text> 
                                         <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
@@ -434,7 +434,7 @@
                                     <view class="order-button" bindtap="getOrderDelTap" data-id="{{item.id}}">删除订单</view>
                                 </view></view>
                                 <view wx:if="{{item.status == 1}}" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;"><view class="ui-col-content align-right valign-middle">
-                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}">
+                                    <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                                         <text>付款</text> 
                                         <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
@@ -477,7 +477,7 @@
                 </view>
                 <view class="order-qrcode-box">
                     <view class="qrcode-title">请向店员展示提货码</view>
-                    <canvas hidden="{{!showMask}}" class="canvas" canvas-id="canvas" bindlongtap="save"></canvas>
+                    <image src="{{imageQrPath}}" style="width:380rpx;height:380rpx;"/>
                     <view class="qrcode-state">状态：
                         <text wx:if="{{codeStatus == '已核验'}}" class="b">已核验</text>
                         <text wx:if="{{codeStatus == '未核验'}}" class="a">未核验</text>
@@ -486,4 +486,5 @@
             </view>
         </ui-mask>
 
+        <canvas class="canvas" canvas-id="canvas" style="width:380rpx;height:380rpx;position:fixed;left:-1000rpx;top:-1000rpx;"></canvas>
     </page>

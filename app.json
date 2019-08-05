@@ -4,8 +4,11 @@
     "pages/pages/login/login",
     "pages/pages/menu/menu",
     "pages/pages/goods/goods",
+    "pages/pages/goods/pingtuan",
+    "pages/pages/goods/ptinfo",
     "pages/pages/menu/list/list",
     "pages/pages/menu/search/search",
+    "pages/pages/menu/pingtuan/pingtuan",
     "pages/pages/menu/newlist/newlist",
     "pages/pages/shopcart/shopcart",
     "pages/pages/payorder/payorder",
@@ -41,9 +44,13 @@
     "pages/pages/user/history/history",
     "pages/pages/user/pingtuan/pingtuan",
     "pages/pages/user/share/share",
+    "pages/pages/buycao/list",
+    "pages/pages/buycao/buycao",
     "pages/component/swiper/swiper",
     "pages/component/menu/menu",
-    "pages/component/module/module"
+    "pages/component/module/module",
+    "pages/pages/cash/cash",
+    "pages/pages/cash/info"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -71,6 +78,12 @@
         "text": "分类"
       },
       {
+        "pagePath": "pages/pages/buycao/list",
+        "iconPath": "images/tabbar/cao-off.png",
+        "selectedIconPath": "images/tabbar/cao-on.png",
+        "text": "种草"
+      },
+      {
         "pagePath": "pages/pages/shopcart/shopcart",
         "iconPath": "images/tabbar/cart-off.png",
         "selectedIconPath": "images/tabbar/cart-on.png",
@@ -94,5 +107,6 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

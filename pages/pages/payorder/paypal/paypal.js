@@ -80,8 +80,12 @@ exports.default = Page({
                 }
             });
         }
+        if (e.pt) {
+            that.setData({ ptype: e.pt });
+        }
         if (token) {
             _server2.default.get(_urls2.default.links[0].ordepaypal, { token: token, number: e.id }).then(function (res) {
+                console.log(res);
                 if (res.code == 0) {
                     that.setData({
                         orderNumber: e.id,
@@ -144,30 +148,48 @@ exports.default = Page({
         var id = e.currentTarget.dataset.id;
         var data = that.data.oederPaypal;
         var money = that.data.orderMoney;
+        var ptype = that.data.ptype;
+        if (ptype) {
+            var ctype = 2;
+        } else {
+            var ctype = 0;
+        }
         if (id == 0) {
             //微信支付
             var nextAction = {
-                ctype: 0,
+                ctype: ctype,
                 id: data.id,
                 ptype: 0
             };
-            wxpay.wxpay(app, money, data.id, 0, nextAction);
+            if (ptype) {
+                wxpay.wxpay(app, money, data.id, 4, nextAction);
+            } else {
+                wxpay.wxpay(app, money, data.id, 0, nextAction);
+            }
         } else if (id == 1) {
             //余额支付
             var nextAction = {
-                ctype: 0,
+                ctype: ctype,
                 id: data.id,
                 ptype: 1
             };
-            wxpay.wxpay(app, money, data.id, 0, nextAction);
+            if (ptype) {
+                wxpay.wxpay(app, money, data.id, 4, nextAction);
+            } else {
+                wxpay.wxpay(app, money, data.id, 0, nextAction);
+            }
         } else if (id == 2) {
             //微信+余额支付
             var nextAction = {
-                ctype: 0,
+                ctype: ctype,
                 id: data.id,
                 ptype: 2
             };
-            wxpay.wxpay(app, money, data.id, 0, nextAction);
+            if (ptype) {
+                wxpay.wxpay(app, money, data.id, 4, nextAction);
+            } else {
+                wxpay.wxpay(app, money, data.id, 0, nextAction);
+            }
         } else if (id == 3) {
             //微信好友代付
             that.setData({
@@ -215,26 +237,48 @@ exports.default = Page({
         wxpay.wxpay(app, money, number, 0, nextAction);
     },
     toUserPayTap: function toUserPayTap(e) {
+        var that = this;
         var number = e.currentTarget.dataset.id;
         var money = e.currentTarget.dataset.money;
+        var ptype = that.data.ptype;
+
+        if (ptype) {
+            var ctype = 2;
+        } else {
+            var ctype = 0;
+        }
         var nextAction = {
-            ctype: 0,
-            id: number
+            ctype: ctype,
+            id: number,
+            ptype: 0
         };
-        wxpay.wxpay(app, money, number, 1, nextAction);
+        if (ptype) {
+            wxpay.wxpay(app, money, number, 4, nextAction);
+        } else {
+            wxpay.wxpay(app, money, number, 1, nextAction);
+        }
     },
     onShareAppMessage: function onShareAppMessage(res) {
         var that = this;
         var share = that.data.share;
+        var ptype = that.data.ptype;
         var shopInfo = wx.getStorageSync('__appShopInfo').shopInfo;
         that.setData({ showMask: false });
         if (res.from === 'button') {
             if (share == 0) {
-                return {
-                    title: that.data.shareText,
-                    path: '/pages/pages/payorder/paypal/paypal?id=' + that.data.orderNumber + '&share=1',
-                    imageUrl: that.data.oederPaypal.orderGoods[0].pic
-                };
+                if (ptype) {
+                    return {
+                        title: that.data.shareText,
+                        path: '/pages/pages/payorder/paypal/paypal?id=' + that.data.orderNumber + '&share=1&pt=2',
+                        imageUrl: that.data.oederPaypal.orderGoods[0].pic
+                    };
+                } else {
+                    return {
+                        title: that.data.shareText,
+                        path: '/pages/pages/payorder/paypal/paypal?id=' + that.data.orderNumber + '&share=1',
+                        imageUrl: that.data.oederPaypal.orderGoods[0].pic
+                    };
+                }
             } else {
                 return {
                     title: shopInfo.sname,

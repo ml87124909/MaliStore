@@ -64,7 +64,7 @@
         </view>
       </view>
     </view>
-    <view class="ui-row" style="height:40px;">
+    <view wx:if="{{!pingtuan}}" class="ui-row" style="height:40px;">
       <view class="ui-col ui-col-5" style="flex: 0 0 41.66666666666667%;padding-left: 10px;padding-right: 5px;">
         <view class="ui-col-content">
           <view class="column-content column-price-content">
@@ -96,7 +96,8 @@
           <block wx:if="{{shopInfo.vip_type == '购物升级'}}">
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state == 0}}">
               <image src="../../../images/vip.png" lazy-load="true" />
-              <view class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
+              <view wx:if="{{!pingtuan}}" class="column-goods-vip">会员最低价 ¥{{goodsDetail.basicInfo.vip_price}}</view>
+              <view wx:else="" class="column-goods-vip">会员最低价 ¥{{goodsDetail.pingtuanInfo.price}}</view>
               <view bindtap="getmamberTap" class="column-goods-vip-pay">会员中心<i class="vip-right"></i></view>
             </view>
             <view class="column-content column-vip-content" wx:if="{{userInfo.vip_state != 0}}">
@@ -118,18 +119,66 @@
         </view>
       </view>
     </view>
+    <view class="pingtuanTextInfo" wx:if="{{pingtuan}}" bindtap="getPingtuanInfotap">
+      <view class="text">
+        <block wx:if="{{pingtuan.ptkstat==1 && pingtuan.ptcstat==1}}">
+          <text>仅限新用户开团或参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==1 && pingtuan.ptcstat==2}}">
+          <text>仅限新用户开团，限老用户参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==1 && pingtuan.ptcstat==3}}">
+          <text>仅限新用户开团，新老用户均可参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==2 && pingtuan.ptcstat==1}}">
+          <text>仅限老用户开团，限新用户参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==2 && pingtuan.ptcstat==2}}">
+          <text>仅限老用户开团或参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==2 && pingtuan.ptcstat==3}}">
+          <text>仅限老用户开团，新老用户均可参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==3 && pingtuan.ptcstat==1}}">
+          <text>新老用户均可开团，限新用户参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==3 && pingtuan.ptcstat==2}}">
+          <text>新老用户均可开团，限老用户参团</text>
+        </block>
+        <block wx:if="{{pingtuan.ptkstat==3 && pingtuan.ptcstat==3}}">
+          <text>新老用户均可开团或参团</text>
+        </block>
+      </view>
+      <span class="icon ui-icon icon-arrow-right" type="arrow-right" size="16" color="#27323f" style="color: #27323f;font-size: 16px;"></span>
+    </view>
   </template>
   <template name="pingtuan">
-    <view wx:if="{{toptuan}}" class="pingtuna-container">
-      <view class="pingtuna-title" bindtap="tapSales" data-id="{{toptuaninfo.remark}}">
-        <text>{{toptuaninfo.value}}</text>
-        <image src="../../../images/home_more.png" lazy-load="true" />
-      </view>
-      <view class="pingtuna-list" wx:for="{{toptuan}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.businessId}}">
-        <view class="pingtuna-list-title">{{item.title}}</view>
-        <view wx:if="{{item.linkUrl}}" class="pingtuna-list-text">{{item.linkUrl}}</view>
-        <view wx:if="{{item.remark}}" class="pingtuna-list-info">{{item.remark}}</view>
-        <image src="{{item.picUrl}}" lazy-load="true" />
+    <view class="pingtuanBox" wx:if="{{ptGoodsList}}">
+      <view class="pingtuanContent">
+        <view class="header ui-row" style="height:42px;">
+          <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 10px;">
+            <view class="ui-col-content align-left valign-middle">
+              <view class="name">超值拼团好物</view>
+            </view>
+          </view>
+          <view bindtap="getPingtuanListTap" class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 10px;flex:0 0 100px;">
+            <view class="ui-col-content align-right valign-middle">
+              <view class="text">查看更多 <span type="arrow-right" size="14" color="#27323f" class="ui-icon icon-arrow-right" style="color: #27323f;font-size: 14px;"></span></view>
+            </view>
+          </view>
+        </view>
+        <view class="goodsContent">
+          <view class="goods" wx:for="{{ptGoodsList}}" wx:key="id" bindtap="toDetailsTap" data-id="{{item.id}}">
+            <view class="image">
+              <image src="{{item.pic}}" />
+            </view>
+            <view class="info">
+              <view class="title">{{item.ptuan_success}}人团<text>¥{{item.ptuan_price}}</text></view>
+              <view class="text">单买价¥{{item.mini_price}}</view>
+              <view class="button">去拼团</view>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </template>
@@ -285,17 +334,28 @@
           <view class="text ui-col" style="padding-left: 20px;">
             <view class="ui-col-content">我的服务</view>
           </view>
+          <view class="ui-col ui-col-align-right align-right" style="padding-right: 20px;">
+            <view class="ui-col-content align-right">
+              <view class="code">
+                <image src="../../../images/user/code.png" />
+                <text>付款码</text>
+                <navigator url="/pages/pages/cash/cash" open-type="navigate" hover-class="none"></navigator>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
       <view class="ui-row" style="margin-bottom: 10px;margin-top: 20px;height:50px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <image src="../../../images/user/6.png" />
+              <text>我的拼团</text>
+              <navigator url="/pages/pages/user/pingtuan/pingtuan" open-type="navigate" hover-class="none"></navigator>
+            </view>
+          </view>
+        </view>
         <!--
-                    <ui-col align="center" vertical-align="middle">
-                        <view class="cart-list cart-list-type">
-                            <image src="../../../images/user/6.png" />
-                            <text>拼团订单</text>
-                            <navigator url="/pages/pages/user/pingtuan/pingtuan" open-type="navigate" hover-class="none"></navigator>
-                        </view>
-                    </ui-col>
                     <ui-col align="center" vertical-align="middle">
                         <view class="cart-list cart-list-type">
                             <image src="../../../images/user/7.png" />
@@ -322,6 +382,9 @@
             </view>
           </view>
         </view>
+      </view>
+      <view class="user-line-small"></view>
+      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="">
           <view class="ui-col-content align-center valign-middle">
             <view class="cart-list cart-list-type">
@@ -331,9 +394,6 @@
             </view>
           </view>
         </view>
-      </view>
-      <view class="user-line-small"></view>
-      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="">
           <view class="ui-col-content align-center valign-middle">
             <view class="cart-list cart-list-type">
@@ -352,6 +412,9 @@
             </view>
           </view>
         </view>
+      </view>
+      <view class="user-line-small"></view>
+      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="">
           <view class="ui-col-content align-center valign-middle">
             <view class="cart-list cart-list-type">
@@ -361,24 +424,12 @@
             </view>
           </view>
         </view>
-      </view>
-      <view class="user-line-small"></view>
-      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
         <view class="ui-col ui-col-align-center align-center valign-middle" style="">
           <view class="ui-col-content align-center valign-middle">
             <view class="cart-list cart-list-type">
               <image src="../../../images/user/14.png" />
               <text>地址</text>
               <navigator url="/pages/pages/user/address/address" open-type="navigate" hover-class="none"></navigator>
-            </view>
-          </view>
-        </view>
-        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
-          <view class="ui-col-content align-center valign-middle">
-            <view class="cart-list cart-list-type">
-              <image src="../../../images/user/15.png" />
-              <text>客服</text>
-              <button open-type="contact" session-from="weapp"></button>
             </view>
           </view>
         </view>
@@ -394,9 +445,9 @@
         <!--
                     <ui-col align="center" vertical-align="middle">
                         <view class="cart-list cart-list-type">
-                            <image src="../../../images/user/17.png" />
-                            <text>帮助</text>
-                            <navigator url="/pages/pages/user/help/help" open-type="navigate" hover-class="none"></navigator>
+                            <image src="../../../images/user/15.png" />
+                            <text>客服</text>
+                            <button open-type="contact" session-from="weapp"></button>
                         </view>
                     </ui-col>
                     -->
