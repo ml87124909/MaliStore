@@ -514,6 +514,7 @@ exports.default = Page({
                     } else {
                       var qrcodePic = res.data.qrimg; //二维码图片
                     }*/
+                    var qrcodePic = res.data.qrimg; //二维码图片
                     wx.downloadFile({
                       url: qrcodePic,
                       success: function success(qr) {
