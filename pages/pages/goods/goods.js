@@ -480,12 +480,12 @@ exports.default = Page({
       //下载商品海报
       //console.log(data.basicInfo.pic)
       var basPic = data.basicInfo.pic
-      if (data.basicInfo.pic.search("https:") == -1 ){
-        var basPic = data.basicInfo.pic.replace(/'http:'/g, 'https:'); //商品图片
+      if (basPic.search("https:") == -1 ){
+        var basPic = basPic.replace(/http:/g, 'https:'); //商品图片
       }
       
       /*if (_urls2.default.images === 'A') {
-        var basPic = data.basicInfo.pic.replace(/'http:\\/\\/'/g, 'https:\\/\\/'); //商品图片
+        var basPic = data.basicInfo.pic.replace(/http:/g, 'https:'); //商品图片
       } else {
         var basPic = data.basicInfo.pic; //商品图片
       }*/
