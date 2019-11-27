@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _config = require('../../../config.js');
+
+var _config2 = _interopRequireDefault(_config);
+
+var mendian_type = _config2.default.mendian_type;
+
 var _urls = require("../../modules/urls.js");
 
 var _urls2 = _interopRequireDefault(_urls);
@@ -272,6 +278,46 @@ exports.default = Page({
             });
             return;
         } else {
+            //////////////////////////自提增加地址start
+          if (mendian_type==1){
+            if (!that.data.curAddressData) {
+              wx.showConfirm({
+                content: "\u8BF7\u5148\u8BBE\u7F6E\u60A8\u7684\u6536\u8D27\u5730\u5740\uFF01",
+                cancelColor: "#999999",
+                confirmColor: "#ffd305",
+                confirmText: "\u7ACB\u5373\u8BBE\u7F6E",
+                cancelText: "\u7A0D\u540E\u8BBE\u7F6E",
+                success: function success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: "/pages/pages/user/address/address"
+                    });
+                  }
+                }
+              });
+              return;
+            }
+            //收货人姓名
+            postData.name = that.data.curAddressData.name;
+            //收货人手机/电话
+            postData.phone = that.data.curAddressData.phone;
+            //收货人省
+            postData.province = that.data.curAddressData.province;
+            //收货人市
+            postData.city = that.data.curAddressData.city;
+            //收货人区
+            if (that.data.curAddressData.district) {
+              postData.district = that.data.curAddressData.district;
+            }
+            //收货人街道地址
+            postData.address = that.data.curAddressData.address;
+            //收货人邮编
+            if (that.data.curAddressData.code) {
+              postData.code = that.data.curAddressData.code;
+            }
+          }
+            
+            ////////////////////////////// 自提增加地址end
             postData.mendian_id = that.data.mendian_id;
         }
         if (that.data.coupon_id != 0) {

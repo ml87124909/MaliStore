@@ -23,7 +23,7 @@
   border-top-right-radius: 30rpx;
 }
 .ui-popup-content.bottom {
-  bottom: 0;
+  bottom: 20rpx;
   left: 0;
   width: 100%;
   transition: transform 300ms;

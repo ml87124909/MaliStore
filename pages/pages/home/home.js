@@ -32,6 +32,7 @@ exports.default = Page({
     var that = this;
     //轮播幻灯片
     _server2.default.get(_urls2.default.links[0].imgsbanner, { type: 'home' }).then(function (res) {
+      //console.log(res,'000000000')
       if (res.code == 0) {
         that.setData({ home: res.data });
       }

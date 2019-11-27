@@ -51,9 +51,10 @@ exports.default = App({
               that.globalData.userinfo = 1e4;
               return;
             }
+            
             if (res.code != 0) {
               wx.showConfirm({
-                content: "\u5C0F\u7A0B\u5E8F\u79D8\u94A5\u4FE1\u606F\u672A\u914D\u7F6E\u6216\u8005\u914D\u7F6E\u4E0D\u6B63\u786E\uFF0C\u8BF7\u68C0\u67E5\u540E\u91CD\u8BD5",
+                content:res.msg,
                 showCancel: false,
                 confirmColor: '#ffd305',
                 confirmText: "\u6211\u77E5\u9053\u4E86",
