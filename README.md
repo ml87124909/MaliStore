@@ -1,8 +1,9 @@
+## 提示
+本项目暂时只会做bug维护，建议前往   和这个小程序一样的https://github.com/mn3711698/SmallStore  及配套后台 https://github.com/mn3711698/Small
+
 # [码力小店 MaliStore+][1]
 ![码力小店，MaliStore+][2]
 
-## 建议说明
-   本项目暂时只会做bug维护，建议前往   和这个小程序一样的https://github.com/mn3711698/SmallStore  及配套后台 https://github.com/mn3711698/Small
 
 
 ## 最后更新日期  2019-08-05
