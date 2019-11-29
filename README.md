@@ -1,5 +1,5 @@
 ## 提示
-本项目暂时只会做bug维护，建议前往   和这个小程序一样的https://github.com/mn3711698/SmallStore  及配套后台 https://github.com/mn3711698/Small
+本项目后台为付费平台，如需免费后台请使用https://github.com/mn3711698/SmallStore  及配套后台 https://github.com/mn3711698/Small
 
 # [码力小店 MaliStore+][1]
 ![码力小店，MaliStore+][2]
