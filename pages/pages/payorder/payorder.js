@@ -35,6 +35,7 @@ exports.default = Page({
         confirm: false,
         //isNeedLogistics: 0, 
         allGoodsPrice: 0,
+        score_needs: 0,
         yunPrice: 0,
         allGoodsAndYunPrice: 0,
         goodsJsonStr: "",
@@ -48,7 +49,8 @@ exports.default = Page({
         couponstype: null,
         shopsName: '请选择自提门店',
         couponsName: '请选择优惠券',
-        wuLiuName: "\u8BF7\u9009\u62E9\u914D\u9001\u65B9\u5F0F"
+        wuLiuName: "\u8BF7\u9009\u62E9\u914D\u9001\u65B9\u5F0F",
+        ptime: '12:01',
     },
     onShow: function onShow() {
         var that = this;
@@ -200,7 +202,8 @@ exports.default = Page({
             goodsJsonStr: that.data.goodsJsonStr,
             kuaid: that.data.inlineDescListKey,
             coupon_id: that.data.coupon_id,
-            remark: remark
+            remark: remark,
+            ptime: that.data.ptime
         };
         //上门自提 & 无须配送
         if (that.data.inlineDescListKey >= 1) {
@@ -345,13 +348,27 @@ exports.default = Page({
             postData.ctype = 0;
         }
         _server2.default.post(_urls2.default.links[0].ordecreate, postData).then(function (res) {
-          
+          //console.log(res)
           if (res.code != 0) {
             wx.showConfirm({
               content: res.msg,
               cancelColor: "#999999",
               confirmColor: "#ffd305",
               success: function success(res) { }
+            });
+            that.setData({
+              allGoodsPrice: res.data.goods_price,
+              score_needs: res.data.score_needs,
+              allGoodsAndYunPrice: res.data.total,
+              yunPrice: res.data.yunfei_price,
+              VipGoodsPrice: res.data.vip_price,
+              VipGoodsAndYunPrice: res.data.vip_total,
+              ViplevelName: res.data.vip_level_name,
+              VipSale: res.data.vip_sale,
+              VipState: res.data.vip_state,
+              VipSmallMoney: res.data.vip_small,
+              allMoney: res.data.money,
+              orderfrom: res.data
             });
             return;
           }
@@ -380,6 +397,7 @@ exports.default = Page({
                 if (!e) {
                     that.setData({
                         allGoodsPrice: res.data.goods_price,
+                        score_needs: res.data.score_needs,
                         allGoodsAndYunPrice: res.data.total,
                         yunPrice: res.data.yunfei_price,
                         VipGoodsPrice: res.data.vip_price,
@@ -542,5 +560,12 @@ exports.default = Page({
     },
     navigateBack: function navigateBack() {
         wx.navigateBack();
+    },
+   
+    bindTimeChange: function (e) {
+      //console.log('picker发送选择改变，携带值为', e.detail.value)
+      this.setData({
+        ptime: e.detail.value
+      })
     }
 });

@@ -279,3 +279,8 @@
 .iphonexBottom {
   bottom: 67rpx !important;
 }
+
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}

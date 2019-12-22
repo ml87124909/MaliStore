@@ -83,6 +83,20 @@
       </ui-accordion>
     </view>
     <view class="shops-ui-row" wx:if="{{inlineDescListKey == 1}}">
+      <view class="pay-ui-row" style="border-top:20rpx solid #f5f5f5;border-bottom:2rpx solid #f5f5f5;">
+          
+            <view class="dhConponsBox">
+              <view class="section">
+                <picker mode="time" value="{{ptime}}" start="09:01" end="18:00" bindchange="bindTimeChange">
+                  <view class="picker">
+                    选择自提时间: {{ptime}}
+                  </view>
+                </picker>
+              </view>
+              
+            </view>
+          
+        </view>
       <ui-accordion bindchange="slide" header-height="50" _pid="{{_pid}}">
         <view slot="header">
           <view class="ui-row ui-row-border-bottom" style="height:50px;">
@@ -127,6 +141,7 @@
         </view>
       </form>
     </view>
+    
     <view class="pay-ui-row" wx:if="{{hasNoCoupons}}">
       <ui-accordion bindchange="slide" header-height="50" wx:if="{{hasNoCoupons}}" _pid="{{_pid}}">
         <view slot="header">
@@ -179,6 +194,14 @@
         </view>
         <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
           <view class="ui-col-content align-right valign-middle">¥{{allGoodsPrice}}</view>
+        </view>
+      </view>
+      <view class="ui-row" style="height:40px;">
+        <view class="ui-col valign-middle" style="padding-left: 20px;">
+          <view class="ui-col-content valign-middle">所需积分(订单取消积分不退)</view>
+        </view>
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+          <view class="ui-col-content align-right valign-middle">{{score_needs}}分</view>
         </view>
       </view>
       <view wx:if="{{couponsMoney!=0}}" class="ui-row" style="height:40px;">

@@ -1,9 +1,10 @@
 'use strict';
 
 var config = {
-  'version': '1.5.0',
+  'version': '1.5.1',
   //版本标识，不用管
   'suburl': 'https://api.maliapi.com/api/1?viewid=home',
+  //'suburl': 'https://api.maliapi.com/api/549?viewid=home',
   //'suburl': 'http://127.0.0.1:5001/api/1?viewid=home',
   //suburl在码力小店后台首页——>基本信息
   'mapkey': 'DNTBZ-JZRC4-AB7US-XWO2R-KUVSZ-HVBQG',
