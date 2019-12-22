@@ -345,7 +345,17 @@ exports.default = Page({
             postData.ctype = 0;
         }
         _server2.default.post(_urls2.default.links[0].ordecreate, postData).then(function (res) {
-            if (res.code == 701) {
+          
+          if (res.code != 0) {
+            wx.showConfirm({
+              content: res.msg,
+              cancelColor: "#999999",
+              confirmColor: "#ffd305",
+              success: function success(res) { }
+            });
+            return;
+          }
+            /*if (res.code == 701) {
                 wx.showConfirm({
                     content: "\u60A8\u7684\u8D26\u6237\u5DF2\u7ECF\u88AB\u7981\u7528\uFF0C\u4E0D\u80FD\u521B\u5EFA\u8BA2\u5355\r\n\u5982\u6709\u7591\u95EE\uFF0C\u8BF7\u8054\u7CFB\u5BA2\u670D\u5DE5\u4F5C\u4EBA\u5458",
                     cancelColor: "#999999",
@@ -362,7 +372,7 @@ exports.default = Page({
                     success: function success(res) {}
                 });
                 return;
-            }
+            }*/
             if (res.code == 0) {
                 if (e && "buyNow" != that.data.orderType) {
                     wx.removeStorageSync('__shopCarInfo');
