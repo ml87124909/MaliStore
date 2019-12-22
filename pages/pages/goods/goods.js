@@ -196,6 +196,7 @@ exports.default = Page({
     var token = wx.getStorageSync('__appUserInfo').token;
     wx.showLoading({ title: "\u52A0\u8F7D\u4E2D..." });
     _server2.default.get(_urls2.default.links[0].mlgoodsdet, { id: e, token: token }).then(function (res) {
+      console.log(res)
       if (res.code == 0) {
         wx.hideLoading();
         that.setData({

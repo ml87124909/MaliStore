@@ -90,6 +90,15 @@
         </view>
       </view>
     </view>
+    <view wx:if="{{goodsDetail.basicInfo.jf_status==1}}" class="ui-row" style="margin-bottom: 10px;margin-top: 5px;height:38px;">
+      <view class="ui-col" style="padding-left: 10px;padding-right: 10px;">
+        <view class="ui-col-content">
+            <view class="column-content column-vip-content">
+              <view class="column-goods-vip">{{goodsDetail.basicInfo.jf_score}}积分抵扣{{goodsDetail.basicInfo.jf_money}}元</view>
+            </view>
+        </view>
+      </view>
+    </view>
     <view wx:if="{{goodsDetail.basicInfo.vip_open != 0 && !noneLogin}}" class="ui-row" style="margin-bottom: 10px;margin-top: 5px;height:38px;">
       <view class="ui-col" style="padding-left: 10px;padding-right: 10px;">
         <view class="ui-col-content">

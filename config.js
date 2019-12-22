@@ -1,9 +1,10 @@
 'use strict';
 
 var config = {
-  'version': '1.4.9',
+  'version': '1.5.0',
   //版本标识，不用管
   'suburl': 'https://api.maliapi.com/api/1?viewid=home',
+  //'suburl': 'http://127.0.0.1:5001/api/1?viewid=home',
   //suburl在码力小店后台首页——>基本信息
   'mapkey': 'DNTBZ-JZRC4-AB7US-XWO2R-KUVSZ-HVBQG',
   //mapkey请自己到腾讯地图开放平台申请：https://lbs.qq.com/
