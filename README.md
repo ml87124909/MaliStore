@@ -1,5 +1,5 @@
-# [阳江云之家][1]
-![阳江云之家][2]
+# [简道云之家][1]
+![简道云之家][2]
 
 
 
@@ -10,7 +10,7 @@
 
 ## 小店说明
 目前开源的小程序商城有很多，但真正能上线使用的没几个，就算能上线使用做的也相对比较粗糙。码力小店更注重前端用户体验，在用户视觉和交互方面做了很多改进。 功能方面目前优惠券、会员、自提、人人分享、售后等功能，更多更能正在陆续添加中，欢迎Star～
-> 当前开源的是码力小店微信小程序端，可以搭配[阳江云之家][3]服务端使用。
+> 当前开源的是码力小店微信小程序端，可以搭配[YJYZJ][3]服务端使用。
 > 此处开源最新的全功能版本；
 
 ## 小店功能
@@ -48,7 +48,7 @@
 ## License
 MIT License
  
-Copyright (c) 2018 O2Team
+Copyright (c) 2018 O1Team
  
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  
