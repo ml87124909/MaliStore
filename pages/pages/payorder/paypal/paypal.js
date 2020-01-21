@@ -85,7 +85,7 @@ exports.default = Page({
         }
         if (token) {
             _server2.default.get(_urls2.default.links[0].ordepaypal, { token: token, number: e.id }).then(function (res) {
-                console.log(res);
+                //console.log(res);
                 if (res.code == 0) {
                     that.setData({
                         orderNumber: e.id,

@@ -444,7 +444,7 @@
   transition: all 1.2s;
 }
 .coupons-content {
-  background-image: url(https://cdn.maliapi.com/a0e6753d5f2d9f1bd247cb96017ce004.png);
+  background-image: url(http://cdn.janedao.cn/62be4cea90aa3b55546301bcc4c4ef58.png);
   background-size: 100% 100%;
   width: 500rpx;
   height: 670rpx;
@@ -474,7 +474,7 @@
   opacity: 1;
 }
 .coupons-content .coupons-bg {
-  background-image: url(https://cdn.maliapi.com/78f9c9d2df5e8d98af35f97c23419b9b.png);
+  background-image: url(http://cdn.janedao.cn/ccd376ec53c1ce7369f11892684ab482.png);
   background-size: 100% 100%;
   width: 460rpx;
   height: 570rpx;
@@ -512,7 +512,7 @@
   font-weight: 500;
 }
 .coupons-content .coupons-fr {
-  background-image: url(https://cdn.maliapi.com/c0a88dbcc3bbdbe3eb2dac6d3b2b6ff2.png);
+  background-image: url(http://cdn.janedao.cn/025fc5b2115451aa4b2eb4347d58232f.png);
   background-size: 100% 100%;
   position: absolute;
   width: 516rpx;
@@ -532,7 +532,7 @@
   font-weight: 800;
 }
 .coupons-content .coupons-fr .coupons-btn {
-  background-image: url(https://cdn.maliapi.com/e92b49f2cde68f2d82dc730e4a5eeef2.png);
+  background-image: url(http://cdn.janedao.cn/32bffb96d869d809796aa567f6d93163.png);
   background-size: 100% 100%;
   position: absolute;
   left: 0;

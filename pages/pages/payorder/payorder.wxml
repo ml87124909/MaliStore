@@ -282,7 +282,7 @@
           </view>
         </view>
         <view class="ui-col valign-middle" style="flex:0 0 120px;">
-          <view class="ui-col-content valign-middle">
+          <view class="ui-col-content valign-middle" bindtap="accepttongzhi">
             <view class="form_list" wx:if="{{orderfrom}}">
               确认付款<button formType="submit"></button>
             </view>

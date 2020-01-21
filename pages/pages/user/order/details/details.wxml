@@ -180,8 +180,10 @@
                 <block wx:if="{{item.kuaname != '商家配送'}}">
                   <view wx:if="{{orderDetails.status == 5 || orderDetails.status == 6 || orderDetails.status == 7 || item.kuaid}}" bindtap="getWuLiuTap" data-id="{{item.kuaid}}" data-name="{{item.kuaname}}" class="button">物流动态</view>
                 </block>
-                <view wx:if="{{orderDetails.status == 5 && item.kuastate == 0}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
-                <view wx:if="{{orderDetails.status == 3 && item.kuastate == 0 && item.kuaid}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
+                <view bindtap="accepttongzhi">
+                  <view wx:if="{{orderDetails.status == 5 && item.kuastate == 0}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
+                  <view wx:if="{{orderDetails.status == 3 && item.kuastate == 0 && item.kuaid}}" class="button" bindtap="getReceivingTap" data-kuaid="{{item.kuaid}}" data-kname="{{item.kuaname}}" data-id="{{orderDetails.id}}">确认收货</view>
+                </view>
                 <view wx:if="{{orderDetails.status == 6}}" bindtap="geiPingjiaTap" data-id="{{orderDetails.id}}" data-kuaid="{{item.kuaid}}" class="button">评价有礼</view>
                 <view wx:if="{{!item.kuaid && orderDetails.status != '-1' && orderDetails.status != '1' && item.kuaname != '商家配送'}}" bindtap="getFahuoTips" class="button">提醒发货</view>
                 <view wx:if="{{orderDetails.status == 1}}" bindtap="getOrderCancelTap" data-id="{{orderDetails.id}}" class="button">取消订单</view>

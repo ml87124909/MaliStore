@@ -51,6 +51,7 @@ exports.default = Page({
         couponsName: '请选择优惠券',
         wuLiuName: "\u8BF7\u9009\u62E9\u914D\u9001\u65B9\u5F0F",
         ptime: '12:01',
+        tmpids:{}
     },
     onShow: function onShow() {
         var that = this;
@@ -71,6 +72,17 @@ exports.default = Page({
         that.setData({ goodsList: shopList });
         that.initShippingAddress();
     },
+    accepttongzhi(e){
+        var that = this;
+        let tmpids=that.data.tmpids
+        let cancel_id=tmpids['cancel_id']
+        let send_id=tmpids['send_id']
+        //console.log(cancel_id,send_id)
+        wx.requestSubscribeMessage({
+          tmplIds: [cancel_id,send_id],
+          success(res) { }
+        })
+      },
     onLoad: function onLoad(e) {
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
@@ -368,7 +380,8 @@ exports.default = Page({
               VipState: res.data.vip_state,
               VipSmallMoney: res.data.vip_small,
               allMoney: res.data.money,
-              orderfrom: res.data
+              orderfrom: res.data,
+              tmpids:res.data.TmplIds
             });
             return;
           }
@@ -407,7 +420,8 @@ exports.default = Page({
                         VipState: res.data.vip_state,
                         VipSmallMoney: res.data.vip_small,
                         allMoney: res.data.money,
-                        orderfrom: res.data
+                        orderfrom: res.data,
+                        tmpids:res.data.TmplIds
                     });
                     that.getMyCoupons();
                     return;

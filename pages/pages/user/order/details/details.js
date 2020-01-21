@@ -30,6 +30,7 @@ exports.default = Page({
         share: 0,
         showMask: false,
         fahuo: 0,
+        tmpids:{},
         customStyle: {
             'background': 'rgba(51, 51, 51, 0.9)'
         }
@@ -40,6 +41,17 @@ exports.default = Page({
         var id = that.data.id;
         that.orderDetailsTap(id);
     },
+    accepttongzhi(e) {
+        var that = this;
+        let tmpids=that.data.tmpids
+        let evaluate_id=tmpids['evaluate_id']
+        let complete_id=tmpids['complete_id']
+        //console.log(evaluate_id,complete_id)
+        wx.requestSubscribeMessage({
+          tmplIds: [evaluate_id,complete_id],
+          success(res) { }
+        })
+      },
     onLoad: function onLoad(e) {
         var that = this;
         if (e.share) {
@@ -74,11 +86,12 @@ exports.default = Page({
         var token = wx.getStorageSync('__appUserInfo').token;
         wx.showLoading();
         _server2.default.get(_urls2.default.links[0].orderdetas, { token: token, id: e }).then(function (res) {
-            console.log(res);
+            //console.log(res);
             if (res.code == 0) {
                 wx.hideLoading();
                 that.setData({
-                    orderDetails: res.data
+                    orderDetails: res.data,
+                    tmpids:res.data.TmplIds
                 });
                 if (res.data.shopinfo) {
                     wx.getLocation({

@@ -45,6 +45,7 @@ exports.default = Page({
     });
     //获取推荐拼团商品
     _server2.default.get(_urls2.default.links[0].recptgoods, {}).then(function (res) {
+      //console.log(res)
       that.setData({
         ptGoodsList: res.data
       });
@@ -52,6 +53,7 @@ exports.default = Page({
     //专题板块
     wx.nextTick(function () {
       _server2.default.get(_urls2.default.links[0].mlcategory, { type: 'home' }).then(function (res) {
+        //console.log(res)
         if (res.code == 0) {
           that.setData({ category: res.data });
           var goods = {};
