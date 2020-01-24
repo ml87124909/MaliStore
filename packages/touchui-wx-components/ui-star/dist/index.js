@@ -66,7 +66,6 @@ exports.default = Component({
   attached: function attached() {
     this.data.selfLength = Number(this.data.length);
     this.data.selfValue = Number(this.data.value);
-    console.log(this.data.selfLength);
     this.data.selfStarWidth = Number(this.data.starWidth);
     this.data.selfStarHeight = Number(this.data.starHeight);
 
