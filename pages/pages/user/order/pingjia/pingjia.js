@@ -46,7 +46,7 @@ exports.default = Page({
             };
         }
         _server2.default.get(_urls2.default.links[0].pingjalist, postData).then(function (res) {
-            console.log(res);
+            //console.log(res);
             if (res.code == 0) {
                 that.setData({
                     pingajiaList: res.data
@@ -112,36 +112,39 @@ exports.default = Page({
             });
             return;
         }
-        if (imgList.nums == indexid) {
-            wx.showLoading({ title: "\u56FE\u7247\u4E0A\u4F20\u4E2D" });
-            for (var i = 0; i < imgList.list.length; i++) {
-                wx.uploadFile({
-                    url: _urls2.default.links[0].uploadfile,
-                    filePath: imgList.list[i],
-                    name: 'name',
-                    formData: {
-                        'ctype': '3', //商品评论类型
-                        'viewid': 'home',
-                        'part': 'get_upload',
-                        'orderId': orderid, //订单ID
-                        'goodsId': goodsid, //商品ID
-                        'timestamp': timestamp //时间戳
-                    },
-                    success: function success(res) {
-                        if (res.statusCode != 200) {
-                            wx.showConfirm({
-                                content: "\u56FE\u7247\u4E0A\u4F20\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5",
-                                confirmColor: "#ffd305",
-                                confirmText: "\u786E\u5B9A",
-                                showCancel: 'false',
-                                success: function success(res) {}
-                            });
-                            return;
+        if (imgList){
+            if (imgList['nums'] == indexid) {
+                wx.showLoading({ title: "\u56FE\u7247\u4E0A\u4F20\u4E2D" });
+                for (var i = 0; i < imgList.list.length; i++) {
+                    wx.uploadFile({
+                        url: _urls2.default.links[0].uploadfile,
+                        filePath: imgList.list[i],
+                        name: 'name',
+                        formData: {
+                            'ctype': '3', //商品评论类型
+                            'viewid': 'home',
+                            'part': 'get_upload',
+                            'orderId': orderid, //订单ID
+                            'goodsId': goodsid, //商品ID
+                            'timestamp': timestamp //时间戳
+                        },
+                        success: function success(res) {
+                            if (res.statusCode != 200) {
+                                wx.showConfirm({
+                                    content: "\u56FE\u7247\u4E0A\u4F20\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5",
+                                    confirmColor: "#ffd305",
+                                    confirmText: "\u786E\u5B9A",
+                                    showCancel: 'false',
+                                    success: function success(res) {}
+                                });
+                                return;
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
+        
         _server2.default.get(_urls2.default.links[0].pingjasend, { token: token, id: orderid, goods_id: goodsid, goods_star: starNumber, goods_text: textarea }).then(function (res) {
             if (res.code == 0) {
                 var id = that.data.id;
