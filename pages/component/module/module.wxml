@@ -463,7 +463,7 @@
       </view>
     </view>
     <!-- 重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务 -->
-    <view class="sample_power"><i></i></view>
+    <view class="sample_power">YJYZJ</view>
   </template>
   <template name="hcategory">
     <view class="category" wx:for="{{category}}" wx:key="id">
