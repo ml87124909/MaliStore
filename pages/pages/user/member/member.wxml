@@ -27,7 +27,7 @@
       <open-data class="name" type="userNickName"></open-data>
     </view>
     <view class="none-vip-info-box" wx:if="{{vipState == 0}}">
-      <view class="vip-active">现在开通立享¥{{vipPrice}}/年</view>
+      <view class="vip-active">现在开通立享¥{{vipPrice}}元/年</view>
       <view class="vip-info">（超级会员平均可省¥{{shopInfo.shopInfo.vip_sale}}元/年）</view>
     </view>
     <view class="vip-info-box" wx:if="{{vipState == 1}}">
@@ -36,7 +36,7 @@
       <view class="vip-info">您的会员权益将在{{userInfo.vip_time}}到期</view>
     </view>
     <view wx:if="{{vipState == 0}}" class="vip-btn" bindtap="getVipTap" data-id="0" data-money="{{vipPrice}}">立即开通超级会员</view>
-    <view wx:if="{{vipState == 1}}" class="vip-btn" bindtap="getVipTap" data-id="1" data-money="{{vipPrice}}">续费超级会员{{vipPrice}}/年</view>
+    <view wx:if="{{vipState == 1}}" class="vip-btn" bindtap="getVipTap" data-id="1" data-money="{{vipPrice}}">续费超级会员¥{{vipPrice}}元/年</view>
   </view>
   <!--购物升级-->
   <view class="vip-box" wx:if="{{vipType == '购物升级'}}">
