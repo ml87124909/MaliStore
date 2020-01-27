@@ -17,7 +17,7 @@ function wxpay(app, money, orderId, page, nextAction) {
     remark = "支付订单 ：" + orderId;
   }
   _server2.default.get(_urls2.default.links[0].wechatpays, { token: token, money: money, remark: remark, payName: '在线支付', nextAction: nextAction }).then(function (res) {
-    console.log(res);
+    //console.log(res);
     if (res.code == 0) {
       //发起微信支付
       wx.requestPayment({
