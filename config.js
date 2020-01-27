@@ -3,8 +3,8 @@
 var config = {
   'version': '1.5.2',
   //版本标识，不用管
-  'suburl': 'https://store.yjyzj.cn/api/1?viewid=home',
-  //'suburl': 'https://store.yjyzj.cn/api/549?viewid=home',
+  'suburl': 'https://api.yjyzj.cn/api/1?viewid=home',
+  //'suburl': 'https://api.yjyzj.cn/api/549?viewid=home',
   //'suburl': 'http://127.0.0.1:5002/api/1?viewid=home',
   //suburl在码力小店后台首页——>基本信息
   'mapkey': 'TJYBZ-ES2KJ-FWEFE-KKHLP-MKHEQ-JOBYB',
