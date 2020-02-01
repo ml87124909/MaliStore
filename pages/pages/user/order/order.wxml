@@ -48,7 +48,7 @@
               <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
                 <view class="ui-col-content align-right valign-middle">
                   <view wx:if="{{item.status == -1}}" class="order-cancel">已取消</view>
-                  <view wx:if="{{item.status == 1}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
+                  <view wx:if="{{item.status == 1 || item.status == 12}}" bindtap="getOrderCancelTap" data-id="{{item.id}}" class="order-cancel">取消订单</view>
                   <view wx:if="{{item.status == 2}}" class="order-cancel">待发货</view>
                   <view wx:if="{{item.status == 3}}" class="order-cancel">部分发货</view>
                   <view wx:if="{{item.status == 4}}" class="order-cancel">待自提</view>
