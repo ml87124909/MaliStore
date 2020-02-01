@@ -4,12 +4,12 @@
   <import src="../../../component/module/module.wxml" />
   <ui-nav-bar slot="nav-bar" custom-style="{{ {borderBottom:'1px solid rgba(231, 231, 231, 0.6)',backgroundColor:'#fff'} }}" _pid="{{_pid}}">
     <view class="ui-row" style="height:46px;">
-      <view wx:if="{{share == 0}}" bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+      <view wx:if="{{share == 0 && kuaid!=4}}" bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
         <view class="ui-col-content align-center valign-middle">
           <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
         </view>
       </view>
-      <view wx:if="{{share == 1}}" bindtap="getHomeTap" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+      <view wx:if="{{share == 1 || kuaid==4}}" bindtap="getHomeTap" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
         <view class="ui-col-content align-center valign-middle">
           <span type="jd-home" size="16" color="#27323f" class="ui-icon icon-jd-home" style="color: #27323f;font-size: 16px;"></span>
         </view>

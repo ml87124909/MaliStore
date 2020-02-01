@@ -23,9 +23,9 @@
   <view class="recharge-hrader">
     <view class="name">我的余额</view>
     <view class="money"><text>¥</text>{{amount.money}}</view>
-    <view class="info" bindtap="paypalinfoTap">充值记录</view>
+    <view wx:if="{{paystatus == 1}}" class="info" bindtap="paypalinfoTap">充值记录</view>
   </view>
-  <view class="recharge-money-box">
+  <view wx:if="{{paystatus == 1}}" class="recharge-money-box">
     <form bindsubmit="bindSave">
       <input name="money" placeholder="请输入充值金额" class="input-money" maxlength="6" type="digit"></input>
       <view class="recharge-money-list">

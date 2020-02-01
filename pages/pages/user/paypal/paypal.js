@@ -33,6 +33,7 @@ exports.default = Page({
             }
         });
         _server2.default.get(_urls2.default.links[0].mlshopinfo, {}).then(function (res) {
+
             if (res.code == 0) {
                 that.setData({
                     payinfo: res.data.shopInfo

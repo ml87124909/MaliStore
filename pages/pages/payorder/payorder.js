@@ -77,9 +77,10 @@ exports.default = Page({
         let tmpids=that.data.tmpids
         let cancel_id=tmpids['cancel_id']
         let send_id=tmpids['send_id']
+        let evaluate_id=tmpids['evaluate_id']
         //console.log(cancel_id,send_id)
         wx.requestSubscribeMessage({
-          tmplIds: [cancel_id,send_id],
+          tmplIds: [cancel_id,send_id,evaluate_id],
           success(res) { }
         })
       },

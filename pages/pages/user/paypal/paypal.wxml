@@ -23,9 +23,9 @@
   <view class="paypal-header">
     <view class="paypal-name">我的余额</view>
     <view class="paypal-number"><text>¥</text>{{amount.money}}</view>
-    <view class="paypal-info" bindtap="rechargeTap">充值返现</view>
+    <view wx:if="{{payinfo.topup == 1}}" class="paypal-info" bindtap="rechargeTap">充值返现</view>
   </view>
-  <view class="paypal-withdraw">
+  <view wx:if="{{payinfo.drawal == 1}}"  class="paypal-withdraw">
     <form bindsubmit="bindSave">
       <view class="form-box">
         <view class="row-wrap">

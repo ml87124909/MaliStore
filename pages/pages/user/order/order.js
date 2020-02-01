@@ -53,7 +53,7 @@ exports.default = Page({
         };
         //全部订单
         if (e == 0) {
-            postData.status = '-1,1,2,3,4,5,6,7';
+            postData.status = '-1,1,2,3,4,5,6,7,12';
         }
         //待付款
         if (e == 1) {

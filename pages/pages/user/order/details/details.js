@@ -44,11 +44,12 @@ exports.default = Page({
     accepttongzhi(e) {
         var that = this;
         let tmpids=that.data.tmpids
-        let evaluate_id=tmpids['evaluate_id']
+        //let evaluate_id=tmpids['evaluate_id']
         let complete_id=tmpids['complete_id']
         //console.log(evaluate_id,complete_id)
         wx.requestSubscribeMessage({
-          tmplIds: [evaluate_id,complete_id],
+          //tmplIds: [evaluate_id,complete_id],
+          tmplIds: [complete_id],
           success(res) { }
         })
       },

@@ -18,7 +18,8 @@ var app = getApp();
 var wxpay = require('../../../../../static/utils/pay.js');
 exports.default = Page({
     data: {
-        NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + 'px'
+        NAV_HEIGHT: wx.STATUS_BAR_HEIGHT + wx.DEFAULT_HEADER_HEIGHT + 'px',
+        paystatus:0
 
     },
     onLoad: function onLoad() {
@@ -26,6 +27,7 @@ exports.default = Page({
         var token = wx.getStorageSync('__appUserInfo').token;
         _server2.default.get(_urls2.default.links[0].usepaylist, { token: token }).then(function (res) {
             if (res.code == 0) {
+                that.setData({ paystatus: 1 });
                 that.setData({ payList: res.data });
             }
         });
@@ -37,6 +39,7 @@ exports.default = Page({
         var that = this;
         var token = wx.getStorageSync('__appUserInfo').token;
         _server2.default.get(_urls2.default.links[0].mluserinfo, { token: token }).then(function (res) {
+            console.log(res)
             if (res.code == 0) {
                 that.setData({ amount: res.data });
             }
