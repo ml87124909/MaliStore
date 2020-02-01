@@ -83,7 +83,8 @@
             <block wx:if="{{orderMoney == 0}}">
                 <view class="money-success">
                     <image src="../../../../images/paypal.png"/>
-                    <text>订单支付成功</text>
+                    <text wx:if="{{kuaid!=4}}">订单支付成功</text>
+                    <text wx:if="{{kuaid==4}}">订单提交成功</text>
                 </view>
                 <view class="money-success-order" bindtap="getOrderTap">查看我的订单</view>
                 <view class="money-success-home" bindtap="getHomeTap">返回首页</view>

@@ -91,7 +91,8 @@ exports.default = Page({
                         orderNumber: e.id,
                         oederPaypal: res.data,
                         orderMoney: res.data.money.toFixed(2),
-                        payText: '微信支付 ¥' + res.data.money
+                        payText: '微信支付 ¥' + res.data.money,
+                        kuaid:res.data.kuaid
                     });
                 }
             });
