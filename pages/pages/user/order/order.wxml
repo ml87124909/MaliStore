@@ -104,7 +104,7 @@
                 <view class="ui-col-content align-right valign-middle">
                   <view class="order-button-time" bindtap="getPayOrderTap" data-id="{{item.number}}" data-type="{{item.ctype}}">
                     <text>付款</text>
-                    <ui-count-down done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
+                    <ui-count-down wx:if="{{item.kuaid!=4}}" done-text="超时" time="{{item.data_close}}" format="{%h}:{%m}:{%s}" bindtimeup="bindtimeup" data-id="{{current}}" _pid="{{_pid}}"></ui-count-down>
                                     </view>
                                 </view></view>
                                 
