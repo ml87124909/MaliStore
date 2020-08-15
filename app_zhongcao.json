@@ -79,10 +79,10 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/pages/live/live",
-        "iconPath": "images/tabbar/live-off.png",
-        "selectedIconPath": "images/tabbar/live-on.png",
-        "text": "直播"
+        "pagePath": "pages/pages/buycao/list",
+        "iconPath": "images/tabbar/cao-off.png",
+        "selectedIconPath": "images/tabbar/cao-on.png",
+        "text": "种草"
       },
       {
         "pagePath": "pages/pages/shopcart/shopcart",

@@ -1,0 +1,96 @@
+<page>
+  <import src="../../../component/menu/menu.wxml" />
+  <import src="../../../component/module/module.wxml" />
+  <ui-nav-bar slot="nav-bar" custom-style="{{ {backgroundColor:'#fff'} }}" _pid="{{_pid}}">
+    <view class="ui-row" style="height:46px;">
+      <view wx:if="{{share == 0}}" bindtap="navigateBack" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="arrow-left" size="14" color="#27323f" class="ui-icon icon-arrow-left" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view wx:if="{{share == 1}}" bindtap="getHomeTap" class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+          <span type="jd-home" size="14" color="#27323f" class="ui-icon icon-jd-home" style="color: #27323f;font-size: 14px;"></span>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+        <view class="ui-col-content align-center valign-middle">
+          <view>直播</view>
+        </view>
+      </view>
+      <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 60px;">
+        <view class="ui-col-content align-center valign-middle">
+        </view>
+      </view>
+    </view>
+  </ui-nav-bar>
+  <view style="height:{{NAV_HEIGHT}}"></view>
+  
+  <view class="order-content-box">
+    <swiper style="height:{{WIN_HEIGHT}}px" class="content" current="{{ current }}">
+      <swiper-item>
+        <view class="order-content-list">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+            <view class="order-ui-row ui-row" style="height:40px;">
+              <view data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  <view class="order-number">{{item.cname}}</view>
+                </view>
+              </view>
+              <view class="ui-col ui-col-align-right align-right valign-middle" style="padding-right: 20px;flex:0 0 100px;">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.live_status == 101}}" class="order-cancel">直播中</view>
+                  <view wx:if="{{item.live_status == 102}}" class="order-cancel">未开始</view>
+                  <view wx:if="{{item.live_status == 103}}" class="order-cancel">已结束</view>
+                  <view wx:if="{{item.live_status == 104}}" class="order-cancel">禁播</view>
+                  <view wx:if="{{item.live_status == 105}}" class="order-cancel">暂停中</view>
+                  <view wx:if="{{item.live_status == 106}}" class="order-cancel">异常</view>
+                  <view wx:if="{{item.live_status == 107}}" class="order-cancel">已过期</view>
+                </view>
+              </view>
+            </view>
+            <view data-id="{{item.roomid}}">
+              <view class="order-ui-row ui-row" style="height:90px;">
+                <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
+                  <view class="ui-col-content align-center valign-middle">
+                    <view class="order-one-img">
+                      <image src="{{item.cover_img}}" />
+                    </view>
+                  </view>
+                </view>
+                <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+                  <view class="ui-col-content align-left valign-middle">
+                    <view class="order-goods-name">开始时间：{{item.start_time}}</view>
+                    <view class="order-goods-name">结束时间：{{item.end_time}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            
+            <view class="ui-row" style="margin-bottom: 10px;height:45px;">
+              <view class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
+                <view class="ui-col-content align-left valign-middle">
+                  
+                  <view  class="order-money">主播昵称:{{item.anchor_name}}</view>
+                </view>
+              </view>
+              <view  class="ui-col ui-col-align-right align-right valign-middle" style="">
+                <view class="ui-col-content align-right valign-middle">
+                  <view wx:if="{{item.live_status == 101}}" class="order-button" bindtap="getLive" data-id="{{item.roomid}}">观看直播</view>
+                  <view wx:if="{{item.live_status == 102}}" class="order-button" bindtap="getLive" data-id="{{item.roomid}}">观看直播</view>
+                  <view wx:if="{{item.live_status == 105}}" class="order-button" bindtap="getLive" data-id="{{item.roomid}}">观看直播</view>
+                </view>
+              </view>
+                        
+        </view>
+        </view>
+                    <view class="no-more-goods" wx:if="{{!orderList}}">
+                        
+                        <view class="text">还没有直播</view>
+                    </view>
+                </view>
+            </swiper-item>
+            
+        </swiper>
+    </view>
+</page>

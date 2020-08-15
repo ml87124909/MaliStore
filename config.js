@@ -1,7 +1,7 @@
 'use strict';
 
 var config = {
-  'version': '1.5.3',
+  'version': '1.5.4',
   //版本标识，不用管
   'suburl': 'https://api.yjyzj.cn/api/1?viewid=home',
   //'suburl': 'https://api.yjyzj.cn/api/549?viewid=home',

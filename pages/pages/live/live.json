@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "ui-nav-bar": "../../../../packages/touchui-wx-components/ui-nav-bar/dist/index",
+    "ui-tabs": "../../../../packages/touchui-wx-components/ui-tabs/dist/index",
+    "ui-tab": "../../../../packages/touchui-wx-components/ui-tab/dist/index",
+    "ui-count-down": "../../../../packages/touchui-wx-components/ui-count-down/dist/index",
+    "ui-mask": "../../../../packages/touchui-wx-components/ui-mask/dist/index"
+  }
+}

@@ -90,6 +90,8 @@ var links = [(_ref = {
 	'opentyuanc': urlDomain + '&part=pingtuan_join_tuan', //检查团员能否参团
 	'ptundetail': urlDomain + '&part=pingtuan_details', //拼团详情
 	'checkmoney': urlDomain + '&part=check_money_pay', //自助买单接口
+	'livelist': urlDomain + '&part=live_list', //直接列表
+	'get_live': urlDomain + '&part=get_live', //更新直播状态
 	'paypalcode': urlDomain + '&part=user_paypal_code' }, _defineProperty(_ref, 'paypalinfo', urlDomain + '&part=user_paypal_info'), _defineProperty(_ref, 'paypalsock', 'wss://api.maliapi.com/ws/1?appid=' + mlwxappId.miniProgram.appId), _defineProperty(_ref, 'categoryls', urlDomain + '&part=topic_category'), _defineProperty(_ref, 'topiclists', urlDomain + '&part=topic_list'), _defineProperty(_ref, 'topiconten', urlDomain + '&part=topic_content'), _defineProperty(_ref, 'addtolikes', urlDomain + '&part=topic_likes_add'), _defineProperty(_ref, 'deltolikes', urlDomain + '&part=topic_likes_del'), _ref)];
 
 module.exports = {

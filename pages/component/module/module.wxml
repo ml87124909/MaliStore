@@ -451,6 +451,7 @@
             </view>
           </view>
         </view>
+      
         <!--
                     <ui-col align="center" vertical-align="middle">
                         <view class="cart-list cart-list-type">
@@ -460,6 +461,38 @@
                         </view>
                     </ui-col>
                     -->
+      </view>
+      <view class="user-line-small"></view>
+      <view class="ui-row" style="margin-bottom: 12px;margin-top: 12px;height:45px;">
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <view class="cart-list cart-list-type">
+              <!--image src="../../../images/user/19.png" />
+              <text>分销</text-->
+              <!--navigator url="/pages/pages/user/history/history" open-type="navigate" hover-class="none"></navigator-->
+            </view>
+          </view>
+        </view>
+        
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <!--view class="cart-list cart-list-type">
+              <image src="../../../images/user/14.png" />
+              <text>地址</text>
+              <navigator url="/pages/pages/user/address/address" open-type="navigate" hover-class="none"></navigator>
+            </view-->
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-center align-center valign-middle" style="">
+          <view class="ui-col-content align-center valign-middle">
+            <!--view class="cart-list cart-list-type">
+              <image src="../../../images/user/16.png" />
+              <text>反馈</text>
+              <navigator url="/pages/pages/user/feedback/feedback" open-type="navigate" hover-class="none"></navigator>
+            </view-->
+          </view>
+        </view>
+        
       </view>
     </view>
     <!-- 重要提示：请勿擅自隐藏、删除、修改底部版权信息，一经发现将不在提供任何技术支持服务 -->

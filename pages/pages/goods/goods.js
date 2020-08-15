@@ -612,6 +612,8 @@ exports.default = Page({
                       }
                     });
                   } else {
+                    console.log(res)
+                    wx.showLoading({ title:res.msg });
                     that.getshareimgTap();
                   }
                 });
