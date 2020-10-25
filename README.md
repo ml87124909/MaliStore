@@ -4,9 +4,13 @@
 ## 提醒
 
 没有开通微信小程序官方直播权限的小程序，请app_zhongcao.json代替app.json，也就是将app_zhongcao.json改名为app.json
-否则是报没有插件权限错误
+否则是报没有插件权限错误，或者请下载https://gitee.com/mn3711698/jdstore的代码
+
 
 ## 更新日志  2020-08-15 (请注意，开源协议为GPL V2)
+
+2020-10-25
+修改app_zhongcao.json提示的直接插件错误
 
 2020-08-15
 更新到V1.5.4,增加直播功能

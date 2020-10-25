@@ -101,12 +101,6 @@
   "networkTimeout": {
     "request": 24000
   },
-  "plugins": {
-    "live-player-plugin": {
-        "version": "1.1.6",
-        "provider": "wx2b03c6e691cd7370"
-    }
-  },
   "theme":"#ffd305",
   "permission": {
     "scope.userLocation": {
