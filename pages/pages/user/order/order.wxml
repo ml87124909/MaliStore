@@ -38,7 +38,7 @@
     <swiper style="height:{{WIN_HEIGHT}}px" class="content" current="{{ current }}" bindchange="handleContentChange">
       <swiper-item>
         <view class="order-content-list">
-          <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+          <view class="order-list" wx:for="{{orderList}}" wx:key="*this">
             <view class="order-ui-row ui-row" style="height:40px;">
               <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;">
                 <view class="ui-col-content align-left valign-middle">
@@ -59,7 +59,7 @@
               </view>
             </view>
             <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
-              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+              <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="*this" style="height:90px;">
                 <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;">
                   <view class="ui-col-content align-center valign-middle">
                     <view class="order-one-img">
@@ -136,7 +136,7 @@
                 </swiper-item>
                 <swiper-item>
                     <view class="order-content-list">
-                        <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+                        <view class="order-list" wx:for="{{orderList}}" wx:key="*this">
                             <view class="order-ui-row ui-row" style="height:40px;">
                                 <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;"><view class="ui-col-content align-left valign-middle">
                                     <view class="order-number">{{item.number}}</view>
@@ -153,7 +153,7 @@
                                 </view></view>
                             </view>
                             <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
-                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="*this" style="height:90px;">
                                     <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;"><view class="ui-col-content align-center valign-middle">
                                         <view class="order-one-img">
                                             <image src="{{item.pic}}"/>
@@ -169,7 +169,7 @@
                                 <view class="order-ui-row ui-row" style="height:100px;">
                                     <view class="ui-col ui-col-align-left align-left valign-middle" style=""><view class="ui-col-content align-left valign-middle">
                                         <view class="order-two-box">
-                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="*this">
                                                 <image src="{{item.pic}}"/>
                                             </view>
                                         </view>
@@ -219,7 +219,7 @@
                 </swiper-item>
                 <swiper-item>
                     <view class="order-content-list">
-                        <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+                        <view class="order-list" wx:for="{{orderList}}" wx:key="*this">
                             <view class="order-ui-row ui-row" style="height:40px;">
                                 <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;"><view class="ui-col-content align-left valign-middle">
                                     <view class="order-number">{{item.number}}</view>
@@ -236,7 +236,7 @@
                                 </view></view>
                             </view>
                             <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
-                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="*this" style="height:90px;">
                                     <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;"><view class="ui-col-content align-center valign-middle">
                                         <view class="order-one-img">
                                             <image src="{{item.pic}}"/>
@@ -252,7 +252,7 @@
                                 <view class="order-ui-row ui-row" style="height:100px;">
                                     <view class="ui-col ui-col-align-left align-left valign-middle" style=""><view class="ui-col-content align-left valign-middle">
                                         <view class="order-two-box">
-                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="*this">
                                                 <image src="{{item.pic}}"/>
                                             </view>
                                         </view>
@@ -302,7 +302,7 @@
                 </swiper-item>
                 <swiper-item>
                     <view class="order-content-list">
-                        <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+                        <view class="order-list" wx:for="{{orderList}}" wx:key="*this">
                             <view class="order-ui-row ui-row" style="height:40px;">
                                 <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;"><view class="ui-col-content align-left valign-middle">
                                     <view class="order-number">{{item.number}}</view>
@@ -319,7 +319,7 @@
                                 </view></view>
                             </view>
                             <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
-                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="*this" style="height:90px;">
                                     <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;"><view class="ui-col-content align-center valign-middle">
                                         <view class="order-one-img">
                                             <image src="{{item.pic}}"/>
@@ -335,7 +335,7 @@
                                 <view class="order-ui-row ui-row" style="height:100px;">
                                     <view class="ui-col ui-col-align-left align-left valign-middle" style=""><view class="ui-col-content align-left valign-middle">
                                         <view class="order-two-box">
-                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="*this">
                                                 <image src="{{item.pic}}"/>
                                             </view>
                                         </view>
@@ -385,7 +385,7 @@
                 </swiper-item>
                 <swiper-item>
                     <view class="order-content-list">
-                        <view class="order-list" wx:for="{{orderList}}" wx:key="{{index}}">
+                        <view class="order-list" wx:for="{{orderList}}" wx:key="*this">
                             <view class="order-ui-row ui-row" style="height:40px;">
                                 <view bindtap="getDetailsTap" data-id="{{item.id}}" class="ui-col ui-col-align-left align-left valign-middle" style="padding-left: 20px;"><view class="ui-col-content align-left valign-middle">
                                     <view class="order-number">{{item.number}}</view>
@@ -402,7 +402,7 @@
                                 </view></view>
                             </view>
                             <view wx:if="{{item.order_goods.length == 1}}" bindtap="getDetailsTap" data-id="{{item.id}}">
-                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="{{index}}" style="height:90px;">
+                                <view class="order-ui-row ui-row" wx:for-items="{{item.order_goods}}" wx:key="*this" style="height:90px;">
                                     <view class="ui-col ui-col-align-center align-center valign-middle" style="flex:0 0 100px;"><view class="ui-col-content align-center valign-middle">
                                         <view class="order-one-img">
                                             <image src="{{item.pic}}"/>
@@ -418,7 +418,7 @@
                                 <view class="order-ui-row ui-row" style="height:100px;">
                                     <view class="ui-col ui-col-align-left align-left valign-middle" style=""><view class="ui-col-content align-left valign-middle">
                                         <view class="order-two-box">
-                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="{{index}}">
+                                            <view class="order-two-img" wx:for-items="{{item.order_goods}}" wx:key="*this">
                                                 <image src="{{item.pic}}"/>
                                             </view>
                                         </view>

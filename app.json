@@ -103,11 +103,11 @@
   },
   "plugins": {
     "live-player-plugin": {
-        "version": "1.1.6",
-        "provider": "wx2b03c6e691cd7370"
+      "version": "1.3.0",
+      "provider": "wx2b03c6e691cd7370"
     }
   },
-  "theme":"#ffd305",
+  "theme": "#ffd305",
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"

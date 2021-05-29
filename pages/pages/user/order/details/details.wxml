@@ -219,6 +219,25 @@
           </view>
         </view>
       </view>
+      <!--20210529add start-->
+      <view wx:if="{{orderDetails.cdkey_flag == 1}}" class="order-info-list ui-row" style="height:28px;">
+        <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
+          <view class="ui-col-content align-right valign-middle">
+            <view class="name">券码：</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="number">{{orderDetails.cdkey_code}}</view>
+          </view>
+        </view>
+        <view class="ui-col ui-col-align-left align-left valign-middle" style="flex:0 0 50px;">
+          <view class="ui-col-content align-left valign-middle">
+            <view class="button" bindtap="getCopyNmuber" data-id="{{orderDetails.cdkey_code}}">复制</view>
+          </view>
+        </view>
+      </view>
+        <!--20210529add end-->
       <view class="order-info-list ui-row" style="height:28px;">
         <view class="ui-col ui-col-align-right align-right valign-middle" style="flex:0 0 88px;">
           <view class="ui-col-content align-right valign-middle">
